@@ -1,0 +1,10 @@
+let g:spf13_bundle_groups=['general', 'neocomplete', 'neocomplcache', 'programming', 'go' ]
+let g:spf13_leader='\'
+" let g:airline_theme='simple'
+let g:airline_theme='violet'
+" let g:airline_theme='luna'
+" let g:airline_theme='night_owl'
+" let g:airline_theme='fruit_punch'
+" let g:airline_theme='durant'
+" let g:airline_theme='atomic'
+let g:airline_theme='one'
