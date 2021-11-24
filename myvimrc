@@ -3,6 +3,29 @@ set nu
 set hlsearch
 set incsearch
 set mouse=a
+set shiftwidth=4                " Use indents of 4 spaces
+set expandtab                   " Tabs are spaces, not tabs
+set tabstop=4                   " An indentation every four columns
+set softtabstop=4               " Let backspace delete indent
+
+if has('statusline')
+    set laststatus=2
+
+    " Broken down into easily includeable segments
+    set statusline=%<%f\                     " Filename
+    set statusline+=%w%h%m%r                 " Options
+    set statusline+=\ [%{&ff}/%Y]            " Filetype
+    set statusline+=\ [%{getcwd()}]          " Current dir
+    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+endif
+
+if has('clipboard')
+	if has('unnamedplus')  " When possible use + register for copy-paste
+	    set clipboard=unnamed,unnamedplus
+	else         " On mac and Windows, use * register for copy-paste
+	    set clipboard=unnamed
+	endif
+endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'fatih/vim-go', {'tag': '*'}
@@ -11,6 +34,7 @@ Plug 'easymotion/vim-easymotion'
 " Plug 'rakr/vim-one'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive' 
 call plug#end()
 set list
 set listchars=space:\ ,tab:>\ 
