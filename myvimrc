@@ -2,6 +2,7 @@ set nocompatible
 set nu
 set hlsearch
 set incsearch
+set mouse=a
 call plug#begin('~/.vim/plugged')
 
 Plug 'fatih/vim-go', {'tag': '*'}
