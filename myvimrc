@@ -47,4 +47,6 @@ set listchars=space:\ ,tab:>\
 " colorscheme one
 " let g:airline#extensions#tabline#enabled = 1
 
-
+" Visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv
