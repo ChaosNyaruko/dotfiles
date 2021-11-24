@@ -7,6 +7,7 @@ set shiftwidth=4                " Use indents of 4 spaces
 set expandtab                   " Tabs are spaces, not tabs
 set tabstop=4                   " An indentation every four columns
 set softtabstop=4               " Let backspace delete indent
+set noshowmode
 
 if has('clipboard')
 	if has('unnamedplus')  " When possible use + register for copy-paste
@@ -34,12 +35,13 @@ Plug 'fatih/vim-go', {'tag': '*'}
 Plug 'tpope/vim-commentary'
 Plug 'easymotion/vim-easymotion'
 " Plug 'rakr/vim-one'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive' 
 Plug 'tpope/vim-surround'
+Plug 'itchyny/lightline.vim'
 
 call plug#end()
 set list
@@ -50,3 +52,13 @@ set listchars=space:\ ,tab:>\
 " Visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv
+
+let g:lightline = {
+  \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'readonly', 'filename', 'modified', 'pwd' ] ]
+  \ },
+  \ 'component': {
+      \   'pwd': '%{getcwd()}'
+  \ },
+  \ }
