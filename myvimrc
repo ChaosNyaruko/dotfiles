@@ -42,6 +42,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive' 
 Plug 'tpope/vim-surround'
 Plug 'itchyny/lightline.vim'
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 set list
@@ -62,3 +63,5 @@ let g:lightline = {
       \   'pwd': '%{getcwd()}'
   \ },
   \ }
+
+colorscheme gruvbox
