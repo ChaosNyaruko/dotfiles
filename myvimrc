@@ -1,0 +1,15 @@
+set nocompatible
+set nu
+set hlsearch
+set incsearch
+call plug#begin('~/.vim/plugged')
+
+Plug 'fatih/vim-go', {'tag': '*'}
+Plug 'tpope/vim-commentary'
+Plug 'easymotion/vim-easymotion'
+" Plug 'rakr/vim-one'
+call plug#end()
+set list
+set listchars=space:\ ,tab:>\ 
+" colorscheme one
+
