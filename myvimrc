@@ -8,6 +8,8 @@ Plug 'fatih/vim-go', {'tag': '*'}
 Plug 'tpope/vim-commentary'
 Plug 'easymotion/vim-easymotion'
 " Plug 'rakr/vim-one'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 set list
 set listchars=space:\ ,tab:>\ 
