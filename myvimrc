@@ -2,6 +2,8 @@ set nocompatible
 set nu
 set hlsearch
 set incsearch
+set ignorecase
+set smartcase
 set mouse=a
 set shiftwidth=4                " Use indents of 4 spaces
 set expandtab                   " Tabs are spaces, not tabs
@@ -70,3 +72,6 @@ colorscheme gruvbox
 " Key Mappings
 noremap <C-p> :Files<CR>
 noremap <leader>f :Rg<CR>
+
+" vim-go navi mappings
+autocmd FileType go nnoremap <buffer> gr :GoReferrers<CR>
