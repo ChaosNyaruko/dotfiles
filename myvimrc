@@ -65,3 +65,8 @@ let g:lightline = {
   \ }
 
 colorscheme gruvbox
+
+
+" Key Mappings
+noremap <C-p> :Files<CR>
+noremap <leader>f :Rg<CR>
