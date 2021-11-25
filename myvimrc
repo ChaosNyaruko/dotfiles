@@ -45,6 +45,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
+Plug 'ycm-core/YouCompleteMe'
 
 call plug#end()
 set list
