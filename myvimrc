@@ -76,3 +76,17 @@ noremap <leader>f :Rg<CR>
 
 " vim-go navi mappings
 autocmd FileType go nnoremap <buffer> gr :GoReferrers<CR>
+
+set background=dark
+function! ResCur()
+    if line("'\"") <= line("$")
+        silent! normal! g`"
+        return 1
+    endif
+endfunction
+
+augroup resCur
+    autocmd!
+    autocmd BufWinEnter * call ResCur()
+augroup END
+ 
