@@ -45,11 +45,13 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
+Plug 'preservim/nerdtree'
 Plug 'ycm-core/YouCompleteMe'
 
 call plug#end()
 set list
 set listchars=space:\ ,tab:>\ 
+set backspace=indent,eol,start
 " colorscheme one
 " let g:airline#extensions#tabline#enabled = 1
 
@@ -76,6 +78,7 @@ noremap <leader>f :Rg<CR>
 
 " vim-go navi mappings
 autocmd FileType go nnoremap <buffer> gr :GoReferrers<CR>
+autocmd FileType go nnoremap <buffer> gi :GoImplements<CR>
 
 set background=dark
 function! ResCur()
