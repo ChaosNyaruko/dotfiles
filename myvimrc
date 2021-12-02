@@ -10,6 +10,9 @@ set expandtab                   " Tabs are spaces, not tabs
 set tabstop=4                   " An indentation every four columns
 set softtabstop=4               " Let backspace delete indent
 set noshowmode
+set wildmenu
+set wildmode=list:longest,full
+
 
 if has('clipboard')
 	if has('unnamedplus')  " When possible use + register for copy-paste
@@ -92,4 +95,7 @@ augroup resCur
     autocmd!
     autocmd BufWinEnter * call ResCur()
 augroup END
+
+" autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+
  
