@@ -82,6 +82,7 @@ noremap <leader>f :Rg<CR>
 " vim-go navi mappings
 autocmd FileType go nnoremap <buffer> gr :GoReferrers<CR>
 autocmd FileType go nnoremap <buffer> gi :GoImplements<CR>
+autocmd FileType go nnoremap <buffer> goc :GoCallers<CR>
 
 set background=dark
 function! ResCur()
