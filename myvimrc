@@ -78,6 +78,8 @@ colorscheme gruvbox
 " Key Mappings
 noremap <C-p> :Files<CR>
 noremap <leader>f :Rg<CR>
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
 
 " vim-go navi mappings
 autocmd FileType go nnoremap <buffer> gr :GoReferrers<CR>
