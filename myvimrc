@@ -86,6 +86,10 @@ autocmd FileType go nnoremap <buffer> gr :GoReferrers<CR>
 autocmd FileType go nnoremap <buffer> gi :GoImplements<CR>
 autocmd FileType go nnoremap <buffer> goc :GoCallers<CR>
 
+" just something interesting saw in coding videos
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
+
 set background=dark
 function! ResCur()
     if line("'\"") <= line("$")
