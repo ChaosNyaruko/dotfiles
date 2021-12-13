@@ -14,6 +14,7 @@ set noshowmode
 set wildmenu
 set wildmode=list:longest,full
 set noswapfile
+set hidden
 
 
 if has('clipboard')
@@ -54,7 +55,7 @@ Plug 'preservim/nerdtree'
 Plug 'ycm-core/YouCompleteMe'
 
 call plug#end()
-set list
+set nolist
 set listchars=space:\ ,tab:>\ 
 set backspace=indent,eol,start
 " colorscheme one
