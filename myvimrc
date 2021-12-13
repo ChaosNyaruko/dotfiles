@@ -12,6 +12,7 @@ set softtabstop=4               " Let backspace delete indent
 set noshowmode
 set wildmenu
 set wildmode=list:longest,full
+set noswapfile
 
 
 if has('clipboard')
