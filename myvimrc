@@ -15,7 +15,7 @@ set wildmenu
 set wildmode=list:longest,full
 set noswapfile
 set hidden
-
+set history=2000
 
 if has('clipboard')
 	if has('unnamedplus')  " When possible use + register for copy-paste
