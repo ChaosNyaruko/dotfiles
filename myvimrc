@@ -92,6 +92,7 @@ autocmd FileType go nnoremap <buffer> goc :GoCallers<CR>
 " just something interesting saw in coding videos
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
+autocmd FileType qt :set norelativenumber
 
 set background=dark
 function! ResCur()
