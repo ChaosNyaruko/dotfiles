@@ -89,6 +89,9 @@ autocmd FileType go nnoremap <buffer> gr :GoReferrers<CR>
 autocmd FileType go nnoremap <buffer> gi :GoImplements<CR>
 autocmd FileType go nnoremap <buffer> goc :GoCallers<CR>
 
+" vim-go settings
+let g:go_list_type="quickfix"
+
 " just something interesting saw in coding videos
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
