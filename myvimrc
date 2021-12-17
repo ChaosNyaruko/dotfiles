@@ -91,6 +91,7 @@ autocmd FileType go nnoremap <buffer> goc :GoCallers<CR>
 
 " vim-go settings
 let g:go_list_type="quickfix"
+let g:go_list_type_command={"GoReferrers":"locationlist"}
 
 " just something interesting saw in coding videos
 autocmd InsertEnter * :set norelativenumber
