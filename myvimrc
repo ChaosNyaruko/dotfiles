@@ -13,7 +13,11 @@ set softtabstop=4               " Let backspace delete indent
 set noshowmode
 set wildmenu
 set wildmode=list:longest,full
+
 set noswapfile
+set nobackup
+set nowritebackup
+
 set hidden
 set history=2000
 
