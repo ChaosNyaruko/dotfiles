@@ -56,7 +56,9 @@ Plug 'tpope/vim-surround'
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
-Plug 'ycm-core/YouCompleteMe'
+if has('vim')
+    Plug 'ycm-core/YouCompleteMe'
+endif
 
 call plug#end()
 set nolist
