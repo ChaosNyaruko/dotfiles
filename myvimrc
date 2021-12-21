@@ -55,6 +55,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
+Plug 'vim-scripts/peaksea'
 Plug 'preservim/nerdtree'
 if has('vim')
     Plug 'ycm-core/YouCompleteMe'
