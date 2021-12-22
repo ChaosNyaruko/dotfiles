@@ -13,6 +13,7 @@ set softtabstop=4               " Let backspace delete indent
 set noshowmode
 set wildmenu
 set wildmode=list:longest,full
+filetype plugin indent on
 
 set noswapfile
 set nobackup
