@@ -71,7 +71,8 @@ endif
 
 call plug#end()
 set nolist
-set listchars=space:\ ,tab:>\ 
+" set listchars=space:\ ,tab:>\ 
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 set backspace=indent,eol,start
 " colorscheme one
 " let g:airline#extensions#tabline#enabled = 1
