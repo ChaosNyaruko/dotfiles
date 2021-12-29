@@ -1,4 +1,5 @@
 set nocompatible
+filetype plugin indent on
 set nu
 set nornu
 set hlsearch
@@ -13,7 +14,7 @@ set softtabstop=4               " Let backspace delete indent
 set noshowmode
 set wildmenu
 set wildmode=list:longest,full
-filetype plugin indent on
+set colorcolumn=120 " a mark at col 120 indicating that the line is too long
 
 set novisualbell
 set noswapfile
