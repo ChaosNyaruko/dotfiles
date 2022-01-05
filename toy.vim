@@ -12,4 +12,5 @@ set matchtime=5
 inoremap <c-u> <esc>viwUea
 " nnoremap <c-u> <esc>viwU
 iunmap <c-u>
+vnoremap <leader><leader>( <esc>`<i(<esc>`>la)<esc>l
 
