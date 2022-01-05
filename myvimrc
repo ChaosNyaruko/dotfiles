@@ -96,8 +96,8 @@ let g:lightline = {
 
 " colorscheme gruvbox
 " colorscheme peaksea
-" colorscheme default
-colorscheme monokai
+colorscheme default
+" colorscheme monokai
 
 
 " Key Mappings
