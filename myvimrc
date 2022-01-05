@@ -94,7 +94,8 @@ let g:lightline = {
   \ }
 
 " colorscheme gruvbox
-colorscheme peaksea
+" colorscheme peaksea
+colorscheme default
 
 
 " Key Mappings
