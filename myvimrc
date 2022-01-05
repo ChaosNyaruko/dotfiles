@@ -60,6 +60,7 @@ Plug 'tpope/vim-surround'
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
 Plug 'vim-scripts/peaksea'
+Plug 'sickill/vim-monokai'
 Plug 'preservim/nerdtree'
 if has('nvim')
     " Use release branch (recommend)
@@ -95,7 +96,8 @@ let g:lightline = {
 
 " colorscheme gruvbox
 " colorscheme peaksea
-colorscheme default
+" colorscheme default
+colorscheme monokai
 
 
 " Key Mappings
