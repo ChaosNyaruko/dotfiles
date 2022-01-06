@@ -197,3 +197,24 @@ endfunction
 :h wincmd
 
 # Functional Programming
+:h sort()
+:h reverse()
+:h copy()
+:h deepcopy()
+:h map()
+:h function()
+
+# Paths
+:echom expand('%')
+:echom expand('%:p')
+:echom fnamemodify('foo.txt', ':p')
+:echo globpath('.', '*')
+:echo split(globpath('.', '*'), '\n')
+:echo split(globpath('.', '**'), '\n')
+:h expand()
+:h fnamemodify()
+:h filename-modifiers
+:h simplify()
+:h resolve()
+:h globpath()
+:h wildcards
