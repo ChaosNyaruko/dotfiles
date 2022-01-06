@@ -101,3 +101,13 @@ vanilla Vim/Emacs
 :h shellescape()
 :h silent
 :h cword
+
+# Case Study: Grep Operator, Part Two
+put it in ~/.vim/plugin
+:h visualmode()
+:h c_ctrl-u
+:h operatorfunc
+:h map-operator
+
+# Case Study: Grep Operator, Part Three
+:h <SID>
