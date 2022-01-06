@@ -1,3 +1,4 @@
+set laststatus=2
 set statusline=%f
 set statusline=%f\ -\ FileType:\ %y
 set statusline=%f         " Path to the file

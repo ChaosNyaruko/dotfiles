@@ -32,3 +32,10 @@ let &l:number=111 " no use
 
 " You should never use let if set will suffice -- it's harder to read.
 " :help registers
+
+
+" variable scoping
+let b:hello = "world"
+echo b:hello
+" :h internal-variables
+" echo errmsg   does it work?
