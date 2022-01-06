@@ -88,3 +88,16 @@ vanilla Vim/Emacs
 :match group /pattern/
 :h nohlsearch
 :nohls vs :set nohls
+
+# Case Study: Grep Operator, Part One
+## Grep
+:h :grep
+:h :make
+:h quickfix-window
+
+## Refine
+<cword> <cWORD>
+:h escape()
+:h shellescape()
+:h silent
+:h cword
