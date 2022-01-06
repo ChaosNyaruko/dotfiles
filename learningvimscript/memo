@@ -195,3 +195,5 @@ endfunction
 :h winnr()
 :h ctrl-w_w
 :h wincmd
+
+# Functional Programming
