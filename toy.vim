@@ -66,3 +66,12 @@ augroup filetype_html
     autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
 augroup END
 " :h autocmd-groups
+
+onoremap in( :<c-u>normal! f(vi(<cr>
+" :h omap-info
+"
+:normal! ?^==\+$<cr>:nohlsearch<cr>kvg_
+" :h pattern-overview
+" :h normal
+" :h execute
+" :h expr-quote
