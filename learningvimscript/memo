@@ -111,3 +111,51 @@ put it in ~/.vim/plugin
 
 # Case Study: Grep Operator, Part Three
 :h <SID>
+
+# Lists
+zero-indexed
+-1: the last element -2: the second-to-last
+
+slicing: [0:2] both included
+
+strings can be indexed and sliced too
+
+use + to concatenate
+
+add()
+len()
+get()
+index()
+join()
+reverse()
+:help List
+:match Keyword
+:h highlight
+
+# Looping
+## For Loops
+There's no equivalent to the C-style `for (int i = 1;i < foo; i++)`
+
+## While Loops
+
+:h for
+:h while
+
+# Dictionaries
+
+Always use the trailing comma in your dictionaries
+
+index: Vim coerce the index to a string before performing the lookup.
+Javascript-style "dot" is allowed
+
+remove()
+unlet
+
+get()
+has_key()
+items()
+keys()
+values()
+:h Dictionary
+
+# Toggle
