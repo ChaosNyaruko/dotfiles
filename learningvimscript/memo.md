@@ -257,3 +257,32 @@ groups defined later have priority over groups defined earlier.
 # Even More Advanced Syntax Highlighting
 For more `:h syntax` and look at syntax files other people have made.
 :h syn-region
+
+# Basic Folding
+:h usr_28
+manual/marker/diff/expr/indent
+Run ftplugin's scripts whenever it sets a buffer's `filetype` to `potion`(because it's in a folder named `potion`)
+
+:h foldmethod
+:h fold-manual
+:h fold-marker
+:h foldmarker
+:h fold-indent
+:h fdl
+:h foldlevelstart
+:h foldminlines
+:h foldignore
+
+# Advanced Folding
+Each line of code in a file has a "foldlevel". This is always either zero or a positive integer.
+Lines with a foldlevel of zero are never included in any fold.
+Adjacent lines with the same foldlevel are folded together.
+If a fold of level X is closed, any subsequent lines with a foldlevel greater than or equal to X are folded along with it until you reach a line with a level less than X.
+
+you can simply run :set ft=potion in the split containing factorial.pn and Vim will reload the folding code!
+
+:h foldexpr
+:h fold-expr
+:h getline
+:h indent()
+:h line()

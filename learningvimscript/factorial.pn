@@ -1,6 +1,7 @@
 factorial = (n):
     total = 1
     n to 1 (i):
+        # Multiply the running total.
         total *= i.
     total.
 
