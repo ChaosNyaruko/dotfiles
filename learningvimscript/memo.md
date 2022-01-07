@@ -286,3 +286,17 @@ you can simply run :set ft=potion in the split containing factorial.pn and Vim w
 :h getline
 :h indent()
 :h line()
+
+# Section Movement Theory
+:h section
+:h sections
+[[ ]] opening braces
+[] ][ closing braces 
+or some similar concepts/marks
+
+# Potion Section Movement
+<script> <slient> <buffer>
+:h line-continuation
+:h %^ // vim regex: beginning of file
+:h search()
+:h ordinary-atom

@@ -1,0 +1,26 @@
+# factorial.pn                              1
+# Print some factorials, just for fun.
+
+factorial = (n):
+    total = 1
+
+    n to 1 (i):
+        total *= i.
+
+    total.
+
+print_line = ():
+    "-=-=-=-=-=-=-=-\n" print.
+
+print_factorial = (i):
+    i string print
+    '! is: ' print
+    factorial (i) string print
+    "\n" print.
+
+"Here are some factorials:\n\n" print 
+
+print_line ()                        
+10 times (i):
+    print_factorial (i).
+print_line ()
