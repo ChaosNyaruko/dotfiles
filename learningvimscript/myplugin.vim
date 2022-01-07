@@ -1,1 +1,1 @@
-set runtimepath+=./potion/
+set runtimepath+=./potion
