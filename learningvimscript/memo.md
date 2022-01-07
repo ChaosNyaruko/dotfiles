@@ -233,7 +233,7 @@ endfunction
 # A New Hope: Plugin Layout with Pathogen
 :h runtimepath
 
-# Detecting FileTypes
+# Detecting Filetypes
 :h ft
 :h setfiletype
 `setfiletype` instead of `set filetype`
@@ -243,3 +243,13 @@ endfunction
 :h path
 for ftdetect issues
 
+# Basic Syntax Highlighting
+We'll ignore the `if` and `let` boilerplate at the beginning and end of the file.
+:h syn-keyword
+:h iskeyword
+:h group-name
+
+# Advanced Syntax Highlighting
+groups defined later have priority over groups defined earlier.
+:h syn-match
+:h syn-priority
