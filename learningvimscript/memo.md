@@ -253,3 +253,7 @@ We'll ignore the `if` and `let` boilerplate at the beginning and end of the file
 groups defined later have priority over groups defined earlier.
 :h syn-match
 :h syn-priority
+
+# Even More Advanced Syntax Highlighting
+For more `:h syntax` and look at syntax files other people have made.
+:h syn-region
