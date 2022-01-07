@@ -238,3 +238,8 @@ endfunction
 :h setfiletype
 `setfiletype` instead of `set filetype`
 
+:h packadd
+:h runtimepath
+:h path
+for ftdetect issues
+
