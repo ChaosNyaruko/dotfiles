@@ -295,7 +295,7 @@ you can simply run :set ft=potion in the split containing factorial.pn and Vim w
 or some similar concepts/marks  
   
 # Potion Section Movement  
-<script> <slient> <buffer>    
+\<script\> <slient> <buffer>    
 :h line-continuation    
 :h %^ // vim regex: beginning of file    
 :h search()    
