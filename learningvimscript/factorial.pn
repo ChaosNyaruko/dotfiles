@@ -9,4 +9,4 @@ factorial = (n):
     i string print
     '! is: ' print
     factorial (i) string print
-    "\n" print.
+    "\n" print\

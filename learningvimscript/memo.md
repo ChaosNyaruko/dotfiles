@@ -317,3 +317,62 @@ a "scratch" split
 :h :read!
 :h system()
 :h design-not
+:help bufwinnr()
+
+# Autoloading
+:help autoload
+:h silent
+
+# Documentaion
+:h help
+:set filetype=help
+figlet -f ogre "Potion"
+The ~ characters at the end of the lines ensure that Vim doesn't try to highlight or hide individual characters inside the art.
+:Helptags to tell Pathogen to rebuild the index of help tags
+:h help-writing
+:h :left
+:h :right
+:h :center
+
+# Distribution
+
+# What Now?
+## Color Schemes
+:h highlight
+
+## The Command Command
+:help user-commands
+
+## runtimepath
+:h runtimepath
+
+## Omnicomplete
+:help ins-completion
+:h omnifunc
+:h compl-omni
+
+## Compiler Support
+:h quickfix.txt
+However, I will warn you now that errorformat is not for the faint of heart!
+
+## Other Languages
+:h Python
+:h Ruby
+:h Lua
+:h perl-using
+:h MzScheme
+
+## Vim's Documentation
+:h various-motions
+:h sign-support
+:h map-alt-keys
+:h error-messages
+:h development
+:h virtualedit
+:h tips
+:h 24.8
+:h 24.9
+:h usr_12.txt
+:h usr_26.txt
+:h usr_32.txt
+:h usr_42.txt
