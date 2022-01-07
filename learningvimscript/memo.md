@@ -328,7 +328,7 @@ a "scratch" split
 :set filetype=help
 figlet -f ogre "Potion"
 The ~ characters at the end of the lines ensure that Vim doesn't try to highlight or hide individual characters inside the art.
-:Helptags to tell Pathogen to rebuild the index of help tags
+:helptags to tell Pathogen to rebuild the index of help tags
 :h help-writing
 :h :left
 :h :right
