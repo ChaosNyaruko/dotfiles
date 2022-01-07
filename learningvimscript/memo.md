@@ -300,3 +300,20 @@ or some similar concepts/marks
 :h %^ // vim regex: beginning of file
 :h search()
 :h ordinary-atom
+
+# External Commands
+:silent !  vs :silent!
+:redraw!
+system()
+append()
+split()
+a "scratch" split
+:h bufname
+:h buftype
+:h append()
+:h split()
+:h :!
+:h :read
+:h :read!
+:h system()
+:h design-not
