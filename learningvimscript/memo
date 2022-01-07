@@ -218,3 +218,23 @@ endfunction
 :h resolve()
 :h globpath()
 :h wildcards
+
+# Plugin Layout in the Dark Ages
+~/.vim/colors/
+~/.vim/plugin/
+~/.vim/ftdetect/
+~/.vim/ftplugin/
+~/.vim/indent/
+~/.vim/compiler/
+~/.vim/after/
+~/.vim/autoload/
+~/.vim/doc/
+
+# A New Hope: Plugin Layout with Pathogen
+:h runtimepath
+
+# Detecting FileTypes
+:h ft
+:h setfiletype
+`setfiletype` instead of `set filetype`
+
