@@ -14,7 +14,7 @@ set softtabstop=4               " Let backspace delete indent
 set noshowmode
 set wildmenu
 set wildmode=list:longest,full
-set colorcolumn=120 " a mark at col 120 indicating that the line is too long
+" set colorcolumn=120 " a mark at col 120 indicating that the line is too long
 set encoding=utf-8
 
 set novisualbell
