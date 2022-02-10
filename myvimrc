@@ -11,7 +11,7 @@ set shiftwidth=4                " Use indents of 4 spaces
 set expandtab                   " Tabs are spaces, not tabs
 set tabstop=4                   " An indentation every four columns
 set softtabstop=4               " Let backspace delete indent
-set noshowmode
+set showmode
 set wildmenu
 set wildmode=list:longest,full
 " set colorcolumn=120 " a mark at col 120 indicating that the line is too long
@@ -33,10 +33,12 @@ if has('clipboard')
 	endif
 endif
 
+
 if has('statusline')
-    set laststatus=2
+    set laststatus=1
 
     " Broken down into easily includeable segments
+    set shortmess-=S " display the number of matches from a search, see https://vi.stackexchange.com/questions/15944/how-to-display-in-the-statusline-the-number-of-matches-from-a-search
     set statusline=%<%f\                     " Filename
     set statusline+=%w%h%m%r                 " Options
     set statusline+=\ [%{&ff}/%Y]            " Filetype
@@ -44,6 +46,7 @@ if has('statusline')
     set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
     " set statusline+=%{fugitive#statusline()} " Git Hotness
 endif
+
 
 call plug#begin('~/.vim/plugged')
 
@@ -57,10 +60,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive' 
 Plug 'tpope/vim-surround'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 " Plug 'morhetz/gruvbox'
-" Plug 'vim-scripts/peaksea'
-" Plug 'sickill/vim-monokai'
 Plug 'preservim/nerdtree'
 if has('nvim')
     " Use release branch (recommend)
