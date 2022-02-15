@@ -106,6 +106,7 @@ noremap <C-p> :Files<CR>
 noremap <leader>f :Rg<CR>
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
+nnoremap <leader><space><space> :pwd<CR>
 
 " vim-go navi mappings
 autocmd FileType go nnoremap <buffer> gr :GoReferrers<CR>
