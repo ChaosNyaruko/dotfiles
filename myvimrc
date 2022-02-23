@@ -35,7 +35,7 @@ endif
 
 
 if has('statusline')
-    set laststatus=1
+    set laststatus=2
 
     " Broken down into easily includeable segments
     set shortmess-=S " display the number of matches from a search, see https://vi.stackexchange.com/questions/15944/how-to-display-in-the-statusline-the-number-of-matches-from-a-search
