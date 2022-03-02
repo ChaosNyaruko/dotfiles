@@ -136,7 +136,6 @@ noremap <C-p> :Files<CR>
 noremap <leader>f :Rg<CR>
 " For easy movements in insert mode without arrows
 let g:emacs_mapping=0
-call ToggleEmacsMapping()
 
 nnoremap <leader>e :call ToggleEmacsMapping()<CR>
 nnoremap <leader><space> :pwd<CR>
