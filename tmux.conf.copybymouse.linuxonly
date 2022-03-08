@@ -1,3 +1,8 @@
+# remap prefix from 'C-b' to 'C-a'
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
 # Add truecolor support
 set-option -ga terminal-overrides ",xterm-256color:Tc"
 # Default terminal is 256 colors
