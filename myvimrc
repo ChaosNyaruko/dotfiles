@@ -174,4 +174,4 @@ augroup END
 " see https://github.com/junegunn/fzf.vim/issues/358
 let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}' --bind ctrl-y:preview-up,ctrl-e:preview-down,ctrl-b:preview-page-up,ctrl-f:preview-page-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-top,shift-down:preview-bottom,alt-up:half-page-up,alt-down:half-page-down" 
 
-nmap <leader><leader>fs <Plug>(YCMFindSymbolInWorkspace)
+nmap <leader>yfs <Plug>(YCMFindSymbolInWorkspace)
