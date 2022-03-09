@@ -52,7 +52,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'fatih/vim-go', {'tag': '*'}
 Plug 'tpope/vim-commentary'
-" Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 " Plug 'rakr/vim-one'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
