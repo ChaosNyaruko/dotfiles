@@ -24,6 +24,7 @@ set nowritebackup
 
 set hidden
 set history=2000
+set splitright
 
 if has('clipboard')
 	if has('unnamedplus')  " When possible use + register for copy-paste
