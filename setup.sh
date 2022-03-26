@@ -80,7 +80,6 @@ for file in ${FILES[@]}; do
     echo "file:$file"
 done
 
-exit 1
 echo -e "\n\n\n"
 
 show
