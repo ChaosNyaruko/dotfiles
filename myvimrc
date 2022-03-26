@@ -25,6 +25,8 @@ set nowritebackup
 set hidden
 set history=2000
 set splitright
+let mapleader=" "
+" let mapleader="\<space>"
 
 if has('clipboard')
 	if has('unnamedplus')  " When possible use + register for copy-paste
@@ -139,7 +141,7 @@ noremap <leader>f :Rg<CR>
 let g:emacs_mapping=0
 
 nnoremap <leader>e :call ToggleEmacsMapping()<CR>
-nnoremap <leader><space> :pwd<CR>
+" nnoremap <leader><space> :pwd<CR>
 
 " vim-go navi mappings
 autocmd FileType go nnoremap <buffer> gr :GoReferrers<CR>
