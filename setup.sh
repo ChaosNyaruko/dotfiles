@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILEREPO="$HOME/dotfiles_test"
+DOTFILEREPO="$HOME/dotfiles"
 echo "$DOTFILEREPO"
 
 show() {
