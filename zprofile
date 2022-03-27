@@ -7,3 +7,5 @@ export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebr
 alias docs='cd ~/github.com/symmetrical-dollop/docs'
 alias dot='cd ~/dotfiles'
 alias vim='nvim'
+
+export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
