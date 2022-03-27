@@ -6,4 +6,4 @@ export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebr
 # PATH="/usr/local/go/bin/go:$PATH"
 alias docs='cd ~/github.com/symmetrical-dollop/docs'
 alias dot='cd ~/dotfiles'
-alias nv='nvim'
+alias vim='nvim'
