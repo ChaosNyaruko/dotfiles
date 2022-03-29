@@ -26,13 +26,23 @@ set hidden
 set history=2000
 set splitright
 let mapleader=" "
+
+" set encoding for chinese input and vim language in chinese
+" see http://edyfox.codecarver.org/html/vim_fileencodings_detection.html
+set encoding=utf-8
+" set langmenu=zh_CN.UTF-8
+" language message zh_CN.UTF-8
+"
+" set termencoding=gbk
+" set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+
 " let mapleader="\<space>"
 
 " auto load for first time uses
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocomd VimEnter * PlugInstall --sync | source $MYVIMRC
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 if has('clipboard')
