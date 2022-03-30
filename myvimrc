@@ -82,6 +82,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 " Plug 'itchyny/lightline.vim'
 " Plug 'morhetz/gruvbox'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'preservim/nerdtree'
 if has('nvim')
     " Use release branch (recommend)
@@ -119,6 +120,7 @@ let g:lightline = {
 " colorscheme peaksea
 colorscheme default
 " colorscheme monokai
+colorscheme PaperColor
 
 
 " A function for default basic emacs/bash-like moving in insert mode
