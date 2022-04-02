@@ -15,6 +15,7 @@ set showmode
 set wildmenu
 set wildmode=list:longest,full
 " set colorcolumn=120 " a mark at col 120 indicating that the line is too long
+set showtabline=1
 set encoding=utf-8
 
 set novisualbell
