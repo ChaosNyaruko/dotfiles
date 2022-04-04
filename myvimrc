@@ -129,7 +129,7 @@ colorscheme PaperColor
 function! ToggleEmacsMapping()
     " vim has defined ctrl-u alt-b for similar functionality
     if g:emacs_mapping==1
-        echom "emacs_mapping is on, turning it off"
+        " echo "emacs_mapping is on, turning it off"
         iunmap <C-f>
         iunmap <C-b>
         iunmap <C-n>
@@ -141,7 +141,7 @@ function! ToggleEmacsMapping()
         let g:emacs_mapping=0
         return
     endif
-    echom "emacs_mapping is off, turning it on"
+    " echo "emacs_mapping is off, turning it on"
     inoremap <C-f> <Right>
     inoremap <C-b> <Left>
     inoremap <C-n> <Down>
