@@ -4,7 +4,6 @@ let &packpath=&runtimepath
 source ~/.vimrc
 
 let g:coc_global_extensions=[
-            \ "coc-go", 
             \ "coc-clangd",
             \ "coc-json",
             \ "coc-webview",
