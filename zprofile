@@ -8,4 +8,4 @@ alias docs='cd ~/github.com/symmetrical-dollop/docs'
 alias dot='cd ~/dotfiles'
 alias vim='nvim'
 
-export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
+export PATH="$HOME/go/bin:$HOME/.gem/ruby/2.6.0/bin:$PATH"
