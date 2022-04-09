@@ -9,3 +9,5 @@ alias dot='cd ~/dotfiles'
 alias vim='nvim'
 
 export PATH="$HOME/go/bin:$HOME/.gem/ruby/2.6.0/bin:$PATH"
+alias sn="syncnotes -f -p -o $HOME/github.com/symmetrical-dollop"
+alias snd="syncnotes -f -p -o $HOME/dotfiles"
