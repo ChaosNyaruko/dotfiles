@@ -64,6 +64,7 @@ if has('statusline')
     set statusline+=%w%h%m%r                 " Options
     set statusline+=\ [%{&ff}/%Y]            " Filetype
     " set statusline+=\ [%{getcwd()}]          " Current dir
+    set statusline+=\ %b\ 0x%B
     set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
     " set statusline+=%{fugitive#statusline()} " Git Hotness
 endif
