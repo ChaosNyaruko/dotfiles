@@ -11,3 +11,23 @@ alias nvi='nvim'
 export PATH="$HOME/go/bin:$HOME/.gem/ruby/2.6.0/bin:$PATH"
 alias sn="syncnotes -f -p -o $HOME/github.com/symmetrical-dollop"
 alias snd="syncnotes -f -p -o $HOME/dotfiles"
+
+setproxy() {
+    echo "setting proxy"
+    export HTTP_PROXY=socks5://127.0.0.1:10808
+    export HTTPS_PROXY=socks5://127.0.0.1:10808
+    export ALL_PROXY=socks5://127.0.0.1:10808
+    echo $HTTP_PROXY
+    echo $HTTPS_PROXY
+    echo $ALL_PROXY
+}
+
+unsetproxy() {
+    echo "unsetting proxy"
+    unset HTTP_PROXY
+    unset HTTPS_PROXY
+    unset ALL_PROXY
+    echo $HTTP_PROXY
+    echo $HTTPS_PROXY
+    echo $ALL_PROXY
+}
