@@ -3,3 +3,5 @@
 [user]
 	name = ChaosNyaruko
 	email = cabbageparadise@gmail.com
+[http]
+	sslVerify = false
