@@ -206,3 +206,19 @@ function! ToggleYcmMapping()
     nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
     nnoremap <leader>gi :YcmCompleter GoToImplementation<CR>
 endfunction
+
+" If the current buffer has never been saved, it will have no name,
+" call the file browser to save it, otherwise just save it.
+" command -nargs=0 -bar Update if &modified
+"                            \|    if empty(bufname('%'))
+"                            \|        browse confirm write
+"                            \|    else
+"                            \|        confirm write
+"                            \|    endif
+"                            \|endif
+" nnoremap <silent> <C-S> :<C-u>Update<CR>
+" let s:uname = system("echo -n \"$(uname)\"")
+" if !v:shell_error && s:uname == "Darwin" && !has("gui_running")
+"     echo "map cmd+s as save"
+"     inoremap <D-s> <ESC>:Update<CR>
+" endif
