@@ -223,3 +223,10 @@ endfunction
 "     echo "map cmd+s as save"
 "     inoremap <D-s> <ESC>:Update<CR>
 " endif
+"
+
+
+"MYVIMRC mappings
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>ev :vsp $MYVIMRC<cr>
+
