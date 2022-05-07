@@ -107,6 +107,7 @@ set backspace=indent,eol,start
 " Visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv
+vnoremap / y/<c-r>"
 
 let g:lightline = {
   \ 'active': {
