@@ -1,8 +1,8 @@
 " """ Editing and Reloading the Config
 " set clipboard+=unnamed
 " set clipboard+=ideaput
-" nnoremap \e :e ~/.ideavimrc<CR>
-" nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+nnoremap \e :e ~/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
  """ The Escape button
 " map <C-c> <Esc>
 " """ The Leader Key
@@ -55,7 +55,7 @@ let mapleader=" "
 " nnoremap <c-/> :action FindInPath<CR>
 " nnoremap <c-a> :action GotoAction<CR>
 " nnoremap <c-f> :action GotoFile<CR>
-nnoremap gr :action FindUsages<CR>
+nmap gr <Action>(FindUsages)
 " nnoremap <leader>s :action GotoRelated<CR>
 " nnoremap <leader>h :action CallHierarchy<CR>
 " nnoremap <leader>b :action ShowNavBar<CR>
@@ -63,7 +63,7 @@ nnoremap gr :action FindUsages<CR>
 " nnoremap <c-o> :action GotoSymbol<CR>
 " nnoremap gc :action GotoClass<CR>
 nnoremap gi :action GotoImplementation<CR>
-nnoremap gd :action GotToDeclaration<CR>
+" nnoremap gd :action GotoDeclaration<CR>
 " nnoremap gp :action GotToSuperMethod<CR>
 " nnoremap gt :action GotoTest<CR>
 " nnoremap gb :action Back<CR>
