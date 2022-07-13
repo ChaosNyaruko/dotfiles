@@ -63,7 +63,7 @@ if has('statusline')
     set statusline=%<%f\                     " Filename
     set statusline+=%w%h%m%r                 " Options
     set statusline+=\ [%{&ff}/%Y]            " Filetype
-    " set statusline+=\ [%{getcwd()}]          " Current dir
+    set statusline+=\ [%{getcwd()}]          " Current dir
     set statusline+=\ %b\ 0x%B
     set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
     " set statusline+=%{fugitive#statusline()} " Git Hotness
@@ -158,7 +158,7 @@ endfunction
 
 " Key Mappings
 noremap <C-p> :Files<CR>
-noremap <leader>f :Rg<CR>
+noremap <leader>f :PRg<CR>
 " For easy movements in insert mode without arrows
 let g:emacs_mapping=0
 call ToggleEmacsMapping()
@@ -231,3 +231,10 @@ endfunction
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>ev :vsp $MYVIMRC<cr>
 
+" borrowed from https://github.com/junegunn/fzf.vim/issues/837
+" command! -bang -nargs=* PRg
+"   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'dir': expand('%:p:h')}, <bang>0)
+
+command! -bang -nargs=* PRg
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'dir': getenv('PWD')}, <bang>0)
+set autochdir
