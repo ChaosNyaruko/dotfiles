@@ -241,3 +241,4 @@ command! -bang -nargs=* PRg
 set autochdir
 
 command! -nargs=* -complete=dir -bang PFZF call fzf#run(fzf#wrap('FZF', {'dir': getenv('PWD')}, 0))
+" source play.vim
