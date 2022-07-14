@@ -157,7 +157,8 @@ function! ToggleEmacsMapping()
 endfunction 
 
 " Key Mappings
-noremap <C-p> :Files<CR>
+" noremap <C-p> :Files<CR>
+noremap <C-p> :PFZF<CR>
 noremap <leader>f :PRg<CR>
 " For easy movements in insert mode without arrows
 let g:emacs_mapping=0
@@ -238,3 +239,5 @@ nnoremap <leader>ev :vsp $MYVIMRC<cr>
 command! -bang -nargs=* PRg
   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'dir': getenv('PWD')}, <bang>0)
 set autochdir
+
+command! -nargs=* -complete=dir -bang PFZF call fzf#run(fzf#wrap('FZF', {'dir': getenv('PWD')}, 0))
