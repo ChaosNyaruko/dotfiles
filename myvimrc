@@ -82,6 +82,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " Plug 'tpope/vim-fugitive' 
 Plug 'tpope/vim-surround'
+Plug 'voldikss/vim-floaterm'
 " Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
@@ -160,6 +161,7 @@ endfunction
 " noremap <C-p> :Files<CR>
 noremap <C-p> :PFZF<CR>
 noremap <leader>f :PRg<CR>
+noremap <leader>t <cmd>FloatermNew<CR>
 " For easy movements in insert mode without arrows
 let g:emacs_mapping=0
 call ToggleEmacsMapping()
