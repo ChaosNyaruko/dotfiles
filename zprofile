@@ -16,9 +16,9 @@ alias np='git -C "$HOME/github.com/symmetrical-dollop" pull'
 
 setproxy() {
     echo "setting proxy"
-    export HTTP_PROXY=socks5://127.0.0.1:10808
-    export HTTPS_PROXY=socks5://127.0.0.1:10808
-    export ALL_PROXY=socks5://127.0.0.1:10808
+    export HTTP_PROXY=socks5://127.0.0.1:10001
+    export HTTPS_PROXY=socks5://127.0.0.1:10001
+    export ALL_PROXY=socks5://127.0.0.1:10001
     echo $HTTP_PROXY
     echo $HTTPS_PROXY
     echo $ALL_PROXY
