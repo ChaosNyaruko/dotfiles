@@ -66,7 +66,7 @@ if has('statusline')
     set statusline+=\ [%{getcwd()}]          " Current dir
     set statusline+=\ %b\ 0x%B
     set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-    " set statusline+=%{fugitive#statusline()} " Git Hotness
+    set statusline+=%{fugitive#statusline()} " Git Hotness
 endif
 
 
@@ -80,7 +80,7 @@ Plug 'easymotion/vim-easymotion'
 " Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" Plug 'tpope/vim-fugitive' 
+Plug 'tpope/vim-fugitive' 
 Plug 'tpope/vim-surround'
 Plug 'voldikss/vim-floaterm'
 " Plug 'itchyny/lightline.vim'
