@@ -89,6 +89,7 @@ Plug 'voldikss/vim-floaterm'
 Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'preservim/nerdtree'
+" Plug 'airblade/vim-gitgutter'
 if has('nvim')
     " Use release branch (recommend)
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
