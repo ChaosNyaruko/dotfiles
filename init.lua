@@ -1,4 +1,7 @@
-vim.cmd([[set runtimepath^=~/.vim runtimepath+=~/.vim/after]])
+-- vim.cmd([[set runtimepath^=~/.vim runtimepath+=~/.vim/after]])
+print(vim.o.runtimepath)
+vim.o.runtimepath = '~/.vim,' .. vim.o.runtimepath .. ',~/.vim/after'
+print(vim.o.runtimepath)
 vim.cmd([[let &packpath=&runtimepath]])
 vim.cmd([[source ~/.vimrc]])
 local api = vim.api
