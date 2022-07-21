@@ -32,17 +32,11 @@ api.nvim_set_keymap('n', 'gr', '<Plug>(coc-references)', {silent = true})
 api.nvim_set_keymap('n', 'K', ':call ShowDocumentation()<CR>', {silent = true, noremap = true})
 api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], {noremap = true})
 
--- function map(mode, shortcut, command)
---   vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
+-- function _G.test()
+--     print("test")
 -- end
+-- api.nvim_buf_set_keymap(0, 'n', 'xs', [[<cmd>v:lua.test()]<CR>]], {noremap = true})
 
--- function nmap(shortcut, command)
---   map('n', shortcut, command)
--- end
-
--- function imap(shortcut, command)
---   map('i', shortcut, command)
--- end
 
 vim.cmd([[
 function! ShowDocumentation()
