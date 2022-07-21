@@ -1,7 +1,7 @@
 set nocompatible
 filetype plugin indent on
 set nu
-set nornu
+set rnu
 set hlsearch
 set incsearch
 set ignorecase
@@ -191,9 +191,9 @@ autocmd FileType go nnoremap <buffer> goc :GoCallers<CR>
 let g:go_list_type="quickfix"
 
 " just something interesting saw in coding videos
-" autocmd InsertEnter * :set norelativenumber
-" autocmd InsertLeave * :set relativenumber
-" autocmd FileType qt :set norelativenumber
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
+autocmd FileType qf :set norelativenumber
 
 set background=dark
 function! ResCur()
