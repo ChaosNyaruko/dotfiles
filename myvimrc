@@ -78,6 +78,8 @@ Plug 'easymotion/vim-easymotion'
 " Plug 'rakr/vim-one'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
+" Plug 'mengelbrecht/lightline-bufferline'
+" Plug 'ap/vim-buftabline' " simpler and maybe more useful for me
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive' 
@@ -118,6 +120,16 @@ let g:lightline = {
   \ 'component': {
       \   'pwd': '%{getcwd()}'
   \ },
+  \ 'tabline': {
+  \   'left': [ ['buffers'] ],
+  \   'right': [ ['close'] ]
+  \ },
+  \ 'component_expand': {
+  \   'buffers': 'lightline#bufferline#buffers'
+  \ },
+  \ 'component_type': {
+  \   'buffers': 'tabsel'
+  \ }
   \ }
 
 colorscheme gruvbox
