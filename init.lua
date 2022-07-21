@@ -1,7 +1,7 @@
 -- vim.cmd([[set runtimepath^=~/.vim runtimepath+=~/.vim/after]])
-print(vim.o.runtimepath)
+-- print(vim.o.runtimepath)
 vim.o.runtimepath = '~/.vim,' .. vim.o.runtimepath .. ',~/.vim/after'
-print(vim.o.runtimepath)
+-- print(vim.o.runtimepath)
 vim.cmd([[let &packpath=&runtimepath]])
 vim.cmd([[source ~/.vimrc]])
 local api = vim.api
@@ -32,11 +32,23 @@ api.nvim_set_keymap('n', 'gr', '<Plug>(coc-references)', {silent = true})
 api.nvim_set_keymap('n', 'K', ':call ShowDocumentation()<CR>', {silent = true, noremap = true})
 api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], {noremap = true})
 
--- function _G.test()
---     print("test")
--- end
--- api.nvim_buf_set_keymap(0, 'n', 'xs', [[<cmd>v:lua.test()]<CR>]], {noremap = true})
+function _G.ahahatest()
+    print("test")
+end
+api.nvim_buf_set_keymap(0, 'n', 'xs', [[<cmd>call v:lua.ahahatest()<CR>]], {noremap = true})
 
+
+vim.cmd([[
+function! s:localtest()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+]])
 
 vim.cmd([[
 function! ShowDocumentation()
