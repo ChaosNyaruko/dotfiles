@@ -290,8 +290,7 @@ function! GuiTabLabel()
   let wincount = tabpagewinnr(v:lnum, '$')
   return label . '  [' . wincount . ']'
 endfunction
-set guitablabel=%{GuiTabLabel()}
-" set tabline=%{GuiTabLabel()}
+" set guitablabel=%{GuiTabLabel()}
 " set up tab tooltips with every buffer name
 function! GuiTabToolTip()
   let tip = ''
@@ -326,7 +325,7 @@ set guitabtooltip=%{GuiTabToolTip()}
 
 
 " copied from helpdoc tabpage.txt
-function MyTabLine()
+function! MyTabLine()
   let s = ''
   for i in range(tabpagenr('$'))
     " select the highlighting
@@ -356,7 +355,7 @@ endfunction
 
 " set tabline=%!MyTabLine()
 
-function MyTabLabel(n)
+function! MyTabLabel(n)
   let buflist = tabpagebuflist(a:n)
   let winnr = tabpagewinnr(a:n)
   return bufname(buflist[winnr - 1])
