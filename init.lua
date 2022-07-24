@@ -69,6 +69,9 @@ vim.cmd(
 
 augroup END]]
 )
+vim.cmd(
+[[command Testaa echo "testaa"]]
+) -- :verbose command, and it's a     "Last set from anonymous :source" command, maybe it explains why defining "s:func" in lua and using <SID>func is not available
 --[[
 
 " Use <c-space> to trigger completion.
