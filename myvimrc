@@ -13,8 +13,8 @@ set tabstop=4                   " An indentation every four columns
 set softtabstop=4               " Let backspace delete indent
 set showmode
 set wildmenu
-set wildmode=list:longest,full
-" set wildoptions=pum,fuzzy
+set wildmode=list:longest,full " basically [:] means [&&]  [,] means [then]
+" set wildoptions=pum,tagfile "nvim's default settings
 " set colorcolumn=120 " a mark at col 120 indicating that the line is too long
 set showtabline=1
 set encoding=utf-8
