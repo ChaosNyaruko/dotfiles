@@ -259,7 +259,7 @@ set autochdir
 command! -nargs=* -complete=dir -bang PFZF call fzf#run(fzf#wrap('FZF', fzf#vim#with_preview({'dir': getenv('PWD')}), <bang>0))
 " source play.vim
 "
-set showtabline=2 " always show tabs in gvim, but not vim
+" set showtabline=2 " always show tabs in gvim, but not vim
 " set up tab labels with tab number, buffer name, number of windows
 function! GuiTabLabel()
   let label = ''
