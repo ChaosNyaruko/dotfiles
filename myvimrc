@@ -63,7 +63,7 @@ if has('statusline')
     set shortmess-=S " display the number of matches from a search, see https://vi.stackexchange.com/questions/15944/how-to-display-in-the-statusline-the-number-of-matches-from-a-search
     set statusline=%<%f\                     " Filename
     set statusline+=%w%h%m%r                 " Options
-    set statusline+=\ [%{&ff}/%Y]            " Filetype
+    set statusline+=\ [%{&ff}/%Y/%{&fileencoding?&fileencoding:&encoding}]            " Filetype
     set statusline+=\ [%{getcwd()}]          " Current dir
     set statusline+=\ %b\ 0x%B
     set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
