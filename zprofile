@@ -13,6 +13,11 @@ alias sn="syncnotes -f -p -o $HOME/github.com/symmetrical-dollop"
 alias snd="syncnotes -f -p -o $HOME/dotfiles"
 alias dp='git -C "$HOME/dotfiles" pull'
 alias np='git -C "$HOME/github.com/symmetrical-dollop" pull'
+if [ ~/z/z.sh ]; then
+    source ~/z/z.sh
+else
+    echo "do not exit z"
+fi
 
 setproxy() {
     echo "setting proxy"
