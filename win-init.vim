@@ -109,7 +109,7 @@ let g:go_list_type="quickfix"
 " just something interesting saw in coding videos
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
-autocmd FileType qt :set norelativenumber
+autocmd FileType qf :set norelativenumber
 
 set background=dark
 function! ResCur()
