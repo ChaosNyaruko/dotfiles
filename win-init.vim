@@ -89,7 +89,7 @@ let g:lightline = {
   \ },
   \ }
 
-colorscheme gruvbox
+colorscheme default
 
 
 " Key Mappings
