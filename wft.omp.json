@@ -66,7 +66,7 @@
             {
                 "type": "node",
                 "style": "diamond",
-                "leading_diamond": " \ue060",
+                "leading_diamond": " \ue0b6",
                 "trailing_diamond": "\ue0b4",
                 "foreground": "#3c873a",
                 "background": "#303030",
