@@ -9,3 +9,11 @@ call setbufline(bufnr, 2, 'second line')
 echo winid bufnr
 " sleep 5
 " call popup_close(winid)
+"
+call popup_clear()
+function! SimpleEval()
+    let l:in = input("Please in put a simple string", "your eval is:")
+    redraw
+    echo l:in
+endfunction
+
