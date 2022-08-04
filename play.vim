@@ -17,3 +17,14 @@ function! SimpleEval()
     echo l:in
 endfunction
 
+function! s:get_char(...)
+  let c = (a:0 == 0) ? getchar() : getchar(a:1)
+  " If the character is a number, then it's not a special key
+  if type(c) == 0
+    let c = nr2char(c)
+  endif
+  return c
+endfunction
+
+let new_char = s:get_char()
+echo new_char
