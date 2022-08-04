@@ -135,11 +135,11 @@ let g:lightline = {
   \ }
   \ }
 
-colorscheme gruvbox
+" colorscheme gruvbox
 " colorscheme peaksea
 " colorscheme monokai
 " colorscheme PaperColor
-" colorscheme default
+colorscheme default
 
 
 " A function for default basic emacs/bash-like moving in insert mode
