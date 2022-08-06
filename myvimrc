@@ -91,7 +91,8 @@ Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'preservim/nerdtree'
 " Plug 'airblade/vim-gitgutter'
-" Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors' " Deprecated
+Plug 'mg979/vim-visual-multi'
 if has('nvim')
     " Use release branch (recommend)
     Plug 'neoclide/coc.nvim', {'branch': 'release'}

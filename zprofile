@@ -8,7 +8,7 @@ alias docs='cd ~/github.com/symmetrical-dollop/docs'
 alias dot='cd ~/dotfiles'
 alias nvi='nvim -u ~/.config/nvim_bak/init.lua'
 
-export PATH="$HOME/go/bin:$HOME/.gem/ruby/2.6.0/bin:$PATH"
+export PATH="/usr/local/bin:$HOME/go/bin:$HOME/.gem/ruby/2.6.0/bin:$PATH"
 alias sn="syncnotes -f -p -o $HOME/github.com/symmetrical-dollop"
 alias snd="syncnotes -f -p -o $HOME/dotfiles"
 alias dp='git -C "$HOME/dotfiles" pull'
