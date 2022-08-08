@@ -96,6 +96,8 @@ Plug 'mg979/vim-visual-multi'
 if has('nvim')
     " Use release branch (recommend)
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Plug 'lukas-reineke/indent-blankline.nvim'
+
     "
     " " Or build from source code by using yarn: https://yarnpkg.com
     " Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install  --frozen-lockfile'}
