@@ -113,7 +113,7 @@ else
                 nnoremap <buffer> gd :YcmCompleter GoToDefinition<CR>
                 nnoremap <buffer> gr :YcmCompleter GoToReferences<CR>
                 nnoremap <buffer> gi :YcmCompleter GoToImplementation<CR>
-                            } " in neovim, a leading '\' is needed, buf vim(9?) is just the opposite.
+                            } " in neovim/vim8, a leading '\' is needed, buf vim9 is just the opposite.
     augroup END
 endif
 
