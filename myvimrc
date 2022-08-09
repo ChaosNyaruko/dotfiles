@@ -369,3 +369,13 @@ function! MyTabLabel(n)
   let winnr = tabpagewinnr(a:n)
   return bufname(buflist[winnr - 1])
 endfunction
+
+" copied from https://www.reddit.com/r/vim/comments/gpe3tr/ripgrep_from_inside_vim/
+" if executable('rg')
+" 	set grepprg=rg\ --vimgrep\ --hidden\ —glob ‘!.git’
+" endif
+" Then you can just do the following which populates the results in the quick fix list
+" :grep <pattern>
+" If you want to grep the word under your cursor do
+" :grep <c-r><c-w>
+" :h c_CTRL-R_CTRL-W to check
