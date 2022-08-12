@@ -20,7 +20,7 @@ local api = vim.api
 -- api.nvim_win_set_option(0, "relativenumber",true)
 -- print(vim.inspect(api.nvim_list_runtime_paths()))
 
-api.nvim_set_var("coc_global_extensions", {"coc-clangd", "coc-json", "coc-webview", "coc-markdown-preview-enhanced", "coc-vimlsp"})
+api.nvim_set_var("coc_global_extensions", {"coc-clangd", "coc-json", "coc-vimlsp"})
 api.nvim_set_keymap('n', '[g', '<Plug>(coc-diagnostic-prev)', {})
 api.nvim_set_keymap('n', ']g', '<Plug>(coc-diagnostic-next)', {})
 
@@ -62,13 +62,6 @@ function! ShowDocumentation()
 endfunction
 ]])
 
-vim.cmd(
-[[augroup MarkDown
-    autocmd!
-    autocmd FileType markdown nnoremap <buffer> <F5> :CocCommand markdown-preview-enhanced.openPreview<CR>
-
-augroup END]]
-)
 vim.cmd(
 [[command Testaa echo "testaa"]]
 ) -- :verbose command, and it's a     "Last set from anonymous :source" command, maybe it explains why defining "s:func" in lua and using <SID>func is not available
