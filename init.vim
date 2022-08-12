@@ -6,11 +6,11 @@ source ~/.vimrc
 let g:coc_global_extensions=[
             \ "coc-clangd",
             \ "coc-json",
-            \ "coc-webview",
-            \ "coc-markdown-preview-enhanced",
             \ "coc-vimlsp",
             \ ]
 
+"  coc-markdown-preview-enhanced, coc-webview for markdown
+"  preview, but now I am using iamcco/markdown-preview.nvim
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -37,11 +37,11 @@ endfunction
 
 tnoremap <Esc> <C-\><C-n>
 
-augroup MarkDown
-    autocmd!
-    autocmd FileType markdown nnoremap <buffer> <F5> :CocCommand markdown-preview-enhanced.openPreview<CR>
+" augroup MarkDown
+"     autocmd!
+"     autocmd FileType markdown nnoremap <buffer> <F5> :CocCommand markdown-preview-enhanced.openPreview<CR>
 
-augroup END
+" augroup END
 
 " Use <c-space> to trigger completion.
 if has('nvim')
