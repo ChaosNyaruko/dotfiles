@@ -2,6 +2,8 @@ local status, nvim_lsp = pcall(require, 'lspconfig')
 
 if (not status) then return end
 
+vim.diagnostic.config({ virtual_text = true })
+
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
