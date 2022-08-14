@@ -1,4 +1,6 @@
-set nocompatible
+" modeline vim: fdm=marker 
+" General settings {{{ 
+set nocompatible 
 filetype plugin indent on
 set encoding=utf-8
 set nu
@@ -18,7 +20,7 @@ set wildmode=list:longest,full " basically [:] means [&&]  [,] means [then]
 " set wildoptions=pum,tagfile "nvim's default settings
 " set colorcolumn=120 " a mark at col 120 indicating that the line is too long
 set showtabline=1
-set encoding=utf-8
+set background=dark
 
 set novisualbell
 set noswapfile
@@ -29,24 +31,40 @@ set hidden
 set history=2000
 set splitright
 let mapleader=" "
+set autochdir
 
-" auto load for first time uses
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+set nolist
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+set backspace=indent,eol,start
+colorscheme default
 
-if has('clipboard')
+" Common mappings
+" Visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv
+" vnoremap / y/<c-r>"
+"
+"MYVIMRC mappings
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>ev :vsp $MYVIMRC<cr>
+
+" something interesting saw in coding videos, but seems useful
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
+autocmd FileType qf :set norelativenumber
+"}}}
+
+" Share clipboard if possible"{{{
+if has('clipboard') 
 	if has('unnamedplus')  " When possible use + register for copy-paste
 	    set clipboard=unnamed,unnamedplus
 	else         " On mac and Windows, use * register for copy-paste
 	    set clipboard=unnamed
-	endif
-endif
+    endif
+endif "}}}
 
-
-if has('statusline')
+" Set a rough statusline "{{{
+if has('statusline') 
     set laststatus=2
 
     " Broken down into easily includeable segments
@@ -58,8 +76,14 @@ if has('statusline')
     set statusline+=\ %b\ 0x%B
     set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
     set statusline+=%{fugitive#statusline()} " Git Hotness
-endif
+endif "}}}
 
+" Manage plugins using vim-plug, auto load for first time uses {{{
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 call plug#begin('~/.vim/plugged')
 
@@ -90,7 +114,6 @@ if has('nvim')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Plug 'lukas-reineke/indent-blankline.nvim'
 
-    "
     " " Or build from source code by using yarn: https://yarnpkg.com
     " Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install  --frozen-lockfile'}
 else 
@@ -108,52 +131,15 @@ else
     augroup END
 endif
 
-call plug#end()
-set nolist
-" set listchars=space:\ ,tab:>\ 
-set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
-set backspace=indent,eol,start
-" colorscheme one
-" let g:airline#extensions#tabline#enabled = 1
-
-" Visual shifting (does not exit Visual mode)
-vnoremap < <gv
-vnoremap > >gv
-" vnoremap / y/<c-r>"
-
-let g:lightline = {
-  \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'readonly', 'filename', 'modified', 'pwd' ] ]
-  \ },
-  \ 'component': {
-      \   'pwd': '%{getcwd()}'
-  \ },
-  \ 'tabline': {
-  \   'left': [ ['buffers'] ],
-  \   'right': [ ['close'] ]
-  \ },
-  \ 'component_expand': {
-  \   'buffers': 'lightline#bufferline#buffers'
-  \ },
-  \ 'component_type': {
-  \   'buffers': 'tabsel'
-  \ }
-  \ }
-
-" colorscheme gruvbox
-" colorscheme peaksea
-" colorscheme monokai
-" colorscheme PaperColor
-colorscheme default
+call plug#end() "}}}
 
 
-" A function for default basic emacs/bash-like moving in insert mode
+" A function for default basic emacs/bash-like moving in insert mode {{{
 " might be useful when using Chinese input method
 function! ToggleEmacsMapping()
     " vim has defined ctrl-u alt-b for similar functionality
     if g:emacs_mapping==1
-        " echo "emacs_mapping is on, turning it off"
+        echo "emacs_mapping is on, turning it off"
         iunmap <C-f>
         iunmap <C-b>
         iunmap <C-n>
@@ -163,89 +149,46 @@ function! ToggleEmacsMapping()
         iunmap <C-k>
         iunmap <A-f>
         let g:emacs_mapping=0
-        return
+    else
+        echo "emacs_mapping is off, turning it on"
+        inoremap <C-f> <Right>
+        inoremap <C-b> <Left>
+        inoremap <C-n> <Down>
+        inoremap <C-p> <Up>
+        inoremap <C-a> <Home>
+        inoremap <C-e> <End>
+        inoremap <C-k> <esc>d$a
+        inoremap <A-f> <esc>lwi
+        let g:emacs_mapping=1
     endif
-    " echo "emacs_mapping is off, turning it on"
-    inoremap <C-f> <Right>
-    inoremap <C-b> <Left>
-    inoremap <C-n> <Down>
-    inoremap <C-p> <Up>
-    inoremap <C-a> <Home>
-    inoremap <C-e> <End>
-    inoremap <C-k> <esc>d$a
-    inoremap <A-f> <esc>lwi
-    let g:emacs_mapping=1
-    return
-endfunction 
-
-" Key Mappings
-" noremap <C-p> :Files<CR>
-noremap <C-p> :PFZF<CR>
-noremap <leader>f :PRg<CR>
-noremap <leader>t <cmd>FloatermNew<CR>
-" For easy movements in insert mode without arrows
+endfunction
 let g:emacs_mapping=0
-call ToggleEmacsMapping()
+command! -nargs=0 ToggleEmacs call ToggleEmacsMapping() "}}}
 
-nnoremap <leader>e :call ToggleEmacsMapping()<CR>
-" nnoremap <leader><space> :pwd<CR>
-
-" vim-go navi mappings
-autocmd FileType go nnoremap <buffer> gr :GoReferrers<CR>
-autocmd FileType go nnoremap <buffer> gi :GoImplements<CR>
-autocmd FileType go nnoremap <buffer> goc :GoCallers<CR>
-" au filetype go inoremap <buffer> . .<C-x><C-o>
-
-" vim-go settings
-let g:go_list_type="quickfix"
-
-" just something interesting saw in coding videos
-autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber
-autocmd FileType qf :set norelativenumber
-
-set background=dark
-function! ResCur()
+" Auto jump back to the last position when opened {{{
+function! ResCur() 
     if line("'\"") <= line("$")
         silent! normal! g`"
         return 1
     endif
-endfunction
+endfunction 
 
 augroup resCur
     autocmd!
     autocmd BufWinEnter * call ResCur()
 augroup END
-" Always switch to the current file directory
-" autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+" Always switch to the current file directory, now I am using 'autochdir' option
+" autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif "}}}
 
-" autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
-
+" FZF key Mappings {{{
 " for fzf preview-window
 " see https://github.com/junegunn/fzf.vim/issues/358
 let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}' --bind ctrl-y:preview-up,ctrl-e:preview-down,ctrl-b:preview-page-up,ctrl-f:preview-page-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-top,shift-down:preview-bottom,alt-up:half-page-up,alt-down:half-page-down" 
 
-" If the current buffer has never been saved, it will have no name,
-" call the file browser to save it, otherwise just save it.
-" command -nargs=0 -bar Update if &modified
-"                            \|    if empty(bufname('%'))
-"                            \|        browse confirm write
-"                            \|    else
-"                            \|        confirm write
-"                            \|    endif
-"                            \|endif
-" nnoremap <silent> <C-S> :<C-u>Update<CR>
-" let s:uname = system("echo -n \"$(uname)\"")
-" if !v:shell_error && s:uname == "Darwin" && !has("gui_running")
-"     echo "map cmd+s as save"
-"     inoremap <D-s> <ESC>:Update<CR>
-" endif
-"
-
-
-"MYVIMRC mappings
-nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <leader>ev :vsp $MYVIMRC<cr>
+" noremap <C-p> :Files<CR>
+noremap <C-p> :PFZF<CR>
+noremap <leader>f :PRg<CR>
+noremap <leader>t <cmd>FloatermNew<CR>
 
 " borrowed from https://github.com/junegunn/fzf.vim/issues/837
 " command! -bang -nargs=* PRg
@@ -253,114 +196,10 @@ nnoremap <leader>ev :vsp $MYVIMRC<cr>
 
 command! -bang -nargs=* PRg
   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({'dir': getenv('PWD')}), <bang>0)
-set autochdir
 
 command! -nargs=* -complete=dir -bang PFZF call fzf#run(fzf#wrap('FZF', fzf#vim#with_preview({'dir': getenv('PWD')}), <bang>0))
 " source play.vim
 "
-" set showtabline=2 " always show tabs in gvim, but not vim
-" set up tab labels with tab number, buffer name, number of windows
-function! GuiTabLabel()
-  let label = ''
-  let bufnrlist = tabpagebuflist(v:lnum)
-  " Add '+' if one of the buffers in the tab page is modified
-  for bufnr in bufnrlist
-    if getbufvar(bufnr, "&modified")
-      let label = '+'
-      break
-    endif
-  endfor
-  " Append the tab number
-  let label .= v:lnum.': '
-  " Append the buffer name
-  let name = bufname(bufnrlist[tabpagewinnr(v:lnum) - 1])
-  if name == ''
-    " give a name to no-name documents
-    if &buftype=='quickfix'
-      let name = '[Quickfix List]'
-    else
-      let name = '[No Name]'
-    endif
-  else
-    " get only the file name
-    let name = fnamemodify(name,":t")
-  endif
-  let label .= name
-  " Append the number of windows in the tab page
-  let wincount = tabpagewinnr(v:lnum, '$')
-  return label . '  [' . wincount . ']'
-endfunction
-" set guitablabel=%{GuiTabLabel()}
-" set up tab tooltips with every buffer name
-function! GuiTabToolTip()
-  let tip = ''
-  let bufnrlist = tabpagebuflist(v:lnum)
-  for bufnr in bufnrlist
-    " separate buffer entries
-    if tip!=''
-      let tip .= " \n "
-    endif
-    " Add name of buffer
-    let name=bufname(bufnr)
-    if name == ''
-      " give a name to no name documents
-      if getbufvar(bufnr,'&buftype')=='quickfix'
-        let name = '[Quickfix List]'
-      else
-        let name = '[No Name]'
-      endif
-    endif
-    let tip.=name
-    " add modified/modifiable flags
-    if getbufvar(bufnr, "&modified")
-      let tip .= ' [+]'
-    endif
-    if getbufvar(bufnr, "&modifiable")==0
-      let tip .= ' [-]'
-    endif
-  endfor
-  return tip
-endfunction
-set guitabtooltip=%{GuiTabToolTip()}
-
-
-" copied from helpdoc tabpage.txt
-function! MyTabLine()
-  let s = ''
-  for i in range(tabpagenr('$'))
-    " select the highlighting
-    if i + 1 == tabpagenr()
-      let s ..= '%#TabLineSel#'
-    else
-      let s ..= '%#TabLine#'
-    endif
-
-    " set the tab page number (for mouse clicks)
-    let s ..= '%' .. (i + 1) .. 'T'
-
-    " the label is made by MyTabLabel()
-    let s ..= ' %{MyTabLabel(' .. (i + 1) .. ')} '
-  endfor
-
-  " after the last tab fill with TabLineFill and reset tab page nr
-  let s ..= '%#TabLineFill#%T'
-
-  " right-align the label to close the current tab page
-  if tabpagenr('$') > 1
-    let s ..= '%=%#TabLine#%999Xclose'
-  endif
-
-  return s
-endfunction
-
-" set tabline=%!MyTabLine()
-
-function! MyTabLabel(n)
-  let buflist = tabpagebuflist(a:n)
-  let winnr = tabpagewinnr(a:n)
-  return bufname(buflist[winnr - 1])
-endfunction
-
 " copied from https://www.reddit.com/r/vim/comments/gpe3tr/ripgrep_from_inside_vim/
 " if executable('rg')
 " 	set grepprg=rg\ --vimgrep\ --hidden\ —glob ‘!.git’
@@ -371,8 +210,20 @@ endfunction
 " :grep <c-r><c-w>
 " :h c_CTRL-R_CTRL-W to check
 "
+"}}}
 
-" =================markdown-preview config============================
+" vim-go navi mappings {{{
+autocmd FileType go nnoremap <buffer> gr :GoReferrers<CR>
+autocmd FileType go nnoremap <buffer> gi :GoImplements<CR>
+autocmd FileType go nnoremap <buffer> goc :GoCallers<CR>
+" au filetype go inoremap <buffer> . .<C-x><C-o>
+
+" vim-go settings
+let g:go_list_type="quickfix"
+
+"}}}
+
+" markdown-preview config {{{
 " set to 1, nvim will open the preview window after entering the markdown buffer
 " default: 0
 let g:mkdp_auto_start = 0
@@ -476,9 +327,9 @@ augroup MarkDown
     autocmd!
     autocmd FileType markdown nnoremap <buffer> <F5> :MarkdownPreview<CR>
 augroup END
+"}}}
 
-
-" ===== some memo =====
+" Memo {{{ 
 " == formatoptions
 " set formatoptions=croql
 "
@@ -492,4 +343,21 @@ augroup END
 
 " == mapleader
 " let mapleader="\<space>"
+
+" If the current buffer has never been saved, it will have no name,
+" call the file browser to save it, otherwise just save it.
+" command -nargs=0 -bar Update if &modified
+"                            \|    if empty(bufname('%'))
+"                            \|        browse confirm write
+"                            \|    else
+"                            \|        confirm write
+"                            \|    endif
+"                            \|endif
+" nnoremap <silent> <C-S> :<C-u>Update<CR>
+" let s:uname = system("echo -n \"$(uname)\"")
+" if !v:shell_error && s:uname == "Darwin" && !has("gui_running")
+"     echo "map cmd+s as save"
+"     inoremap <D-s> <ESC>:Update<CR>
+" endif
+" }}}
 
