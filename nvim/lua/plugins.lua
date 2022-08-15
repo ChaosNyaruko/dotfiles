@@ -22,10 +22,10 @@ packer.startup(function(use)
     use { 'fatih/vim-go', tag = '*' }
 
 
-    -- use {
-    --     'nvim-treesitter/nvim-treesitter',
-    --     run = ':TSUpdate'
-    -- }
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
 
     use 'nvim-lua/plenary.nvim'
     use 'nvim-telescope/telescope.nvim'
