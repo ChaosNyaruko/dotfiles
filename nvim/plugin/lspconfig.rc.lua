@@ -73,5 +73,11 @@ nvim_lsp.sumneko_lua.setup {
 --     flags = lsp_flags,
 -- }
 
--- for python
+-- for Python
 nvim_lsp.pyright.setup {}
+
+-- for C++
+nvim_lsp.clangd.setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
