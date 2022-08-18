@@ -361,3 +361,10 @@ augroup END
 " endif
 " }}}
 
+" grep/make integration related stuff {{{
+if !executable('rg')
+    set grepprg=grep\ -n\ -r\ $*\ %:p:h\ /dev/null
+else
+    set grepprg=rg\ --vimgrep\ $*\ %:p:h\ /dev/null
+endif
+"}}}
