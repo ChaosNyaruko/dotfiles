@@ -31,7 +31,7 @@ set hidden
 set history=2000
 set splitright
 let mapleader=" "
-set autochdir
+" set autochdir
 
 set nolist
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
