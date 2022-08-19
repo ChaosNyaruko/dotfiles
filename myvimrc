@@ -123,14 +123,25 @@ else
     " YCM related 
     nmap <leader>yfs <Plug>(YCMFindSymbolInWorkspace)
 
-    augroup YCM
-        autocmd!
-        autocmd BufWinEnter *.py,*.cpp  {
-                nnoremap <buffer> gd :YcmCompleter GoToDefinition<CR>
-                nnoremap <buffer> gr :YcmCompleter GoToReferences<CR>
-                nnoremap <buffer> gi :YcmCompleter GoToImplementation<CR>
-                            } " in neovim/vim8, a leading '\' is needed, buf vim9 is just the opposite.
-    augroup END
+    if v:version >= 900
+        augroup YCM
+            autocmd!
+            autocmd BufWinEnter *.py,*.cpp  {
+                    nnoremap <buffer> gd :YcmCompleter GoToDefinition<CR>
+                    nnoremap <buffer> gr :YcmCompleter GoToReferences<CR>
+                    nnoremap <buffer> gi :YcmCompleter GoToImplementation<CR>
+                                } " in neovim/vim8, a leading '\' is needed, buf vim9 is just the opposite.
+        augroup END
+    else
+        augroup YCM
+            autocmd!
+            autocmd BufWinEnter *.py,*.cpp  {
+                    nnoremap <buffer> gd :YcmCompleter GoToDefinition<CR>
+                    nnoremap <buffer> gr :YcmCompleter GoToReferences<CR>
+                    nnoremap <buffer> gi :YcmCompleter GoToImplementation<CR>
+                                \} " in neovim/vim8, a leading '\' is needed, buf vim9 is just the opposite.
+        augroup END
+    endif
 endif
 
 call plug#end() "}}}
