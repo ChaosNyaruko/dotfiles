@@ -74,7 +74,7 @@ if has('statusline')
     set statusline=%<%f\                     " Filename
     set statusline+=%w%h%m%r                 " Options
     set statusline+=\ [%{&ff}/%Y/%{&fileencoding?&fileencoding:&encoding}]            " Filetype
-    set statusline+=\ [%{getcwd()}]          " Current dir
+    " set statusline+=\ [%{getcwd()}]          " Current dir
     " set statusline+=\ %b\ 0x%B             " ga/:ascii 
     set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
     set statusline+=%{fugitive#statusline()} " Git Hotness

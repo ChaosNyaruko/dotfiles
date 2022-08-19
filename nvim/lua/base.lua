@@ -56,7 +56,7 @@ vim.opt.shortmess:remove { 'S' }
 vim.opt.statusline = '%<%f ' -- Filename
 vim.opt.statusline:append '%w%h%m%r' -- Options
 vim.opt.statusline:append ' [%{&ff}/%Y/%{&fileencoding?&fileencoding:&encoding}]' -- Filetype
-vim.opt.statusline:append ' [%{getcwd()}]' -- Current dir
+-- vim.opt.statusline:append ' [%{getcwd()}]' -- Current dir
 -- vim.opt.statusline:append ' %b 0x%B' -- :ascii
 vim.opt.statusline:append '%=%-14.(%l,%c%V%) %p%%' -- Right aligned file nav info
 vim.opt.statusline:append '%{fugitive#statusline()}' -- Git Hotness
