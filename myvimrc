@@ -48,6 +48,8 @@ vnoremap > >gv
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>ev :vsp $MYVIMRC<cr>
 
+tnoremap <esc> <c-\><c-n>
+
 " something interesting saw in coding videos, but seems useful
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
@@ -100,7 +102,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive' 
 Plug 'tpope/vim-surround'
 Plug 'gcmt/wildfire.vim'
-Plug 'voldikss/vim-floaterm'
+" Plug 'voldikss/vim-floaterm'
 " Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
