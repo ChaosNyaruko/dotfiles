@@ -20,7 +20,6 @@ set wildmode=list:longest,full " basically [:] means [&&]  [,] means [then]
 " set wildoptions=pum,tagfile "nvim's default settings
 " set colorcolumn=120 " a mark at col 120 indicating that the line is too long
 set showtabline=1
-set background=dark
 
 set novisualbell
 set noswapfile
@@ -37,6 +36,7 @@ set nolist
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 set backspace=indent,eol,start
 colorscheme default
+set background=dark
 
 " Common mappings
 " Visual shifting (does not exit Visual mode)
