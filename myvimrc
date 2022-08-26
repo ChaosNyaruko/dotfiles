@@ -90,6 +90,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'fatih/vim-go', {'tag': '*'}
+Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 " Plug 'easymotion/vim-easymotion'
 " Plug 'rakr/vim-one'
@@ -133,6 +134,7 @@ else
                                 } " in neovim/vim8, a leading '\' is needed, buf vim9 is just the opposite.
         augroup END
     else
+        echom "It is vim8 intepreter!"
         augroup YCM
             autocmd!
             autocmd BufWinEnter *.py,*.cpp  {
@@ -380,3 +382,16 @@ else
     set grepprg=rg\ --vimgrep\ $*\ %:p:h\ /dev/null
 endif
 "}}}
+
+
+
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories=["$HOME/" .. ".vim/plugged/vim-go/gosnippets"]
