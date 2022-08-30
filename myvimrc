@@ -170,8 +170,11 @@ function! ToggleEmacsMapping()
         iunmap <C-e>
         iunmap <C-k>
         iunmap <A-f>
+        iunmap <C-s>
         let g:emacs_mapping=0
     else
+        " TODO: using magarg to save/restore original mapping
+        " https://vi.stackexchange.com/questions/7734/how-to-save-and-restore-a-mapping
         echo "emacs_mapping is off, turning it on"
         inoremap <C-f> <Right>
         inoremap <C-b> <Left>
@@ -181,6 +184,7 @@ function! ToggleEmacsMapping()
         inoremap <C-e> <End>
         inoremap <C-k> <esc>d$a
         inoremap <A-f> <esc>lwi
+        inoremap <C-s> <cmd>update<cr>
         let g:emacs_mapping=1
     endif
 endfunction
@@ -402,4 +406,3 @@ let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories=["$HOME/" .. ".vim/plugged/vim-go/gosnippets"]
-
