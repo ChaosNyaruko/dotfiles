@@ -170,7 +170,6 @@ function! ToggleEmacsMapping()
         iunmap <C-e>
         iunmap <C-k>
         iunmap <A-f>
-        iunmap <C-s>
         let g:emacs_mapping=0
     else
         " TODO: using magarg to save/restore original mapping
@@ -184,7 +183,6 @@ function! ToggleEmacsMapping()
         inoremap <C-e> <End>
         inoremap <C-k> <esc>d$a
         inoremap <A-f> <esc>lwi
-        inoremap <C-s> <cmd>update<cr>
         let g:emacs_mapping=1
     endif
 endfunction
@@ -406,3 +404,53 @@ let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories=["$HOME/" .. ".vim/plugged/vim-go/gosnippets"]
+
+" meta key related settings
+" refer to https://github.com/skywind3000/vim-init/wiki/Setup-terminals-to-support-ALT-and-Backspace-correctly
+function! Terminal_MetaMode(mode)
+    set ttimeout
+    if $TMUX != ''
+        set ttimeoutlen=30
+    elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
+        set ttimeoutlen=80
+    endif
+    if has('nvim') || has('gui_running')
+        return
+    endif
+    function! s:metacode(mode, key)
+        if a:mode == 0
+            exec "set <M-".a:key.">=\e".a:key
+        else
+            exec "set <M-".a:key.">=\e]{0}".a:key."~"
+        endif
+    endfunc
+    for i in range(10)
+        call s:metacode(a:mode, nr2char(char2nr('0') + i))
+    endfor
+    for i in range(26)
+        call s:metacode(a:mode, nr2char(char2nr('a') + i))
+        call s:metacode(a:mode, nr2char(char2nr('A') + i))
+    endfor
+    if a:mode != 0
+        for c in [',', '.', '/', ';', '[', ']', '{', '}']
+            call s:metacode(a:mode, c)
+        endfor
+        for c in ['?', ':', '-', '_']
+            call s:metacode(a:mode, c)
+        endfor
+    else
+        for c in [',', '.', '/', ';', '{', '}']
+            call s:metacode(a:mode, c)
+        endfor
+        for c in ['?', ':', '-', '_']
+            call s:metacode(a:mode, c)
+        endfor
+    endif
+endfunc
+
+" call Terminal_MetaMode(0)
+set timeout
+set timeoutlen=3000
+set ttimeoutlen=100
+" set Meta based shortcuts
+inoremap <M-s> <cmd>update<cr>
