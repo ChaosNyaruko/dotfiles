@@ -54,7 +54,7 @@ let mapleader=" "
 " set incsearch
 " nnoremap <c-/> :action FindInPath<CR>
 " nnoremap <c-a> :action GotoAction<CR>
-" nnoremap <c-f> :action GotoFile<CR>
+nnoremap <c-p> :action GotoFile<CR>
 nmap gr <Action>(FindUsages)
 " nnoremap <leader>s :action GotoRelated<CR>
 " nnoremap <leader>h :action CallHierarchy<CR>
@@ -81,3 +81,5 @@ nnoremap gi :action GotoImplementation<CR>
 " nnoremap ,b :action ToggleLineBreakpoint<CR>
 " nnoremap ,d :action ContextDebug<CR>
 " nnoremap ,n :action ActivateDebugToolWindow<CR>
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
