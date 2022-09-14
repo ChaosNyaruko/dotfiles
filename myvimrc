@@ -141,14 +141,10 @@ else
                                 } " in neovim/vim8, a leading '\' is needed, buf vim9 is just the opposite.
         augroup END
     else
-        echom "It is vim8 intepreter!"
+        " echom "It is vim8 intepreter!"
         augroup YCM
             autocmd!
-            autocmd BufWinEnter *.py,*.cpp  {
-                    nnoremap <buffer> gd :YcmCompleter GoToDefinition<CR>
-                    nnoremap <buffer> gr :YcmCompleter GoToReferences<CR>
-                    nnoremap <buffer> gi :YcmCompleter GoToImplementation<CR>
-                                \} " in neovim/vim8, a leading '\' is needed, buf vim9 is just the opposite.
+            autocmd BufWinEnter *.py,*.cpp  nnoremap <buffer> gd :YcmCompleter GoToDefinition<CR> | nnoremap <buffer> gr :YcmCompleter GoToReferences<CR> | nnoremap <buffer> gi :YcmCompleter GoToImplementation<CR>
         augroup END
     endif
 endif
