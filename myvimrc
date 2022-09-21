@@ -37,6 +37,9 @@ set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic white
 set backspace=indent,eol,start
 colorscheme default
 set background=dark
+if has('gui_running')
+    set background = light
+endif
 
 " termguicolors, read `:h xterm-true-color` for further help
 " the followin' t_8f/t_8b settings are copied from
