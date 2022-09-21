@@ -36,7 +36,7 @@ set nolist
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 set backspace=indent,eol,start
 colorscheme default
-set background=dark
+set background=light
 if has('gui_running')
     set background = light
 endif
