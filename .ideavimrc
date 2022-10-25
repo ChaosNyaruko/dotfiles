@@ -1,6 +1,8 @@
 " """ Editing and Reloading the Config
 " set clipboard+=unnamed
 " set clipboard+=ideaput
+set ignorecase
+set smartcase
 nnoremap \e :e ~/.ideavimrc<CR>
 nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
  """ The Escape button
