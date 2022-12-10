@@ -102,7 +102,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'fatih/vim-go', {'tag': '*'}
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
-Plug 'mattn/vim-yoshi'
+" Plug 'mattn/vim-yoshi'
 " Plug 'easymotion/vim-easymotion'
 " Plug 'rakr/vim-one'
 " Plug 'vim-airline/vim-airline'
