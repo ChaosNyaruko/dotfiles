@@ -84,3 +84,9 @@ nvim_lsp.clangd.setup {
     on_attach = on_attach,
     flags = lsp_flags,
 }
+
+-- for Rust
+nvim_lsp.rust_analyzer.setup {
+    on_attach = on_attach,
+    flags = lsg_flags,
+}
