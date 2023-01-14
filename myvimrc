@@ -455,3 +455,5 @@ set timeoutlen=3000
 set ttimeoutlen=100
 " set Meta based shortcuts
 inoremap <M-s> <cmd>update<cr>
+
+source $HOME/dotfiles/redir.vim
