@@ -44,9 +44,9 @@ endif
 " termguicolors, read `:h xterm-true-color` for further help
 " the followin' t_8f/t_8b settings are copied from
 " https://stackoverflow.com/questions/62702766/termguicolors-in-vim-makes-everything-black-and-white
-set termguicolors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" set termguicolors
+" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " Common mappings
 " Visual shifting (does not exit Visual mode)

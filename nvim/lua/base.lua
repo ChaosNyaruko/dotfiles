@@ -3,7 +3,7 @@ vim.cmd('autocmd!')
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
 vim.opt.mouse = 'a'
-vim.opt.termguicolors = true
+-- vim.opt.termguicolors = true
 vim.opt.background = 'light'
 
 vim.opt.number = true
