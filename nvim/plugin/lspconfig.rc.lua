@@ -56,7 +56,7 @@ nvim_lsp.sumneko_lua.setup {
     settings = {
         Lua = {
             diagnostics = {
-                globals = { 'vim' }
+                globals = { 'vim', 'hs', 'spoon' }
             },
 
             workspace = {
