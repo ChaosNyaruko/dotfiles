@@ -212,11 +212,15 @@ let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbe
 " noremap <C-p> :Files<CR>
 noremap <C-p> :FZF<CR>
 noremap <leader>f :Rg<CR>
+noremap sf :Files<CR>
 let g:fzf_layout = { 'down': '40%' }
 
 " borrowed from https://github.com/junegunn/fzf.vim/issues/837
 " command! -bang -nargs=* PRg
 "   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'dir': expand('%:p:h')}, <bang>0)
+
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}, <bang>0))
 
 command! -bang -nargs=* PRg
   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({'dir': getenv('PWD')}), <bang>0)
