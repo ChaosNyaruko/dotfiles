@@ -21,17 +21,15 @@ packer.startup(function(use)
     -- use 'hrsh7th/cmp-buffer'
     use { 'fatih/vim-go', tag = '*' }
 
-    use { 'junegunn/fzf', run = ":call fzf#install()" }
-    use { 'junegunn/fzf.vim' }
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
 
     use 'nvim-lua/plenary.nvim'
-    use 'nvim-telescope/telescope.nvim'
-    use 'nvim-telescope/telescope-file-browser.nvim'
-    use 'kyazdani42/nvim-web-devicons' -- for telescope file icons
+    -- use 'nvim-telescope/telescope.nvim'
+    -- use 'nvim-telescope/telescope-file-browser.nvim'
+    -- use 'kyazdani42/nvim-web-devicons' -- for telescope file icons
 
     -- use 'akinsho/nvim-bufferline.lua'
     -- use 'norcalli/nvim-colorizer.lua'
@@ -42,4 +40,7 @@ packer.startup(function(use)
 
     use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
         setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+
+    use { 'junegunn/fzf', run = ":call fzf#install()" }
+    use { 'junegunn/fzf.vim' }
 end)

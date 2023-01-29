@@ -1,5 +1,7 @@
 local status, telescope = pcall(require, 'telescope')
 if (not status) then return end
+
+if (vim.g.fzf_loaded) then return end
 local actions = require('telescope.actions')
 
 function telescope_buffer_dir()
