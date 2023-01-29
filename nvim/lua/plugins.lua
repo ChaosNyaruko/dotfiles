@@ -21,7 +21,8 @@ packer.startup(function(use)
     -- use 'hrsh7th/cmp-buffer'
     use { 'fatih/vim-go', tag = '*' }
 
-
+    use { 'junegunn/fzf', run = ":call fzf#install()" }
+    use { 'junegunn/fzf.vim' }
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
