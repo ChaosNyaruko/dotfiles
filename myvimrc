@@ -158,10 +158,12 @@ call plug#end() "}}}
 
 " A function for default basic emacs/bash-like moving in insert mode {{{
 " might be useful when using Chinese input method
-function! ToggleEmacsMapping()
+function! ToggleEmacsMapping(prompt)
     " vim has defined ctrl-u alt-b for similar functionality
     if g:emacs_mapping==1
-        echo "emacs_mapping is on, turning it off"
+        if (a:prompt)
+            echo "emacs_mapping is on, turning it off"
+        endif
         iunmap <C-f>
         iunmap <C-b>
         iunmap <C-n>
@@ -174,7 +176,9 @@ function! ToggleEmacsMapping()
     else
         " TODO: using magarg to save/restore original mapping
         " https://vi.stackexchange.com/questions/7734/how-to-save-and-restore-a-mapping
-        echo "emacs_mapping is off, turning it on"
+        if (a:prompt)
+            echo "emacs_mapping is off, turning it on"
+        endif
         inoremap <C-f> <Right>
         inoremap <C-b> <Left>
         inoremap <C-n> <Down>
@@ -187,7 +191,8 @@ function! ToggleEmacsMapping()
     endif
 endfunction
 let g:emacs_mapping=0
-command! -nargs=0 ToggleEmacs call ToggleEmacsMapping() "}}}
+call ToggleEmacsMapping(v:false)
+command! -nargs=0 ToggleEmacs call ToggleEmacsMapping(v:true) "}}}
 
 " Auto jump back to the last position when opened {{{
 function! ResCur() 
