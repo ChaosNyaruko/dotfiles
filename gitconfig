@@ -5,7 +5,7 @@
 	email = cabbageparadise@gmail.com
 [http]
 	sslVerify = false
-	proxy = socks5://127.0.0.1:10001
+	proxy = socks5://127.0.0.1:21000
 [status]
 	submodulesummary = 1
 [diff]
@@ -15,3 +15,5 @@
 [push]
 	recurseSubmodule = check
 	recurseSubmodules = check
+[https]
+	proxy = socks5://127.0.0.1:21000

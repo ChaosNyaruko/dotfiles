@@ -7,7 +7,7 @@ export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebr
 alias docs='cd ~/github.com/symmetrical-dollop/docs'
 alias dot='cd ~/dotfiles'
 
-export PATH="$HOME/.local/bin:/usr/local/bin:$HOME/go/bin:$HOME/.gem/ruby/2.6.0/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/go/bin:$HOME/.gem/ruby/2.6.0/bin:/usr/local/bin:$PATH"
 alias sn="syncnotes -f -p -o $HOME/github.com/symmetrical-dollop"
 alias snd="syncnotes -f -p -o $HOME/dotfiles"
 alias dp='git -C "$HOME/dotfiles" pull'
@@ -20,20 +20,20 @@ fi
 
 setproxy() {
     echo "setting proxy"
-    export HTTP_PROXY=socks5://127.0.0.1:10001
-    export HTTPS_PROXY=socks5://127.0.0.1:10001
-    export ALL_PROXY=socks5://127.0.0.1:10001
-    echo $HTTP_PROXY
-    echo $HTTPS_PROXY
-    echo $ALL_PROXY
+    export http_proxy=socks5://127.0.0.1:10001
+    export https_proxy=socks5://127.0.0.1:10001
+    export all_proxy=socks5://127.0.0.1:10001
+    echo $http_proxy
+    echo $https_proxy
+    echo $all_proxy
 }
 
 unsetproxy() {
     echo "unsetting proxy"
-    unset HTTP_PROXY
-    unset HTTPS_PROXY
-    unset ALL_PROXY
-    echo $HTTP_PROXY
-    echo $HTTPS_PROXY
-    echo $ALL_PROXY
+    unset http_proxy
+    unset https_proxY
+    unset all_proxy
+    echo $http_proxy
+    echo $https_proxY
+    echo $all_proxy
 }
