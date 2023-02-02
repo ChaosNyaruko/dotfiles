@@ -253,6 +253,7 @@ autocmd FileType go nnoremap <buffer> goc :GoCallers<CR>
 
 " vim-go settings
 let g:go_list_type="quickfix"
+let g:go_doc_popup_window=1
 
 "}}}
 
