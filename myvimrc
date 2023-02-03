@@ -212,7 +212,8 @@ augroup END
 " FZF key Mappings {{{
 " for fzf preview-window
 " see https://github.com/junegunn/fzf.vim/issues/358
-let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}' --bind ctrl-y:preview-up,ctrl-e:preview-down,ctrl-b:preview-page-up,ctrl-f:preview-page-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-top,shift-down:preview-bottom,alt-up:half-page-up,alt-down:half-page-down" 
+" let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}' --bind ctrl-y:preview-up,ctrl-e:preview-down,ctrl-b:preview-page-up,ctrl-f:preview-page-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-top,shift-down:preview-bottom,alt-up:half-page-up,alt-down:half-page-down" 
+let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --bind ctrl-y:preview-up,ctrl-e:preview-down,ctrl-b:preview-page-up,ctrl-f:preview-page-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-top,shift-down:preview-bottom,alt-up:half-page-up,alt-down:half-page-down" 
 
 " noremap <C-p> :Files<CR>
 noremap <C-p> :FZF<CR>
@@ -253,7 +254,7 @@ autocmd FileType go nnoremap <buffer> goc :GoCallers<CR>
 
 " vim-go settings
 let g:go_list_type="quickfix"
-let g:go_doc_popup_window=1
+let g:go_doc_popup_window = 1
 
 "}}}
 
