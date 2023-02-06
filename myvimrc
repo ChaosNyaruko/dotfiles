@@ -397,11 +397,20 @@ augroup END
 " }}}
 
 " grep/make integration related stuff {{{
-if !executable('rg')
-    set grepprg=grep\ -n\ -r\ $*\ %:p:h\ /dev/null
-else
-    set grepprg=rg\ --vimgrep\ $*\ %:p:h\ /dev/null
+" from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
+" jonhoo's config
+if executable('ag')
+        set grepprg=ag\ --nogroup\ --nocolor
 endif
+if executable('rg')
+    set grepprg=rg\ --no-heading\ --vimgrep\ $*\ $PWD
+    set grepformat=%f:%l:%c:%m
+endif
+" if !executable('rg')
+"     set grepprg=grep\ -n\ -r\ $*\ %:p:h\ /dev/null
+" else
+"     set grepprg=rg\ --vimgrep\ $*\ %:p:h\ /dev/null
+" endif
 "}}}
 
 
