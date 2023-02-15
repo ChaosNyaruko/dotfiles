@@ -52,7 +52,8 @@ endif
 " Visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv
-" vnoremap / y/<c-r>"
+
+vnoremap <leader>f y/<c-r>"
 "
 "MYVIMRC mappings
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -216,9 +217,9 @@ augroup END
 let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --bind ctrl-y:preview-up,ctrl-e:preview-down,ctrl-b:preview-page-up,ctrl-f:preview-page-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-top,shift-down:preview-bottom,alt-up:half-page-up,alt-down:half-page-down" 
 
 " noremap <C-p> :Files<CR>
-noremap <C-p> :FZF<CR>
-noremap <leader>f :Rg<CR>
-noremap sf :Files<CR>
+nnoremap <C-p> :FZF<CR>
+nnoremap <leader>f :Rg<CR>
+nnoremap sf :Files<CR>
 let g:fzf_layout = { 'down': '40%' }
 
 " borrowed from https://github.com/junegunn/fzf.vim/issues/837
@@ -531,4 +532,5 @@ nmap <silent> <C-k> :wincmd k<CR>
 nmap <silent> <C-j> :wincmd j<CR>
 nmap <silent> <C-h> :wincmd h<CR>
 nmap <silent> <C-l> :wincmd l<CR>
+
 
