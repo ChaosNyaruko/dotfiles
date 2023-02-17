@@ -1,6 +1,8 @@
 " """ Editing and Reloading the Config
 " set clipboard+=unnamed
 " set clipboard+=ideaput
+set number
+set relativenumber
 set ignorecase
 set smartcase
 nnoremap \e :e ~/.ideavimrc<CR>
