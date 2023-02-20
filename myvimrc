@@ -219,6 +219,7 @@ let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --bind ctrl-y:preview-up,ctr
 " noremap <C-p> :Files<CR>
 nnoremap <C-p> :FZF<CR>
 nnoremap <leader>f :Rg<CR>
+nnoremap <leader>b :Buffers<CR>
 nnoremap sf :Files<CR>
 let g:fzf_layout = { 'down': '40%' }
 
