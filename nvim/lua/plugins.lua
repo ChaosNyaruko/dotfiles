@@ -8,8 +8,8 @@ vim.cmd [[packadd packer.nvim]]
 
 packer.startup(function(use)
     use 'wbthomason/packer.nvim'
-    use 'tpope/vim-fugitive'
-    use 'tpope/vim-commentary'
+    -- use 'tpope/vim-fugitive'
+    -- use 'tpope/vim-commentary'
 
     use 'neovim/nvim-lspconfig' -- LSP
     -- use 'onsails/lspkind-nvim' -- vscode-like pictograms
@@ -19,7 +19,7 @@ packer.startup(function(use)
     -- use 'hrsh7th/nvim-cmp' -- complete engine
     -- use 'hrsh7th/cmp-nvim-lsp'
     -- use 'hrsh7th/cmp-buffer'
-    use { 'fatih/vim-go', tag = '*' }
+    -- use { 'fatih/vim-go', tag = '*' }
 
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -38,9 +38,9 @@ packer.startup(function(use)
     --     run = function() vim.fn["mkdp#util#install"]() end,
     -- })
 
-    use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
-        setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+    -- use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
+    --     setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 
-    use { 'junegunn/fzf', run = ":call fzf#install()" }
-    use { 'junegunn/fzf.vim' }
+    -- use { 'junegunn/fzf', run = ":call fzf#install()" }
+    -- use { 'junegunn/fzf.vim' }
 end)

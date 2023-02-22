@@ -51,20 +51,44 @@ local lsp_flags = {
     debounce_text_changes = 150,
 }
 -- for Lua, especially neovim lua configurations
-nvim_lsp.sumneko_lua.setup {
+-- nvim_lsp.sumneko_lua.setup {
+--     on_attach = on_attach,
+--     settings = {
+--         Lua = {
+--             diagnostics = {
+--                 globals = { 'vim', 'hs', 'spoon' }
+--             },
+
+--             workspace = {
+--                 library = vim.api.nvim_get_runtime_file("", true),
+--                 checkThirdParty = false
+--             }
+--         }
+--     }
+-- }
+
+nvim_lsp.lua_ls.setup {
     on_attach = on_attach,
     settings = {
         Lua = {
-            diagnostics = {
-                globals = { 'vim', 'hs', 'spoon' }
-            },
-
-            workspace = {
-                library = vim.api.nvim_get_runtime_file("", true),
-                checkThirdParty = false
-            }
-        }
-    }
+          runtime = {
+            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+            version = 'LuaJIT',
+          },
+          diagnostics = {
+            -- Get the language server to recognize the `vim` global
+            globals = {'vim'},
+          },
+          workspace = {
+            -- Make the server aware of Neovim runtime files
+            library = vim.api.nvim_get_runtime_file("", true),
+          },
+          -- Do not send telemetry data containing a randomized but unique identifier
+          telemetry = {
+            enable = false,
+          },
+    },
+  },
 }
 
 -- for Go, use vim-go Plugin instead

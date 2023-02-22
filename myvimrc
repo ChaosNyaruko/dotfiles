@@ -124,14 +124,14 @@ Plug 'preservim/nerdtree'
 " Plug 'terryma/vim-multiple-cursors' " Deprecated
 Plug 'mg979/vim-visual-multi'
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-if has('nvim')
+if v:false && has('nvim')
     " Use release branch (recommend)
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Plug 'lukas-reineke/indent-blankline.nvim'
 
     " " Or build from source code by using yarn: https://yarnpkg.com
     " Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install  --frozen-lockfile'}
-else 
+elseif !has('nvim') 
     Plug 'ycm-core/YouCompleteMe'
     " YCM related 
     nmap <leader>yfs <Plug>(YCMFindSymbolInWorkspace)
@@ -525,8 +525,8 @@ endif
 if !isdirectory($HOME."/.vim/undo-dir")
         call mkdir($HOME."/.vim/undo-dir", "", 0700)
 endif
-set undodir=~/.vim/undo-dir
-set undofile
+" set undodir=~/.vim/undo-dir
+" set undofile
 
 " window operations shortcuts
 nmap <silent> <C-k> :wincmd k<CR>
