@@ -26,7 +26,11 @@ packer.startup(function(use)
     -- use 'onsails/lspkind-nvim' -- vscode-like pictograms
     -- use 'L3MON4D3/LuaSnip'
     -- use 'jose-elias-alvarez/null-ls.nvim'
-
+    --
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
     use 'hrsh7th/nvim-cmp' -- complete engine
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
