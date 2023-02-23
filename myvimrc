@@ -105,7 +105,6 @@ Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 " Plug 'mattn/vim-yoshi'
 " Plug 'easymotion/vim-easymotion'
-" Plug 'rakr/vim-one'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 " Plug 'mengelbrecht/lightline-bufferline'
@@ -117,12 +116,13 @@ Plug 'tpope/vim-surround'
 Plug 'gcmt/wildfire.vim'
 " Plug 'voldikss/vim-floaterm'
 " Plug 'itchyny/lightline.vim'
-Plug 'morhetz/gruvbox'
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'rakr/vim-one'
+" Plug 'morhetz/gruvbox'
+" Plug 'NLKNguyen/papercolor-theme'
 Plug 'preservim/nerdtree'
-" Plug 'airblade/vim-gitgutter'
-" Plug 'terryma/vim-multiple-cursors' " Deprecated
-Plug 'mg979/vim-visual-multi'
+Plug 'airblade/vim-gitgutter'
+" Plug 'terryma/vim-multiple-cursors' " Deprecated 
+" Plug 'mg979/vim-visual-multi'
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 if v:false && has('nvim')
     " Use release branch (recommend)
@@ -533,5 +533,7 @@ nmap <silent> <C-k> :wincmd k<CR>
 nmap <silent> <C-j> :wincmd j<CR>
 nmap <silent> <C-h> :wincmd h<CR>
 nmap <silent> <C-l> :wincmd l<CR>
+
+colorscheme one
 
 
