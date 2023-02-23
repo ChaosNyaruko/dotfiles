@@ -116,9 +116,9 @@ Plug 'tpope/vim-surround'
 Plug 'gcmt/wildfire.vim'
 " Plug 'voldikss/vim-floaterm'
 " Plug 'itchyny/lightline.vim'
-Plug 'rakr/vim-one'
+" Plug 'rakr/vim-one'
 " Plug 'morhetz/gruvbox'
-" Plug 'NLKNguyen/papercolor-theme'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'preservim/nerdtree'
 Plug 'airblade/vim-gitgutter'
 " Plug 'terryma/vim-multiple-cursors' " Deprecated 
@@ -534,6 +534,6 @@ nmap <silent> <C-j> :wincmd j<CR>
 nmap <silent> <C-h> :wincmd h<CR>
 nmap <silent> <C-l> :wincmd l<CR>
 
-colorscheme one
+colorscheme PaperColor
 
 
