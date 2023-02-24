@@ -134,6 +134,7 @@ if v:false && has('nvim')
 elseif !has('nvim') 
     Plug 'ycm-core/YouCompleteMe'
     " YCM related 
+    let g:ycm_add_preview_to_completeopt="popup"
     nmap <leader>yfs <Plug>(YCMFindSymbolInWorkspace)
 
     if v:version >= 900
