@@ -1,3 +1,4 @@
+-- print("loading nvim-cmp")
 -- Set up nvim-cmp.
 local status, cmp = pcall(require, 'cmp')
 if not status then return end

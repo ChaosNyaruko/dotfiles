@@ -1,3 +1,4 @@
+-- print("lua/plugins.lua is loading")
 local ensure_packer = function()
     local fn = vim.fn
     local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -70,6 +71,12 @@ end)
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
   augroup end
 ]])
+
+require("settings.mason")
+require("settings.lspconfig")
+require("settings.nvim-cmp")
+require("settings.lualine")
+require("settings.treesitter")

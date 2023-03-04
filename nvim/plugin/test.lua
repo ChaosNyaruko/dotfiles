@@ -1,0 +1,1 @@
+-- print("plugin/test.lua loaded")
