@@ -3,9 +3,6 @@
 [user]
 	name = ChaosNyaruko
 	email = cabbageparadise@gmail.com
-[http]
-	sslVerify = false
-	proxy = socks5://127.0.0.1:21000
 [status]
 	submodulesummary = 1
 [diff]
@@ -15,5 +12,9 @@
 [push]
 	recurseSubmodule = check
 	recurseSubmodules = check
+
+[http]
+	proxy = socks5://127.0.0.1:10005
+
 [https]
-	proxy = socks5://127.0.0.1:21000
+	proxy = socks5://127.0.0.1:10005

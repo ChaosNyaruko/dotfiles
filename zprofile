@@ -37,3 +37,5 @@ unsetproxy() {
     echo $https_proxY
     echo $all_proxy
 }
+
+source ~/.zlocal
