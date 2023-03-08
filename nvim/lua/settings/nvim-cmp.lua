@@ -18,6 +18,8 @@ cmp.setup({
         -- documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
+        ['<C-n>'] = cmp.config.disable, -- C-n/C-p is used in my Emacs like keymapping in insert mode
+        ['<C-p>'] = cmp.config.disable,
         ['<C-b>'] = cmp.mapping.scroll_docs( -4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-y>'] = cmp.mapping.complete(),
