@@ -520,12 +520,12 @@ command! -nargs=1 -complete=command -bar -range Redir silent call Redir(<q-args>
 command! -nargs=1 -complete=command -range Redir silent call Redir(<q-args>, <range>, <line1>, <line2>)
 
 " Let's save undo info!
-if !isdirectory($HOME."/.vim")
-    call mkdir($HOME."/.vim", "", 0770)
-endif
-if !isdirectory($HOME."/.vim/undo-dir")
-        call mkdir($HOME."/.vim/undo-dir", "", 0700)
-endif
+" if !isdirectory($HOME."/.vim")
+"     call mkdir($HOME."/.vim", "", 0770)
+" endif
+" if !isdirectory($HOME."/.vim/undo-dir")
+"         call mkdir($HOME."/.vim/undo-dir", "", 0700)
+" endif
 " set undodir=~/.vim/undo-dir
 " set undofile
 
