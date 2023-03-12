@@ -3,7 +3,54 @@
 local status, cmp = pcall(require, 'cmp')
 if not status then return end
 
+local preset_insert_mapping = cmp.mapping.preset.insert({
+    -- ['<C-n>'] = cmp.config.disable, -- C-n/C-p is used in my Emacs like keymapping in insert mode
+    -- ['<C-p>'] = cmp.config.disable,
+    ['<C-b>'] = cmp.mapping.scroll_docs( -4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-s>'] = cmp.mapping.complete(),
+    ['<C-y>'] = cmp.mapping.confirm(),
+    ['<C-e>'] = cmp.mapping.abort(),
+})
+
+-- print(vim.inspect(cmp.mapping.preset.insert()))
+-- print(vim.inspect(cmp.mapping.preset.cmdline()))
+preset_insert_mapping["<CR>"] = cmp.mapping({
+    i = function(fallback)
+        if cmp.visible() and cmp.get_active_entry() then
+            cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false })
+        else
+            fallback()
+        end
+    end,
+    -- s = cmp.mapping.confirm({ select = true }),
+    -- c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
+})
+
+preset_insert_mapping['<C-n>'] = cmp.mapping({
+    i = function(fallback)
+        if cmp.visible() then
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+        else
+            fallback()
+        end
+    end
+})
+
+preset_insert_mapping['<C-p>'] = cmp.mapping({
+    i = function(fallback)
+        if cmp.visible() then
+            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+        else
+            fallback()
+        end
+    end
+})
+
+-- print(vim.inspect(preset_insert_mapping['<C-n>']))
+
 cmp.setup({
+    preselect = cmp.PreselectMode.None,
     snippet = {
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
@@ -17,15 +64,7 @@ cmp.setup({
         -- completion = cmp.config.window.bordered(),
         -- documentation = cmp.config.window.bordered(),
     },
-    mapping = cmp.mapping.preset.insert({
-        ['<C-n>'] = cmp.config.disable, -- C-n/C-p is used in my Emacs like keymapping in insert mode
-        ['<C-p>'] = cmp.config.disable,
-        ['<C-b>'] = cmp.mapping.scroll_docs( -4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-y>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    }),
+    mapping = preset_insert_mapping,
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         -- { name = 'vsnip' }, -- For vsnip users.
@@ -90,6 +129,7 @@ cmp.setup {
     },
 }
 
+vim.opt.completeopt = 'menu,menuone,noselect'
 -- local cmp = require('cmp')
 -- local lspkind = require('lspkind')
 -- cmp.setup {
