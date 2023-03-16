@@ -18,7 +18,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
     -- formatting, refer to github.com/craftzdog/dotfiles
-    if client.server_capabilities.documentFormattingProvider then
+    if client.server_capabilities.documentFormattingProvider and client.name ~= 'gopls' then
         vim.api.nvim_command [[augroup Format]]
         vim.api.nvim_command [[autocmd! * <buffer>]]
         vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format() ]]
@@ -96,8 +96,8 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- for Go, use vim-go Plugin instead
 nvim_lsp.gopls.setup {
-    -- on_attach = on_attach,
-    -- flags = lsp_flags,
+    on_attach = on_attach,
+    flags = lsp_flags,
     capabilities = capabilities,
 }
 
