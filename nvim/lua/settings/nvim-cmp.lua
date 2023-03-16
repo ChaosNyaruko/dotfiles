@@ -27,24 +27,29 @@ preset_insert_mapping["<CR>"] = cmp.mapping({
     -- c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
 })
 
-preset_insert_mapping['<C-n>'] = cmp.mapping({
-    i = function(fallback)
-        if cmp.visible() then
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-        else
-            fallback()
-        end
+
+local cn = function(fallback)
+    if cmp.visible() then
+        cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+    else
+        fallback()
     end
+end
+
+local cp = function(fallback)
+    if cmp.visible() then
+        cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+    else
+        fallback()
+    end
+end
+
+preset_insert_mapping['<C-n>'] = cmp.mapping({
+    i = cn,
 })
 
 preset_insert_mapping['<C-p>'] = cmp.mapping({
-    i = function(fallback)
-        if cmp.visible() then
-            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-        else
-            fallback()
-        end
-    end
+    i = cp,
 })
 
 -- print(vim.inspect(preset_insert_mapping['<C-n>']))
@@ -85,21 +90,29 @@ cmp.setup.filetype('gitcommit', {
     })
 })
 
--- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline({ '/', '?' }, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-        { name = 'buffer' }
-    }
+local preset_cmdline = cmp.mapping.preset.cmdline()
+preset_cmdline['<C-n>'] = cmp.mapping({
+    c = cn
 })
+preset_cmdline['<C-p>'] = cmp.mapping({
+    c = cp
+})
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+-- cmp.setup.cmdline({ '/', '?' }, {
+--     mapping = preset_cmdline,
+--     sources = {
+--         { name = 'buffer' }
+--     }
+-- })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
+    mapping = preset_cmdline,
     sources = cmp.config.sources({
-        { name = 'path' }
+        { name = 'path', keyword_length = 8 }
     }, {
-        { name = 'cmdline' }
+        { name = 'cmdline', keyword_length = 8 }
     })
 })
 
