@@ -535,9 +535,15 @@ nmap <silent> <C-j> :wincmd j<CR>
 nmap <silent> <C-h> :wincmd h<CR>
 nmap <silent> <C-l> :wincmd l<CR>
 
+" ergonomic line operations
 nnoremap j gj
 nnoremap k gk
 
-colorscheme PaperColor
+" easy operations for quickfix window
+nnoremap ++ :cnext<cr>
+nnoremap __ :cprevious<cr>
+nnoremap +_ :cnewer<cr>
+nnoremap _+ :colder<cr>
 
+colorscheme PaperColor
 
