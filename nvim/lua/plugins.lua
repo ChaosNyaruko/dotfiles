@@ -80,6 +80,7 @@ vim.cmd([[
 ]])
 
 require("settings.mason")
+require("settings.fzf")
 require("settings.lspconfig")
 require("settings.nvim-cmp")
 require("settings.lualine")
