@@ -12,6 +12,8 @@ alias sn="syncnotes -f -p -o $HOME/github.com/symmetrical-dollop"
 alias snd="syncnotes -f -p -o $HOME/dotfiles"
 alias dp='git -C "$HOME/dotfiles" pull'
 alias np='git -C "$HOME/github.com/symmetrical-dollop" pull'
+alias pp='git -C "$HOME/playground" pull'
+alias ap='dp&&np&&pp'
 if [ ~/z/z.sh ]; then
     source ~/z/z.sh
 else
