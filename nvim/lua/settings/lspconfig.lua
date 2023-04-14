@@ -17,6 +17,16 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+    local cap = client.server_capabilities
+    if cap.document_highlight then
+        vim.api.nvim_set_hl(0, "LspReferenceText", { underline = true })
+        vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" },
+            { buffer = bufnr, callback = vim.lsp.buf.clear_references })
+        vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" },
+            { buffer = bufnr, callback = vim.lsp.buf.document_highlight })
+    end
+    -- autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
+    -- autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.document_highlight()
     -- formatting, refer to github.com/craftzdog/dotfiles
     if client.server_capabilities.documentFormattingProvider and client.name ~= 'gopls' then
         vim.api.nvim_command [[augroup Format]]
