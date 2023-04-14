@@ -38,6 +38,7 @@ packer.startup(function(use)
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
+    use 'hrsh7th/cmp-nvim-lsp-signature-help'
     use 'quangnguyen30192/cmp-nvim-ultisnips'
     -- use { 'fatih/vim-go', tag = '*' }
 
