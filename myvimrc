@@ -113,6 +113,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive' 
 Plug 'tpope/vim-surround'
+Plug 'mbbill/undotree'
 Plug 'gcmt/wildfire.vim'
 " Plug 'voldikss/vim-floaterm'
 Plug 'itchyny/lightline.vim'
