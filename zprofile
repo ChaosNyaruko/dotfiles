@@ -7,7 +7,7 @@ export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebr
 alias docs='cd ~/github.com/symmetrical-dollop/docs'
 alias dot='cd ~/dotfiles'
 
-export PATH="$HOME/.local/bin:$HOME/go/bin:$HOME/.gem/ruby/2.6.0/bin:/usr/local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/go/bin:$HOME/.gem/ruby/2.6.0/bin:/usr/local/bin:/usr/local/go/bin:$PATH"
 alias sn="syncnotes -f -p -o $HOME/github.com/symmetrical-dollop"
 alias snd="syncnotes -f -p -o $HOME/dotfiles"
 alias dp='git -C "$HOME/dotfiles" pull'
@@ -39,5 +39,7 @@ unsetproxy() {
     echo $https_proxY
     echo $all_proxy
 }
+
+export FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}' --bind ctrl-y:preview-up,ctrl-e:preview-down,ctrl-b:preview-page-up,ctrl-f:preview-page-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-top,shift-down:preview-bottom,alt-up:half-page-up,alt-down:half-page-down" 
 
 source ~/.zlocal

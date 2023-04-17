@@ -13,8 +13,8 @@
 	recurseSubmodule = check
 	recurseSubmodules = check
 
-[http "github.com"]
-	proxy = socks5://127.0.0.1:10005
+[http "https://github.com"]
+	proxy = socks5://127.0.0.1:21000
 
-[https "github.com"]
-	proxy = socks5://127.0.0.1:10005
+[https "https://github.com"]
+	proxy = socks5://127.0.0.1:21000
