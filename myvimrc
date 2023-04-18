@@ -182,12 +182,12 @@ function! ToggleEmacsMapping(prompt)
         if (a:prompt)
             echo "emacs_mapping is off, turning it on"
         endif
-        imap <C-f> <Right>
-        imap <C-b> <Left>
-        imap <C-n> <Down>
-        imap <C-p> <Up>
-        imap <C-a> <Home>
-        imap <C-e> <End>
+        inoremap <C-f> <Right>
+        inoremap <C-b> <Left>
+        inoremap <C-n> <Down>
+        inoremap <C-p> <Up>
+        inoremap <C-a> <Home>
+        inoremap <C-e> <End>
         inoremap <C-k> <esc>d$a
         inoremap <A-f> <esc>lwi
         let g:emacs_mapping=1

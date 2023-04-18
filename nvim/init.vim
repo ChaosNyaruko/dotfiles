@@ -16,4 +16,6 @@ autocmd BufRead *.pacnew set readonly
 
 lua <<EOF
 require("plugins")
+vim.api.nvim_set_keymap('i', '<c-n>', '<Down>', {noremap = true})
+vim.api.nvim_set_keymap('i', '<c-p>', '<Up>', {noremap = true})
 EOF

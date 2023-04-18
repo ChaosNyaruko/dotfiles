@@ -3,9 +3,28 @@
 local status, cmp = pcall(require, 'cmp')
 if not status then return end
 
+local cn = function(fallback)
+    -- print(vim.inspect(vim.api.nvim_get_keymap('i')))
+    if cmp.visible() then
+        cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+    else
+        fallback()
+    end
+end
+
+local cp = function(fallback)
+    if cmp.visible() then
+        cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+    else
+        fallback()
+    end
+end
+
 local preset_insert_mapping = cmp.mapping.preset.insert({
-    -- ['<C-n>'] = cmp.config.disable, -- C-n/C-p is used in my Emacs like keymapping in insert mode
-    -- ['<C-p>'] = cmp.config.disable,
+    ['<C-n>'] = cmp.config.disable, -- C-n/C-p is used in my Emacs like keymapping in insert mode
+    ['<C-p>'] = cmp.config.disable,
+    -- ['<C-n>'] = cn, -- C-n/C-p is used in my Emacs like keymapping in insert mode
+    -- ['<C-p>'] = cp,
     ['<C-b>'] = cmp.mapping.scroll_docs( -4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-s>'] = cmp.mapping.complete(),
@@ -28,21 +47,6 @@ preset_insert_mapping["<CR>"] = cmp.mapping({
 })
 
 
-local cn = function(fallback)
-    if cmp.visible() then
-        cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-    else
-        fallback()
-    end
-end
-
-local cp = function(fallback)
-    if cmp.visible() then
-        cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-    else
-        fallback()
-    end
-end
 
 preset_insert_mapping['<C-n>'] = cmp.mapping({
     i = cn,
