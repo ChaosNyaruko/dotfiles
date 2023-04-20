@@ -570,3 +570,7 @@ if !has("nvim")
       \}
     \ }
 endif
+
+nnoremap / /\v
+nnoremap ? ?\v
+" cnoremap %s/ %sm/ "smagic

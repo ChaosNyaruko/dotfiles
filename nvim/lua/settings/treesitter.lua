@@ -13,6 +13,7 @@ ts.setup {
     ensure_installed = {
         'lua',
         'json',
+        'vim',
     },
     autotag = {
         enable = true,
