@@ -544,10 +544,10 @@ nnoremap j gj
 nnoremap k gk
 
 " easy operations for quickfix window
-nnoremap ++ :cnext<cr>
-nnoremap __ :cprevious<cr>
-nnoremap +_ :cnewer<cr>
-nnoremap _+ :colder<cr>
+nnoremap ++ <cmd>cnext<cr>
+nnoremap __ <cmd>cprevious<cr>
+nnoremap +_ <cmd>cnewer<cr>
+nnoremap _+ <cmd>colder<cr>
 
 colorscheme PaperColor
 
