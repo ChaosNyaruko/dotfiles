@@ -103,6 +103,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'fatih/vim-go', {'tag': '*'}
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
+Plug 'preservim/vim-markdown'
+Plug 'godlygeek/tabular'
 " Plug 'mattn/vim-yoshi'
 " Plug 'easymotion/vim-easymotion'
 " Plug 'vim-airline/vim-airline'
@@ -574,3 +576,12 @@ endif
 nnoremap / /\v
 nnoremap ? ?\v
 " cnoremap %s/ %sm/ "smagic
+
+let g:vim_markdown_folding_disabled = 1
+" let g:vim_markdown_conceal = 0 " see 'conceallevel' for more 
+"
+let g:vim_markdown_math = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_toml_frontmatter = 1
+let g:vim_markdown_json_frontmatter = 1
+let g:vim_markdown_strikethrough = 1
