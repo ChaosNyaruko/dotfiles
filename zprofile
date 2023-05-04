@@ -46,4 +46,3 @@ export FZF_DEFAULT_COMMAND="fd --hidden --type f"
 # brew info autojump and you will get it
 [ -f /usr/local/etc/autojump.sh ] && . /usr/local/etc/autojump.sh
 
-source ~/.zlocal

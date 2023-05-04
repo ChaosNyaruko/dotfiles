@@ -1,0 +1,17 @@
+# maybe some local config?
+export V2CONFIG=~/github.com/symmetrical-dollop/v2ray.config.json
+alias todo="nvim ~/tmp/todo.md"
+alias vstart='rm ~/.config/nvim && ln -s -f ~/.config/_nvim_video ~/.config/nvim && rm ~/.local/share/nvim && ln -s -f ~/.local/share/_nvim_video ~/.local/share/nvim'
+alias vend='rm ~/.local/share/nvim && ln -s -f ~/.local/share/nvim_main ~/.local/share/nvim && rm ~/.config/nvim && ln -s -f ~/dotfiles/nvim ~/.config/nvim'
+
+# https://www.topbug.net/blog/2016/10/11/speed-test-check-the-existence-of-a-command-in-bash-and-zsh/ 
+#  type foobar &> /dev/null 
+# hash foobar &> /dev/null 
+# command -v foobar &> /dev/null 
+# which foobar &> /dev/null 
+# (( $+commands[foobar] )) (zsh only) 
+if (type exa &> /dev/null)  then 
+    # echo "exa exists"
+    alias ll='exa -l -a --git --icons'
+fi
+
