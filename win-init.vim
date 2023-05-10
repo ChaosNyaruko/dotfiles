@@ -41,7 +41,7 @@ if has('statusline')
     " set statusline+=%{fugitive#statusline()} " Git Hotness
 endif
 
-call plug#begin('~/AppData/Local/nvim-data/plugged')
+call plug#begin(stdpath('data'))
 
 Plug 'fatih/vim-go', {'tag': '*'}
 Plug 'tpope/vim-commentary'
@@ -49,23 +49,23 @@ Plug 'easymotion/vim-easymotion'
 " Plug 'rakr/vim-one'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'junegunn/fzf.vim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
 Plug 'tpope/vim-fugitive' 
 Plug 'tpope/vim-surround'
 Plug 'itchyny/lightline.vim'
-Plug 'morhetz/gruvbox'
-Plug 'vim-scripts/peaksea'
 Plug 'preservim/nerdtree'
-if has('vim')
-    Plug 'ycm-core/YouCompleteMe'
-elseif has('nvim')
-    " Use release branch (recommend)
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    "
-    " " Or build from source code by using yarn: https://yarnpkg.com
-    Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install  --frozen-lockfile'}
-endif
+"if has('vim')
+"    Plug 'ycm-core/YouCompleteMe'
+"elseif has('nvim')
+"    " Use release branch (recommend)
+"    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"    "
+"    " " Or build from source code by using yarn: https://yarnpkg.com
+"    Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install  --frozen-lockfile'}
+"endif
 
 call plug#end()
 set nolist
@@ -93,10 +93,15 @@ colorscheme default
 
 
 " Key Mappings
-noremap <C-p> :Files<CR>
-noremap <leader>f :Rg<CR>
-inoremap <C-f> <Right>
-inoremap <C-b> <Left>
+" noremap <C-p> :Files<CR>
+" noremap <leader>f :Rg<CR>
+" inoremap <C-f> <Right>
+" inoremap <C-b> <Left>
+" Using telescope instead of fzf on Windows
+nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>f <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
+" nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 " vim-go navi mappings
 autocmd FileType go nnoremap <buffer> gr :GoReferrers<CR>
@@ -130,4 +135,34 @@ augroup END
 
 " for fzf preview-window
 " see https://github.com/junegunn/fzf.vim/issues/358
-let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}' --bind ctrl-y:preview-up,ctrl-e:preview-down,ctrl-b:preview-page-up,ctrl-f:preview-page-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-top,shift-down:preview-bottom,alt-up:half-page-up,alt-down:half-page-down" 
+" let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}' --bind ctrl-y:preview-up,ctrl-e:preview-down,ctrl-b:preview-page-up,ctrl-f:preview-page-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-top,shift-down:preview-bottom,alt-up:half-page-up,alt-down:half-page-down" 
+"
+lua << EOF
+require('telescope').setup{
+  defaults = {
+    -- Default configuration for telescope goes here:
+    -- config_key = value,
+    mappings = {
+        n = {
+            ['q'] = actions.close
+        }
+    },
+  }
+  pickers = {
+    -- Default configuration for builtin pickers goes here:
+    -- picker_name = {
+    --   picker_config_key = value,
+    --   ...
+    -- }
+    -- Now the picker_config_key will be applied every time you call this
+    -- builtin picker
+  },
+  extensions = {
+    -- Your extension configuration goes here:
+    -- extension_name = {
+    --   extension_config_key = value,
+    -- }
+    -- please take a look at the readme of the extension you want to configure
+  }
+}
+EOF

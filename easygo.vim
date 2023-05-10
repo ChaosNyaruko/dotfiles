@@ -126,6 +126,7 @@ set novb
 
 " vim-go settings
 let g:go_list_type = "quickfix"
+let g:go_doc_popup_window = 1
 
 " FZF key Mappings
 " for fzf preview-window

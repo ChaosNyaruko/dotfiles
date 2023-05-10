@@ -1,0 +1,11 @@
+memodir = "~/.config/memo/_posts"
+editor = "nvim"
+column = 20
+width = 0
+selectcmd = "fzf -m --preview 'bat ~/.config/memo/_posts/{}'"
+grepcmd = "rg -Hn ${PATTERN} ${FILES}"
+memotemplate = ""
+assetsdir = "."
+pluginsdir = "~/.config/memo/plugins"
+templatedirfile = ""
+templatebodyfile = ""

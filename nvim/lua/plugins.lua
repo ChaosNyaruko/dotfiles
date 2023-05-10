@@ -51,8 +51,9 @@ packer.startup(function(use)
     }
 
     use 'nvim-lua/plenary.nvim'
-    -- use 'nvim-telescope/telescope.nvim'
-    -- use 'nvim-telescope/telescope-file-browser.nvim'
+    use 'nvim-telescope/telescope.nvim'
+    use 'nvim-telescope/telescope-file-browser.nvim'
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
     -- use 'kyazdani42/nvim-web-devicons' -- for telescope file icons
 
     -- use 'akinsho/nvim-bufferline.lua'
@@ -86,3 +87,4 @@ require("settings.lspconfig")
 require("settings.nvim-cmp")
 require("settings.lualine")
 require("settings.treesitter")
+require("settings.telescope")
