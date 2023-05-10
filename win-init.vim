@@ -41,7 +41,7 @@ if has('statusline')
     " set statusline+=%{fugitive#statusline()} " Git Hotness
 endif
 
-call plug#begin(stdpath('data'))
+call plug#begin(stdpath('data') . '\plugged')
 
 Plug 'fatih/vim-go', {'tag': '*'}
 Plug 'tpope/vim-commentary'
@@ -107,9 +107,10 @@ nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
 autocmd FileType go nnoremap <buffer> gr :GoReferrers<CR>
 autocmd FileType go nnoremap <buffer> gi :GoImplements<CR>
 autocmd FileType go nnoremap <buffer> goc :GoCallers<CR>
+" autocmd FileType go inoremap <buffer> <C-i> .<C-x><C-o>
 
 " vim-go settings
-let g:go_list_type="quickfix"
+let g:go_doc_popup_window = 1
 
 " just something interesting saw in coding videos
 autocmd InsertEnter * :set norelativenumber
@@ -144,10 +145,10 @@ require('telescope').setup{
     -- config_key = value,
     mappings = {
         n = {
-            ['q'] = actions.close
+            ['q'] = "close"
         }
     },
-  }
+  },
   pickers = {
     -- Default configuration for builtin pickers goes here:
     -- picker_name = {
