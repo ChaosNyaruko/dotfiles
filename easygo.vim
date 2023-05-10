@@ -3,6 +3,7 @@ set nocompatible
 " 打开语法高亮
 syntax on
 filetype plugin indent on    " required
+let mapleader=" "
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -12,6 +13,8 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'fatih/vim-go', {'tag': '*'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 set showmode
@@ -103,7 +106,7 @@ set smartcase
 set noswapfile
 
 " 自动切换工作目录。这主要用在一个 Vim 会话之中打开多个文件的情况，默认的工作目录是打开的第一个文件的目录。该配置可以将工作目录自动切换到，正在编辑的文件的目录。
-set autochdir
+" set autochdir
 
 " 出错时，不要发出响声
 set noerrorbells
@@ -132,8 +135,7 @@ let g:go_doc_popup_window = 1
 " for fzf preview-window
 " see https://github.com/junegunn/fzf.vim/issues/358
 " let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}' --bind ctrl-y:preview-up,ctrl-e:preview-down,ctrl-b:preview-page-up,ctrl-f:preview-page-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-top,shift-down:preview-bottom,alt-up:half-page-up,alt-down:half-page-down" 
-let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --bind ctrl-y:preview-up,ctrl-e:preview-down,ctrl-b:preview-page-up,ctrl-f:preview-page-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-top,shift-down:preview-bottom,alt-up:half-page-up,alt-down:half-page-down" 
-let $FZF_DEFAULT_COMMAND="fd --hidden --type f" 
+let $FZF_DEFAULT_OPTS="--bind ctrl-y:preview-up,ctrl-e:preview-down,ctrl-b:preview-page-up,ctrl-f:preview-page-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-top,shift-down:preview-bottom,alt-up:half-page-up,alt-down:half-page-down" 
 
 " noremap <C-p> :Files<CR>
 nnoremap <C-p> :FZF<CR>
