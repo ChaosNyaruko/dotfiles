@@ -484,6 +484,7 @@ set timeoutlen=3000
 set ttimeoutlen=100
 " set Meta based shortcuts
 inoremap <M-s> <cmd>update<cr>
+noremap <M-s> <cmd>update<cr>
 
 " source $HOME/dotfiles/redir.vim
 " copy-paste it to here to avoid the location problem,
@@ -585,3 +586,5 @@ let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_toml_frontmatter = 1
 let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_strikethrough = 1
+
+nnoremap jq <cmd>%!jq .<cr>
