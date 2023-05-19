@@ -18,7 +18,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
     local cap = client.server_capabilities
-    if cap.documentHighlightProvider then
+    if vim.g.enable_document_highlight and cap.documentHighlightProvider then
         vim.api.nvim_set_hl(0, "LspReferenceText", { underline = true })
         vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" },
             { buffer = bufnr, callback = vim.lsp.buf.clear_references })

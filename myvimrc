@@ -587,4 +587,4 @@ let g:vim_markdown_toml_frontmatter = 1
 let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_strikethrough = 1
 
-nnoremap jq <cmd>%!jq .<cr>
+nnoremap <leader>jq <cmd>%!jq .<cr>
