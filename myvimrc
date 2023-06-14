@@ -127,6 +127,7 @@ Plug 'preservim/nerdtree'
 " Plug 'terryma/vim-multiple-cursors' " Deprecated 
 " Plug 'mg979/vim-visual-multi'
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'vim-autoformat/vim-autoformat'
 if v:false && has('nvim')
     " Use release branch (recommend)
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
