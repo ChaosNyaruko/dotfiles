@@ -50,6 +50,7 @@ packer.startup(function(use)
     use {
         'nvim-treesitter/playground'
     }
+    use 'nvim-treesitter/nvim-treesitter-context'
 
     use 'nvim-lua/plenary.nvim'
     use 'nvim-telescope/telescope.nvim'
