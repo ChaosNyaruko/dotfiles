@@ -105,6 +105,7 @@ Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'preservim/vim-markdown'
 Plug 'godlygeek/tabular'
+Plug 'christoomey/vim-tmux-navigator'
 " Plug 'mattn/vim-yoshi'
 " Plug 'easymotion/vim-easymotion'
 " Plug 'vim-airline/vim-airline'
@@ -538,10 +539,10 @@ command! -nargs=1 -complete=command -range Redir silent call Redir(<q-args>, <ra
 " set undofile
 
 " window operations shortcuts
-nmap <silent> <C-k> :wincmd k<CR>
-nmap <silent> <C-j> :wincmd j<CR>
-nmap <silent> <C-h> :wincmd h<CR>
-nmap <silent> <C-l> :wincmd l<CR>
+" nmap <silent> <C-k> :wincmd k<CR>
+" nmap <silent> <C-j> :wincmd j<CR>
+" nmap <silent> <C-h> :wincmd h<CR>
+" nmap <silent> <C-l> :wincmd l<CR>
 
 " ergonomic line operations
 nnoremap j gj
