@@ -10,7 +10,6 @@
 [submodule]
 	recurse = true
 [push]
-	recurseSubmodule = check
 	recurseSubmodules = check
 
 [http "https://github.com"]
@@ -18,3 +17,12 @@
 
 [https "https://github.com"]
 	proxy = socks5://127.0.0.1:21000
+
+[color]
+	ui = auto
+
+[core]
+	editor = vim
+    pager = LESSCHARSET=utf-8 less -R
+    quotepath = off
+
