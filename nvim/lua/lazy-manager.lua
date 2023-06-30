@@ -14,8 +14,16 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     'neovim/nvim-lspconfig', -- LSP
     'williamboman/mason.nvim',
-    { 'nvim-lualine/lualine.nvim',       dependencies = { 'kyazdani42/nvim-web-devicons' } },
+    { 'nvim-lualine/lualine.nvim',       dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true } },
     'hrsh7th/nvim-cmp',
+    -- {
+    --     "L3MON4D3/LuaSnip",
+    --     -- follow latest release.
+    --     version = "1.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    --     -- install jsregexp (optional!).
+    --     build = "make install_jsregexp"
+    -- },
+    'SirVer/ultisnips',
     'onsails/lspkind.nvim',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer',
@@ -31,6 +39,21 @@ require("lazy").setup({
     'nvim-telescope/telescope-file-browser.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
     "gfanto/fzf-lsp.nvim",
+    'fatih/vim-go',
+    'tpope/vim-commentary',
+    'preservim/vim-markdown',
+    'godlygeek/tabular',
+    'christoomey/vim-tmux-navigator',
+    { 'junegunn/fzf',                             build = ":call fzf#install()" },
+    'junegunn/fzf.vim',
+    'tpope/vim-fugitive',
+    'tpope/vim-surround',
+    'mbbill/undotree',
+    'gcmt/wildfire.vim',
+    'NLKNguyen/papercolor-theme',
+    'preservim/nerdtree',
+    { 'iamcco/markdown-preview.nvim', build = function() vim.fn["mkdp#util#install"]() end },
+    { 'vim-autoformat/vim-autoformat' }
 })
 
 require("settings.mason")
