@@ -547,6 +547,8 @@ command! -nargs=1 -complete=command -range Redir silent call Redir(<q-args>, <ra
 " ergonomic line operations
 nnoremap j gj
 nnoremap k gk
+nnoremap gj j
+nnoremap gk k
 
 " easy operations for quickfix window
 nnoremap ++ <cmd>cnext<cr>

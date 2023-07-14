@@ -106,9 +106,10 @@ nvim_lsp.lua_ls.setup {
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
+vim.lsp.set_log_level("debug")
 -- for Go, use vim-go Plugin instead
 nvim_lsp.gopls.setup {
+    cmd = { "gopls", "-remote=auto" },
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
