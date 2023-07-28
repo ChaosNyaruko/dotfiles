@@ -12,6 +12,7 @@ local cn = function(fallback)
     end
 end
 
+local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 local cp = function(fallback)
     if cmp.visible() then
         cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
@@ -57,6 +58,19 @@ preset_insert_mapping['<C-p>'] = cmp.mapping({
 })
 
 -- print(vim.inspect(preset_insert_mapping['<C-n>']))
+preset_insert_mapping['<C-l>'] = cmp.mapping(
+    function(fallback)
+        cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+    end,
+    { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+)
+
+preset_insert_mapping['<C-h>'] = cmp.mapping(
+    function(fallback)
+        cmp_ultisnips_mappings.jump_backwards(fallback)
+    end,
+    { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+)
 
 cmp.setup({
     preselect = cmp.PreselectMode.None,
