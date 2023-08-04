@@ -3,6 +3,10 @@ if not status then
     return
 end
 
+local function codium_status()
+    return "{...}" .. vim.fn['codeium#GetStatusString']()
+end
+
 line.setup {
     options = {
         icons_enabled = true,
@@ -31,7 +35,8 @@ line.setup {
         lualine_c = { { 'filename', path = 1 } },
         lualine_x = { 'encoding', 'fileformat', 'filetype' },
         lualine_y = { 'progress' },
-        lualine_z = { 'location' }
+        -- lualine_z = { 'location', [[%3{codeium#GetStatusString()}]] }
+        lualine_z = { 'location', codium_status }
     },
     inactive_sections = {
         lualine_a = {},

@@ -14,7 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     'neovim/nvim-lspconfig', -- LSP
     'williamboman/mason.nvim',
-    { 'nvim-lualine/lualine.nvim',       dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true } },
+    { 'nvim-lualine/lualine.nvim',       dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true }, enabled = true },
     'hrsh7th/nvim-cmp',
     -- {
     --     "L3MON4D3/LuaSnip",
@@ -159,8 +159,9 @@ require("lazy").setup({
         config = function()
             -- Change '<C-g>' here to any keycode you like.
             vim.keymap.set('i', '<tab>', function() return vim.fn['codeium#Accept']() end, { expr = true })
-            vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true })
-            vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions']( -1) end, { expr = true })
+            -- vim.keymap.set('i', '<C-;>', function() return vim.fn['codeium#CycleCompletions'](1) end,
+            --     { expr = true, desc = "codedium#CycleCompletions" })
+            -- vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions']( -1) end, { expr = true })
             vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true })
             vim.g.codeium_enabled = false
             vim.g.codeium_filetypes = { python = true, go = false }
