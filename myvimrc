@@ -553,8 +553,8 @@ nnoremap gk k
 " easy operations for quickfix window
 nnoremap ++ <cmd>cnext<cr>
 nnoremap __ <cmd>cprevious<cr>
-nnoremap +_ <cmd>cnewer<cr>
-nnoremap _+ <cmd>colder<cr>
+" nnoremap +_ <cmd>cnewer<cr>
+" nnoremap _+ <cmd>colder<cr>
 
 colorscheme PaperColor
 
@@ -592,3 +592,25 @@ let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_strikethrough = 1
 
 nnoremap <leader>jq <cmd>%!jq .<cr>
+
+function MyMatch(...) abort
+    " execute "normal" "*"
+    " return
+    if a:1 == "clear"
+        call clearmatches()
+        return
+    endif
+    let pattern = input("add a match:")
+    if pattern == ""
+        let pattern = expand("<cword>")
+    endif
+    echo printf("\nmatching %s", pattern)
+    " redraw
+    call feedkeys("\<CR>")
+    let @/ = pattern
+    call matchadd("ErrorMsg", pattern)
+endfunction
+
+command! -nargs=? Match call MyMatch(<q-args>)
+nnoremap <M-8> <Cmd>Match clear<CR>
+nnoremap * <Cmd>Match<CR>
