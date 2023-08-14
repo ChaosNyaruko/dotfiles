@@ -593,6 +593,8 @@ let g:vim_markdown_strikethrough = 1
 
 nnoremap <leader>jq <cmd>%!jq .<cr>
 
+let s:match_highlights = ["ErrorMsg", "StatusLine", "DiffChange", "DiffAdd", "DiffText", "DiffDelete", "SpellRare"]
+let s:mh_index = 0
 function MyMatch(...) abort
     " execute "normal" "*"
     " return
@@ -608,9 +610,10 @@ function MyMatch(...) abort
     " redraw
     call feedkeys("\<CR>")
     let @/ = pattern
-    call matchadd("ErrorMsg", pattern)
+    call matchadd(s:match_highlights[s:mh_index], pattern)
+    let s:mh_index = (s:mh_index + 1) % len(s:match_highlights)
 endfunction
 
 command! -nargs=? Match call MyMatch(<q-args>)
-nnoremap <M-8> <Cmd>Match clear<CR>
-nnoremap * <Cmd>Match<CR>
+nnoremap <M-*> <Cmd>Match clear<CR>
+nnoremap <M-8> <Cmd>Match<CR>
