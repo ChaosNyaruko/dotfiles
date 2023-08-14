@@ -595,16 +595,24 @@ nnoremap <leader>jq <cmd>%!jq .<cr>
 
 let s:match_highlights = ["ErrorMsg", "StatusLine", "DiffChange", "DiffAdd", "DiffText", "DiffDelete", "SpellRare"]
 let s:mh_index = 0
-function MyMatch(...) abort
+function MyMatch(bang, mode) abort
     " execute "normal" "*"
     " return
-    if a:1 == "clear"
+    if a:mode == "clear"
+        echom "all matches cleared"
         call clearmatches()
         return
     endif
-    let pattern = input("add a match:")
+    if a:mode == "cword"
+        let pattern = ""
+    else
+        let pattern = input("add a match:")
+    endif
     if pattern == ""
         let pattern = expand("<cword>")
+    endif
+    if a:bang 
+        let pattern = '\<' . pattern . '\>'
     endif
     echo printf("\nmatching %s", pattern)
     " redraw
@@ -614,6 +622,7 @@ function MyMatch(...) abort
     let s:mh_index = (s:mh_index + 1) % len(s:match_highlights)
 endfunction
 
-command! -nargs=? Match call MyMatch(<q-args>)
+command! -nargs=? -bang Match call MyMatch(<bang>0, <q-args>)
 nnoremap <M-*> <Cmd>Match clear<CR>
-nnoremap <M-8> <Cmd>Match<CR>
+nnoremap <M-8> <Cmd>Match! cword<CR>
+nnoremap <M-9> <Cmd>Match cword<CR>
