@@ -28,7 +28,8 @@ local on_attach = function(client, bufnr)
     -- autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
     -- autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.document_highlight()
     -- formatting, refer to github.com/craftzdog/dotfiles
-    if client.server_capabilities.documentFormattingProvider and client.name ~= 'gopls' then
+    -- if client.server_capabilities.documentFormattingProvider --[[and client.name ~= 'gopls'--]] then
+    if client.server_capabilities.documentFormattingProvider and client.name == 'clangd' then
         vim.api.nvim_command [[augroup Format]]
         vim.api.nvim_command [[autocmd! * <buffer>]]
         vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format() ]]
