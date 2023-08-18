@@ -13,7 +13,7 @@ function! MyBuild(cmd)
             execute 'buffer ' . s:compile_name
             let s:compile_name = bufname()
             let s:compile_buffer = bufnr()
-            echo s:compile_buffer
+            " echo s:compile_buffer
         else
             execute compile_window."wincmd w"
         endif
@@ -26,7 +26,7 @@ function! MyBuild(cmd)
         " set readonly
         file __Compile__
         let s:compile_buffer = bufnr()
-        echo s:compile_buffer
+        " echo s:compile_buffer
     endif
 
     " echo s:compile_buffer
@@ -37,7 +37,9 @@ function! MyBuild(cmd)
     " refer to vim-go implementation
     let old_errorformat = &errorformat
     let s:errformat = "%f:%l:%c:\ %m,%f:%l:%c\ %#%m"
+    echom "MyBuild [" . cmd . "] building..."
     let s:out = call("system", [cmd])
+    echom "MyBuild [" . cmd . "] done!"
     let s:items = split(s:out, "\n")
     " echo s:items
     call setbufline(s:compile_name, "$", s:items)
