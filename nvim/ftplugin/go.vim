@@ -35,8 +35,8 @@ function! MyBuild(cmd)
 
     " backup users errorformat, will be restored once we are finished
     " refer to vim-go implementation
-    let old_errorformat = &errorformat
-    let s:errformat = "%f:%l:%c:\ %m,%f:%l:%c\ %#%m"
+    " let old_errorformat = &errorformat
+    " let s:errformat = "%f:%l:%c:\ %m,%f:%l:%c\ %#%m"
     echom "MyBuild [" . cmd . "] building..."
     let s:out = call("system", [cmd])
     echom "MyBuild [" . cmd . "] done!"
@@ -44,10 +44,12 @@ function! MyBuild(cmd)
     " echo s:items
     call setbufline(s:compile_name, "$", s:items)
     " call setqflist(s:items, 'r')
-    cgetexpr s:items
-    call setqflist([], 'a', {"title": "./build.sh"}) " this seems to not take effect?
-    copen
-    let &errorformat = old_errorformat
+    if len(s:items) != 0
+        cgetexpr s:items
+        call setqflist([], 'a', {"title": "MyBuild"}) " this seems to not take effect?
+        copen
+    endif
+    " let &errorformat = old_errorformat
 endfunction
 
 nnoremap <buffer> <F5> <Cmd>call MyBuild("")<Cr>
