@@ -1,0 +1,14 @@
+font:
+    normal:
+        family: Hack NF
+        style: Regular
+    bold:
+        family: Hack NF
+        style: Bold
+    italic:
+        family: Hack NF
+        style: Italic
+
+    # Point size of the font
+    size: 11.5
+
