@@ -14,26 +14,35 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 -- vim.opt.completeopt = 'menuone,noinsert'
 
+local function document_highlight()
+    vim.lsp.buf.clear_references()
+    vim.lsp.buf.document_highlight()
+end
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
     local cap = client.server_capabilities
-    if vim.g.enable_document_highlight and cap.documentHighlightProvider then
+    if cap.documentHighlightProvider then
         vim.api.nvim_set_hl(0, "LspReferenceText", { underline = true })
-        vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" },
-            { buffer = bufnr, callback = vim.lsp.buf.clear_references })
-        vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" },
-            { buffer = bufnr, callback = vim.lsp.buf.document_highlight })
+        -- vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" },
+        --     { buffer = bufnr, callback = vim.lsp.buf.clear_references })
+        -- vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" },
+        --     { buffer = bufnr, callback = vim.lsp.buf.document_highlight })
+        vim.keymap.set('n', '<space>8', document_highlight, opts)
     end
     -- autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
     -- autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.document_highlight()
     -- formatting, refer to github.com/craftzdog/dotfiles
     -- if client.server_capabilities.documentFormattingProvider --[[and client.name ~= 'gopls'--]] then
-    if client.server_capabilities.documentFormattingProvider and client.name == 'clangd' then
-        vim.api.nvim_command [[augroup Format]]
-        vim.api.nvim_command [[autocmd! * <buffer>]]
-        vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format() ]]
-        vim.api.nvim_command [[augroup END]]
+    if client.server_capabilities.documentFormattingProvider then
+        -- vim.api.nvim_command [[augroup Format]]
+        -- vim.api.nvim_command [[autocmd! * <buffer>]]
+        -- vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format() ]]
+        -- vim.api.nvim_command [[augroup END]]
+        vim.cmd [[
+            command! -nargs=0 -bang -buffer LspFormat lua vim.lsp.buf.format()
+        ]]
     end
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
