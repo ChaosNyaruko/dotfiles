@@ -2,6 +2,8 @@ let s:compile_name = "__Compile__"
 let s:compile_buffer = bufnr(s:compile_name, 1)
 call setbufvar(s:compile_buffer, "&buflisted", v:true)
 call setbufvar(s:compile_buffer, "&buftype", "nofile")
+" call setbufvar(s:compile_buffer, "&readonly", v:true) " I don't need the
+" warning, 'nofile' is enough
 call bufload(s:compile_buffer)
 " :h file-pattern
 function! MyBuild(cmd)
@@ -46,7 +48,7 @@ function! MyBuild(cmd)
     echom "MyBuild [" . cmd . "] done!"
     let s:items = split(s:out, "\n")
     " echo s:items
-    call setbufline(s:compile_buffer, "$", s:items)
+    call appendbufline(s:compile_buffer, "$", s:items)
     " call setqflist(s:items, 'r')
     if len(s:items) != 0
         cgetexpr s:items

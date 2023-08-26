@@ -15,6 +15,7 @@ alias np='git -C "$HOME/github.com/symmetrical-dollop" pull'
 alias pp='git -C "$HOME/playground" pull'
 alias op='git -C "$HOME/github.com/obsidian-vault" pull'
 alias ap='dp&&np&&pp&&op'
+alias vim='nvim'
 if [ ~/z/z.sh ]; then
     source ~/z/z.sh
 else
@@ -46,4 +47,21 @@ export FZF_DEFAULT_COMMAND="fd --hidden --type f"
 
 # brew info autojump and you will get it
 [ -f /usr/local/etc/autojump.sh ] && . /usr/local/etc/autojump.sh
+
+alias python='python3'
+
+export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
+
+function Proxy() {
+    ip=${SSH_CLIENT/ */}
+    if [[ "$1" == "on" ]]; then
+        export https_proxy=localhost:7890
+        export http_proxy=localhost:7890
+        echo Proxy On
+    else
+        unset https_proxy
+        unset http_proxy
+        echo Proxy Off
+    fi
+}
 

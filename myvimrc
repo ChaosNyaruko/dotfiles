@@ -628,3 +628,8 @@ command! -nargs=? -bang Match call MyMatch(<bang>0, <q-args>)
 nnoremap <M-*> <Cmd>Match clear<CR>
 nnoremap <M-8> <Cmd>Match! cword<CR>
 nnoremap <M-9> <Cmd>Match cword<CR>
+
+command -nargs=1 Vsb call VsbFunction(<f-args>)
+function VsbFunction (arg1)
+  execute 'vert sb' a:arg1
+endfunction

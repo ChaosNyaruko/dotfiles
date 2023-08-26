@@ -12,11 +12,11 @@
 [push]
 	recurseSubmodules = check
 
-[http "https://github.com"]
-	proxy = socks5://127.0.0.1:21000
+; [http "https://github.com"]
+; 	proxy = socks5://127.0.0.1:7890
 
-[https "https://github.com"]
-	proxy = socks5://127.0.0.1:21000
+; [https "https://github.com"]
+; 	proxy = socks5://127.0.0.1:7890
 
 [color]
 	ui = auto
