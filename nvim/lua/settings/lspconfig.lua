@@ -7,7 +7,7 @@ vim.diagnostic.config({ virtual_text = true })
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap = true, silent = true, desc = "mappings in lspconfig global" }
+local opts = { buffer = true, noremap = true, silent = true, desc = "mappings in lspconfig global" }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
@@ -22,6 +22,47 @@ end
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+    if client.name == 'gopls' then
+        vim.keymap.set('n', '<leader>R', function ()
+           vim.cmd [[LspRestart]]
+        end )
+        if vim.fn.expand("%:t") == "go.mod" then
+            -- print(string.format('gopls attached, set noautoread for my automatic LspRestart'))
+            -- vim.bo.autoread = false
+        end
+        vim.api.nvim_create_augroup('my_go_lsp', {
+            clear = true
+        })
+        -- print("gopls is used")
+        -- vim.api.nvim_create_autocmd({"FileType"}, { 
+        --     group = 'my_go_lsp',
+        --     pattern = {"gomod"},
+        --     callback = function(ev)
+        --         print(string.format('gomod noautoread'))
+        --         vim.bo.autoread = false
+        --     end
+        -- })
+        -- TODO:
+        -- if "FileChangedShell" is used, this can only work when autoread is not set.
+        -- FileChangedShellPost works fine.
+        -- not really figure it out yet.
+        -- maybe go#lsp#DidChange is what I need?
+        vim.api.nvim_create_autocmd({"FileChangedShellPost", "BufWritePost"}, {
+            group = 'my_go_lsp',
+            pattern = {"go.mod"},
+            callback = function(ev)
+                -- print(string.format('%s event fired: %s', os.time(), vim.inspect(ev)))
+                print(string.format('[%s] go.mod update detected, restart lsp', os.date('%Y-%m-%d %H:%M:%S')))
+                vim.api.nvim_command("LspRestart")
+            end
+        })
+        -- https://www.reddit.com/r/neovim/comments/f0qx2y/automatically_reload_file_if_contents_changed/
+        -- it's not useful for this problem, but just remind me of sth.
+        -- vim.cmd [[
+        -- autocmd FocusGained *.go checktime
+        -- autocmd FocusGained go.mod checktime
+        -- ]]
+    end
     local cap = client.server_capabilities
     if cap.documentHighlightProvider then
         vim.api.nvim_set_hl(0, "LspReferenceText", { underline = true })
