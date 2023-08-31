@@ -100,7 +100,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'https://code.byted.org/chenjiaqi.cposture/cannycoder.vim.git'
 Plug 'fatih/vim-go', {'tag': '*'}
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
@@ -484,11 +483,14 @@ endfunc
 
 " call Terminal_MetaMode(0)
 set timeout
+" set ttimeout
 set timeoutlen=3000
 set ttimeoutlen=100
 " set Meta based shortcuts
 inoremap <M-s> <cmd>update<cr>
 noremap <M-s> <cmd>update<cr>
+" for vim 
+" inoremap <Esc>s <Cmd>update<Cr>
 
 " source $HOME/dotfiles/redir.vim
 " copy-paste it to here to avoid the location problem,
@@ -635,3 +637,12 @@ function VsbFunction (arg1)
 endfunction
 
 " set formatoptions=
+
+let g:cannycoder_disable_bindings = v:true
+let g:cannycoder_log_file = "~/.temp/cannycoder.log"
+imap <C-s> <Plug>(cannycoder-complete)
+imap <C-]> <Plug>(cannycoder-next-or-complete)
+
+" https://github.com/vim/vim/issues/5200 for more?
+" set t_TI=""
+" set t_TE=""
