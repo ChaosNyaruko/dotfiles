@@ -638,11 +638,8 @@ endfunction
 
 " set formatoptions=
 
-let g:cannycoder_disable_bindings = v:true
-let g:cannycoder_log_file = "~/.temp/cannycoder.log"
-imap <C-s> <Plug>(cannycoder-complete)
-imap <C-]> <Plug>(cannycoder-next-or-complete)
-
 " https://github.com/vim/vim/issues/5200 for more?
 " set t_TI=""
 " set t_TE=""
+inoremap <M-CR> <cmd>normal! $o <cr>
+
