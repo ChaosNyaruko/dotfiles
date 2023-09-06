@@ -642,4 +642,4 @@ endfunction
 " set t_TI=""
 " set t_TE=""
 inoremap <M-CR> <cmd>normal! $o <cr>
-
+set spell
