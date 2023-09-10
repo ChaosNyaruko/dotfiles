@@ -15,3 +15,7 @@ if (type exa &> /dev/null)  then
     alias ll='exa -l -a --git --icons'
 fi
 
+# export LANG="zh_CN.UTF-8"
+# export LC_ALL="zh_CN.UTF-8"
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
