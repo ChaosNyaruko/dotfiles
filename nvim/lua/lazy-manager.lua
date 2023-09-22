@@ -164,10 +164,12 @@ require("lazy").setup({
             --     { expr = true, desc = "codedium#CycleCompletions" })
             -- vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions']( -1) end, { expr = true })
             vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true })
-            vim.g.codeium_enabled = false
+            vim.g.codeium_enabled = true
             vim.g.codeium_filetypes = { python = true, go = false }
         end
-    }
+    },
+    {"itchyny/dictionary.vim"}
+
 })
 require("settings.mason")
 require("settings.fzf")
