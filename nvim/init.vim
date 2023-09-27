@@ -2,7 +2,7 @@
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath=&runtimepath
 source ~/.vimrc
-set guicursor=i:block
+" set guicursor=i:block
 
 au Filetype cpp source ~/.config/nvim/scripts/spacetab.vim
 au Filetype cpp set colorcolumn=100
@@ -18,6 +18,16 @@ autocmd BufRead *.pacnew set readonly
 lua <<EOF
 -- require("plugins")
 require("lazy-manager")
-vim.api.nvim_set_keymap('i', '<c-n>', '<Down>', {noremap = true})
-vim.api.nvim_set_keymap('i', '<c-p>', '<Up>', {noremap = true})
+vim.api.nvim_set_keymap('i', '<c-n>', '<cmd>normal! g<Down><cr>', {noremap = true})
+vim.api.nvim_set_keymap('i', '<c-p>', '<cmd>normal! g<Up><cr>', {noremap = true})
 EOF
+
+" if ! exists("g:CheckUpdateStarted")
+"     let g:CheckUpdateStarted=1
+"     call timer_start(1,'CheckUpdate')
+" endif
+" function! CheckUpdate(timer)
+"     silent! checktime
+"     call timer_start(1000,'CheckUpdate')
+" endfunction
+" set noautoread
