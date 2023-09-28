@@ -24,7 +24,7 @@ font:
         style: Italic
 
     # Point size of the font
-    size: 11.5
+    size: 14.0
 
 # Colors (One Dark); if dim colors are not set, they will be calculated
 # automatically based on the `normal` colors
@@ -45,7 +45,7 @@ colors:
         matches:
             foreground: '#3e4452'
             background: '#e5c07b'
-        bar:
+        footer_bar:
             background: '#282c34'
             foreground: '#abb2bf'
     normal:
