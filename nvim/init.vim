@@ -18,8 +18,9 @@ autocmd BufRead *.pacnew set readonly
 lua <<EOF
 -- require("plugins")
 require("lazy-manager")
-vim.api.nvim_set_keymap('i', '<c-n>', '<cmd>normal! g<Down><cr>', {noremap = true})
-vim.api.nvim_set_keymap('i', '<c-p>', '<cmd>normal! g<Up><cr>', {noremap = true})
+-- require("mydict")
+-- vim.api.nvim_set_keymap('i', '<c-n>', '<cmd>normal! g<Down><cr>', {noremap = true})
+-- vim.api.nvim_set_keymap('i', '<c-p>', '<cmd>normal! g<Up><cr>', {noremap = true})
 EOF
 
 " if ! exists("g:CheckUpdateStarted")
