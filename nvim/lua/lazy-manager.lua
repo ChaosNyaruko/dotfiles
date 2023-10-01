@@ -168,8 +168,8 @@ require("lazy").setup({
             vim.g.codeium_filetypes = { python = true, go = false }
         end
     },
-    {"itchyny/dictionary.vim"}
-
+    {"itchyny/dictionary.vim"},
+    {"ChaosNyaruko/ondict"}
 })
 require("settings.mason")
 require("settings.fzf")
