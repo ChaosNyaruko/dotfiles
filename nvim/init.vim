@@ -22,6 +22,8 @@ require("lazy-manager")
 -- vim.api.nvim_set_keymap('i', '<c-n>', '<cmd>normal! g<Down><cr>', {noremap = true})
 -- vim.api.nvim_set_keymap('i', '<c-p>', '<cmd>normal! g<Up><cr>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>d', ':lua require("ondict").query()<cr>', {noremap = true})
+vim.api.nvim_set_keymap('v', '<leader>d', '<cmd>lua require("ondict").query()<cr>', {noremap = true}) -- it must be <cmd>, not :, otherwise the "visual" mode state will be lost.
+ -- vim.api.nvim_set_keymap('v', '<leader>d', ':lua require("ondict").query()<cr>', {noremap = true})
 EOF
 
 " if ! exists("g:CheckUpdateStarted")
