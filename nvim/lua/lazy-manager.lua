@@ -14,7 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     'neovim/nvim-lspconfig', -- LSP
     'williamboman/mason.nvim',
-    { 'nvim-lualine/lualine.nvim',       dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true }, enabled = true },
+    { 'nvim-lualine/lualine.nvim',       dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true }, enabled = true },
     'hrsh7th/nvim-cmp',
     -- {
     --     "L3MON4D3/LuaSnip",
@@ -168,6 +168,13 @@ require("lazy").setup({
             vim.g.codeium_filetypes = { python = true, go = false }
         end
     },
+{
+    'goolord/alpha-nvim',
+    enabled = false,
+    config = function ()
+        require'alpha'.setup(require'alpha.themes.startify'.config)
+    end,
+},
     {"itchyny/dictionary.vim"},
     {"ChaosNyaruko/ondict"}
 })
