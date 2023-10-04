@@ -123,7 +123,7 @@ Plug 'itchyny/lightline.vim'
 " Plug 'rakr/vim-one'
 " Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'preservim/nerdtree'
+" Plug 'preservim/nerdtree'
 " Plug 'airblade/vim-gitgutter'
 " Plug 'terryma/vim-multiple-cursors' " Deprecated 
 " Plug 'mg979/vim-visual-multi'

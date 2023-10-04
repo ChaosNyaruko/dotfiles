@@ -51,7 +51,7 @@ require("lazy").setup({
     'mbbill/undotree',
     'gcmt/wildfire.vim',
     'NLKNguyen/papercolor-theme',
-    'preservim/nerdtree',
+    {'preservim/nerdtree', enabled = false},
     { 'iamcco/markdown-preview.nvim', build = function() vim.fn["mkdp#util#install"]() end },
     { 'vim-autoformat/vim-autoformat' },
     {
