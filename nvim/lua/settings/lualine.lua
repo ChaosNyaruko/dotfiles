@@ -36,7 +36,7 @@ line.setup {
         lualine_x = { 'encoding', 'fileformat', 'filetype' },
         lualine_y = { 'progress' },
         -- lualine_z = { 'location', [[%3{codeium#GetStatusString()}]] }
-        lualine_z = { 'location', codium_status }
+        lualine_z = { 'location'}, --codium_status }
     },
     inactive_sections = {
         lualine_a = {},

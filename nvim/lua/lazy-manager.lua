@@ -14,7 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     'neovim/nvim-lspconfig', -- LSP
     'williamboman/mason.nvim',
-    { 'nvim-lualine/lualine.nvim',       dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true }, enabled = true },
+    { 'nvim-lualine/lualine.nvim',       dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true }, enabled = true}, -- TODO: when this plugin is used, a strange bug happen, see lualine_bug.lua, and codium_status may be the source
+    {'itchyny/lightline.vim', enabled = false},
     'hrsh7th/nvim-cmp',
     -- {
     --     "L3MON4D3/LuaSnip",
