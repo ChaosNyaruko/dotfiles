@@ -12,49 +12,44 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    'neovim/nvim-lspconfig', -- LSP
-    'williamboman/mason.nvim',
+    {'neovim/nvim-lspconfig', event = "VeryLazy"}, -- LSP
+    {'williamboman/mason.nvim', event = "VeryLazy"},
     { 'nvim-lualine/lualine.nvim',       dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true }, enabled = true}, -- TODO: when this plugin is used, a strange bug happen, see lualine_bug.lua, and codium_status may be the source
     {'itchyny/lightline.vim', enabled = false},
-    'hrsh7th/nvim-cmp',
-    -- {
-    --     "L3MON4D3/LuaSnip",
-    --     -- follow latest release.
-    --     version = "1.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-    --     -- install jsregexp (optional!).
-    --     build = "make install_jsregexp"
-    -- },
-    'SirVer/ultisnips',
-    'onsails/lspkind.nvim',
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-cmdline',
-    'hrsh7th/cmp-nvim-lsp-signature-help',
-    'quangnguyen30192/cmp-nvim-ultisnips',
-    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
-    { 'nvim-treesitter/playground',      enabled = false },
-    'nvim-treesitter/nvim-treesitter-context',
-    'nvim-lua/plenary.nvim',
-    'nvim-telescope/telescope.nvim',
-    'nvim-telescope/telescope-file-browser.nvim',
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
-    "gfanto/fzf-lsp.nvim",
-    { 'fatih/vim-go',                             enabled = true },
-    'tpope/vim-commentary',
-    'preservim/vim-markdown',
-    'godlygeek/tabular',
-    'christoomey/vim-tmux-navigator',
-    { 'junegunn/fzf',                 build = ":call fzf#install()" },
-    'junegunn/fzf.vim',
-    'tpope/vim-fugitive',
-    'tpope/vim-surround',
-    'mbbill/undotree',
-    'gcmt/wildfire.vim',
+    {'hrsh7th/nvim-cmp', event = "VeryLazy"},
+    {'SirVer/ultisnips', event = "VeryLazy"},
+    {'onsails/lspkind.nvim', event = "VeryLazy"},
+    {'hrsh7th/cmp-nvim-lsp', event = "VeryLazy"},
+    {'hrsh7th/cmp-buffer', event = "VeryLazy"},
+    {'hrsh7th/cmp-path', event = "VeryLazy"},
+    {'hrsh7th/cmp-cmdline', event = "VeryLazy"},
+    {'hrsh7th/cmp-nvim-lsp-signature-help', event = "VeryLazy"},
+    {'quangnguyen30192/cmp-nvim-ultisnips', event = "VeryLazy"},
+    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', event = "VeryLazy" },
+    { 'nvim-treesitter/playground',      enabled = false, event = "VeryLazy" },
+    {'nvim-treesitter/nvim-treesitter-context', event = "VeryLazy"},
+    {'nvim-lua/plenary.nvim', event = "VeryLazy"},
+    {'nvim-telescope/telescope.nvim', event = "VeryLazy"},
+    {'nvim-telescope/telescope-file-browser.nvim', event = "VeryLazy"},
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build', event = "VeryLazy" },
+    {"gfanto/fzf-lsp.nvim", event = "VeryLazy"},
+    { 'fatih/vim-go',                             enabled = true, event = "VeryLazy" },
+    {'tpope/vim-commentary', event = "VeryLazy"},
+    {'preservim/vim-markdown', event = "VeryLazy"},
+    {'godlygeek/tabular', event = "VeryLazy"},
+    {'christoomey/vim-tmux-navigator', enable = false, event = "VeryLazy"},
+    { 'junegunn/fzf',                 build = ":call fzf#install()" , event = "VeryLazy"},
+    {'junegunn/fzf.vim', event = "VeryLazy"},
+    {'tpope/vim-fugitive', event = "VeryLazy"},
+    {'tpope/vim-surround', event = "VeryLazy"},
+    {'mbbill/undotree', event = "VeryLazy"},
+    {'gcmt/wildfire.vim', event = "VeryLazy"},
     'NLKNguyen/papercolor-theme',
     {'preservim/nerdtree', enabled = false},
-    { 'iamcco/markdown-preview.nvim', build = function() vim.fn["mkdp#util#install"]() end },
-    { 'vim-autoformat/vim-autoformat' },
+    { 'iamcco/markdown-preview.nvim', build = function() vim.fn["mkdp#util#install"]() end , event = "VeryLazy"},
+    {  'vim-autoformat/vim-autoformat',
+        event = "VeryLazy",
+    },
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
@@ -158,6 +153,7 @@ require("lazy").setup({
     {
         'Exafunction/codeium.vim',
         enabled = false,
+        event = "VeryLazy",
         config = function()
             -- Change '<C-g>' here to any keycode you like.
             vim.keymap.set('i', '<tab>', function() return vim.fn['codeium#Accept']() end, { expr = true })
@@ -176,8 +172,8 @@ require("lazy").setup({
         require'alpha'.setup(require'alpha.themes.startify'.config)
     end,
 },
-    {"itchyny/dictionary.vim"},
-    {"ChaosNyaruko/ondict"}
+    {"itchyny/dictionary.vim", enable = false},
+    {"ChaosNyaruko/ondict", event = "VeryLazy"}
 })
 require("settings.mason")
 require("settings.fzf")
