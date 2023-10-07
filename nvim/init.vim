@@ -275,7 +275,7 @@ let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetDirectories=["$HOME/" .. ".vim/plugged/vim-go/gosnippets"]
+let g:UltiSnipsSnippetDirectories=["$HOME/.local/share/nvim/lazy/" .. "vim-go/gosnippets"]
 
 " set Meta based shortcuts
 inoremap <M-s> <cmd>update<cr>
