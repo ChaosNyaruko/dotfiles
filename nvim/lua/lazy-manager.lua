@@ -17,6 +17,7 @@ require("lazy").setup({
         ft  = {"go", "lua", "python", "c", "cpp", "rust"},
         config = function ()
             require("settings.lspconfig")
+            require("settings.fzf")
         end
     },
     {
@@ -79,9 +80,6 @@ require("lazy").setup({
     },
     {"gfanto/fzf-lsp.nvim",
         lazy = true,
-        config = function ()
-            require("settings.fzf")
-        end
     },
     { 'fatih/vim-go', lazy = true, ft = {"go", "gomod"}, enabled = false},
     {'tpope/vim-commentary', event = "VeryLazy"},

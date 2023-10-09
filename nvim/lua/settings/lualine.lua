@@ -53,3 +53,4 @@ line.setup {
 }
 
 vim.o.showmode = false
+vim.o.laststatus = 3
