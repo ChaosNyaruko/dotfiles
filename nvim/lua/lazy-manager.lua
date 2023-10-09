@@ -14,7 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     {
         'neovim/nvim-lspconfig',
-        ft  = {"go", "lua", "python", "c", "cpp", "rust"}, 
+        ft  = {"go", "lua", "python", "c", "cpp", "rust"},
         config = function ()
             require("settings.lspconfig")
         end
@@ -83,7 +83,7 @@ require("lazy").setup({
             require("settings.fzf")
         end
     },
-    { 'fatih/vim-go', lazy = true, ft = {"go", "gomod"}, enabled = true},
+    { 'fatih/vim-go', lazy = true, ft = {"go", "gomod"}, enabled = false},
     {'tpope/vim-commentary', event = "VeryLazy"},
     {'preservim/vim-markdown', ft = "markdown", event = "VeryLazy"},
     {'godlygeek/tabular', event = "VeryLazy"},

@@ -23,6 +23,17 @@ end
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
     if client.name == 'gopls' then
+        -- print(vim.inspect(client.server_capabilities))
+        vim.api.nvim_create_autocmd({"BufWritePre"}, {
+            group = vim.api.nvim_create_augroup("LspFormatGroup", {clear = true}),
+            buffer = bufnr,
+            -- pattern = {"go", "gomod"},
+            desc = "LspFormatGroup",
+            callback = function ()
+                print("format by lsp")
+                vim.lsp.buf.format()
+            end,
+        })
         vim.keymap.set('n', '<leader>R', function ()
            vim.cmd [[LspRestart]]
         end )
@@ -157,7 +168,8 @@ nvim_lsp.lua_ls.setup {
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-vim.lsp.set_log_level("debug")
+-- print(vim.inspect(capabilities))
+vim.lsp.set_log_level("INFO")
 -- for Go, use vim-go Plugin instead
 nvim_lsp.gopls.setup {
     cmd = { "gopls", "-remote=auto" },
