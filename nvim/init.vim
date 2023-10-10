@@ -258,7 +258,8 @@ endif
 au Filetype cpp source ~/.config/nvim/scripts/spacetab.vim
 au Filetype cpp set colorcolumn=100
 au Filetype go set colorcolumn=120
-au TextYankPost * silent! lua vim.highlight.on_yank() " Highlight yank
+" Highlight yank
+au TextYankPost *  lua vim.highlight.on_yank() 
 
  " Leave paste mode when leaving insert mode
 autocmd InsertLeave * set nopaste
