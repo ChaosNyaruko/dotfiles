@@ -7,10 +7,15 @@ local function codium_status()
     return "{...}" .. vim.fn['codeium#GetStatusString']()
 end
 
+local theme = 'onelight'
+if os.getenv("TERM") == "alacritty" then
+    theme = 'onedark'
+end
+
 line.setup {
     options = {
         icons_enabled = true,
-        theme = 'onelight',
+        theme = theme,
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         disabled_filetypes = {

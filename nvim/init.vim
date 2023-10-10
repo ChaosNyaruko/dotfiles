@@ -32,6 +32,10 @@ let mapleader=" "
 set nolist
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 set background=light
+if $TERM == "alacritty"
+    set bg=dark
+endif
+
 
 " Common mappings
 vnoremap < <gv
