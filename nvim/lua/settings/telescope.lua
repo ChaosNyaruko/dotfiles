@@ -58,6 +58,7 @@ vim.keymap.set('n', '<leader>f', '<cmd>lua require("telescope.builtin").live_gre
 vim.keymap.set('n', '<leader>F', '<cmd>lua require("telescope.builtin").grep_string()<cr>', opts)
 vim.keymap.set('v', '<leader>F', '<cmd>lua require("telescope.builtin").grep_string()<cr>', opts)
 vim.keymap.set('n', '<leader>b', '<cmd>lua require("telescope.builtin").buffers()<cr>', opts)
+vim.keymap.set('n', '<leader>h', '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
 -- vim.keymap.set('n', '<leader>d', '<cmd>lua require("telescope.builtin").diagnostics()<cr>', opts)
 -- vim.keymap.set('n', '<leader>c', '<cmd>lua require("telescope.builtin").lsp_incoming_calls()<cr>', opts)
 -- vim.keymap.set('n', '<leader>r', '<cmd>lua require("telescope.builtin").lsp_references()<cr>', opts)
