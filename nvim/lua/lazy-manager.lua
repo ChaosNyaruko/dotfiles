@@ -14,8 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     {
         'neovim/nvim-lspconfig',
-        ft  = {"go", "lua", "python", "c", "cpp", "rust"},
-        config = function ()
+        ft     = { "go", "lua", "python", "c", "cpp", "rust" },
+        config = function()
             require("settings.lspconfig")
             require("settings.fzf")
         end
@@ -24,7 +24,7 @@ require("lazy").setup({
         'williamboman/mason.nvim',
         lazy = true,
         cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
-        config = function ()
+        config = function()
             require("settings.mason")
         end
     },
@@ -33,69 +33,69 @@ require("lazy").setup({
         dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
         event = "VimEnter",
         enabled = true,
-        config = function ()
+        config = function()
             require("settings.lualine")
         end
     }, -- TODO: when this plugin is used, a strange bug happen, see lualine_bug.lua, and codium_status may be the source
-    {'itchyny/lightline.vim', enabled = false},
+    { 'itchyny/lightline.vim', enabled = false },
     {
         'hrsh7th/nvim-cmp',
-        event = {"InsertEnter", "CmdlineEnter"},
-        config = function ()
+        event = { "InsertEnter", "CmdlineEnter" },
+        config = function()
             require("settings.nvim-cmp")
         end,
         dependencies = {
-            {'hrsh7th/cmp-nvim-lsp'},
-            {'hrsh7th/cmp-buffer'},
-            {'hrsh7th/cmp-path'},
-            {'hrsh7th/cmp-cmdline'},
-            {'hrsh7th/cmp-nvim-lsp-signature-help'},
-            {'quangnguyen30192/cmp-nvim-ultisnips'},
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'hrsh7th/cmp-buffer' },
+            { 'hrsh7th/cmp-path' },
+            { 'hrsh7th/cmp-cmdline' },
+            { 'hrsh7th/cmp-nvim-lsp-signature-help' },
+            { 'quangnguyen30192/cmp-nvim-ultisnips' },
         }
     },
-    {'SirVer/ultisnips', lazy = false},
-    {'onsails/lspkind.nvim', event = "VeryLazy", lazy = true},
+    { 'SirVer/ultisnips',      lazy = false },
+    { 'onsails/lspkind.nvim',  event = "VeryLazy", lazy = true },
     {
         'nvim-treesitter/nvim-treesitter',
         lazy = true,
-        cmd = {"TSInstallInfo", "TSUpdate"},
+        cmd = { "TSInstallInfo", "TSUpdate" },
         build = ':TSUpdate',
-        config = function ()
+        config = function()
             require("settings.treesitter")
         end
     },
-    { 'nvim-treesitter/playground',  cmd = "TSPlaygroundToggle",  enabled = true, event = "VeryLazy" },
-    {'nvim-treesitter/nvim-treesitter-context', event = "VeryLazy"},
-    {'nvim-lua/plenary.nvim', event = "VeryLazy"},
+    { 'nvim-treesitter/playground',              cmd = "TSPlaygroundToggle", enabled = true, event = "VeryLazy" },
+    { 'nvim-treesitter/nvim-treesitter-context', event = "VeryLazy" },
+    { 'nvim-lua/plenary.nvim',                   event = "VeryLazy" },
     {
         'nvim-telescope/telescope.nvim',
-        keys = { {"<C-p>", mode = "n"} },
-        config = function ()
+        keys = { { "<C-p>", mode = "n" } },
+        config = function()
             require("settings.telescope")
         end,
         dependencies = {
-            {'nvim-telescope/telescope-file-browser.nvim'},
-            {'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'},
+            { 'nvim-telescope/telescope-file-browser.nvim' },
+            { 'nvim-telescope/telescope-fzf-native.nvim',  build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
         }
     },
-    {"gfanto/fzf-lsp.nvim",
+    { "gfanto/fzf-lsp.nvim",
         lazy = true,
     },
-    { 'fatih/vim-go', lazy = true, ft = {"go", "gomod"}, enabled = false},
-    {'tpope/vim-commentary', event = "VeryLazy"},
-    {'preservim/vim-markdown', ft = "markdown", event = "VeryLazy"},
-    {'godlygeek/tabular', event = "VeryLazy"},
-    {'christoomey/vim-tmux-navigator', enable = false, event = "VeryLazy"},
-    { 'junegunn/fzf',                 build = ":call fzf#install()" , event = "VeryLazy"},
-    {'junegunn/fzf.vim', event = "VeryLazy"},
-    {'tpope/vim-fugitive', event = "VeryLazy"},
-    {'tpope/vim-surround', event = "VeryLazy"},
-    {'mbbill/undotree', event = "VeryLazy"},
-    {'gcmt/wildfire.vim', event = "VeryLazy"},
+    { 'fatih/vim-go',                   lazy = true,                   ft = { "go", "gomod" }, enabled = false },
+    { 'tpope/vim-commentary',           event = "VeryLazy" },
+    { 'preservim/vim-markdown',         ft = "markdown",               event = "VeryLazy" },
+    { 'godlygeek/tabular',              event = "VeryLazy" },
+    { 'christoomey/vim-tmux-navigator', enable = false,                event = "VeryLazy" },
+    { 'junegunn/fzf',                   build = ":call fzf#install()", event = "VeryLazy" },
+    { 'junegunn/fzf.vim',               event = "VeryLazy" },
+    { 'tpope/vim-fugitive',             event = "VeryLazy" },
+    { 'tpope/vim-surround',             event = "VeryLazy" },
+    { 'mbbill/undotree',                event = "VeryLazy" },
+    { 'gcmt/wildfire.vim',              event = "VeryLazy" },
     'NLKNguyen/papercolor-theme',
-    {'preservim/nerdtree', enabled = false},
-    { 'iamcco/markdown-preview.nvim', ft = "markdown", build = function() vim.fn["mkdp#util#install"]() end , event = "VeryLazy"},
-    {  'vim-autoformat/vim-autoformat',
+    { 'preservim/nerdtree',           enabled = false },
+    { 'iamcco/markdown-preview.nvim', ft = "markdown", build = function() vim.fn["mkdp#util#install"]() end, event = "VeryLazy" },
+    { 'vim-autoformat/vim-autoformat',
         event = "VeryLazy",
     },
     {
@@ -213,15 +213,20 @@ require("lazy").setup({
             vim.g.codeium_filetypes = { python = true, go = false }
         end
     },
-{
-    'goolord/alpha-nvim',
-    enabled = false,
-    config = function ()
-        require'alpha'.setup(require'alpha.themes.startify'.config)
-    end,
-},
-    {"itchyny/dictionary.vim", enable = false},
-    {"ChaosNyaruko/ondict", event = "VeryLazy"}
+    {
+        'goolord/alpha-nvim',
+        enabled = false,
+        config = function()
+            require 'alpha'.setup(require 'alpha.themes.startify'.config)
+        end,
+    },
+    { "itchyny/dictionary.vim", enable = false },
+    { "ChaosNyaruko/ondict",
+        event = "VeryLazy",
+        build = function(plugin)
+            require("ondict").install(plugin.dir)
+        end
+    }
 })
 -- require("settings.mason")
 -- require("settings.fzf")
