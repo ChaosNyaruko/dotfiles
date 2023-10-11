@@ -64,7 +64,7 @@ require("lazy").setup({
             require("settings.treesitter")
         end
     },
-    { 'nvim-treesitter/playground',      enabled = false, event = "VeryLazy" },
+    { 'nvim-treesitter/playground',  cmd = "TSPlaygroundToggle",  enabled = true, event = "VeryLazy" },
     {'nvim-treesitter/nvim-treesitter-context', event = "VeryLazy"},
     {'nvim-lua/plenary.nvim', event = "VeryLazy"},
     {

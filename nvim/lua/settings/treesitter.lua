@@ -14,6 +14,7 @@ ts.setup {
         'lua',
         'json',
         'vim',
+        "query",
     },
     autotag = {
         enable = true,

@@ -133,15 +133,13 @@ command! -bang -nargs=* PRg
 
 command! -nargs=* -complete=dir -bang PFZF call fzf#run(fzf#wrap('FZF', fzf#vim#with_preview({'dir': getenv('PWD')}), <bang>0))
 
-" vim-go navi mappings {{{
-autocmd FileType go nnoremap <buffer> gr :GoReferrers<CR>
-autocmd FileType go nnoremap <buffer> gi :GoImplements<CR>
-autocmd FileType go nnoremap <buffer> goc :GoCallers<CR>
-" au filetype go inoremap <buffer> . .<C-x><C-o>
-
 " vim-go settings
-let g:go_list_type="quickfix"
-let g:go_doc_popup_window = 1
+" autocmd FileType go nnoremap <buffer> gr :GoReferrers<CR>
+" autocmd FileType go nnoremap <buffer> gi :GoImplements<CR>
+" autocmd FileType go nnoremap <buffer> goc :GoCallers<CR>
+" au filetype go inoremap <buffer> . .<C-x><C-o>
+" let g:go_list_type="quickfix"
+" let g:go_doc_popup_window = 1
 
 " markdown-preview config
 " set to 1, nvim will open the preview window after entering the markdown buffer
@@ -280,7 +278,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetDirectories=["$HOME/.local/share/nvim/lazy/" .. "vim-go/gosnippets"]
 
 " set Meta based shortcuts
 inoremap <M-s> <cmd>update<cr>

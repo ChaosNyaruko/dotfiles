@@ -19,6 +19,11 @@ local function document_highlight()
     vim.lsp.buf.document_highlight()
 end
 
+local function on_list(options)
+  vim.fn.setqflist({}, ' ', options)
+  vim.api.nvim_command('cfirst')
+end
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -105,7 +110,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation {on_list = on_list} end, bufopts)
     -- if client.name ~= 'gopls' then
     vim.keymap.set('n', 'goc', vim.lsp.buf.incoming_calls, bufopts)
     -- end
