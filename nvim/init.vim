@@ -391,4 +391,3 @@ EOF
 
 colorscheme PaperColor
 set noshowmode
-
