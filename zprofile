@@ -65,3 +65,18 @@ function Proxy() {
     fi
 }
 
+function GoSwitch() {
+    if [ "$1" == "" ]; then
+        echo "Please input the go version."
+        echo $(ls $HOME/sdk)
+    else
+        gosdk=$HOME/sdk/go$1
+        if [ "$2" == "y" ]; then
+            sudo rm /usr/local/go
+            sudo ln -s $gosdk /usr/local/go
+            echo "switch to $gosdk"
+        else
+            echo "switch to $gosdk, add y to confirm"
+        fi
+    fi
+}
