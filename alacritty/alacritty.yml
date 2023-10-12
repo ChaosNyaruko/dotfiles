@@ -105,42 +105,42 @@ key_bindings:
     - { key: End,      mods: Shift, action: ScrollToBottom       }
     - { key: Home,     mods: Shift, action: ScrollToTop          }
     # Since we cannot set zoom factor we bind keys multiple times
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: U,        mods: Super, action: IncreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
-    - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: U,        mods: Super, action: IncreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
+    # - { key: D,        mods: Super, action: DecreaseFontSize     }
     # Vi mode
     - { key: LBracket, mods: Control|Alt,  action: ToggleViMode  }
     - { key: Q,        mode: Vi,           action: ToggleViMode  }
@@ -149,6 +149,12 @@ key_bindings:
     # Tmux-like
     - { key: P,        mods: Control|Alt,  action: Paste         }
     # On OSX uncomment the following to enable alt maps
-    # - { key: D,        mods: Alt,   chars: "\x1bd"               }
-    # - { key: Z,        mods: Alt,   chars: "\x1bz"               }
+    - { key: S,        mods: Alt,   chars: "\x1bs"               }
+    # - { key: D, mods: Command,   chars: "\x5cd"               }
+    # Use command + [ - to go to previous tmux window
+    # - { key: LBracket, mods: Command, chars: "\x5c\x70" }
+    # Use command + ] - to go to previous tmux window
+    # - { key: RBracket, mods: Command, chars: "\x5c\x6e" }
+    # ctrl-^ doesn't work in some terminals like alacritty
+    - { key: Key6, mods: Control, chars: "\x1e" }
 ...
