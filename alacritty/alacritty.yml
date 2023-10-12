@@ -150,11 +150,19 @@ key_bindings:
     - { key: P,        mods: Control|Alt,  action: Paste         }
     # On OSX uncomment the following to enable alt maps
     - { key: S,        mods: Alt,   chars: "\x1bs"               }
-    # - { key: D, mods: Command,   chars: "\x5cd"               }
-    # Use command + [ - to go to previous tmux window
-    # - { key: LBracket, mods: Command, chars: "\x5c\x70" }
-    # Use command + ] - to go to previous tmux window
+    - { key: S,        mods: Command,   chars: "\x1bs"               }
+    # Use command + [ - to go to previous tmux window, i.e. ctrl-a(97) p
+    # they are xterm-style “modifyOtherKeys”
+    # https://invisible-island.net/xterm/modified-keys.html
+    - { key: LBracket, mods: Command, chars: "\x1b[27;5;97~p" }
+    # Use command + ] - to go to next tmux window
+    - { key: RBracket, mods: Command, chars: "\x1b[27;5;97~n" }
     # - { key: RBracket, mods: Command, chars: "\x5c\x6e" }
     # ctrl-^ doesn't work in some terminals like alacritty
     - { key: Key6, mods: Control, chars: "\x1e" }
+    # hacky bindings from  https://github.com/alacritty/alacritty/issues/3158
+    - { key: Return,     mods: Shift,   chars: "\x1b[13;2u" }
+    - { key: Return,     mods: Control, chars: "\x1b[13;5u" }
+    # for testing
+    # - { key: Key1,     mods: Control, chars: "\x1b[A" }
 ...
