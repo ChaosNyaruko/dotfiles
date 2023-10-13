@@ -20,8 +20,8 @@ local function document_highlight()
 end
 
 local function on_list(options)
-  vim.fn.setqflist({}, ' ', options)
-  vim.api.nvim_command('cfirst')
+    vim.fn.setqflist({}, ' ', options)
+    vim.api.nvim_command('cfirst')
 end
 
 -- Use an on_attach function to only map the following keys
@@ -29,19 +29,20 @@ end
 local on_attach = function(client, bufnr)
     if client.name == 'gopls' then
         -- print(vim.inspect(client.server_capabilities))
-        vim.api.nvim_create_autocmd({"BufWritePre"}, {
-            group = vim.api.nvim_create_augroup("LspFormatGroup", {clear = true}),
-            buffer = bufnr,
-            -- pattern = {"go", "gomod"},
+        local format_group = vim.api.nvim_create_augroup("LspFormatGroup", { clear = true })
+        vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+            group = format_group,
+            -- buffer = bufnr,
+            pattern = { "*.go", "go.mod" },
             desc = "LspFormatGroup",
-            callback = function ()
+            callback = function()
                 print("format by lsp")
                 vim.lsp.buf.format()
             end,
         })
-        vim.keymap.set('n', '<leader>R', function ()
-           vim.cmd [[LspRestart]]
-        end )
+        vim.keymap.set('n', '<leader>R', function()
+            vim.cmd [[LspRestart]]
+        end)
         if vim.fn.expand("%:t") == "go.mod" then
             -- print(string.format('gopls attached, set noautoread for my automatic LspRestart'))
             -- vim.bo.autoread = false
@@ -50,7 +51,7 @@ local on_attach = function(client, bufnr)
             clear = true
         })
         -- print("gopls is used")
-        -- vim.api.nvim_create_autocmd({"FileType"}, { 
+        -- vim.api.nvim_create_autocmd({"FileType"}, {
         --     group = 'my_go_lsp',
         --     pattern = {"gomod"},
         --     callback = function(ev)
@@ -63,9 +64,9 @@ local on_attach = function(client, bufnr)
         -- FileChangedShellPost works fine.
         -- not really figure it out yet.
         -- maybe go#lsp#DidChange is what I need?
-        vim.api.nvim_create_autocmd({"FileChangedShellPost", "BufWritePost"}, {
+        vim.api.nvim_create_autocmd({ "FileChangedShellPost", "BufWritePost" }, {
             group = 'my_go_lsp',
-            pattern = {"go.mod"},
+            pattern = { "go.mod" },
             callback = function(ev)
                 -- print(string.format('%s event fired: %s', os.time(), vim.inspect(ev)))
                 print(string.format('[%s] go.mod update detected, restart lsp', os.date('%Y-%m-%d %H:%M:%S')))
@@ -110,7 +111,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation {on_list = on_list} end, bufopts)
+    vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation { on_list = on_list } end, bufopts)
     -- if client.name ~= 'gopls' then
     vim.keymap.set('n', 'goc', vim.lsp.buf.incoming_calls, bufopts)
     -- end
