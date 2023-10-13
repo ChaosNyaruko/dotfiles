@@ -21,7 +21,7 @@ telescope.setup {
     extensions = {
         file_browser = {
             theme = 'dropdown',
-            hijack_netrw = true,
+            hijack_netrw = false,
             mappings = {
                 ['i'] = {
                     ['<C-w>'] = function() vim.cmd('normal vbd') end,
@@ -58,9 +58,10 @@ vim.keymap.set('n', '<leader>f', '<cmd>lua require("telescope.builtin").live_gre
 vim.keymap.set('n', '<leader>F', '<cmd>lua require("telescope.builtin").grep_string()<cr>', opts)
 vim.keymap.set('v', '<leader>F', '<cmd>lua require("telescope.builtin").grep_string()<cr>', opts)
 vim.keymap.set('n', '<leader>b', '<cmd>lua require("telescope.builtin").buffers()<cr>', opts)
-vim.keymap.set('n', '<leader>d', '<cmd>lua require("telescope.builtin").diagnostics()<cr>', opts)
-vim.keymap.set('n', '<leader>c', '<cmd>lua require("telescope.builtin").lsp_incoming_calls()<cr>', opts)
-vim.keymap.set('n', '<leader>r', '<cmd>lua require("telescope.builtin").lsp_references()<cr>', opts)
+vim.keymap.set('n', '<leader>h', '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
+-- vim.keymap.set('n', '<leader>d', '<cmd>lua require("telescope.builtin").diagnostics()<cr>', opts)
+-- vim.keymap.set('n', '<leader>c', '<cmd>lua require("telescope.builtin").lsp_incoming_calls()<cr>', opts)
+-- vim.keymap.set('n', '<leader>r', '<cmd>lua require("telescope.builtin").lsp_references()<cr>', opts)
 vim.keymap.set('n', '<leader>ws', '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<cr>', opts)
 vim.keymap.set('n', 'sf',
     '<cmd>lua require("telescope").extensions.file_browser.file_browser({ path = "%:p:h", cwd = telescope_buffer_dir(), respect_git_ignore = false, hidden =true, grouped = true, previewer = false, initial_mode = "normal", layout_config = { height = 40}})<cr>'

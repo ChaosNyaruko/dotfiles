@@ -16,6 +16,7 @@ alias pp='git -C "$HOME/playground" pull'
 alias op='git -C "$HOME/github.com/obsidian-vault" pull'
 alias ap='dp&&np&&pp&&op'
 alias vim='nvim'
+alias tmuxn='TERM=xterm-256color tmux new-session -t'
 if [ ~/z/z.sh ]; then
     source ~/z/z.sh
 else
@@ -65,3 +66,18 @@ function Proxy() {
     fi
 }
 
+function GoSwitch() {
+    if [ "$1" == "" ]; then
+        echo "Please input the go version."
+        echo $(ls $HOME/sdk)
+    else
+        gosdk=$HOME/sdk/go$1
+        if [ "$2" == "y" ]; then
+            sudo rm /usr/local/go
+            sudo ln -s $gosdk /usr/local/go
+            echo "switch to $gosdk"
+        else
+            echo "switch to $gosdk, add y to confirm"
+        fi
+    fi
+}

@@ -19,10 +19,26 @@ local function document_highlight()
     vim.lsp.buf.document_highlight()
 end
 
+local function on_list(options)
+  vim.fn.setqflist({}, ' ', options)
+  vim.api.nvim_command('cfirst')
+end
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
     if client.name == 'gopls' then
+        -- print(vim.inspect(client.server_capabilities))
+        vim.api.nvim_create_autocmd({"BufWritePre"}, {
+            group = vim.api.nvim_create_augroup("LspFormatGroup", {clear = true}),
+            buffer = bufnr,
+            -- pattern = {"go", "gomod"},
+            desc = "LspFormatGroup",
+            callback = function ()
+                print("format by lsp")
+                vim.lsp.buf.format()
+            end,
+        })
         vim.keymap.set('n', '<leader>R', function ()
            vim.cmd [[LspRestart]]
         end )
@@ -94,7 +110,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation {on_list = on_list} end, bufopts)
     -- if client.name ~= 'gopls' then
     vim.keymap.set('n', 'goc', vim.lsp.buf.incoming_calls, bufopts)
     -- end
@@ -157,7 +173,8 @@ nvim_lsp.lua_ls.setup {
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-vim.lsp.set_log_level("debug")
+-- print(vim.inspect(capabilities))
+vim.lsp.set_log_level("INFO")
 -- for Go, use vim-go Plugin instead
 nvim_lsp.gopls.setup {
     cmd = { "gopls", "-remote=auto" },

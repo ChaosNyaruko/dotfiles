@@ -1,3 +1,20 @@
+lua <<EOF
+local cnt=0
+function cb()
+    print("moved!", cnt)
+    cnt = cnt+1
+   -- pcall(vim.api.nvim_win_set_cursor, 0,  {1, 0})
+end
+ -- vim.api.nvim_win_set_cursor(0, {1, 1})
+-- lua pcall(vim.api.nvim_win_set_cursor, 0,  {1, 2})
+-- pcall(vim.api.nvim_win_set_cursor, 0,  {1, 3})
+EOF
+autocmd CursorMoved * lua cb() 
+call cursor(1, 1)
+finish
+lua pcall(vim.api.nvim_win_set_cursor, 0,  {1, 3})
+" echo append(1, "")
+finish
 function! s:shit(dir)
     echo a:dir
 endfunction
