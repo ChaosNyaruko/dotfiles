@@ -3,6 +3,14 @@
 # import:
 #   - ~/.config/alacritty/themes/themes/atom_one_light.yaml
 
+env:
+  # TERM variable
+  #
+  # This value is used to set the `$TERM` environment variable for
+  # each instance of Alacritty. If it is not present, alacritty will
+  # check the local terminfo database and use `alacritty` if it is
+  # available, otherwise `xterm-256color` is used.
+  TERM: xterm-256color
 opacity: 1.0
 
 window:
@@ -16,6 +24,7 @@ window:
 
     # Disable border and title bar
     decorations: None
+    option_as_alt: OnlyLeft
 
 font:
     normal:
@@ -98,7 +107,6 @@ key_bindings:
     - { key: V,        mods: Super, action: Paste                }
     - { key: C,        mods: Super, action: Copy                 }
     - { key: Q,        mods: Super, action: Quit                 }
-    - { key: W,        mods: Super, action: Quit                 }
     - { key: Equals,   mods: Super, action: IncreaseFontSize     }
     - { key: Minus,    mods: Super, action: DecreaseFontSize     }
     - { key: Key0,     mods: Super, action: ResetFontSize        }
@@ -165,4 +173,5 @@ key_bindings:
     - { key: Return,     mods: Control, chars: "\x1b[13;5u" }
     # for testing
     # - { key: Key1,     mods: Control, chars: "\x1b[A" }
+    - { key: Return,     mods: Command, action: ToggleFullscreen }
 ...
