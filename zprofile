@@ -16,6 +16,7 @@ alias pp='git -C "$HOME/playground" pull'
 alias op='git -C "$HOME/github.com/obsidian-vault" pull'
 alias ap='dp&&np&&pp&&op'
 alias vim='nvim'
+alias tmuxn='TERM=xterm-256color tmux new-session -t'
 if [ ~/z/z.sh ]; then
     source ~/z/z.sh
 else
