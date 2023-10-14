@@ -67,12 +67,12 @@ function Proxy() {
 }
 
 function GoSwitch() {
-    if [ "$1" == "" ]; then
+    if [[ "$1" == "" ]]; then
         echo "Please input the go version."
         echo $(ls $HOME/sdk)
     else
         gosdk=$HOME/sdk/go$1
-        if [ "$2" == "y" ]; then
+        if [[ "$2" == "y" ]]; then
             sudo rm /usr/local/go
             sudo ln -s $gosdk /usr/local/go
             echo "switch to $gosdk"
@@ -80,4 +80,60 @@ function GoSwitch() {
             echo "switch to $gosdk, add y to confirm"
         fi
     fi
+}
+
+# For set/get Mac OS X proxy settings by command line
+# check `man networksetup` for more
+
+function SysProxy() {
+    if [[ $# -eq 0 ]]; then
+        echo "SysProxy usage:"
+        echo -n "\tall: list all network services\n"
+        echo -n "\tget [networkservice]\n"
+        echo -n "\tset [networkservice] [host] [port]\n"
+        echo -n "\treset\n"
+        return
+    fi
+    service="Wi-Fi"
+    ip="127.0.0.1"
+    port="7890"
+    # declare -a bypassdomains
+    bypassdomains=(
+    "192.168.0.0/16"
+    "10.0.0.0/8"
+    "172.16.0.0/12"
+    "127.0.0.1"
+    "localhost"
+    "*.local"
+    "timestamp.apple.com"
+    "sequoia.apple.com"
+    "seed-sequoia.siri.apple.com"
+    )
+    # echo $bypassdomains
+    # for i ("$bypassdomains[@]") echo $i
+    # return
+    # declare -r bypassdomains
+    if [[ "$1" == "all" ]]; then
+        networksetup -listallnetworkservices # case insensitive
+    elif [[ "$1" == "get" ]]; then
+        echo "[webproxy]: $service" 
+        networksetup -getwebproxy $service
+        echo "[securewebproxy]: $service" 
+        networksetup -getsecurewebproxy $service
+        echo "[socks]: $service" 
+        networksetup -getsocksfirewallproxy $service
+        echo "[bypass domains"]
+        networksetup -getproxybypassdomains $service
+    elif [[ "$1" == "set" ]]; then
+        networksetup -setwebproxy $service $ip $port
+        networksetup -setsecurewebproxy $service $ip $port
+        networksetup -setsocksfirewallproxy $service $ip $port
+        networksetup -setproxybypassdomains $service $bypassdomains
+    elif [[ "$1" == "reset" ]]; then
+        networksetup -setwebproxystate $service off
+        networksetup -setsecurewebproxystate $service off
+        networksetup -setsocksfirewallproxystate $service off
+        networksetup -setproxybypassdomains $service "Empty"
+    fi
+    # networksetup -setwebproxy "Wi-fi" 127.0.0.1 8080
 }

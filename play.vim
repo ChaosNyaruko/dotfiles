@@ -1,3 +1,5 @@
+writefile(["testappend", "event.log", "a")
+finish
 lua <<EOF
 local cnt=0
 function cb()
