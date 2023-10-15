@@ -403,3 +403,6 @@ nnoremap <silent> <Leader>l
       \ else <Bar>
       \   let w:long_line_match = matchadd('ErrorMsg', '\%>80v.\+', -1) <Bar>
       \ endif<CR>
+
+" nnoremap cd :lcd %:p:h
+nnoremap <C-w>n :call Newscratch()<cr>
