@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
+local plugins = {
     {
         'neovim/nvim-lspconfig',
         ft     = { "go", "lua", "python", "c", "cpp", "rust" },
@@ -225,9 +225,20 @@ require("lazy").setup({
         event = "VeryLazy",
         build = function(plugin)
             require("ondict").install(plugin.dir)
-        end
+        end,
+        dev = false
     }
-})
+}
+
+local opts = {
+    dev = {
+        path = "~/github.com",
+        pattern = {},
+        fallback = false,
+    }
+}
+
+require("lazy").setup(plugins, opts)
 -- require("settings.mason")
 -- require("settings.fzf")
 -- require("settings.lspconfig")

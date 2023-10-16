@@ -31,6 +31,7 @@ set splitright
 let mapleader=" "
 set nolist
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+set textwidth=120
 if $LC_TERMINAL == "iTerm2" "ITERM_PROFILE will not be passed to a 'ssh' server.
     set bg=light
 endif
@@ -390,3 +391,18 @@ EOF
 
 colorscheme PaperColor
 set noshowmode
+" match ErrorMsg '\%>80v.\+'
+" :h /\%v
+" lone line detection copied from https://vim.fandom.com/wiki/Highlight_long_lines
+nnoremap <silent> <Leader>l
+      \ :if exists('w:long_line_match') <Bar>
+      \   silent! call matchdelete(w:long_line_match) <Bar>
+      \   unlet w:long_line_match <Bar>
+      \ elseif &textwidth > 0 <Bar>
+      \   let w:long_line_match = matchadd('ErrorMsg', '\%>'.&tw.'v.\+', -1) <Bar>
+      \ else <Bar>
+      \   let w:long_line_match = matchadd('ErrorMsg', '\%>80v.\+', -1) <Bar>
+      \ endif<CR>
+
+" nnoremap cd :lcd %:p:h
+nnoremap <C-w>n :call Newscratch()<cr>
