@@ -31,7 +31,7 @@ set splitright
 let mapleader=" "
 set nolist
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
-set textwidth=120
+set textwidth=0
 if $LC_TERMINAL == "iTerm2" "ITERM_PROFILE will not be passed to a 'ssh' server.
     set bg=light
 endif
