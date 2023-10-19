@@ -58,6 +58,10 @@ if has('clipboard')
     endif
 endif
 
+if exists("g:vscode") 
+    finish
+endif
+
 " A function for default basic emacs/bash-like moving in insert mode
 " might be useful when using Chinese input method
 function! ToggleEmacsMapping(prompt)
@@ -380,16 +384,6 @@ inoremap <M-CR> <cmd>normal! $o <cr>
 
 autocmd FileType markdown setl spell
 
-lua <<EOF
--- require("plugins")
-require("lazy-manager")
--- vim.api.nvim_set_keymap('i', '<c-n>', '<cmd>normal! g<Down><cr>', {noremap = true})
--- vim.api.nvim_set_keymap('i', '<c-p>', '<cmd>normal! g<Up><cr>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>d', ':lua require("ondict").query()<cr>', {noremap = true})
-vim.api.nvim_set_keymap('v', '<leader>d', '<cmd>lua require("ondict").query()<cr>', {noremap = true}) -- it must be <cmd>, not :, otherwise the "visual" mode state will be lost.
-EOF
-
-colorscheme PaperColor
 set noshowmode
 " match ErrorMsg '\%>80v.\+'
 " :h /\%v
@@ -401,8 +395,18 @@ nnoremap <silent> <Leader>l
       \ elseif &textwidth > 0 <Bar>
       \   let w:long_line_match = matchadd('ErrorMsg', '\%>'.&tw.'v.\+', -1) <Bar>
       \ else <Bar>
-      \   let w:long_line_match = matchadd('ErrorMsg', '\%>80v.\+', -1) <Bar>
+      \   let w:long_line_match = matchadd('ErrorMsg', '\%>120v.\+', -1) <Bar>
       \ endif<CR>
 
 " nnoremap cd :lcd %:p:h
 nnoremap <C-w>n :call Newscratch()<cr>
+
+lua <<EOF
+-- require("plugins")
+require("lazy-manager")
+-- vim.api.nvim_set_keymap('i', '<c-n>', '<cmd>normal! g<Down><cr>', {noremap = true})
+-- vim.api.nvim_set_keymap('i', '<c-p>', '<cmd>normal! g<Up><cr>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>d', ':lua require("ondict").query()<cr>', {noremap = true})
+vim.api.nvim_set_keymap('v', '<leader>d', '<cmd>lua require("ondict").query()<cr>', {noremap = true}) -- it must be <cmd>, not :, otherwise the "visual" mode state will be lost.
+EOF
+colorscheme PaperColor
