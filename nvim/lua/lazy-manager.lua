@@ -69,7 +69,10 @@ local plugins = {
     { 'nvim-lua/plenary.nvim',                   event = "VeryLazy" },
     {
         'nvim-telescope/telescope.nvim',
-        keys = { { "<C-p>", mode = "n" } },
+        keys = {
+            { "<leader>ws", mode = "n" },
+            { "<leader>F",  mode = "n" },
+        },
         config = function()
             require("settings.telescope")
         end,
