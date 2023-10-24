@@ -409,4 +409,4 @@ require("lazy-manager")
 vim.api.nvim_set_keymap('n', '<leader>d', ':lua require("ondict").query()<cr>', {noremap = true})
 vim.api.nvim_set_keymap('v', '<leader>d', '<cmd>lua require("ondict").query()<cr>', {noremap = true}) -- it must be <cmd>, not :, otherwise the "visual" mode state will be lost.
 EOF
-colorscheme PaperColor
+" colorscheme PaperColor

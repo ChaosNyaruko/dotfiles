@@ -70,8 +70,8 @@ local plugins = {
     {
         'nvim-telescope/telescope.nvim',
         keys = {
-            { "<leader>ws", mode = "n" },
-            { "<leader>F",  mode = "n" },
+            { "<leader>F",  mode = { "n", "v" } },
+            { "<leader>ws", mode = { "n" } },
         },
         config = function()
             require("settings.telescope")
@@ -95,7 +95,18 @@ local plugins = {
     { 'tpope/vim-surround',             event = "VeryLazy" },
     { 'mbbill/undotree',                event = "VeryLazy" },
     { 'gcmt/wildfire.vim',              event = "VeryLazy" },
-    'NLKNguyen/papercolor-theme',
+    { 'NLKNguyen/papercolor-theme',
+        init = function()
+            vim.cmd.colorscheme "PaperColor"
+        end
+    },
+    -- {
+    --     "ronisbr/nano-theme.nvim",
+    --     init = function()
+    --         vim.o.background = "light" -- or "dark".
+    --         vim.cmd.colorscheme "nano-theme"
+    --     end
+    -- },
     { 'preservim/nerdtree',           enabled = false },
     { 'iamcco/markdown-preview.nvim', ft = "markdown", build = function() vim.fn["mkdp#util#install"]() end, event = "VeryLazy" },
     { 'vim-autoformat/vim-autoformat',
