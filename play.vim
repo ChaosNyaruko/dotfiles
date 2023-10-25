@@ -1,3 +1,5 @@
+echo systemlist("cat" . "<<< $" . "HOME")
+finish
 writefile(["testappend", "event.log", "a")
 finish
 lua <<EOF
