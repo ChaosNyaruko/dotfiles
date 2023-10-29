@@ -71,6 +71,7 @@ local plugins = {
         'nvim-telescope/telescope.nvim',
         keys = {
             { "<leader>F",  mode = { "n", "v" } },
+            { "<leader>tf", mode = { "n" } },
             { "<leader>ws", mode = { "n" } },
         },
         config = function()
