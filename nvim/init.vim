@@ -360,7 +360,7 @@ nnoremap <silent> <Leader>l
       \ endif<CR>
 
 " nnoremap cd :lcd %:p:h
-nnoremap <C-w>n :call Newscratch()<cr>
+nnoremap <C-w>n :call utils#Newscratch()<cr>
 lua <<EOF
 -- require("plugins")
 require("lazy-manager")

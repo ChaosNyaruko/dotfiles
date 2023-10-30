@@ -17,3 +17,23 @@ function! utils#SaveAndSource()
     update
     echo "source " .. expand("%") | source %
 endfunction
+
+function! utils#Newscratch()
+    execute 'tabnew '
+    setlocal buftype=nofile
+    setlocal bufhidden=hide
+    setlocal noswapfile
+endfunction
+
+" function! SynStack()
+"   if !exists("*synstack")
+"     return
+"   endif
+"   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "fg")')
+" endfunc
+
+" function! SynGroup()
+"     let l:s = synID(line('.'), col('.'), 1)
+"     echo synIDattr(l:s, 'fg') . ' -> ' . synIDattr(synIDtrans(l:s), 'fg')
+" endfun
+
