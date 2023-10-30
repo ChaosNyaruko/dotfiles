@@ -7,15 +7,15 @@ local function codium_status()
     return "{...}" .. vim.fn['codeium#GetStatusString']()
 end
 
-local theme = "onedark"
-if vim.o.background == "light" then
-    theme = 'onelight'
-end
+-- local theme = "onedark"
+-- if vim.o.background == "light" then
+--     theme = 'onelight'
+-- end
 
 line.setup {
     options = {
         icons_enabled = true,
-        theme = theme,
+        -- theme = theme,
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         disabled_filetypes = {
