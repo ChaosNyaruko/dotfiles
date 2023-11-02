@@ -10,11 +10,21 @@ end
 
 local fb_actions = require 'telescope'.extensions.file_browser.actions
 
+local add_selected_to_qflist = function (prompt_bufnr)
+    -- print("add selected to qflist, use `copen` to open quickfix window")
+    actions.add_selected_to_qflist(prompt_bufnr)
+    vim.cmd [[copen]]
+end
+
 telescope.setup {
     defaults = {
         mappings = {
             n = {
-                ['q'] = actions.close
+                ['q'] = actions.close,
+                ['A'] = add_selected_to_qflist
+            },
+            i = {
+                ['A'] = add_selected_to_qflist
             }
         }
     },

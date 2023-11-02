@@ -49,6 +49,9 @@ autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
 autocmd FileType qf :set norelativenumber
 
+set undodir=~/.local/state/nvim/undo
+set undofile
+"
 " Share clipboard if possible
 if has('clipboard') 
 	if has('unnamedplus')  " When possible use + register for copy-paste
