@@ -204,4 +204,11 @@ nvim_lsp.rust_analyzer.setup {
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
+    settings = {
+        ['rust-analyzer'] = {
+            diagnostics = {
+                enable = true,
+            }
+        }
+    },
 }
