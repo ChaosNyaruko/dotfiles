@@ -62,7 +62,7 @@ else
 fi
 
 VIMRCFILE=$HOME/.vimrc
-NVIMFILE=$HOME/.config/nvim/init.vim
+NVIMFILE=$HOME/.config/nvim
 TMUXCONF=$HOME/.tmux.conf
 SCREENRC=$HOME/.screenrc
 GITCONFIG=$HOME/.gitconfig
@@ -94,9 +94,9 @@ for file in ${FILES[@]}; do
     # determine actually dotfile
     DEST=""
     if [[ "$file" == "$VIMRCFILE" ]]; then
-        DEST="$DOTFILEREPO/myvimrc"
+        DEST="$DOTFILEREPO/vimrc"
     elif [[ "$file" == "$NVIMFILE" ]]; then
-        DEST="$DOTFILEREPO/init.vim"
+        DEST="$DOTFILEREPO/nvim"
     elif [[ "$file" == "$TMUXCONF" ]]; then
         DEST="$DOTFILEREPO/tmux.conf"
     elif [[ "$file" == "$SCREENRC" ]]; then

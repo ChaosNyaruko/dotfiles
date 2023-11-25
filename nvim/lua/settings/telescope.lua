@@ -10,11 +10,21 @@ end
 
 local fb_actions = require 'telescope'.extensions.file_browser.actions
 
+local add_selected_to_qflist = function (prompt_bufnr)
+    -- print("add selected to qflist, use `copen` to open quickfix window")
+    actions.add_selected_to_qflist(prompt_bufnr)
+    vim.cmd [[copen]]
+end
+
 telescope.setup {
     defaults = {
         mappings = {
             n = {
-                ['q'] = actions.close
+                ['q'] = actions.close,
+                ['A'] = add_selected_to_qflist
+            },
+            i = {
+                ['A'] = add_selected_to_qflist
             }
         }
     },
@@ -51,13 +61,13 @@ telescope.load_extension('file_browser')
 telescope.load_extension('fzf')
 
 local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<c-p>',
-    '<cmd>lua require("telescope.builtin").find_files({ no_ignore = false, hidden = true})<cr>'
-    , opts)
-vim.keymap.set('n', '<leader>f', '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
+-- vim.keymap.set('n', '<c-p>',
+--     '<cmd>lua require("telescope.builtin").find_files({ no_ignore = false, hidden = true})<cr>'
+--     , opts)
+vim.keymap.set('n', '<leader>tf', '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
 vim.keymap.set('n', '<leader>F', '<cmd>lua require("telescope.builtin").grep_string()<cr>', opts)
 vim.keymap.set('v', '<leader>F', '<cmd>lua require("telescope.builtin").grep_string()<cr>', opts)
-vim.keymap.set('n', '<leader>b', '<cmd>lua require("telescope.builtin").buffers()<cr>', opts)
+-- vim.keymap.set('n', '<leader>b', '<cmd>lua require("telescope.builtin").buffers()<cr>', opts)
 vim.keymap.set('n', '<leader>h', '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
 -- vim.keymap.set('n', '<leader>d', '<cmd>lua require("telescope.builtin").diagnostics()<cr>', opts)
 -- vim.keymap.set('n', '<leader>c', '<cmd>lua require("telescope.builtin").lsp_incoming_calls()<cr>', opts)

@@ -31,7 +31,7 @@ set splitright
 let mapleader=" "
 set nolist
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
-set textwidth=120
+set textwidth=0
 if $LC_TERMINAL == "iTerm2" "ITERM_PROFILE will not be passed to a 'ssh' server.
     set bg=light
 endif
@@ -49,6 +49,9 @@ autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
 autocmd FileType qf :set norelativenumber
 
+set undodir=~/.local/state/nvim/undo
+set undofile
+"
 " Share clipboard if possible
 if has('clipboard') 
 	if has('unnamedplus')  " When possible use + register for copy-paste
@@ -56,6 +59,10 @@ if has('clipboard')
 	else         " On mac and Windows, use * register for copy-paste
 	    set clipboard=unnamed
     endif
+endif
+
+if exists("g:vscode") 
+    finish
 endif
 
 " A function for default basic emacs/bash-like moving in insert mode
@@ -83,8 +90,8 @@ function! ToggleEmacsMapping(prompt)
         endif
         inoremap <C-f> <Right>
         inoremap <C-b> <Left>
-        inoremap <C-n> <cmd>normal! g<Down> <cr>
-        inoremap <C-p> <cmd>normal! g<Up> <cr>
+        inoremap <C-n> <cmd>execute "normal! g\<lt>Down>"<cr>
+        inoremap <C-p> <cmd>execute "normal! g\<lt>Up>"<cr>
         inoremap <C-a> <Home>
         inoremap <C-e> <End>
         inoremap <C-k> <esc>d$a
@@ -283,45 +290,6 @@ let g:UltiSnipsEditSplit="vertical"
 inoremap <M-s> <cmd>update<cr>
 noremap <M-s> <cmd>update<cr>
 
-" source $HOME/dotfiles/redir.vim
-" copy-paste it to here to avoid the location problem,
-" not so elegant, but useful.
-function! Redir(cmd, rng, start, end)
-	for win in range(1, winnr('$'))
-		if getwinvar(win, 'scratch')
-			execute win . 'windo close'
-		endif
-	endfor
-	if a:cmd =~ '^!'
-		let cmd = a:cmd =~' %'
-			\ ? matchstr(substitute(a:cmd, ' %', ' ' . shellescape(escape(expand('%:p'), '\')), ''), '^!\zs.*')
-			\ : matchstr(a:cmd, '^!\zs.*')
-		if a:rng == 0
-			let output = systemlist(cmd)
-		else
-			let joined_lines = join(getline(a:start, a:end), '\n')
-			let cleaned_lines = substitute(shellescape(joined_lines), "'\\\\''", "\\\\'", 'g')
-			let output = systemlist(cmd . " <<< $" . cleaned_lines)
-		endif
-	else
-		redir => output
-		execute a:cmd
-		redir END
-		let output = split(output, "\n")
-	endif
-	vnew
-	let w:scratch = 1
-	setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
-	call setline(1, output)
-endfunction
-" This command definition includes -bar, so that it is possible to "chain" Vim commands.
-" Side effect: double quotes can't be used in external commands
-command! -nargs=1 -complete=command -bar -range Redir silent call Redir(<q-args>, <range>, <line1>, <line2>)
-
-" This command definition doesn't include -bar, so that it is possible to use double quotes in external commands.
-" Side effect: Vim commands can't be "chained".
-command! -nargs=1 -complete=command -range Redir silent call Redir(<q-args>, <range>, <line1>, <line2>)
-
 " ergonomic line operations
 nnoremap j gj
 nnoremap k gk
@@ -380,16 +348,6 @@ inoremap <M-CR> <cmd>normal! $o <cr>
 
 autocmd FileType markdown setl spell
 
-lua <<EOF
--- require("plugins")
-require("lazy-manager")
--- vim.api.nvim_set_keymap('i', '<c-n>', '<cmd>normal! g<Down><cr>', {noremap = true})
--- vim.api.nvim_set_keymap('i', '<c-p>', '<cmd>normal! g<Up><cr>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>d', ':lua require("ondict").query()<cr>', {noremap = true})
-vim.api.nvim_set_keymap('v', '<leader>d', '<cmd>lua require("ondict").query()<cr>', {noremap = true}) -- it must be <cmd>, not :, otherwise the "visual" mode state will be lost.
-EOF
-
-colorscheme PaperColor
 set noshowmode
 " match ErrorMsg '\%>80v.\+'
 " :h /\%v
@@ -401,8 +359,19 @@ nnoremap <silent> <Leader>l
       \ elseif &textwidth > 0 <Bar>
       \   let w:long_line_match = matchadd('ErrorMsg', '\%>'.&tw.'v.\+', -1) <Bar>
       \ else <Bar>
-      \   let w:long_line_match = matchadd('ErrorMsg', '\%>80v.\+', -1) <Bar>
+      \   let w:long_line_match = matchadd('ErrorMsg', '\%>120v.\+', -1) <Bar>
       \ endif<CR>
 
 " nnoremap cd :lcd %:p:h
-nnoremap <C-w>n :call Newscratch()<cr>
+nnoremap <C-w>n :call utils#Newscratch()<cr>
+lua <<EOF
+-- require("plugins")
+require("lazy-manager")
+-- vim.api.nvim_set_keymap('i', '<c-n>', '<cmd>normal! g<Down><cr>', {noremap = true})
+-- vim.api.nvim_set_keymap('i', '<c-p>', '<cmd>normal! g<Up><cr>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>d', ':lua require("ondict").query()<cr>', {noremap = true})
+vim.api.nvim_set_keymap('v', '<leader>d', '<cmd>lua require("ondict").query()<cr>', {noremap = true}) -- it must be <cmd>, not :, otherwise the "visual" mode state will be lost.
+EOF
+" colorscheme PaperColor
+" nnoremap f /\%<c-r>=line('.')<cr>l
+

@@ -69,7 +69,11 @@ local plugins = {
     { 'nvim-lua/plenary.nvim',                   event = "VeryLazy" },
     {
         'nvim-telescope/telescope.nvim',
-        keys = { { "<C-p>", mode = "n" } },
+        keys = {
+            { "<leader>F",  mode = { "n", "v" } },
+            { "<leader>tf", mode = { "n" } },
+            { "<leader>ws", mode = { "n" } },
+        },
         config = function()
             require("settings.telescope")
         end,
@@ -92,7 +96,73 @@ local plugins = {
     { 'tpope/vim-surround',             event = "VeryLazy" },
     { 'mbbill/undotree',                event = "VeryLazy" },
     { 'gcmt/wildfire.vim',              event = "VeryLazy" },
-    'NLKNguyen/papercolor-theme',
+    -- { 'NLKNguyen/papercolor-theme',
+    --     init = function()
+    --         vim.cmd.colorscheme "PaperColor"
+    --     end,
+    --     enable = false
+    -- },
+    {
+        "catppuccin/nvim",
+        config = function()
+            require("catppuccin").setup({
+                flavour = "latte", -- latte, frappe, macchiato, mocha
+                background = { -- :h background
+                    light = "latte",
+                    dark = "mocha",
+                },
+                transparent_background = false, -- disables setting the background color.
+                show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+                term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+                dim_inactive = {
+                    enabled = false, -- dims the background color of inactive window
+                    shade = "dark",
+                    percentage = 0.15, -- percentage of the shade to apply to the inactive window
+                },
+                no_italic = false, -- Force no italic
+                no_bold = false, -- Force no bold
+                no_underline = false, -- Force no underline
+                styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+                    comments = { "italic" }, -- Change the style of comments
+                    conditionals = { "italic" },
+                    loops = {},
+                    functions = {},
+                    keywords = {},
+                    strings = {},
+                    variables = {},
+                    numbers = {},
+                    booleans = {},
+                    properties = {},
+                    types = {},
+                    operators = {},
+                },
+                color_overrides = {},
+                custom_highlights = {},
+                integrations = {
+                    cmp = true,
+                    gitsigns = true,
+                    nvimtree = true,
+                    treesitter = true,
+                    notify = false,
+                    mini = {
+                        enabled = true,
+                        indentscope_color = "",
+                    },
+                    -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+                },
+            })
+
+            -- setup must be called before loading
+            vim.cmd.colorscheme "catppuccin"
+        end
+    },
+    -- {
+    --     "ronisbr/nano-theme.nvim",
+    --     init = function()
+    --         vim.o.background = "light" -- or "dark".
+    --         vim.cmd.colorscheme "nano-theme"
+    --     end
+    -- },
     { 'preservim/nerdtree',           enabled = false },
     { 'iamcco/markdown-preview.nvim', ft = "markdown", build = function() vim.fn["mkdp#util#install"]() end, event = "VeryLazy" },
     { 'vim-autoformat/vim-autoformat',
