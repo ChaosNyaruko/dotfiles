@@ -132,4 +132,9 @@ digraph G {
   },
   "options": {}
 }
+
+# Brewfile
+brew bundle dump
+
+`brew bundle --help` for more details.
 ```

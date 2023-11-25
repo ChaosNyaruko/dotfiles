@@ -109,3 +109,8 @@ set -gx VISUAL vim
 
 
 bind \cx\ce edit_command_buffer
+
+
+# sh /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+# sh /opt/homebrew/opt/chruby/share/chruby/auto.sh
+chruby ruby-3.1.3
