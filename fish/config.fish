@@ -20,6 +20,7 @@ end
 
 abbr -a gst git status
 abbr -a gc git commit --verbose 
+abbr -a gcm git commit -m
 abbr -a gd git diff
 abbr -a gaa git add --all
 abbr -a vim nvim
