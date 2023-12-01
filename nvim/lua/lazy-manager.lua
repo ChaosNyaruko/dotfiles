@@ -13,10 +13,6 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
     {
-        "rust-lang/rust.vim",
-        ft = { "rust" },
-    },
-    {
         'neovim/nvim-lspconfig',
         ft     = { "go", "lua", "python", "c", "cpp", "rust" },
         config = function()
