@@ -75,7 +75,9 @@ hs.hotkey.bind({ "alt" }, "d", function()
         -- hs.alert(string.format("ondict[%d]:%s", code, stdout))
         hs.webview.newBrowser(hs.geometry.rect(800, 600, 450, 450)):html(stdout):show()
     end
-    local ondict = hs.task.new("/Users/bytedance/go/bin/ondict", cb,
+    local bin_loc = os.getenv("HOME") .. "/go/bin/ondict"
+    print(string.format("loading ondict from %s", bin_loc))
+    local ondict = hs.task.new(bin_loc, cb,
         { "-remote=localhost:1345", "-q", word, "-e=mdx", "-f=html" })
     if ondict == nil then
         hs.alert("bad new task")

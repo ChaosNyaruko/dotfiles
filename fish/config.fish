@@ -2,15 +2,14 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-eval (/opt/homebrew/bin/brew shellenv)
+# eval (/opt/homebrew/bin/brew shellenv)
 
-set -x HOMEBREW_API_DOMAIN "https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
-set -x HOMEBREW_BREW_GIT_REMOTE "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
+# set -x HOMEBREW_API_DOMAIN "https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
+# set -x HOMEBREW_BREW_GIT_REMOTE "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
 
 # export PATH="$HOME/.local/bin:$HOME/go/bin:$HOME/.gem/ruby/2.6.0/bin:/usr/local/bin:/usr/local/go/bin:$PATH"
 set -gx PATH "$HOME/.local/bin" $HOME/go/bin $HOME/.gem/ruby/2.6.0/bin /usr/local/bin /usr/local/go/bin $PATH
 set -gx PATH "$HOME/.cargo/bin" $PATH
-
 function ap
     git -C "$HOME/dotfiles" pull
     git -C "$HOME/github.com/symmetrical-dollop" pull
@@ -20,9 +19,11 @@ end
 
 abbr -a gst git status
 abbr -a gc git commit --verbose 
+abbr -a gcm git commit -m
 abbr -a gd git diff
 abbr -a gaa git add --all
 abbr -a vim nvim
+abbr -a diff nvim -d
 
 set -gx FZF_DEFAULT_OPTS "--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}' --bind ctrl-y:preview-up,ctrl-e:preview-down,ctrl-b:preview-page-up,ctrl-f:preview-page-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-top,shift-down:preview-bottom,alt-up:half-page-up,alt-down:half-page-down" 
 set -gx FZF_DEFAULT_COMMAND "fd --hidden --type f" 
@@ -104,7 +105,7 @@ function SysProxy
     # networksetup -setwebproxy "Wi-fi" 127.0.0.1 8080
 end
 
-zoxide init fish | source
+# zoxide init fish | source
 set -gx VISUAL vim
 
 
@@ -114,3 +115,5 @@ bind \cx\ce edit_command_buffer
 # sh /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 # sh /opt/homebrew/opt/chruby/share/chruby/auto.sh
 chruby ruby-3.1.3
+
+source ~/local.fish

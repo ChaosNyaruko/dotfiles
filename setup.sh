@@ -100,7 +100,7 @@ for file in ${FILES[@]}; do
     elif [[ "$file" == "$TMUXCONF" ]]; then
         DEST="$DOTFILEREPO/tmux.conf"
     elif [[ "$file" == "$SCREENRC" ]]; then
-        DEST="$DOTFILEREPO/sreenrc"
+        DEST="$DOTFILEREPO/screenrc"
     elif [[ "$file" == "$GITCONFIG" ]]; then
         DEST="$DOTFILEREPO/gitconfig"
     else

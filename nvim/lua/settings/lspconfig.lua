@@ -205,10 +205,23 @@ nvim_lsp.rust_analyzer.setup {
     flags = lsp_flags,
     capabilities = capabilities,
     settings = {
-        ['rust-analyzer'] = {
-            diagnostics = {
-                enable = true,
-            }
-        }
+        ["rust-analyzer"] = {
+            cargo = {
+                allFeatures = true,
+            },
+            completion = {
+                postfix = {
+                    enable = false,
+                },
+            },
+        },
     },
 }
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = true,
+    signs = true,
+    update_in_insert = true,
+  }
+)
