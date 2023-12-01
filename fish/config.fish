@@ -105,7 +105,7 @@ function SysProxy
     # networksetup -setwebproxy "Wi-fi" 127.0.0.1 8080
 end
 
-zoxide init fish | source
+# zoxide init fish | source
 set -gx VISUAL vim
 
 
