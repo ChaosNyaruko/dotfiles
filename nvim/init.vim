@@ -375,3 +375,4 @@ EOF
 " colorscheme PaperColor
 " nnoremap f /\%<c-r>=line('.')<cr>l
 
+set exrc

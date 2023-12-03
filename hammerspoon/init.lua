@@ -88,3 +88,7 @@ hs.hotkey.bind({ "alt" }, "d", function()
     -- end)
     ondict:start()
 end)
+
+hs.hotkey.bind({"alt" }, "e", function ()
+    print(hs.inspect(hs.audiodevice.allOutputDevices()))
+end)
