@@ -29,6 +29,17 @@ set -gx FZF_DEFAULT_OPTS "--preview-window 'right:57%' --preview 'bat --style=nu
 set -gx FZF_DEFAULT_COMMAND "fd --hidden --type f" 
 set -gx FZF_COMPLETION_TRIGGER '~~'
 
+if command -v eza > /dev/null
+	abbr -a l 'eza'
+	abbr -a ls 'eza'
+	abbr -a ll 'eza -l'
+	abbr -a lll 'eza -la'
+# else
+# 	abbr -a l 'ls'
+# 	abbr -a ll 'ls -l'
+# 	abbr -a lll 'ls -la'
+end
+
 function Proxy
     if test $argv[1] = "on" 
         set -gx https_proxy localhost:7890

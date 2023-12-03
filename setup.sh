@@ -66,9 +66,11 @@ NVIMFILE=$HOME/.config/nvim
 TMUXCONF=$HOME/.tmux.conf
 SCREENRC=$HOME/.screenrc
 GITCONFIG=$HOME/.gitconfig
+FISHCONF=$HOME/.config/fish
+BATCONF=$HOME/.config/bat
 
 if [ $MODE == "all" ]; then
-    FILES=($VIMRCFILE $NVIMFILE $TMUXCONF)
+    FILES=($VIMRCFILE $NVIMFILE $TMUXCONF $FISHCONF $BATCONF)
 elif [ $MODE == "screen" ]; then
     FILES=($SCREENRC)
 elif [ $MODE == "git" ]; then
@@ -103,6 +105,10 @@ for file in ${FILES[@]}; do
         DEST="$DOTFILEREPO/screenrc"
     elif [[ "$file" == "$GITCONFIG" ]]; then
         DEST="$DOTFILEREPO/gitconfig"
+    elif [[ "$file" == "$FISHCONF" ]]; then
+        DEST="$DOTFILEREPO/fish"
+    elif [[ "$file" == "$BATCONF" ]]; then
+        DEST="$BATCONF"
     else
         echo "error"
         exit 1
