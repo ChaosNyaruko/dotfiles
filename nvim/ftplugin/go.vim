@@ -63,3 +63,17 @@ nnoremap <buffer> <F5> <Cmd>call MyBuild("")<Cr>
 " async call
 " better default cmd
 " mapping ways
+"
+"
+function MyGenerateTest()
+    let l:func = expand("<cword>")
+    let l:curfile = expand("%")
+    let l:curfile_testfile = expand("%:r") .. "_test.go"
+    let l:curfile_path = expand("%:p:%h")
+    echom l:func .. ' ' .. l:curfile_testfile
+    let l:generated = printf('func Test_%s (t *testing.T) {}', l:func)
+    echom l:generated .. " " .. l:curfile_path
+    execute "!echo " . "'" . l:generated . "'" . " >> " . l:curfile_testfile
+endfunction
+
+nnoremap <buffer> \G <Cmd>call MyGenerateTest()<Cr>
