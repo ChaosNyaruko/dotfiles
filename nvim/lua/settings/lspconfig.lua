@@ -27,22 +27,23 @@ end
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+    print("lsp attached: ", client.name)
+    -- print(vim.inspect(client.server_capabilities))
+    local format_group = vim.api.nvim_create_augroup("LspFormatGroup", { clear = true })
+    vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+        group = format_group,
+        -- buffer = bufnr,
+        pattern = { "*.rs", "*.go", "go.mod" },
+        desc = "LspFormatGroup",
+        callback = function()
+            vim.notify(string.format("format by lsp: %s", client.name), vim.log.levels.WARN)
+            vim.lsp.buf.format()
+        end,
+    })
+    vim.keymap.set('n', '<leader>R', function()
+        vim.cmd [[LspRestart]]
+    end)
     if client.name == 'gopls' then
-        -- print(vim.inspect(client.server_capabilities))
-        local format_group = vim.api.nvim_create_augroup("LspFormatGroup", { clear = true })
-        vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-            group = format_group,
-            -- buffer = bufnr,
-            pattern = { "*.go", "go.mod" },
-            desc = "LspFormatGroup",
-            callback = function()
-                print("format by lsp")
-                vim.lsp.buf.format()
-            end,
-        })
-        vim.keymap.set('n', '<leader>R', function()
-            vim.cmd [[LspRestart]]
-        end)
         if vim.fn.expand("%:t") == "go.mod" then
             -- print(string.format('gopls attached, set noautoread for my automatic LspRestart'))
             -- vim.bo.autoread = false
@@ -219,9 +220,9 @@ nvim_lsp.rust_analyzer.setup {
 }
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
+    vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = true,
     signs = true,
     update_in_insert = true,
-  }
+}
 )

@@ -1,0 +1,1 @@
+- [x] Add a rough "Go Test" generating function
