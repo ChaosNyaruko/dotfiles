@@ -93,13 +93,13 @@ local plugins = {
     { 'tpope/vim-commentary',           event = "VeryLazy" },
     { 'preservim/vim-markdown',         ft = "markdown",               event = "VeryLazy" },
     { 'godlygeek/tabular',              event = "VeryLazy" },
-    { 'christoomey/vim-tmux-navigator', enable = false,                event = "VeryLazy" },
+    -- { 'christoomey/vim-tmux-navigator', enable = false,                event = "VeryLazy" },
     { 'junegunn/fzf',                   build = ":call fzf#install()", event = "VeryLazy" },
     { 'junegunn/fzf.vim',               event = "VeryLazy" },
     { 'tpope/vim-fugitive',             event = "VeryLazy" },
     { 'tpope/vim-surround',             event = "VeryLazy" },
     { 'mbbill/undotree',                event = "VeryLazy" },
-    { 'gcmt/wildfire.vim',              event = "VeryLazy" },
+    -- { 'gcmt/wildfire.vim',              event = "VeryLazy" },
     -- { 'NLKNguyen/papercolor-theme',
     --     init = function()
     --         vim.cmd.colorscheme "PaperColor"
@@ -169,9 +169,9 @@ local plugins = {
     -- },
     { 'preservim/nerdtree',           enabled = false },
     { 'iamcco/markdown-preview.nvim', ft = "markdown", build = function() vim.fn["mkdp#util#install"]() end, event = "VeryLazy" },
-    { 'vim-autoformat/vim-autoformat',
-        event = "VeryLazy",
-    },
+    -- { 'vim-autoformat/vim-autoformat',
+    --     event = "VeryLazy",
+    -- },
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
