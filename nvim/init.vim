@@ -264,9 +264,10 @@ if executable('rg')
     set grepformat=%f:%l:%c:%m
 endif
 
+set colorcolumn=120
 au Filetype cpp source ~/.config/nvim/scripts/spacetab.vim
-au Filetype cpp set colorcolumn=100
-au Filetype go set colorcolumn=120
+au Filetype cpp setl colorcolumn=100
+au Filetype go setl colorcolumn=120
 " Highlight yank
 au TextYankPost *  lua vim.highlight.on_yank() 
 
