@@ -28,6 +28,9 @@ end
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
     print("lsp attached: ", client.name)
+    if client.server_capabilities.documentSymbolProvider then
+        require("breadcrumb").attach(client, bufnr)
+    end
     -- print(vim.inspect(client.server_capabilities))
     local format_group = vim.api.nvim_create_augroup("LspFormatGroup", { clear = true })
     vim.api.nvim_create_autocmd({ "BufWritePre" }, {

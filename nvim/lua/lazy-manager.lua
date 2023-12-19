@@ -301,6 +301,12 @@ local plugins = {
             require("ondict").install(plugin.dir)
         end,
         dev = false
+    },
+    {
+        "loctvl842/breadcrumb.nvim",
+        config = function ()
+            require("breadcrumb").init()
+        end
     }
 }
 
