@@ -365,6 +365,8 @@ nnoremap <silent> <Leader>l
 
 " nnoremap cd :lcd %:p:h
 nnoremap <C-w>n :call utils#Newscratch()<cr>
+
+set inccommand=split
 lua <<EOF
 -- require("plugins")
 require("lazy-manager")
