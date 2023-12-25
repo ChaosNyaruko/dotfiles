@@ -316,6 +316,10 @@ local plugins = {
             'nvim-telescope/telescope-fzf-native.nvim'
         },
         enabled = false,
+    },
+    {
+        "tpope/vim-rsi",
+        enabled = false,
     }
 }
 
