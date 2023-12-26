@@ -18,7 +18,7 @@ local plugins = {
     -- },
     {
         'neovim/nvim-lspconfig',
-        ft     = { "go", "lua", "python", "c", "cpp", "rust" },
+        ft     = { "html", "go", "lua", "python", "c", "cpp", "rust" },
         config = function()
             require("settings.lspconfig")
             require("settings.fzf")
@@ -301,6 +301,25 @@ local plugins = {
             require("ondict").install(plugin.dir)
         end,
         dev = false
+    },
+    {
+        "loctvl842/breadcrumb.nvim",
+        config = function()
+            require("breadcrumb").init()
+        end,
+        enabled = false,
+    },
+    {
+        'Bekaboo/dropbar.nvim',
+        -- optional, but required for fuzzy finder support
+        dependencies = {
+            'nvim-telescope/telescope-fzf-native.nvim'
+        },
+        enabled = false,
+    },
+    {
+        "tpope/vim-rsi",
+        enabled = false,
     }
 }
 

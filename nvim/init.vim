@@ -94,7 +94,7 @@ function! ToggleEmacsMapping(prompt)
         inoremap <C-p> <cmd>execute "normal! g\<lt>Up>"<cr>
         inoremap <C-a> <Home>
         inoremap <C-e> <End>
-        inoremap <C-k> <esc>d$a
+        inoremap <C-k> <C-o>D
         inoremap <A-f> <esc>lwi
         inoremap <A-b> <esc>bi
         let g:emacs_mapping=1
@@ -365,6 +365,8 @@ nnoremap <silent> <Leader>l
 
 " nnoremap cd :lcd %:p:h
 nnoremap <C-w>n :call utils#Newscratch()<cr>
+
+set inccommand=split
 lua <<EOF
 -- require("plugins")
 require("lazy-manager")
