@@ -1,8 +1,8 @@
 # yamllint disable rule:braces rule:commas rule:colons rule:comments-indentation
 ---
 import:
-#   - ~/.config/alacritty/themes/themes/atom_one_light.yaml
-  - ~/.config/alacritty/themes/themes/alabaster.yaml
+  - ~/.config/alacritty/themes/themes/atom_one_light.yaml
+  # - ~/.config/alacritty/themes/themes/alabaster.yaml
 
 env:
   # TERM variable
@@ -24,7 +24,7 @@ window:
     dynamic_padding: true
 
     # Disable border and title bar
-    decorations: None
+    decorations: Full
     option_as_alt: OnlyLeft
 
 font:
@@ -43,6 +43,8 @@ font:
 
 # Colors (One Dark); if dim colors are not set, they will be calculated
 # automatically based on the `normal` colors
+# colors:
+#     primary:
 #         background: '#24272e'
 #         foreground: '#abb2bf'
 #     cursor:
