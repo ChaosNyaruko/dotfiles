@@ -379,3 +379,5 @@ EOF
 " nnoremap f /\%<c-r>=line('.')<cr>l
 
 set exrc
+" Plug 'andymass/vim-matchup' for more comprehensive one
+set matchpairs+=<:>
