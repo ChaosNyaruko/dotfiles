@@ -320,6 +320,14 @@ local plugins = {
     {
         "tpope/vim-rsi",
         enabled = false,
+    },
+    {
+        "nvim-lua/lsp_extensions.nvim",
+        -- ft     = {"rust"},
+        config = function ()
+            -- Enable type inlay hints
+            vim.cmd [[autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }]]
+        end
     }
 }
 
