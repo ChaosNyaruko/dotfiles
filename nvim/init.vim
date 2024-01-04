@@ -381,3 +381,5 @@ EOF
 set exrc
 " Plug 'andymass/vim-matchup' for more comprehensive one
 set matchpairs+=<:>
+nnoremap * *``
+nnoremap # #``
