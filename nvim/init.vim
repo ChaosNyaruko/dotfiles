@@ -265,6 +265,7 @@ if executable('rg')
 endif
 
 set colorcolumn=120
+set signcolumn=yes
 au Filetype cpp source ~/.config/nvim/scripts/spacetab.vim
 au Filetype cpp setl colorcolumn=100
 au Filetype go setl colorcolumn=120
