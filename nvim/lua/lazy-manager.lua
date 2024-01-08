@@ -277,10 +277,10 @@ local plugins = {
         'Exafunction/codeium.vim',
         enabled = function()
             -- disable codeium at working because of security policy
-            if os.getenv("HOME"):find("bytedance") then
-                return false
-            else
+            if os.getenv("HOME"):find("bill") then
                 return true
+            else
+                return false
             end
         end,
         event = "VeryLazy",
