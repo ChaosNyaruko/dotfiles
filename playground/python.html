@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Python Script Formatter</title>
+  <style>
+    .editor {
+      width: 100%;
+      height: 200px;
+      font-family: monospace;
+    }
+
+    .button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <textarea id="editor" class="editor"></textarea>
+  <button id="formatBtn" class="button">Format Python</button>
+
+  <script>
+    document.getElementById('formatBtn').addEventListener('click', function() {
+      var editor = document.getElementById('editor');
+      var pythonCode = editor.value;
+
+      try {
+        var formattedCode = PythonFormatter.format(pythonCode);
+        editor.value = formattedCode;
+      } catch (error) {
+        console.error('Error occurred while formatting Python code:', error);
+      }
+    });
+
+    // Python formatter using the black library
+    var PythonFormatter = {
+      format: function(pythonCode) {
+        // Make a POST request to a server-side endpoint that formats the code using black
+        return fetch('/format', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ code: pythonCode })
+        })
+        .then(function(response) {
+          if (!response.ok) {
+            throw new Error('Failed to format Python code');
+          }
+          return response.text();
+        })
+        .catch(function(error) {
+          throw new Error('Error occurred while formatting Python code: ' + error.message);
+        });
+      }
+    };
+  </script>
+</body>
+</html>

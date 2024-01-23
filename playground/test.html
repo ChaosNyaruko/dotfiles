@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JSON Formatter</title>
+  <style>
+    .editor {
+      width: 100%;
+      height: 200px;
+      font-family: monospace;
+    }
+
+    .button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <textarea id="editor" class="editor"></textarea>
+  <button id="formatBtn" class="button">Format JSON</button>
+
+  <script>
+    document.getElementById('formatBtn').addEventListener('click', function() {
+      var editor = document.getElementById('editor');
+      var jsonString = editor.value;
+
+      try {
+        var formattedJsonString = JSON.stringify(JSON.parse(jsonString), null, 2);
+        editor.value = formattedJsonString;
+      } catch (error) {
+        console.error('Invalid JSON:', error);
+      }
+    });
+  </script>
+</body>
+</html>
