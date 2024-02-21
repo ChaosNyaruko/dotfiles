@@ -1,0 +1,146 @@
+import = ["/Users/bytedance/.config/alacritty/themes/themes/atom_one_light.toml"]
+# opacity = 1.0
+
+[cursor]
+thickness = 0.18
+vi_mode_style = "Block"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 14.0
+
+[font.bold]
+family = "FiraCode Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "FiraCode Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "FiraCode Nerd Font"
+style = "Regular"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Super"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Super"
+
+[[keyboard.bindings]]
+action = "Quit"
+key = "Q"
+mods = "Super"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Equals"
+mods = "Super"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Super"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Super"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "End"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToTop"
+key = "Home"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key = "LBracket"
+mods = "Control|Alt"
+
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key = "Q"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "First"
+key = "H"
+mode = "Vi"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "Last"
+key = "L"
+mode = "Vi"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "P"
+mods = "Control|Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bs"
+key = "S"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bs"
+key = "S"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[27;5;97~p"
+key = "LBracket"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[27;5;97~n"
+key = "RBracket"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001E"
+key = "Key6"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[13;2u"
+key = "Return"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[13;5u"
+key = "Return"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "Return"
+mods = "Command"
+
+[mouse]
+hide_when_typing = true
+
+[selection]
+save_to_clipboard = true
+
+[window]
+decorations = "Full"
+dynamic_padding = true
+option_as_alt = "OnlyLeft"
+
+[window.padding]
+x = 0
+y = 0

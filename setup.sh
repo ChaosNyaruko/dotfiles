@@ -63,14 +63,15 @@ fi
 
 VIMRCFILE=$HOME/.vimrc
 NVIMFILE=$HOME/.config/nvim
-TMUXCONF=$HOME/.tmux.conf
+TMUXCONF=$HOME/.config/tmux
 SCREENRC=$HOME/.screenrc
 GITCONFIG=$HOME/.gitconfig
 FISHCONF=$HOME/.config/fish
 BATCONF=$HOME/.config/bat
+ALACRITTY=$HOME/.config/alacritty
 
 if [ $MODE == "all" ]; then
-    FILES=($VIMRCFILE $NVIMFILE $TMUXCONF $FISHCONF $BATCONF)
+        FILES=($VIMRCFILE $NVIMFILE $TMUXCONF $FISHCONF $BATCONF $ALACRITTY $TMUXCONF)
 elif [ $MODE == "screen" ]; then
     FILES=($SCREENRC)
 elif [ $MODE == "git" ]; then
@@ -100,7 +101,7 @@ for file in ${FILES[@]}; do
     elif [[ "$file" == "$NVIMFILE" ]]; then
         DEST="$DOTFILEREPO/nvim"
     elif [[ "$file" == "$TMUXCONF" ]]; then
-        DEST="$DOTFILEREPO/tmux.conf"
+        DEST="$DOTFILEREPO/tmux"
     elif [[ "$file" == "$SCREENRC" ]]; then
         DEST="$DOTFILEREPO/screenrc"
     elif [[ "$file" == "$GITCONFIG" ]]; then
@@ -108,7 +109,9 @@ for file in ${FILES[@]}; do
     elif [[ "$file" == "$FISHCONF" ]]; then
         DEST="$DOTFILEREPO/fish"
     elif [[ "$file" == "$BATCONF" ]]; then
-        DEST="$BATCONF"
+        DEST="$DOTFILEREPO/bat"
+    elif [[ "$file" == "$ALACRITTY" ]]; then
+        DEST="$DOTFILEREPO/alacritty"
     else
         echo "error"
         exit 1

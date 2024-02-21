@@ -289,7 +289,8 @@ local plugins = {
         "Dummy",
         url = "https://code.byted.org/zhanghaoyang.tomoko/dummy-coder.nvim",
         enabled = function()
-            return not at_home()
+            return false
+            -- return not at_home()
         end,
         config = function()
             require("dummy-coder").setup {

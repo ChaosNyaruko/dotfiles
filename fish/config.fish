@@ -128,3 +128,4 @@ bind \cx\ce edit_command_buffer
 chruby ruby-3.1.3
 
 source ~/local.fish
+
