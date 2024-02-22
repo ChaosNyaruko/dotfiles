@@ -1,4 +1,4 @@
-import = ["/Users/bytedance/.config/alacritty/themes/themes/atom_one_light.toml"]
+import = ["/Users/bytedance/.config/alacritty/atom_one_light.toml"]
 # opacity = 1.0
 
 [cursor]
