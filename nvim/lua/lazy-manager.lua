@@ -427,6 +427,12 @@ local plugins = {
             -- Enable type inlay hints
             vim.cmd [[autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }]]
         end
+    },
+    {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        config = function()
+            require("settings.treesitter")
+        end
     }
 }
 
