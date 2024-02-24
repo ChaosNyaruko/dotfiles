@@ -290,7 +290,7 @@ local plugins = {
         enabled = at_home, event = "VeryLazy",
         init = function()
             vim.g.codeium_enabled = true
-            vim.g.codeium_filetypes = { python = true, go = true, rust = false }
+            vim.g.codeium_filetypes = { python = true, go = true, rust = false, markdown = false, c = false }
         end,
         config = function()
             -- Change '<C-g>' here to any keycode you like.
