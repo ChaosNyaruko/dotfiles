@@ -179,6 +179,12 @@ nvim_lsp.lua_ls.setup {
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- capabilities["textDocument"] = {
+--     semanticHighlightingCapabilities = {
+--         semanticHighlighting = true
+--     }
+-- }
+
 -- print(vim.inspect(capabilities))
 vim.lsp.set_log_level("INFO")
 -- for Go, use vim-go Plugin instead
