@@ -13,7 +13,7 @@ set -gx PATH "$HOME/.cargo/bin" $PATH
 function ap
     git -C "$HOME/dotfiles" pull
     git -C "$HOME/github.com/symmetrical-dollop" pull
-    git -C "$HOME/playground" pull
+    git -C "$HOME/github.com/playground" pull
     git -C "$HOME/github.com/obsidian-vault" pull
 end
 
