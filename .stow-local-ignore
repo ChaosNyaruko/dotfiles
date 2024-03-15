@@ -1,0 +1,16 @@
+\.git
+.gitconfig
+playground
+setup.sh
+.*\.md
+memo_config.toml
+old
+playground
+pwsh
+.*\.py
+zsh
+brew
+chrome
+_vimrc
+iterm2
+learn\-x\-in\-y\-minutes

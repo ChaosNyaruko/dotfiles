@@ -1,0 +1,28 @@
+[alias]
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[user]
+	name = ChaosNyaruko
+	email = cabbageparadise@gmail.com
+[status]
+	submodulesummary = 1
+[diff]
+	submodule = log
+[submodule]
+	recurse = true
+[push]
+	recurseSubmodules = check
+
+; [http "https://github.com"]
+; 	proxy = socks5://127.0.0.1:7890
+
+; [https "https://github.com"]
+; 	proxy = socks5://127.0.0.1:7890
+
+[color]
+	ui = auto
+
+[core]
+	editor = vim
+    pager = LESSCHARSET=utf-8 less -R
+    quotepath = off
+
