@@ -23,9 +23,9 @@ telescope.setup {
                 ['q'] = actions.close,
                 ['A'] = add_selected_to_qflist
             },
-            i = {
-                ['A'] = add_selected_to_qflist
-            }
+            -- i = {
+            --     ['A'] = add_selected_to_qflist
+            -- }
         }
     },
     extensions = {
