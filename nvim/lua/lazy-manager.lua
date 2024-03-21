@@ -316,7 +316,7 @@ local plugins = {
         build = function(plugin)
             require("ondict").install(plugin.dir)
         end,
-        dev = true,
+        dev = false,
         config = function ()
             require("ondict").setup("localhost:1345")
         end
