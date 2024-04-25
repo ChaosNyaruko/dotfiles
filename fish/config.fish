@@ -129,3 +129,25 @@ chruby ruby-3.1.3
 
 source ~/local.fish
 
+function glg
+    git log --graph --color \
+  --format='%C(white)%h - %C(green)%cs - %C(blue)%s%C(red)%d' \
+| fzf \
+  --ansi \
+  --reverse \
+  --no-sort \
+  --preview='
+    echo {} | grep -o "[a-f0-9]\{7\}" \
+    && git show --color $(echo {} | grep -o "[a-f0-9]\{7\}")
+  '
+end
+
+function gco
+    git checkout $(git branch --all --color \
+      --format="%(HEAD) %(color:yellow)%(refname:short) %(color:green)%(committerdate:short) %(color:blue)%(subject)") \
+    | fzf \
+    --ansi \
+    --reverse \
+    --no-sort \
+    --preview='$(echo {})' 
+end
