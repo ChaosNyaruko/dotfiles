@@ -143,9 +143,13 @@ function glg
 end
 
 function gco
+    # the quote stuff, see https://fishshell.com/docs/current/fish_for_bash_users.html
+    # > Fish has two quoting styles: "" and ''. Variables are expanded in double-quotes, nothing is expanded in single-quotes.
+    # > There is no $'', instead the sequences that would transform are transformed when unquoted:
+    set separator $(printf "\t")
 set git_branches "git branch --all --color \
-  --format='%(HEAD) %(color:yellow)%(refname:short)|%(color:green)%(committerdate:short)|%(color:blue)%(subject)' \
-  | column -t -s '|'"
+  --format='%(HEAD) %(color:yellow)%(refname:short)$separator%(color:green)%(committerdate:short)$separator%(color:blue)%(subject)' \
+  | column -t -s \\t"
 eval "$git_branches" \
 | fzf \
   --ansi \
