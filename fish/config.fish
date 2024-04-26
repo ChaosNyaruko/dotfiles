@@ -143,11 +143,37 @@ function glg
 end
 
 function gco
-    git checkout $(git branch --all --color \
-      --format="%(HEAD) %(color:yellow)%(refname:short) %(color:green)%(committerdate:short) %(color:blue)%(subject)") \
-    | fzf \
-    --ansi \
-    --reverse \
-    --no-sort \
-    --preview='$(echo {})' 
+set git_branches "git branch --all --color \
+  --format='%(HEAD) %(color:yellow)%(refname:short)|%(color:green)%(committerdate:short)|%(color:blue)%(subject)' \
+  | column -t -s '|'"
+eval "$git_branches" \
+| fzf \
+  --ansi \
+  --reverse \
+  --no-sort \
+  --preview-label='[ Commits ]' \
+  --preview='
+    git log $(echo {} \
+    | sed "s/^[* ]*//" \
+    | awk "{print \$1}") \
+    --graph --color \
+    --format="%C(white)%h - %C(green)%cs - %C(blue)%s%C(red)%d"' \
+  --bind='alt-c:execute(
+    git checkout $(echo {} \
+    | sed "s/^[* ]*//" \
+    | awk "{print \$1}")
+    )' \
+  --bind="alt-c:+reload($git_branches)" \
+  --bind='enter:execute(
+    set branch $(echo {} \
+    | sed "s/^[* ]*//" \
+    | awk "{print \$1}") \
+    && sh -c "git diff --color $branch \
+    | less -R"
+    )' \
+  --header-first \
+  --header '
+  > ALT C to checkout the branch
+  > ENTER to open the diff with less
+  '
 end
