@@ -131,7 +131,7 @@ key = "Return"
 mods = "Command"
 
 [mouse]
-hide_when_typing = true
+hide_when_typing = false
 
 [selection]
 save_to_clipboard = true
