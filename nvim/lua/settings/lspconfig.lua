@@ -218,6 +218,7 @@ nvim_lsp.rust_analyzer.setup {
         ["rust-analyzer"] = {
             cargo = {
                 allFeatures = true,
+                target = "thumbv7em-none-eabihf"
             },
             completion = {
                 postfix = {
@@ -230,10 +231,10 @@ nvim_lsp.rust_analyzer.setup {
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    signs = true,
-    update_in_insert = true,
-}
+        virtual_text = true,
+        signs = true,
+        update_in_insert = true,
+    }
 )
 
 -- for HTML
