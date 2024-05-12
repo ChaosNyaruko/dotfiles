@@ -200,6 +200,7 @@ nvim_lsp.pyright.setup {
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
+    -- cmd = {"/Users/bill/miniconda3/envs/langchain/bin/pyright-langserver", "--stdio"},
 }
 
 -- for C++
