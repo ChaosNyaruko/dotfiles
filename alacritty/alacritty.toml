@@ -12,15 +12,15 @@ TERM = "xterm-256color"
 size = 14.0
 
 [font.bold]
-family = "FiraCode Nerd Font"
+family = "NotoMono Nerd Font"
 style = "Bold"
 
 [font.italic]
-family = "FiraCode Nerd Font"
+family = "NotoMono Nerd Font"
 style = "Italic"
 
 [font.normal]
-family = "FiraCode Nerd Font"
+family = "NotoMono Nerd Font"
 style = "Regular"
 
 [[keyboard.bindings]]
@@ -131,7 +131,7 @@ key = "Return"
 mods = "Command"
 
 [mouse]
-hide_when_typing = true
+hide_when_typing = false
 
 [selection]
 save_to_clipboard = true

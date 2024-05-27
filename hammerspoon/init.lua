@@ -71,22 +71,30 @@ hs.hotkey.bind({ "alt" }, "d", function()
     if btn == "Cancel" then
         return
     end
-    local cb = function(code, stdout, stderr)
-        -- hs.alert(string.format("ondict[%d]:%s", code, stdout))
-        hs.webview.newBrowser(hs.geometry.rect(800, 600, 450, 450)):html(stdout):show()
-    end
+    -- local cb = function(code, stdout, stderr)
+    --     -- hs.alert(string.format("ondict[%d]:%s", code, stdout))
+    --     hs.webview.newBrowser(hs.geometry.rect(800, 600, 450, 450)):html(stdout):show()
+    -- end
     local bin_loc = os.getenv("HOME") .. "/go/bin/ondict"
-    print(string.format("loading ondict from %s", bin_loc))
-    local ondict = hs.task.new(bin_loc, cb,
-        { "-remote=localhost:1345", "-q", word, "-e=mdx", "-f=html" })
-    if ondict == nil then
-        hs.alert("bad new task")
-        return
-    end
-    -- hs.timer.doEvery(1, function ()
-    --     print(ondict:pid())
-    -- end)
-    ondict:start()
+    -- print(string.format("loading ondict from %s", bin_loc))
+    -- local ondict = hs.task.new(bin_loc, cb,
+    --     { "-remote=localhost:1345", "-q", word, "-e=mdx", "-f=html" })
+    -- if ondict == nil then
+    --     hs.alert("bad new task")
+    --     return
+    -- end
+    -- -- hs.timer.doEvery(1, function ()
+    -- --     print(ondict:pid())
+    -- -- end)
+    -- ondict:start()
+    local cmd = bin_loc .. [[ "-q" ']] .. word .. [[' "-remote" "localhost:1345" "-e" "mdx" "-f" "html" ]]
+    -- print(output)
+    -- print(status)
+    -- print(t)
+    -- print(c)
+    print(cmd)
+    local output, status, t, c = hs.execute(cmd, false)
+    hs.webview.newBrowser(hs.geometry.rect(800, 600, 450, 450)):html(output):show()
 end)
 
 hs.hotkey.bind({"alt" }, "e", function ()
