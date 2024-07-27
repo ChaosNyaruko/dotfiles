@@ -290,7 +290,7 @@ local plugins = {
         enabled = at_home,
         event = "VeryLazy",
         init = function()
-            vim.g.codeium_enabled = true
+            vim.g.codeium_enabled = false
             vim.g.codeium_filetypes = { python = true, go = true, rust = false, markdown = false, c = false }
         end,
         config = function()
@@ -316,7 +316,7 @@ local plugins = {
         build = function(plugin)
             require("ondict").install(plugin.dir)
         end,
-        dev = false,
+        dev = true,
         config = function ()
             require("ondict").setup("localhost:1345")
         end
@@ -372,3 +372,25 @@ require("lazy").setup(plugins, opts)
 -- require("settings.lualine")
 -- require("settings.treesitter")
 -- require("settings.telescope")
+--
+--
+--
+-- workaround for vim in vim's terminal 
+-- local exit_term_key = "<c-c>"
+
+-- wk.register({
+--   [exit_term_key] = { termcodes("<C-\\><C-N>"), "escape terminal mode" },
+-- }, { mode = "t" })
+-- vim.api.nvim_set_keymap("t", "<c-w>", exit_term_key .. "<c-w>", { silent = true })
+
+-- function _G.set_terminal_keymaps()
+--   local opts = { buffer = 0 }
+--   vim.keymap.set("n", exit_term_key, "i" .. exit_term_key, opts)
+-- end
+
+-- vim.api.nvim_create_autocmd({ "TermOpen" }, {
+--   pattern = "term://*",
+--   callback = function()
+--     set_terminal_keymaps()
+--   end,
+-- })

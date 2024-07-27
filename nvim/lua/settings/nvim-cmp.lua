@@ -26,7 +26,7 @@ local preset_insert_mapping = cmp.mapping.preset.insert({
     ['<C-p>'] = cmp.config.disable,
     -- ['<C-n>'] = cn, -- C-n/C-p is used in my Emacs like keymapping in insert mode
     -- ['<C-p>'] = cp,
-    ['<C-b>'] = cmp.mapping.scroll_docs( -4),
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-s>'] = cmp.mapping.complete(),
     ['<C-y>'] = cmp.mapping.confirm(),
@@ -74,6 +74,11 @@ preset_insert_mapping['<C-h>'] = cmp.mapping(
 
 cmp.setup({
     preselect = cmp.PreselectMode.None,
+    confirmation = {
+        get_commit_characters = function(commit_characters)
+            return {}
+        end
+    },
     snippet = {
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
