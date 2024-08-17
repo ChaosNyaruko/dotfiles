@@ -8,8 +8,10 @@ end
 # set -x HOMEBREW_BREW_GIT_REMOTE "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
 
 # export PATH="$HOME/.local/bin:$HOME/go/bin:$HOME/.gem/ruby/2.6.0/bin:/usr/local/bin:/usr/local/go/bin:$PATH"
-set -gx PATH "$HOME/.local/bin" $HOME/go/bin $HOME/.gem/ruby/2.6.0/bin /usr/local/bin /usr/local/go/bin $PATH
-set -gx PATH "$HOME/.cargo/bin" $PATH
+# set -gx PATH "$HOME/.local/bin" $HOME/go/bin $HOME/.gem/ruby/2.6.0/bin /usr/local/bin /usr/local/go/bin $PATH
+# set -gx PATH "$HOME/.cargo/bin" $PATH
+fish_add_path "$HOME/.local/bin" $HOME/go/bin $HOME/.gem/ruby/2.6.0/bin /usr/local/bin /usr/local/go/bin
+fish_add_path "$HOME/.cargo/bin"
 function ap
     git -C "$HOME/dotfiles" pull
     git -C "$HOME/github.com/symmetrical-dollop" pull
