@@ -23,8 +23,8 @@ end
 
 local plugins = {
     -- {
-    --     "rust-lang/rust.vim",
-    --     ft = { "rust" },
+    --     "github/copilot.vim",
+    --     ft = { "go" },
     -- },
     {
         'neovim/nvim-lspconfig',
@@ -317,7 +317,7 @@ local plugins = {
             require("ondict").install(plugin.dir)
         end,
         dev = true,
-        config = function ()
+        config = function()
             require("ondict").setup("localhost:1345")
         end
     },
@@ -375,7 +375,7 @@ require("lazy").setup(plugins, opts)
 --
 --
 --
--- workaround for vim in vim's terminal 
+-- workaround for vim in vim's terminal
 -- local exit_term_key = "<c-c>"
 
 -- wk.register({

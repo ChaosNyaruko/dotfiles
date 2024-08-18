@@ -384,3 +384,11 @@ set exrc
 set matchpairs+=<:>
 nnoremap * *``
 nnoremap # #``
+
+augroup MyObsidian
+    au! BufRead,BufNewFile **/obsidian-vault/** 
+                \ nnoremap <buffer> <F6> <cmd>-1r ./templates/t1.md<cr> |
+                \ inoremap <buffer> <F6> <cmd>-1r ./templates/t1.md<cr>
+augroup END
+" let g:copilot_proxy = 'http://localhost:11435'
+" let g:copilot_proxy_strict_ssl = v:false
