@@ -392,6 +392,8 @@ augroup MyObsidian
     au! BufRead,BufNewFile **/obsidian-vault/** 
                 \ nnoremap <buffer> <F6> <cmd>-1r ./templates/t1.md<cr> |
                 \ inoremap <buffer> <F6> <cmd>-1r ./templates/t1.md<cr>
+                \ inoremap <buffer> <F6> <cmd>-1r ./templates/t1.md<cr> |
+                \ nnoremap <F7> :e daily/<C-R>=strftime("%Y-%m-%d") .. '.md'<cr><cr>
 augroup END
 " let g:copilot_proxy = 'http://localhost:11435'
 " let g:copilot_proxy_strict_ssl = v:false
