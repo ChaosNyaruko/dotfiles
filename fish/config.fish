@@ -19,6 +19,7 @@ function ap
     git -C "$HOME/github.com/obsidian-vault" pull
 end
 
+abbr -a tt gdate +\"%Y-%m-%d %H:%M:%S\"
 abbr -a gst git status
 abbr -a gc git commit --verbose 
 abbr -a gcm git commit -m
