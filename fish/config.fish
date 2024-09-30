@@ -128,7 +128,9 @@ bind \cx\ce edit_command_buffer
 
 # sh /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 # sh /opt/homebrew/opt/chruby/share/chruby/auto.sh
-chruby ruby-3.1.3
+if command -v chruby 
+    chruby ruby-3.1.3
+end
 
 abbr -a kon ps -ef \| grep ondict \| grep -v grep \| grep -v serve \| awk \'{print \$2}\' \| xargs kill
 
