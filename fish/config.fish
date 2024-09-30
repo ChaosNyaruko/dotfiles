@@ -32,6 +32,10 @@ set -gx FZF_DEFAULT_OPTS "--preview-window 'right:57%' --preview 'bat --style=nu
 set -gx FZF_DEFAULT_COMMAND "fd --hidden --type f" 
 set -gx FZF_COMPLETION_TRIGGER '~~'
 
+if command -v fzf > /dev/null
+    fzf --fish | source
+end
+
 if command -v eza > /dev/null
 	abbr -a l 'eza'
 	abbr -a ls 'eza'
