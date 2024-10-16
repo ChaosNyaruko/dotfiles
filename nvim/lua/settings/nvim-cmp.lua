@@ -72,6 +72,7 @@ preset_insert_mapping['<C-h>'] = cmp.mapping(
     { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
 )
 
+require('my_snippets').register_cmp_source()
 cmp.setup({
     preselect = cmp.PreselectMode.None,
     confirmation = {
@@ -85,7 +86,8 @@ cmp.setup({
             -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
             -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
             -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-            vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+            -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+            vim.snippet.expand(args.body)
         end,
     },
     window = {
@@ -95,6 +97,7 @@ cmp.setup({
     mapping = preset_insert_mapping,
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
+        { name = 'snp'},
         { name = 'nvim_lsp_signature_help' }, -- lsp_signature.nvim maybe better?
         -- { name = 'vsnip' }, -- For vsnip users.
         -- { name = 'luasnip' }, -- For luasnip users.
