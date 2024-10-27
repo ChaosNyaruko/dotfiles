@@ -6,7 +6,6 @@
   "cmp-nvim-ultisnips": { "branch": "main", "commit": "2be0eda0f7fbf47ebd9fbdace369cc45d57acf49" },
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
   "codeium.vim": { "branch": "main", "commit": "0b74f274b82c00eaad4b5b5cd8b2e76f872d19f1" },
-  "copilot.vim": { "branch": "release", "commit": "a9fa7946d7307ceb138bfe2706ba75febf6450da" },
   "dictionary.vim": { "branch": "master", "commit": "4f95609166e91ea71fe613e5041670a5fcee7a6e" },
   "fzf": { "branch": "master", "commit": "387c6ef664688582ca1be950e2fe260699aa8862" },
   "fzf.vim": { "branch": "master", "commit": "6f28c8c7bb551161a0315a76488522204f39c1f4" },
