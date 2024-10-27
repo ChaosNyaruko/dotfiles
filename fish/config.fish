@@ -228,4 +228,7 @@ function colors
     echo -e '\e[4:3m\e[58:2:240:143:104mtruecolor underline (new in 0.52) (might be removed at some point) (*)\e[59m\e[4:0m'
     echo -e '\e[4:3m\e[58;2;240;143;104mtruecolor underline (new in 0.52) (*)\e[59m\e[4:0m'
 end
+
+abbr -a ra ~/Library/Python/3.12/bin/ranger
 source ~/local.fish
+
