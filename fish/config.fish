@@ -2,7 +2,9 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-# eval (/opt/homebrew/bin/brew shellenv)
+if command -v /opt/homebrew/bin/brew > /dev/null
+    eval (/opt/homebrew/bin/brew shellenv)
+end
 
 # set -x HOMEBREW_API_DOMAIN "https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
 # set -x HOMEBREW_BREW_GIT_REMOTE "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
@@ -41,7 +43,8 @@ if command -v eza > /dev/null
 	abbr -a ls 'eza'
 	abbr -a ll 'eza -l'
 	abbr -a lll 'eza -la'
-# else
+else
+    # echo "eza not existed"
 # 	abbr -a l 'ls'
 # 	abbr -a ll 'ls -l'
 # 	abbr -a lll 'ls -la'
