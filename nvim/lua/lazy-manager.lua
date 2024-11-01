@@ -22,6 +22,19 @@ end
 
 
 local plugins = {
+    {
+        "norcalli/nvim-colorizer.lua",
+        lazy = false,
+        config = function()
+            vim.o.termguicolors = true
+            require 'colorizer'.setup({
+                kitty = { mode = 'foreground' },
+                'conf',
+                'css',
+            }
+            )
+        end
+    },
     -- {
     --     "github/copilot.vim",
     --     ft = { "go" },
