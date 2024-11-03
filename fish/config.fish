@@ -232,3 +232,18 @@ end
 abbr -a ra ~/Library/Python/3.12/bin/ranger
 source ~/local.fish
 
+function find_live_photos --description="find the live photos in my Apple backups"
+    set -l path $argv[1]
+    for i in (eza $path | grep -i mov)
+        set -l name (string split . $i)
+        set -l jpg (string join "/" $path $name[1].jpg)
+        set -l JPG (string join "/" $path $name[1].JPG)
+        if test -f $jpg 
+            echo $jpg $i
+            else if test -f $JPG
+            echo $JPG $i
+            else
+        end
+    end
+end
+
