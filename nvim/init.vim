@@ -292,6 +292,7 @@ let g:UltiSnipsEditSplit="vertical"
 inoremap <M-s> <cmd>update<cr>
 noremap <M-s> <cmd>update<cr>
 
+nnoremap gV `[v`]
 " ergonomic line operations
 nnoremap j gj
 nnoremap k gk
