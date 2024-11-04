@@ -1,3 +1,4 @@
+[general]
 import = ["/Users/bytedance/.config/alacritty/atom_one_light.toml"]
 # opacity = 1.0
 
