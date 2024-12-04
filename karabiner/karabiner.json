@@ -1,0 +1,48 @@
+{
+    "profiles": [
+        {
+            "complex_modifications": {
+                "rules": [
+                    {
+                        "description": "Disable Cmd+H Hide (rev 2)",
+                        "manipulators": [
+                            {
+                                "description": "",
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": { "mandatory": ["command"] }
+                                },
+                                "to": {
+                                    "key_code": "h",
+                                    "modifiers": ["command", "control"]
+                                },
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "devices": [
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 591,
+                        "vendor_id": 1452
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "caps_lock" },
+                            "to": [{ "key_code": "left_control" }]
+                        },
+                        {
+                            "from": { "key_code": "left_control" },
+                            "to": [{ "key_code": "caps_lock" }]
+                        }
+                    ]
+                }
+            ],
+            "name": "Default profile",
+            "selected": true
+        }
+    ]
+}

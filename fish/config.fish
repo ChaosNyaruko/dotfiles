@@ -12,8 +12,8 @@ end
 # export PATH="$HOME/.local/bin:$HOME/go/bin:$HOME/.gem/ruby/2.6.0/bin:/usr/local/bin:/usr/local/go/bin:$PATH"
 set -gx PATH "$HOME/.local/bin" $HOME/go/bin $HOME/.gem/ruby/2.6.0/bin /usr/local/bin /usr/local/go/bin $PATH
 set -gx PATH "$HOME/.cargo/bin" $PATH
-# fish_add_path "$HOME/.local/bin" $HOME/go/bin $HOME/.gem/ruby/2.6.0/bin /usr/local/bin /usr/local/go/bin
-# fish_add_path "$HOME/.cargo/bin"
+# fish_add_path -m "$HOME/.local/bin" $HOME/go/bin $HOME/.gem/ruby/2.6.0/bin /usr/local/bin /usr/local/go/bin
+# fish_add_path -m "$HOME/.cargo/bin"
 function ap
     git -C "$HOME/dotfiles" pull
     git -C "$HOME/github.com/symmetrical-dollop" pull
@@ -27,7 +27,6 @@ abbr -a gc git commit --verbose
 abbr -a gcm git commit -m
 abbr -a gd git diff
 abbr -a gaa git add --all
-abbr -a vim nvim
 abbr -a diff nvim -d
 
 set -gx FZF_DEFAULT_OPTS "--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}' --bind ctrl-y:preview-up,ctrl-e:preview-down,ctrl-b:preview-page-up,ctrl-f:preview-page-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-top,shift-down:preview-bottom,alt-up:half-page-up,alt-down:half-page-down" 
@@ -135,7 +134,7 @@ bind \cx\ce edit_command_buffer
 
 # sh /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 # sh /opt/homebrew/opt/chruby/share/chruby/auto.sh
-if command -v chruby 
+if type -q chruby 
     chruby ruby-3.1.3
 end
 
@@ -231,4 +230,22 @@ function colors
     echo -e '\e[4:3m\e[58:2:240:143:104mtruecolor underline (new in 0.52) (might be removed at some point) (*)\e[59m\e[4:0m'
     echo -e '\e[4:3m\e[58;2;240;143;104mtruecolor underline (new in 0.52) (*)\e[59m\e[4:0m'
 end
+
+abbr -a ra ~/Library/Python/3.12/bin/ranger
 source ~/local.fish
+
+function find_live_photos --description="find the live photos in my Apple backups"
+    set -l path $argv[1]
+    for i in (eza $path | grep -i mov)
+        set -l name (string split . $i)
+        set -l jpg (string join "/" $path $name[1].jpg)
+        set -l JPG (string join "/" $path $name[1].JPG)
+        if test -f $jpg 
+            echo $jpg $i
+            else if test -f $JPG
+            echo $JPG $i
+            else
+        end
+    end
+end
+
