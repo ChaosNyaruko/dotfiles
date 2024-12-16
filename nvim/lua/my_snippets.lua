@@ -48,6 +48,7 @@ function M.register_cmp_source()
         end
 
         callback(cache[bufnr])
+        -- callback({{label = "Jan"}})
     end
 
     require('cmp').register_source('snp', cmp_source)
