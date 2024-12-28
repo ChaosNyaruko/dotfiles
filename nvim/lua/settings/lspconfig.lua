@@ -219,7 +219,7 @@ nvim_lsp.rust_analyzer.setup {
         ["rust-analyzer"] = {
             cargo = {
                 allFeatures = true,
-                target = "thumbv7em-none-eabihf"
+                -- target = "thumbv7em-none-eabihf"
             },
             completion = {
                 postfix = {
