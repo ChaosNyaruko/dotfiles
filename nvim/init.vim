@@ -292,6 +292,7 @@ let g:UltiSnipsEditSplit="vertical"
 inoremap <M-s> <cmd>update<cr>
 noremap <M-s> <cmd>update<cr>
 
+nnoremap gV `[v`]
 " ergonomic line operations
 nnoremap j gj
 nnoremap k gk
@@ -368,6 +369,9 @@ nnoremap <silent> <Leader>l
 nnoremap <C-w>n :call utils#Newscratch()<cr>
 
 set inccommand=split
+" -- open new file adjacent to current file
+" vim.keymap.set('n', '<leader>o', ':e <C-R>=expand("%:p:h") . "/" <cr>')
+nnoremap <Leader>o :e <C-R>=expand("%:p:h") . "/"<cr>
 lua <<EOF
 -- require("plugins")
 require("lazy-manager")
@@ -388,6 +392,7 @@ nnoremap # #``
 augroup MyObsidian
     au! BufRead,BufNewFile **/obsidian-vault/** 
                 \ nnoremap <buffer> <F6> <cmd>-1r ./templates/t1.md<cr> |
+                \ inoremap <buffer> <F6> <cmd>-1r ./templates/t1.md<cr>
                 \ inoremap <buffer> <F6> <cmd>-1r ./templates/t1.md<cr> |
                 \ nnoremap <F7> :e daily/<C-R>=strftime("%Y-%m-%d") .. '.md'<cr><cr>
 augroup END
