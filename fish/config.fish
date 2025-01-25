@@ -12,6 +12,7 @@ end
 # export PATH="$HOME/.local/bin:$HOME/go/bin:$HOME/.gem/ruby/2.6.0/bin:/usr/local/bin:/usr/local/go/bin:$PATH"
 set -gx PATH "$HOME/.local/bin" $HOME/go/bin $HOME/.gem/ruby/2.6.0/bin /usr/local/bin /usr/local/go/bin $PATH
 set -gx PATH "$HOME/.cargo/bin" $PATH
+set -gx PATH "/opt/homebrew/opt/coreutils/libexec/gnubin" $PATH
 # fish_add_path -m "$HOME/.local/bin" $HOME/go/bin $HOME/.gem/ruby/2.6.0/bin /usr/local/bin /usr/local/go/bin
 # fish_add_path -m "$HOME/.cargo/bin"
 function ap
