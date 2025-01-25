@@ -87,12 +87,11 @@ hs.hotkey.bind({ "alt" }, "d", function()
     -- --     print(ondict:pid())
     -- -- end)
     -- ondict:start()
-    local cmd = bin_loc .. [[ "-q" ']] .. word .. [[' "-remote" "localhost:1345" "-e" "mdx" "-f" "html" ]]
+    local cmd = bin_loc .. [[ "-q" ']] .. word .. [[' "-remote" "localhost:1345" "-e" "mdx" "-f" "html" "-r" "2"]]
     -- print(output)
     -- print(status)
     -- print(t)
     -- print(c)
-    print(cmd)
     local output, status, t, c = hs.execute(cmd, false)
     hs.webview.newBrowser(hs.geometry.rect(800, 600, 450, 450)):html(output):show()
 end)
