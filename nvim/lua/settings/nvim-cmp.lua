@@ -31,6 +31,7 @@ local preset_insert_mapping = cmp.mapping.preset.insert({
     ['<C-s>'] = cmp.mapping.complete(),
     ['<C-y>'] = cmp.mapping.confirm(),
     ['<C-e>'] = cmp.mapping.abort(),
+    -- ["<A-y>"] = require('minuet').make_cmp_map()
 })
 
 -- print(vim.inspect(cmp.mapping.preset.insert()))
@@ -97,7 +98,7 @@ cmp.setup({
     mapping = preset_insert_mapping,
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'snp'},
+        { name = 'snp' },
         { name = 'nvim_lsp_signature_help' }, -- lsp_signature.nvim maybe better?
         -- { name = 'vsnip' }, -- For vsnip users.
         -- { name = 'luasnip' }, -- For luasnip users.
@@ -105,9 +106,13 @@ cmp.setup({
         -- { name = 'snippy' }, -- For snippy users.
     }, {
         { name = 'buffer' },
+        -- { name = 'minuet' },
     }),
     experimental = {
         ghost_text = false
+    },
+    performance = {
+        fetching_timeout = 5000,
     }
 })
 

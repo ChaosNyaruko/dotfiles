@@ -23,6 +23,107 @@ end
 
 local plugins = {
     {
+        -- TODO: maybe someday try ollama.nvim or Ollama-Copilot
+        'milanglacier/minuet-ai.nvim',
+        config = function()
+            require('minuet').setup {
+                virtualtext = {
+                    auto_trigger_ft = {'go'},
+                    keymap = {
+                        -- accept whole completion
+                        accept = '<A-A>',
+                        -- accept one line
+                        accept_line = '<A-a>',
+                        -- accept n lines (prompts for number)
+                        accept_n_lines = '<A-z>',
+                        -- Cycle to prev completion item, or manually invoke completion
+                        prev = '<A-[>',
+                        -- Cycle to next completion item, or manually invoke completion
+                        next = '<A-]>',
+                        dismiss = '<A-e>',
+                    },
+                },
+                provider = 'openai_fim_compatible',
+                n_completions = 1, -- recommend for local model for resource saving
+                -- I recommend beginning with a small context window size and incrementally
+                -- expanding it, depending on your local computing power. A context window
+                -- of 512, serves as an good starting point to estimate your computing
+                -- power. Once you have a reliable estimate of your local computing power,
+                -- you should adjust the context window to a larger value.
+                context_window = 512,
+                provider_options = {
+                    openai_fim_compatible = {
+                        api_key = 'TERM',
+                        name = 'Ollama',
+                        end_point = 'http://localhost:11434/v1/completions',
+                        model = 'qwen2.5-coder:7b',
+                        optional = {
+                            max_tokens = 256,
+                            top_p = 0.9,
+                        },
+                    },
+                },
+            }
+        end,
+    },
+    {
+        "nomnivore/ollama.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+
+        -- All the user commands added by the plugin
+        cmd = { "Ollama", "OllamaModel", "OllamaServe", "OllamaServeStop" },
+
+        keys = {
+            -- Sample keybind for prompt menu. Note that the <c-u> is important for selections to work properly.
+            {
+                "<leader>oo",
+                ":<c-u>lua require('ollama').prompt()<cr>",
+                desc = "ollama prompt",
+                mode = { "n", "v" },
+            },
+
+            -- Sample keybind for direct prompting. Note that the <c-u> is important for selections to work properly.
+            {
+                "<leader>oG",
+                ":<c-u>lua require('ollama').prompt('Generate_Code')<cr>",
+                desc = "ollama Generate Code",
+                mode = { "n", "v" },
+            },
+        },
+
+        ---@type Ollama.Config
+        opts = {
+            model = "codellama",
+            url = "http://127.0.0.1:11434",
+            serve = {
+                on_start = false,
+                command = "ollama",
+                args = { "serve" },
+                stop_command = "pkill",
+                stop_args = { "-SIGTERM", "ollama" },
+            },
+            -- View the actual default prompts in ./lua/ollama/prompts.lua
+            prompts = {
+                Sample_Prompt = {
+                    prompt = "$input $sel",
+                    input_label = "> ",
+                    model = "codellama",
+                    action = "display",
+                    system = "you are a Go expert, and gonna help me with code completion"
+                },
+                Generate_Code = {
+                    prompt = "$buf",
+                    input_label = "> ",
+                    model = "codellama",
+                    action = "insert",
+                    system = "you are a Go expert, and gonna help me with code completion"
+                }
+            }
+        }
+    },
+    {
         "norcalli/nvim-colorizer.lua",
         lazy = false,
         config = function()
