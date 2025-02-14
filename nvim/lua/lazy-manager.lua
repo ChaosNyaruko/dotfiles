@@ -28,7 +28,7 @@ local plugins = {
         config = function()
             require('minuet').setup {
                 virtualtext = {
-                    auto_trigger_ft = {'go'},
+                    auto_trigger_ft = {'go', 'lua', 'vim', 'python'},
                     keymap = {
                         -- accept whole completion
                         accept = '<A-A>',
