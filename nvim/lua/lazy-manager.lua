@@ -28,7 +28,7 @@ local plugins = {
         config = function()
             require('minuet').setup {
                 virtualtext = {
-                    auto_trigger_ft = {'go', 'lua', 'vim', 'python'},
+                    auto_trigger_ft = { 'go', 'lua', 'vim', 'python' },
                     keymap = {
                         -- accept whole completion
                         accept = '<A-A>',
@@ -508,3 +508,44 @@ require("lazy").setup(plugins, opts)
 --     set_terminal_keymaps()
 --   end,
 -- })
+
+local on_attach = function(client, bufnr)
+    local bufopts = { noremap = true, silent = true, buffer = bufnr, desc = "buffer mappings in markdown" }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    -- if client.name ~= 'gopls' then
+    vim.keymap.set('n', 'goc', vim.lsp.buf.incoming_calls, bufopts)
+    -- end
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set('n', '<space>wl', function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, bufopts)
+    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    vim.keymap.set('n', '\\f', vim.lsp.buf.format, bufopts)
+end
+
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+    pattern = { "*.md" },
+    callback = function(ev)
+        local bin = os.getenv("HOME") .. "/go/bin/educationalsp"
+        local client, err = vim.lsp.start_client {
+            print("ev: ", vim.inspect(ev)),
+            name = "markdownlint",
+            cmd = { bin },
+            on_attach = on_attach,
+        }
+        if not client then
+            vim.notify(string.format("hey, you didn't do the client thing good, %s", err))
+        end
+        assert(client, "client should not be nil")
+        vim.lsp.buf_attach_client(0, client)
+    end
+})

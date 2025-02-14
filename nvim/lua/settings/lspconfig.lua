@@ -3,6 +3,8 @@ local status, nvim_lsp = pcall(require, 'lspconfig')
 
 if (not status) then return end
 
+local M = {}
+
 vim.diagnostic.config({ virtual_text = true })
 
 -- Mappings.
@@ -244,3 +246,7 @@ nvim_lsp.html.setup {
     flags = lsp_flags,
     capabilities = capabilities,
 }
+
+M.on_attach = on_attach
+
+return M
