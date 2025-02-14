@@ -532,20 +532,22 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '\\f', vim.lsp.buf.format, bufopts)
 end
 
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-    pattern = { "*.md" },
+local mdlsp = os.getenv("HOME") .. "/go/bin/educationalsp"
+local client, err = vim.lsp.start_client {
+    name = "markdownlint",
+    cmd = { mdlsp },
+    on_attach = on_attach,
+}
+
+if not client then
+    vim.notify(string.format("hey, you didn't do the client thing good, %s", err))
+    return
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "markdown" },
     callback = function(ev)
-        local bin = os.getenv("HOME") .. "/go/bin/educationalsp"
-        local client, err = vim.lsp.start_client {
-            print("ev: ", vim.inspect(ev)),
-            name = "markdownlint",
-            cmd = { bin },
-            on_attach = on_attach,
-        }
-        if not client then
-            vim.notify(string.format("hey, you didn't do the client thing good, %s", err))
-        end
-        assert(client, "client should not be nil")
+        vim.notify(string.format("client id: %d", client))
         vim.lsp.buf_attach_client(0, client)
     end
 })
