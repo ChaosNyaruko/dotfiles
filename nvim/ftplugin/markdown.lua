@@ -1,0 +1,1 @@
+-- print("ft mark") -- TODO: why two times for one open? see https://github.com/folke/lazy.nvim/issues/573 for more.

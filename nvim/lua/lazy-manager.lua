@@ -25,6 +25,9 @@ local plugins = {
     {
         -- TODO: maybe someday try ollama.nvim or Ollama-Copilot
         'milanglacier/minuet-ai.nvim',
+        enabled = function()
+            return not at_home()
+        end,
         config = function()
             require('minuet').setup {
                 virtualtext = {
@@ -68,6 +71,7 @@ local plugins = {
     },
     {
         "nomnivore/ollama.nvim",
+        enabled = false,
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
@@ -508,8 +512,9 @@ require("lazy").setup(plugins, opts)
 --     set_terminal_keymaps()
 --   end,
 -- })
-
+--
 local on_attach = function(client, bufnr)
+    vim.notify(string.format("bufnr: %d", bufnr))
     local bufopts = { noremap = true, silent = true, buffer = bufnr, desc = "buffer mappings in markdown" }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
@@ -533,21 +538,24 @@ local on_attach = function(client, bufnr)
 end
 
 local mdlsp = os.getenv("HOME") .. "/go/bin/educationalsp"
-local client, err = vim.lsp.start_client {
-    name = "markdownlint",
-    cmd = { mdlsp },
-    on_attach = on_attach,
-}
 
-if not client then
-    vim.notify(string.format("hey, you didn't do the client thing good, %s", err))
-    return
-end
-
+local client, err = nil, nil
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "markdown" },
     callback = function(ev)
-        vim.notify(string.format("client id: %d", client))
+        if not client then
+            client, err = vim.lsp.start_client {
+                name = "markdownlint",
+                cmd = { mdlsp },
+                on_attach = on_attach,
+            }
+            vim.notify(string.format("client id: %d", client))
+        end
+        if not client == nil then
+            vim.notify(string.format("hey, you didn't do the client thing good, %s", err))
+            return
+        end
         vim.lsp.buf_attach_client(0, client)
     end
-})
+}
+)
