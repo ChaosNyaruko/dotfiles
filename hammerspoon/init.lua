@@ -1,3 +1,12 @@
+local at_home = function()
+    -- disable codeium at working because of security policy
+    if os.getenv("HOME"):find("bill") then
+        return true
+    else
+        return false
+    end
+end
+
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "R", function()
     hs.reload()
 end)
@@ -87,7 +96,12 @@ hs.hotkey.bind({ "alt" }, "d", function()
     -- --     print(ondict:pid())
     -- -- end)
     -- ondict:start()
-    local cmd = bin_loc .. [[ "-q" ']] .. word .. [[' "-remote" "mini.freecloud.dev:443" "-e" "mdx" "-f" "html" "-r" "2"]]
+    local remote = "localhost:1345"
+    if not at_home then
+        remote = "mini.freecloud.dev:443"
+    end
+    local cmd = bin_loc .. [[ "-q" ']] .. word .. [[' "-remote" ]] .. remote .. [[ "-e" "mdx" "-f" "html" "-r" "2"]]
+    print(cmd)
     -- print(output)
     -- print(status)
     -- print(t)
