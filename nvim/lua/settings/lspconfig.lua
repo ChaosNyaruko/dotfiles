@@ -109,7 +109,8 @@ local on_attach = function(client, bufnr)
         ]]
     end
     -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc') -- the API is deprecated
+    -- vim.api.nvim_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc', { scope = "local" })
 
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -242,6 +243,14 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
 -- for HTML
 nvim_lsp.html.setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities,
+}
+
+-- for thrift, to install the server, see github.com/joyme123/thrift-ls
+nvim_lsp.thriftls.setup {
+    cmd = {"thrift-ls"},
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,

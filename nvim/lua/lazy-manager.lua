@@ -252,7 +252,8 @@ local plugins = {
     -- },
     {
         'neovim/nvim-lspconfig',
-        ft     = { "html", "go", "lua", "python", "c", "cpp", "rust" },
+        ft     = { "thrift", "html", "go", "lua", "python", "c", "cpp", "rust" },
+        -- event = "VeryLazy",
         config = function()
             require("settings.lspconfig")
             require("settings.fzf")
