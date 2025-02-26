@@ -109,7 +109,7 @@ local on_attach = function(client, bufnr)
         ]]
     end
     -- Enable completion triggered by <c-x><c-o>
-    -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc') -- the API is deprecated
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc') -- the API is deprecated
     -- vim.api.nvim_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc', { scope = "local" })
 
     -- Mappings.
@@ -181,7 +181,7 @@ nvim_lsp.lua_ls.setup {
     },
 }
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- capabilities["textDocument"] = {
 --     semanticHighlightingCapabilities = {
 --         semanticHighlighting = true
@@ -195,14 +195,14 @@ nvim_lsp.gopls.setup {
     cmd = { "gopls", "-remote=auto" },
     on_attach = on_attach,
     flags = lsp_flags,
-    capabilities = capabilities,
+    -- capabilities = capabilities,
 }
 
 -- for Python
 nvim_lsp.pyright.setup {
     on_attach = on_attach,
     flags = lsp_flags,
-    capabilities = capabilities,
+    -- capabilities = capabilities,
     -- cmd = {"/Users/bill/miniconda3/envs/langchain/bin/pyright-langserver", "--stdio"},
 }
 
@@ -210,14 +210,14 @@ nvim_lsp.pyright.setup {
 nvim_lsp.clangd.setup {
     on_attach = on_attach,
     flags = lsp_flags,
-    capabilities = capabilities,
+    -- capabilities = capabilities,
 }
 
 -- for Rust
 nvim_lsp.rust_analyzer.setup {
     on_attach = on_attach,
     flags = lsp_flags,
-    capabilities = capabilities,
+    -- capabilities = capabilities,
     settings = {
         ["rust-analyzer"] = {
             cargo = {
@@ -245,7 +245,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 nvim_lsp.html.setup {
     on_attach = on_attach,
     flags = lsp_flags,
-    capabilities = capabilities,
+    -- capabilities = capabilities,
 }
 
 -- for thrift, to install the server, see github.com/joyme123/thrift-ls
@@ -253,7 +253,7 @@ nvim_lsp.thriftls.setup {
     cmd = {"thrift-ls"},
     on_attach = on_attach,
     flags = lsp_flags,
-    capabilities = capabilities,
+    -- capabilities = capabilities,
 }
 
 M.on_attach = on_attach

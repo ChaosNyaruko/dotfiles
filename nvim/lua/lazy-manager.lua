@@ -43,6 +43,13 @@ local plugins = {
             scroll = { enabled = false },
             statuscolumn = { enabled = false },
             words = { enabled = false },
+            styles = {
+                snacks_image = {
+                    relative = "editor",
+                    col = -1,
+                    row = 1,
+                },
+            },
             image =
             ---@class snacks.image.Config
             ---@field enabled? boolean enable image viewer
@@ -72,7 +79,7 @@ local plugins = {
                     "webm",
                     "pdf",
                 },
-                force = false,     -- try displaying the image, even if the terminal does not support it
+                force = false, -- try displaying the image, even if the terminal does not support it
                 doc = {
                     -- enable image viewer for documents
                     -- a treesitter parser must be available for the enabled languages.
@@ -111,7 +118,7 @@ local plugins = {
                 env = {},
                 ---@class snacks.image.convert.Config
                 convert = {
-                    notify = true,     -- show a notification on error
+                    notify = true, -- show a notification on error
                     ---@type snacks.image.args
                     mermaid = function()
                         local theme = vim.o.background == "light" and "neutral" or "dark"
@@ -140,7 +147,7 @@ local plugins = {
                     auto_trigger_ft = { 'go', 'lua', 'vim', 'python' },
                     keymap = {
                         -- accept whole completion
-                        accept = '<A-A>',
+                        accept = '<Tab>',
                         -- accept one line
                         accept_line = '<A-a>',
                         -- accept n lines (prompts for number)
@@ -278,6 +285,7 @@ local plugins = {
     }, -- TODO: when this plugin is used, a strange bug happen, see lualine_bug.lua, and codium_status may be the source
     { 'itchyny/lightline.vim', enabled = false },
     {
+        enabled = true,
         'hrsh7th/nvim-cmp',
         event = { "InsertEnter", "CmdlineEnter" },
         config = function()
