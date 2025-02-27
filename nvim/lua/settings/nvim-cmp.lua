@@ -12,7 +12,6 @@ local cn = function(fallback)
     end
 end
 
-local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 local cp = function(fallback)
     if cmp.visible() then
         cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
@@ -31,6 +30,7 @@ local preset_insert_mapping = cmp.mapping.preset.insert({
     ['<C-s>'] = cmp.mapping.complete(),
     ['<C-y>'] = cmp.mapping.confirm(),
     ['<C-e>'] = cmp.mapping.abort(),
+    -- ["<A-y>"] = require('minuet').make_cmp_map()
 })
 
 -- print(vim.inspect(cmp.mapping.preset.insert()))
@@ -57,17 +57,28 @@ preset_insert_mapping['<C-p>'] = cmp.mapping({
     i = cp,
 })
 
+local luasnip = require("luasnip")
 -- print(vim.inspect(preset_insert_mapping['<C-n>']))
 preset_insert_mapping['<C-l>'] = cmp.mapping(
     function(fallback)
-        cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+        if cmp.visible() then
+            if luasnip.expandable() then
+                luasnip.expand()
+            end
+        else
+            if luasnip.locally_jumpable(1) then
+                luasnip.jump(1)
+            else
+                fallback()
+            end
+        end
     end,
     { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
 )
 
 preset_insert_mapping['<C-h>'] = cmp.mapping(
     function(fallback)
-        cmp_ultisnips_mappings.jump_backwards(fallback)
+        fallback()
     end,
     { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
 )
@@ -84,9 +95,9 @@ cmp.setup({
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
             -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-            -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
             -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-            vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+            -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
             -- vim.snippet.expand(args.body)
         end,
     },
@@ -97,17 +108,21 @@ cmp.setup({
     mapping = preset_insert_mapping,
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'snp'},
+        { name = 'snp' },
         { name = 'nvim_lsp_signature_help' }, -- lsp_signature.nvim maybe better?
         -- { name = 'vsnip' }, -- For vsnip users.
-        -- { name = 'luasnip' }, -- For luasnip users.
-        { name = 'ultisnips' }, -- For ultisnips users.
+        { name = 'luasnip' },                 -- For luasnip users.
+        -- { name = 'ultisnips' }, -- For ultisnips users.
         -- { name = 'snippy' }, -- For snippy users.
     }, {
         { name = 'buffer' },
+        -- { name = 'minuet' },
     }),
     experimental = {
         ghost_text = false
+    },
+    performance = {
+        fetching_timeout = 5000,
     }
 })
 
