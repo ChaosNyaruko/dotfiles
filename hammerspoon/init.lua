@@ -97,7 +97,7 @@ hs.hotkey.bind({ "alt" }, "d", function()
     -- -- end)
     -- ondict:start()
     local remote = "localhost:1345"
-    if not at_home then
+    if not at_home() then
         remote = "mini.freecloud.dev:443"
     end
     local cmd = bin_loc .. [[ "-q" ']] .. word .. [[' "-remote" ]] .. remote .. [[ "-e" "mdx" "-f" "html" "-r" "2"]]

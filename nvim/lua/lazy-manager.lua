@@ -139,7 +139,7 @@ local plugins = {
         -- TODO: maybe someday try ollama.nvim or Ollama-Copilot
         'milanglacier/minuet-ai.nvim',
         enabled = function()
-            return not at_home()
+            return false
         end,
         config = function()
             require('minuet').setup {
@@ -297,11 +297,20 @@ local plugins = {
             { 'hrsh7th/cmp-path' },
             { 'hrsh7th/cmp-cmdline' },
             { 'hrsh7th/cmp-nvim-lsp-signature-help' },
-            { 'quangnguyen30192/cmp-nvim-ultisnips' },
+            -- { 'quangnguyen30192/cmp-nvim-ultisnips' },
+            { 'L3MON4D3/LuaSnip' },
+            { 'saadparwaiz1/cmp_luasnip' },
         }
     },
-    { 'SirVer/ultisnips',      lazy = false },
-    { 'onsails/lspkind.nvim',  event = "VeryLazy", lazy = true },
+    { 'SirVer/ultisnips',      lazy = false,   enabled = false },
+    {
+        "L3MON4D3/LuaSnip",
+        config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+        end,
+        dependencies = { "rafamadriz/friendly-snippets" },
+    },
+    { 'onsails/lspkind.nvim',                    event = "VeryLazy",         lazy = true },
     {
         'nvim-treesitter/nvim-treesitter',
         lazy = true,
