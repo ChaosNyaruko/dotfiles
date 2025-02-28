@@ -139,7 +139,7 @@ local plugins = {
         -- TODO: maybe someday try ollama.nvim or Ollama-Copilot
         'milanglacier/minuet-ai.nvim',
         enabled = function()
-            return false
+            return not at_home()
         end,
         config = function()
             require('minuet').setup {
@@ -147,16 +147,16 @@ local plugins = {
                     auto_trigger_ft = { 'go', 'lua', 'vim', 'python' },
                     keymap = {
                         -- accept whole completion
-                        accept = '<Tab>',
+                        accept = '<C-]>',
                         -- accept one line
-                        accept_line = '<A-a>',
+                        accept_line = '<C-y>',
                         -- accept n lines (prompts for number)
                         accept_n_lines = '<A-z>',
                         -- Cycle to prev completion item, or manually invoke completion
-                        prev = '<A-[>',
+                        prev = '<C-;>',
                         -- Cycle to next completion item, or manually invoke completion
-                        next = '<A-]>',
-                        dismiss = '<A-e>',
+                        next = '<C-,>',
+                        dismiss = '<C-e>',
                     },
                 },
                 provider = 'openai_fim_compatible',
@@ -537,7 +537,7 @@ local plugins = {
         end,
         config = function()
             -- Change '<C-g>' here to any keycode you like.
-            vim.keymap.set('i', '<tab>', function() return vim.fn['codeium#Accept']() end, { expr = true })
+            vim.keymap.set('i', '<C-]>', function() return vim.fn['codeium#Accept']() end, { expr = true })
             vim.keymap.set('i', '<C-;>', function() return vim.fn['codeium#CycleCompletions'](1) end,
                 { expr = true, desc = "codedium#CycleCompletions" })
             vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true })
