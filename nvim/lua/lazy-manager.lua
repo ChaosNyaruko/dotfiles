@@ -39,6 +39,10 @@ local plugins = {
             vim.g.compile_mode = {
                 -- to add ANSI escape code support, add:
                 -- baleia_setup = true,
+                error_regexp_table = {
+                },
+                default_command = "rg --vimgrep .",
+                debug = false,
             }
         end
     },
