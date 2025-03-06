@@ -47,7 +47,7 @@ local plugins = {
         end
     },
     {
-        enabled = false,
+        enabled = true,
         "folke/snacks.nvim",
         priority = 1000,
         lazy = false,
@@ -387,6 +387,15 @@ local plugins = {
     --     enable = false
     -- },
     {
+        "rose-pine/neovim",
+        name = "rose-pine",
+        config = function()
+            vim.cmd("colorscheme rose-pine")
+            vim.cmd("set bg=light")
+        end
+    },
+    {
+        enabled = false,
         "catppuccin/nvim",
         config = function()
             require("catppuccin").setup({

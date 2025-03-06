@@ -30,6 +30,7 @@
   "ondict": { "branch": "main", "commit": "15d91d0a0f8b8ff2a5d3f6f2fe270150eff54e2d" },
   "playground": { "branch": "master", "commit": "ba48c6a62a280eefb7c85725b0915e021a1a0749" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
+  "rose-pine": { "branch": "main", "commit": "7718965bdd1526b233f082da17e88b8bde7a7e6e" },
   "snacks.nvim": { "branch": "main", "commit": "aaed4a94111ddfd9d23cdecb01e4ae53030c2c3e" },
   "tabular": { "branch": "master", "commit": "12437cd1b53488e24936ec4b091c9324cafee311" },
   "telescope-file-browser.nvim": { "branch": "master", "commit": "626998e5c1b71c130d8bc6cf7abb6709b98287bb" },
