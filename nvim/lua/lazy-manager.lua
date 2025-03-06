@@ -387,6 +387,7 @@ local plugins = {
     --     enable = false
     -- },
     {
+        enabled = false,
         "rose-pine/neovim",
         name = "rose-pine",
         config = function()
@@ -472,7 +473,7 @@ local plugins = {
         end
     },
     {
-        enabled = false,
+        enabled = true,
         "catppuccin/nvim",
         config = function()
             require("catppuccin").setup({
