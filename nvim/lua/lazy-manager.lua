@@ -41,9 +41,13 @@ local plugins = {
                 -- baleia_setup = true,
                 error_regexp_table = {
                 },
-                default_command = "rg --vimgrep .",
+                default_command = "rg --vimgrep ",
                 debug = false,
             }
+            vim.keymap.set("n", '<leader>cc', "<cmd>buffer! *compilation*<cr>",
+                { buffer = false, desc = "quickly open compilation buffer" })
+            vim.keymap.set("n", '<F5>', "<cmd>Compile<cr>",
+                { buffer = false, desc = "quickly launch Compile" })
         end
     },
     {
