@@ -12,6 +12,7 @@
   "friendly-snippets": { "branch": "main", "commit": "efff286dd74c22f731cdec26a70b46e5b203c619" },
   "fzf": { "branch": "master", "commit": "8916cbc6ab198abdfa1e5cb24602c13730cb1987" },
   "fzf.vim": { "branch": "master", "commit": "f06bd1e69b7e5c77dbdef40ca8d31292fc926d3c" },
+  "img-clip.nvim": { "branch": "main", "commit": "24c13df08e3fe66624bed5350a2a780f77f1f65b" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "lsp_extensions.nvim": { "branch": "master", "commit": "92c08d4914d5d272fae13c499aafc9f14eb05ada" },
   "lspkind.nvim": { "branch": "master", "commit": "d79a1c3299ad0ef94e255d045bed9fa26025dab6" },
