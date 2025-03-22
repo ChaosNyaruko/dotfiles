@@ -2,19 +2,20 @@
 ; (require 'evil)
 ; (evil-mode t)
 ;; Set up package.el to work with MELPA
+(setq inhibit-startup-screen t)
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
-(package-initialize)
-(package-refresh-contents)
+; (package-initialize)
+; (package-refresh-contents)
 
 ;; Download Evil
-(unless (package-installed-p 'evil)
-  (package-install 'evil))
+; (unless (package-installed-p 'evil)
+;   (package-install 'evil))
 
 ;; Enable Evil
-(require 'evil)
-(evil-mode 1)
+; (require 'evil)
+; (evil-mode 1)
 
 (setq make-backup-files nil)
 (setq org-log-done 'time)
