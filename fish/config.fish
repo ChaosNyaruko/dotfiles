@@ -54,13 +54,21 @@ else
 end
 
 function Proxy
+    if test (count $argv) = 0
+        set -S http_proxy
+        set -S https_proxy
+        set -S no_proxy
+        return
+    end
     if test $argv[1] = "on" 
         set -gx https_proxy localhost:7890
         set -gx http_proxy localhost:7890
+        set -gx no_proxy localhost:7890
         echo Proxy On $https_proxy
-    else
+    else 
         set -e https_proxy
         set -e http_proxy
+        set -e no_proxy 
         echo Proxy Off
     end
 end
