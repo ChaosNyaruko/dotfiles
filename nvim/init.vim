@@ -349,7 +349,7 @@ nnoremap <M-9> <Cmd>Match cword<CR>
 
 inoremap <M-CR> <cmd>normal! $o <cr>
 
-autocmd FileType markdown setl spell
+autocmd FileType markdown setl spell | setl spelllang+=cjk
 
 set noshowmode
 " match ErrorMsg '\%>80v.\+'

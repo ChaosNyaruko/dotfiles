@@ -23,6 +23,47 @@ end
 
 local plugins = {
     {
+        "ej-shafran/compile-mode.nvim",
+        -- you can just use the latest version:
+        -- branch = "latest",
+        -- or the most up-to-date updates:
+        -- branch = "nightly",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            -- if you want to enable coloring of ANSI escape codes in
+            -- compilation output, add:
+            -- { "m00qek/baleia.nvim", tag = "v1.3.0" },
+        },
+        config = function()
+            ---@type CompileModeOpts
+            vim.g.compile_mode = {
+                -- to add ANSI escape code support, add:
+                -- baleia_setup = true,
+                error_regexp_table = {
+                },
+                default_command = "rg --vimgrep ",
+                debug = false,
+            }
+            vim.keymap.set("n", '<leader>cc', "<cmd>buffer! *compilation*<cr>",
+                { buffer = false, desc = "quickly open compilation buffer" })
+            vim.keymap.set("n", '<F5>', "<cmd>Compile<cr>",
+                { buffer = false, desc = "quickly launch Compile" })
+        end
+    },
+    {
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+            -- add options here
+            -- or leave it empty to use the default settings
+        },
+        keys = {
+            -- suggested keymap
+            { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
+        },
+    },
+    {
+        enabled = true,
         "folke/snacks.nvim",
         priority = 1000,
         lazy = false,
@@ -139,7 +180,7 @@ local plugins = {
         -- TODO: maybe someday try ollama.nvim or Ollama-Copilot
         'milanglacier/minuet-ai.nvim',
         enabled = function()
-            return false
+            return not at_home()
         end,
         config = function()
             require('minuet').setup {
@@ -147,16 +188,16 @@ local plugins = {
                     auto_trigger_ft = { 'go', 'lua', 'vim', 'python' },
                     keymap = {
                         -- accept whole completion
-                        accept = '<Tab>',
+                        accept = '<C-]>',
                         -- accept one line
-                        accept_line = '<A-a>',
+                        accept_line = '<C-y>',
                         -- accept n lines (prompts for number)
                         accept_n_lines = '<A-z>',
                         -- Cycle to prev completion item, or manually invoke completion
-                        prev = '<A-[>',
+                        prev = '<C-;>',
                         -- Cycle to next completion item, or manually invoke completion
-                        next = '<A-]>',
-                        dismiss = '<A-e>',
+                        next = '<C-,>',
+                        dismiss = '<C-e>',
                     },
                 },
                 provider = 'openai_fim_compatible',
@@ -362,6 +403,93 @@ local plugins = {
     --     enable = false
     -- },
     {
+        enabled = false,
+        "rose-pine/neovim",
+        name = "rose-pine",
+        config = function()
+            require("rose-pine").setup({
+                variant = "auto",      -- auto, main, moon, or dawn
+                dark_variant = "main", -- main, moon, or dawn
+                dim_inactive_windows = false,
+                extend_background_behind_borders = true,
+
+                enable = {
+                    terminal = true,
+                    legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
+                    migrations = true,        -- Handle deprecated options automatically
+                },
+
+                styles = {
+                    bold = true,
+                    italic = true,
+                    transparency = false,
+                },
+
+                groups = {
+                    border = "muted",
+                    link = "iris",
+                    panel = "surface",
+
+                    error = "love",
+                    hint = "iris",
+                    info = "foam",
+                    note = "pine",
+                    todo = "rose",
+                    warn = "gold",
+
+                    git_add = "foam",
+                    git_change = "rose",
+                    git_delete = "love",
+                    git_dirty = "rose",
+                    git_ignore = "muted",
+                    git_merge = "iris",
+                    git_rename = "pine",
+                    git_stage = "iris",
+                    git_text = "rose",
+                    git_untracked = "subtle",
+
+                    h1 = "iris",
+                    h2 = "foam",
+                    h3 = "rose",
+                    h4 = "gold",
+                    h5 = "pine",
+                    h6 = "foam",
+                },
+
+                palette = {
+                    -- Override the builtin palette per variant
+                    -- moon = {
+                    --     base = '#18191a',
+                    --     overlay = '#363738',
+                    -- },
+                },
+
+                -- NOTE: Highlight groups are extended (merged) by default. Disable this
+                -- per group via `inherit = false`
+                highlight_groups = {
+                    -- Comment = { fg = "foam" },
+                    -- StatusLine = { fg = "love", bg = "love", blend = 15 },
+                    -- VertSplit = { fg = "muted", bg = "muted" },
+                    -- Visual = { fg = "base", bg = "text", inherit = false },
+                },
+
+                before_highlight = function(group, highlight, palette)
+                    -- Disable all undercurls
+                    -- if highlight.undercurl then
+                    --     highlight.undercurl = false
+                    -- end
+                    --
+                    -- Change palette colour
+                    -- if highlight.fg == palette.pine then
+                    --     highlight.fg = palette.foam
+                    -- end
+                end
+            }
+            )
+        end
+    },
+    {
+        enabled = true,
         "catppuccin/nvim",
         config = function()
             require("catppuccin").setup({
@@ -537,7 +665,7 @@ local plugins = {
         end,
         config = function()
             -- Change '<C-g>' here to any keycode you like.
-            vim.keymap.set('i', '<tab>', function() return vim.fn['codeium#Accept']() end, { expr = true })
+            vim.keymap.set('i', '<C-]>', function() return vim.fn['codeium#Accept']() end, { expr = true })
             vim.keymap.set('i', '<C-;>', function() return vim.fn['codeium#CycleCompletions'](1) end,
                 { expr = true, desc = "codedium#CycleCompletions" })
             vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true })

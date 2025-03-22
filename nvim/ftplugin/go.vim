@@ -1,3 +1,4 @@
+finish " use the compile-mode instead.
 setl noexpandtab
 let s:compile_name = "__Compile__"
 let s:compile_buffer = bufnr(s:compile_name, 1)
