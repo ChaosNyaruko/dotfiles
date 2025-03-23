@@ -366,18 +366,19 @@ local plugins = {
     { 'nvim-lua/plenary.nvim',                   event = "VeryLazy" },
     {
         'nvim-telescope/telescope.nvim',
-        keys = {
-            { "<leader>F",  mode = { "n", "v" } },
-            { "<leader>tf", mode = { "n" } },
-            { "<leader>ws", mode = { "n" } },
-            { "<leader>sf", mode = { "n" } },
-        },
+        -- keys = {
+        --     { "<leader>F",  mode = { "n", "v" } },
+        --     { "<leader>tf", mode = { "n" } },
+        --     { "<leader>ws", mode = { "n" } },
+        --     { "<leader>sf", mode = { "n" } },
+        -- },
+        VeryLazy = true,
         config = function()
             require("settings.telescope")
         end,
         dependencies = {
             { 'nvim-telescope/telescope-file-browser.nvim' },
-            { 'nvim-telescope/telescope-fzf-native.nvim',  build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
+            { 'nvim-telescope/telescope-fzf-native.nvim',  build = 'make' },
         }
     },
     {
