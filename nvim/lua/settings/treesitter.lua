@@ -30,7 +30,7 @@ ts.setup {
     ignore_install = { "all" },
     highlight = {
         enable = true,
-        disable = { "vimdoc", "markdown" }, -- TODO: vimdoc:strange error, markdown: make the gx work
+        disable = { "vimdoc" }, -- TODO: vimdoc:strange error, markdown: make the gx work
     },
     indent = {
         enable = true,
