@@ -42,7 +42,8 @@ vim.opt.rtp:prepend(lazypath)
 
 local at_home = function()
     -- disable codeium at working because of security policy
-    if os.getenv("HOME"):find("bill") then
+    local user = os.getenv("HOME")
+    if user:find("bill") or user:find("bat") then
         return true
     else
         return false
@@ -825,8 +826,11 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '\\f', vim.lsp.buf.format, bufopts)
 end
 
-local mdlsp = os.getenv("HOME") .. "/go/bin/educationalsp"
+if true then
+    return
+end
 
+local mdlsp = os.getenv("HOME") .. "/go/bin/educationalsp"
 local client, err = nil, nil
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "markdown" },
