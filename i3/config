@@ -192,3 +192,7 @@ bar {
 }
 
 exec_always xrandr --output Virtual-1 --mode 1920x1080 --rate 60
+exec --no-startup-id "parcellite"
+
+# bindsym $mod+c exec parcellite
+# bindsym $mod+p exec parcellite -c
