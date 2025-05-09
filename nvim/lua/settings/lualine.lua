@@ -14,12 +14,12 @@ end
 
 line.setup {
     options = {
-        icons_enabled = true,
+        icons_enabled = false, -- I want to make nerd-fonts not so necessary
+        -- component_separators = { left = '', right = '' },
+        -- section_separators = { left = '', right = '' },
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
         -- theme = theme,
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
-        -- component_separators = { left = '', right = '' },
-        -- section_separators = { left = '', right = '' },
         disabled_filetypes = {
             statusline = {},
             winbar = {},
