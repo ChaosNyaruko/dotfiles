@@ -386,23 +386,25 @@ local plugins = {
         lazy = true,
         enabled = false
     },
-    { 'fatih/vim-go',           lazy = true,                   ft = { "go", "gomod" }, enabled = false },
-    { 'tpope/vim-commentary',   event = "VeryLazy" },
-    { 'preservim/vim-markdown', ft = "markdown",               event = "VeryLazy" },
-    { 'godlygeek/tabular',      event = "VeryLazy" },
+    { 'fatih/vim-go',              lazy = true,                   ft = { "go", "gomod" }, enabled = false },
+    { 'tpope/vim-commentary',      event = "VeryLazy" },
+    { 'ChaosNyaruko/vim-markdown', ft = "markdown",               event = "VeryLazy",     dev = false },
+    { 'godlygeek/tabular',         event = "VeryLazy" },
     -- { 'christoomey/vim-tmux-navigator', enable = false,                event = "VeryLazy" },
-    { 'junegunn/fzf',           build = ":call fzf#install()", event = "VeryLazy" },
-    { 'junegunn/fzf.vim',       event = "VeryLazy" },
-    { 'tpope/vim-fugitive',     event = "VeryLazy" },
-    { 'tpope/vim-surround',     event = "VeryLazy" },
-    { 'mbbill/undotree',        event = "VeryLazy" },
+    { 'junegunn/fzf',              build = ":call fzf#install()", event = "VeryLazy" },
+    { 'junegunn/fzf.vim',          event = "VeryLazy" },
+    { 'tpope/vim-fugitive',        event = "VeryLazy" },
+    { 'tpope/vim-surround',        event = "VeryLazy" },
+    { 'mbbill/undotree',           event = "VeryLazy" },
     -- { 'gcmt/wildfire.vim',              event = "VeryLazy" },
-    -- { 'NLKNguyen/papercolor-theme',
-    --     init = function()
-    --         vim.cmd.colorscheme "PaperColor"
-    --     end,
-    --     enable = false
-    -- },
+    {
+        'NLKNguyen/papercolor-theme',
+        enable = false,
+        init = function()
+            vim.cmd.colorscheme "PaperColor"
+            vim.o.background = 'light'
+        end,
+    },
     {
         enabled = false,
         "rose-pine/neovim",
@@ -729,7 +731,7 @@ local plugins = {
 
 local opts = {
     dev = {
-        path = "~/github.com",
+        path = "~/github",
         pattern = {},
         fallback = false,
     }

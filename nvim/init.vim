@@ -16,6 +16,7 @@ set expandtab                   " Tabs are spaces, not tabs
 set tabstop=4                   " An indentation every four columns
 set softtabstop=4               " Let backspace delete indent
 set showmode
+set fileencodings=utf-8,gbk,gb18030,gb2312,big5
 set wildmenu
 set wildmode=list:longest,full " basically [:] means [&&]  [,] means [then]
 " set wildoptions=pum,tagfile "nvim's default settings
@@ -227,7 +228,7 @@ let g:mkdp_preview_options = {
 
 " use a custom markdown style must be absolute path
 " like '/Users/username/markdown.css' or expand('~/markdown.css')
-let g:mkdp_markdown_css = ''
+" let g:mkdp_markdown_css = expand('~/dotfiles/github-markdown.css')
 
 " use a custom highlight style must absolute path
 " like '/Users/username/highlight.css' or expand('~/highlight.css')

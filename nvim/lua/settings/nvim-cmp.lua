@@ -173,7 +173,8 @@ local lspkind = require('lspkind')
 cmp.setup {
     formatting = {
         format = lspkind.cmp_format({
-            mode = "symbol_text",
+            -- mode = "symbol_text",
+            mode = "text",
             menu = ({
                 buffer = "[Buffer]",
                 nvim_lsp = "[LSP]",
