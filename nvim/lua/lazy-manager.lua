@@ -725,7 +725,7 @@ local plugins = {
         end,
         dev = false,
         config = function()
-            require("ondict").setup("localhost:1345")
+            require("ondict").setup("192.168.253.1:1345")
         end
     },
     {
