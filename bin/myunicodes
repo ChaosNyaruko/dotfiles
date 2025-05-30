@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# I copied some from the famous "get a menu of emojis to copy" script by Luke Smith, but just integrated it with FZF for terminal usage.
+# Check https://github.com/LukeSmithxyz/voidrice/tree/master/.local/bin/dmenuunicode for more.
+cut -d ';' -f1 ~/.local/share/larbs/chars/* | fzf --preview='echo -en  {}' | sed "s/ .*//"
+
+# If you run this command with an argument, it will automatically insert the
+# character. Otherwise, emoji is copied into clipboard(for macOS).
+# if [ -n "$1" ]; then
+# 	xdotool type "$chosen"
+# else
+# 	printf "%s" "$chosen" | xclip -selection clipboard
+# 	notify-send "'$chosen' copied to clipboard." &
+# fi
+

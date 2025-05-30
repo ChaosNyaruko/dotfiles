@@ -42,6 +42,10 @@ if [[ $1 == "--clean" ]] || [[ $1 == "-c" ]]; then
     show
     clean
     exit 0
+elif [[ $1 == "--share" ]];  then 
+    echo "copying shares..."
+    cp -v -r $DOTFILEREPO/share/* ~/.local/share/
+    exit 0
 elif [[ $1 == "--list" ]] || [[ $1 == "-l" ]]; then 
     echo "show removing files"
     show
@@ -54,7 +58,10 @@ elif [[ $1 == "--screen" ]] || [[ $1 == "-s" ]]; then
     echo "building .screenrc..."
 elif [[ $1 == "--git" ]] || [[ $1 == "-g" ]]; then
     MODE=git
-    echo "building .screenrc..."
+    echo "building .git..."
+elif [[ $1 == "--bin" ]]; then
+    MODE=bin
+    echo "building .bin..."
 else 
     echo -ne "unsupported usage\n"
     help
@@ -69,13 +76,16 @@ GITCONFIG=$HOME/.gitconfig
 FISHCONF=$HOME/.config/fish
 BATCONF=$HOME/.config/bat
 ALACRITTY=$HOME/.config/alacritty
+BINS=$HOME/.local/share/bin
 
 if [ $MODE == "all" ]; then
-        FILES=($VIMRCFILE $NVIMFILE $TMUXCONF $FISHCONF $BATCONF $ALACRITTY $TMUXCONF)
+    FILES=($VIMRCFILE $NVIMFILE $TMUXCONF $FISHCONF $BATCONF $ALACRITTY $TMUXCONF)
 elif [ $MODE == "screen" ]; then
     FILES=($SCREENRC)
 elif [ $MODE == "git" ]; then
     FILES=($GITCONFIG)
+elif [ $MODE == "bin" ]; then
+    FILES=($BINS)
 fi
 # echo "$FILES" # TODO: only print one? weird, learn it later.
 for file in ${FILES[@]}; do
@@ -87,9 +97,9 @@ echo -e "\n\n\n"
 
 show
 echo -e "\n\n\n"
-clean
+# clean
 echo -e "\n\n\n"
-clone
+# clone
 echo -e "\n\n\n"
 
 echo "rebuilding dotfiles......"
@@ -112,6 +122,8 @@ for file in ${FILES[@]}; do
         DEST="$DOTFILEREPO/bat"
     elif [[ "$file" == "$ALACRITTY" ]]; then
         DEST="$DOTFILEREPO/alacritty"
+    elif [[ "$file" == "$BINS" ]]; then
+        DEST="$DOTFILEREPO/bin"
     else
         echo "error"
         exit 1
