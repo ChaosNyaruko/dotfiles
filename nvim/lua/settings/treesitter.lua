@@ -31,6 +31,7 @@ ts.setup {
     highlight = {
         enable = true,
         disable = { "vimdoc" }, -- TODO: vimdoc:strange error, markdown: make the gx work
+        additional_vim_regex_highlighting = false, -- From https://github.com/catppuccin/nvim FAQ
     },
     indent = {
         enable = true,
