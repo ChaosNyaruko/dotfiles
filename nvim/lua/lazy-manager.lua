@@ -1,30 +1,30 @@
 -- https://github.com/neovim/neovim/discussions/29350
 vim.g.clipboard = {
-  name = 'OSC 52',
-  copy = {
-    ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-    ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
-  },
-  paste = {
-    ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
-    ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
-  },
-}
-if vim.env.TMUX ~= nil then
-  local copy = {'tmux', 'load-buffer', '-w', '-'}
-  local paste = {'bash', '-c', 'tmux refresh-client -l && sleep 0.05 && tmux save-buffer -'}
-  vim.g.clipboard = {
-    name = 'tmux',
+    name = 'OSC 52',
     copy = {
-      ['+'] = copy,
-      ['*'] = copy,
+        ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+        ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
     },
     paste = {
-      ['+'] = paste,
-      ['*'] = paste,
+        ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+        ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
     },
-    cache_enabled = 0,
-  }
+}
+if vim.env.TMUX ~= nil then
+    local copy = { 'tmux', 'load-buffer', '-w', '-' }
+    local paste = { 'bash', '-c', 'tmux refresh-client -l && sleep 0.05 && tmux save-buffer -' }
+    vim.g.clipboard = {
+        name = 'tmux',
+        copy = {
+            ['+'] = copy,
+            ['*'] = copy,
+        },
+        paste = {
+            ['+'] = paste,
+            ['*'] = paste,
+        },
+        cache_enabled = 0,
+    }
 end
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -97,6 +97,10 @@ local plugins = {
         priority = 1000,
         lazy = false,
         ---@type snacks.Config
+        keys = {
+            { "<leader>ss", function() Snacks.picker.lsp_symbols() end },
+            { "<leader>sk", function() Snacks.image.hover() end },
+        },
         opts = {
             -- your configuration comes here
             -- or leave it empty to use the default settings
@@ -154,7 +158,7 @@ local plugins = {
                     -- enable image viewer for documents
                     -- a treesitter parser must be available for the enabled languages.
                     -- supported language injections: markdown, html
-                    enabled = true,
+                    enabled = false,
                     -- render the image inline in the buffer
                     -- if your env doesn't support unicode placeholders, this will be disabled
                     -- takes precedence over `opts.float` on supported terminals
