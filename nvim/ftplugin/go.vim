@@ -1,4 +1,17 @@
-finish " use the compile-mode instead.
+function MyGenerateTest()
+    let l:func = expand("<cword>")
+    let l:curfile = expand("%")
+    let l:curfile_testfile = expand("%:r") .. "_test.go"
+    let l:curfile_path = expand("%:p:%h")
+    echom l:func .. ' ' .. l:curfile_testfile
+    let l:generated = printf('func Test_%s (t *testing.T) {}', l:func)
+    echom l:generated .. " " .. l:curfile_path
+    execute "!echo " . "'" . l:generated . "'" . " >> " . l:curfile_testfile
+endfunction
+
+nnoremap <buffer> \G <Cmd>call MyGenerateTest()<Cr>
+finish " compile stuff are replaced with the compile-mode plugin.
+
 setl noexpandtab
 let s:compile_name = "__Compile__"
 let s:compile_buffer = bufnr(s:compile_name, 1)
@@ -67,15 +80,3 @@ nnoremap <buffer> <F5> <Cmd>call MyBuild("")<Cr>
 " mapping ways
 "
 "
-function MyGenerateTest()
-    let l:func = expand("<cword>")
-    let l:curfile = expand("%")
-    let l:curfile_testfile = expand("%:r") .. "_test.go"
-    let l:curfile_path = expand("%:p:%h")
-    echom l:func .. ' ' .. l:curfile_testfile
-    let l:generated = printf('func Test_%s (t *testing.T) {}', l:func)
-    echom l:generated .. " " .. l:curfile_path
-    execute "!echo " . "'" . l:generated . "'" . " >> " . l:curfile_testfile
-endfunction
-
-nnoremap <buffer> \G <Cmd>call MyGenerateTest()<Cr>
