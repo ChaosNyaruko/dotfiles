@@ -141,6 +141,17 @@ command! -bang -nargs=* PRg
 
 command! -nargs=* -complete=dir -bang PFZF call fzf#run(fzf#wrap('FZF', fzf#vim#with_preview({'dir': getenv('PWD')}), <bang>0))
 
+function! s:onlyemoji(emoji_with_comments)
+    return (split(join(a:emoji_with_comments), ' '))[0]
+endfunction
+
+inoremap <expr> <c-x><c-k> fzf#vim#complete({
+            \ 'source': 'cat ~/.local/share/larbs/chars/emoji ~/.local/share/larbs/chars/font-awesome',
+            \ 'reducer': function('<sid>onlyemoji'),
+            \ 'right':    40
+            \ })
+
+
 " vim-go settings
 " autocmd FileType go nnoremap <buffer> gr :GoReferrers<CR>
 " autocmd FileType go nnoremap <buffer> gi :GoImplements<CR>

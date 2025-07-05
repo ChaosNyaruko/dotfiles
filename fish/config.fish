@@ -61,9 +61,9 @@ function Proxy
         return
     end
     if test $argv[1] = "on" 
-        set -gx https_proxy localhost:7890
-        set -gx http_proxy localhost:7890
-        set -gx no_proxy localhost:7890
+        set -gx https_proxy http://localhost:7890
+        set -gx http_proxy http://localhost:7890
+        set -gx no_proxy socks5://localhost:7890
         echo Proxy On $https_proxy
     else 
         set -e https_proxy
