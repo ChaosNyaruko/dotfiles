@@ -1,0 +1,29 @@
+__build_info:
+  rime_version: 1.13.0
+  timestamps:
+    default: 1737643099
+    default.custom: 1751779152
+    emoji_english.custom: 0
+    emoji_english.schema: 1751778763
+    key_bindings: 1737643099
+    key_bindings.custom: 0
+    punctuation: 1737643099
+    punctuation.custom: 0
+engine:
+  processors:
+    - speller
+    - express_editor
+  segmentors:
+    - abc_segmentor
+    - fallback_segmentor
+  translators:
+    - echo_translator
+    - table_translator
+menu:
+  page_size: 5
+schema:
+  name: emoji
+  schema_id: emoji_english
+  version: 1
+translator:
+  dictionary: extended
