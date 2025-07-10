@@ -124,8 +124,8 @@ augroup END
 " let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}' --bind ctrl-y:preview-up,ctrl-e:preview-down,ctrl-b:preview-page-up,ctrl-f:preview-page-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-top,shift-down:preview-bottom,alt-up:half-page-up,alt-down:half-page-down" 
 let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --bind ctrl-y:preview-up,ctrl-e:preview-down,ctrl-b:preview-page-up,ctrl-f:preview-page-down,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-top,shift-down:preview-bottom,alt-up:half-page-up,alt-down:half-page-down" 
 let $FZF_DEFAULT_COMMAND="fd --hidden --type f" 
+" set autochdir
 " noremap <C-p> :Files<CR>
-nnoremap <C-p> :FZF<CR>
 nnoremap <leader>f :Rg<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap sf :LFiles<CR>
@@ -140,6 +140,7 @@ command! -bang -nargs=* PRg
   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({'dir': getenv('PWD')}), <bang>0)
 
 command! -nargs=* -complete=dir -bang PFZF call fzf#run(fzf#wrap('FZF', fzf#vim#with_preview({'dir': getenv('PWD')}), <bang>0))
+nnoremap <C-p> :PFZF<CR>
 
 function! s:onlyemoji(emoji_with_comments)
     return (split(join(a:emoji_with_comments), ' '))[0]
@@ -272,7 +273,8 @@ if executable('ag')
         set grepprg=ag\ --nogroup\ --nocolor
 endif
 if executable('rg')
-    set grepprg=rg\ --no-heading\ --vimgrep\ $*\ $PWD
+    " set grepprg=rg\ --no-heading\ --vimgrep\ $*\ $PWD
+    set grepprg=rg\ --no-heading\ --vimgrep\ $* 
     set grepformat=%f:%l:%c:%m
 endif
 
