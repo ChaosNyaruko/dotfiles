@@ -414,3 +414,5 @@ augroup END
 " let g:copilot_proxy_strict_ssl = v:false
 "
 cnoremap vt /\v(_test)@<!\.go
+
+nnoremap \t <cmd>call append(line("."), strftime("%F", localtime()))<cr>
