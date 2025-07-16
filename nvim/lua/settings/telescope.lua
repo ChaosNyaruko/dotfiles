@@ -73,6 +73,6 @@ vim.keymap.set('n', '<leader>td', '<cmd>lua require("telescope.builtin").diagnos
 vim.keymap.set('n', '<leader>c', '<cmd>lua require("telescope.builtin").lsp_incoming_calls()<cr>', opts)
 vim.keymap.set('n', '<leader>r', '<cmd>lua require("telescope.builtin").lsp_references()<cr>', opts)
 vim.keymap.set('n', '<leader>ws', '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<cr>', opts)
-vim.keymap.set('n', 'sf',
+vim.keymap.set('n', '<leader>sf',
     '<cmd>lua require("telescope").extensions.file_browser.file_browser({ path = "%:p:h", cwd = telescope_buffer_dir(), respect_git_ignore = false, hidden =true, grouped = true, previewer = false, initial_mode = "normal", layout_config = { height = 40}})<cr>'
     , opts)
