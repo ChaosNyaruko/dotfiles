@@ -1,0 +1,5 @@
+# refer to chatgpt output:
+# for 4K 27-inch monitor: 
+# physical DPI: sqrt(3840**2 + 2160**2) / 27
+# 1080p simulation: 192
+Xft.dpi 163
