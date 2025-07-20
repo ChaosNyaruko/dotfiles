@@ -36,6 +36,9 @@ set textwidth=0
 if $LC_TERMINAL == "iTerm2" "ITERM_PROFILE will not be passed to a 'ssh' server.
     set bg=light
 endif
+if  $TERMINAL_BG_DARK != ""
+    set bg=dark
+endif
 
 
 " Common mappings

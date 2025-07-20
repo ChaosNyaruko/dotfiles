@@ -193,6 +193,6 @@ bar {
         # font noto-cjk:NotoSansCJK-Medium 8
 }
 
-exec --no-startup-id setxkbmap -layout us -option ctrl:swapcaps
+exec --no-startup-id 'setxkbmap -layout us -option ctrl:swapcaps'
 exec --no-startup-id "~/go/bin/clash -f ~/clash/config.yml > ~/tmp/clash.log &"
 exec --no-startup-id "fcitx5 &"

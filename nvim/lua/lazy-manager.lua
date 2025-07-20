@@ -463,14 +463,14 @@ local plugins = {
     { 'tpope/vim-surround',        event = "VeryLazy" },
     { 'mbbill/undotree',           event = "VeryLazy" },
     -- { 'gcmt/wildfire.vim',              event = "VeryLazy" },
-    {
-        'NLKNguyen/papercolor-theme',
-        enable = false,
-        init = function()
-            vim.cmd.colorscheme "PaperColor"
-            vim.o.background = 'light'
-        end,
-    },
+    -- {
+    --     'NLKNguyen/papercolor-theme',
+    --     enable = false,
+    --     init = function()
+    --         vim.cmd.colorscheme "PaperColor"
+    --         -- vim.o.background = 'light'
+    --     end,
+    -- },
     {
         enabled = false,
         "rose-pine/neovim",
@@ -562,7 +562,7 @@ local plugins = {
         "catppuccin/nvim",
         config = function()
             require("catppuccin").setup({
-                flavour = "latte", -- latte, frappe, macchiato, mocha
+                -- flavour = "latte", -- latte, frappe, macchiato, mocha
                 background = {     -- :h background
                     light = "latte",
                     dark = "mocha",
