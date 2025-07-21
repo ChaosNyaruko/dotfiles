@@ -15,13 +15,28 @@ order += "ipv6"
 order += "wireless _first_"
 order += "ethernet _first_"
 order += "battery all"
+order += "volume master"
 order += "disk /"
-order += "load"
+# order += "load"
+order += "cpu_usage"
 order += "memory"
 order += "tztime local"
 
+cpu_usage {
+    format = "CPU: %usage"
+}
+
+volume master {
+       format = "♪: %volume"
+       format_muted = "♪: muted (%volume)"
+       device = "default"
+       mixer = "Master"
+       mixer_idx = 0
+}
+
 wireless _first_ {
-        format_up = "W: (%quality at %essid) %ip"
+        # format_up = "W: (%quality at %essid) %ip"
+        format_up = "W:(%quality) %ip %bitrate"
         format_down = "W: down"
 }
 
