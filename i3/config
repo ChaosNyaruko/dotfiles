@@ -61,6 +61,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+# bindcode $mod+40 exec "rofi -show combi -modes combi -combi-modes 'window,drun,run'"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
@@ -198,3 +199,15 @@ exec_always --no-startup-id "killall clash; ~/go/bin/clash -f ~/clash/config.yml
 exec --no-startup-id "fcitx5 &"
 exec_always --no-startup-id "~/.screenlayout/aoc.sh &"
 exec_always --no-startup-id "setxkbmap -layout us -option ctrl:swapcaps"
+
+
+
+## Screenshots, refer to  https://dev.to/dianjuar/i3wm-screenshot-shortcuts-3n7b
+bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
+
+## Clipboard Screenshots
+bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
+bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
