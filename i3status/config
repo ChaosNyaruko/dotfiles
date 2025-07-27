@@ -11,9 +11,9 @@ general {
         interval = 5
 }
 
-order += "ipv6"
+# order += "ipv6"
 order += "wireless _first_"
-order += "ethernet _first_"
+# order += "ethernet _first_"
 order += "battery all"
 order += "volume master"
 order += "disk /"
@@ -48,12 +48,12 @@ ethernet _first_ {
 battery all {
         # format = "%status %percentage %remaining"
         format = "%status %percentage %remaining %emptytime"
-        format_down = "No battery"
-        status_chr = "⚡ CHR"
-        status_bat = "🔋 BAT"
-        status_unk = "? UNK"
-        status_full = "☻ FULL"
-        status_idle = "☻ IDLE"
+        format_down = ""
+        status_chr = "⚡"
+        status_bat = ""
+        status_unk = "??"
+        status_full = ""
+        status_idle = "😪"
 }
 
 disk "/" {
