@@ -1,0 +1,15 @@
+# https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland/zh-cn#TLDR.EF.BC.9A.E8.BF.98.E9.9C.80.E8.A6.81.E8.AE.BE.E7.BD.AE_XMODIFIERS.EF.BC.8CGTK_IM_MODULE_.E5.92.8C_QT_IM_MODULE_.E5.90.97.3F
+#
+# If your compositor supports text-input-v1 protocol. Check the compositor section below.
+chromium --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime
+
+# If your compositor & chromium supports text-input-v3 protocol, you may also use
+chromium --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3 
+
+# However, due to a different understanding in text-input-v3 protocol, it has some issue when using with KWin.
+# Prefer text-input-v1 if you're using kwin.
+chromium --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=1
+
+wayland chromium about:flags --> auto
+
+https://www.fosskers.ca/en/blog/wayland
