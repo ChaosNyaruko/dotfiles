@@ -1,0 +1,252 @@
+Device:                  Power Button
+Kernel:                  /dev/input/event2
+Id:                      host:0000:0001
+Group:                   1
+Seat:                    seat0, default
+Capabilities:            keyboard 
+Tap-to-click:            n/a
+Tap-and-drag:            n/a
+Tap button map:          n/a
+Tap drag lock:           n/a
+Left-handed:             n/a
+Nat.scrolling:           n/a
+Middle emulation:        n/a
+Calibration:             n/a
+Scroll methods:          none
+Scroll button:           n/a
+Scroll button lock:      n/a
+Click methods:           none
+Clickfinger button map:  n/a
+Disable-w-typing:        n/a
+Disable-w-trackpointing: n/a
+Accel profiles:          n/a
+Rotation:                0.0
+Area rectangle:          n/a
+
+Device:                  Video Bus
+Kernel:                  /dev/input/event4
+Id:                      host:0000:0006
+Group:                   2
+Seat:                    seat0, default
+Capabilities:            keyboard 
+Tap-to-click:            n/a
+Tap-and-drag:            n/a
+Tap button map:          n/a
+Tap drag lock:           n/a
+Left-handed:             n/a
+Nat.scrolling:           n/a
+Middle emulation:        n/a
+Calibration:             n/a
+Scroll methods:          none
+Scroll button:           n/a
+Scroll button lock:      n/a
+Click methods:           none
+Clickfinger button map:  n/a
+Disable-w-typing:        n/a
+Disable-w-trackpointing: n/a
+Accel profiles:          n/a
+Rotation:                0.0
+Area rectangle:          n/a
+
+Device:                  Power Button
+Kernel:                  /dev/input/event0
+Id:                      host:0000:0001
+Group:                   3
+Seat:                    seat0, default
+Capabilities:            keyboard 
+Tap-to-click:            n/a
+Tap-and-drag:            n/a
+Tap button map:          n/a
+Tap drag lock:           n/a
+Left-handed:             n/a
+Nat.scrolling:           n/a
+Middle emulation:        n/a
+Calibration:             n/a
+Scroll methods:          none
+Scroll button:           n/a
+Scroll button lock:      n/a
+Click methods:           none
+Clickfinger button map:  n/a
+Disable-w-typing:        n/a
+Disable-w-trackpointing: n/a
+Accel profiles:          n/a
+Rotation:                0.0
+Area rectangle:          n/a
+
+Device:                  Lid Switch
+Kernel:                  /dev/input/event1
+Id:                      host:0000:0005
+Group:                   4
+Seat:                    seat0, default
+Capabilities:            switch
+Tap-to-click:            n/a
+Tap-and-drag:            n/a
+Tap button map:          n/a
+Tap drag lock:           n/a
+Left-handed:             n/a
+Nat.scrolling:           n/a
+Middle emulation:        n/a
+Calibration:             n/a
+Scroll methods:          none
+Scroll button:           n/a
+Scroll button lock:      n/a
+Click methods:           none
+Clickfinger button map:  n/a
+Disable-w-typing:        n/a
+Disable-w-trackpointing: n/a
+Accel profiles:          n/a
+Rotation:                0.0
+Area rectangle:          n/a
+
+Device:                  Logitech B330/M330/M3
+Kernel:                  /dev/input/event5
+Id:                      usb:046d:4057
+Group:                   5
+Seat:                    seat0, default
+Capabilities:            keyboard pointer 
+Tap-to-click:            n/a
+Tap-and-drag:            n/a
+Tap button map:          n/a
+Tap drag lock:           n/a
+Left-handed:             disabled
+Nat.scrolling:           disabled
+Middle emulation:        disabled
+Calibration:             n/a
+Scroll methods:          button
+Scroll button:           BTN_MIDDLE
+Scroll button lock:      disabled
+Click methods:           none
+Clickfinger button map:  n/a
+Disable-w-typing:        n/a
+Disable-w-trackpointing: n/a
+Accel profiles:          flat *adaptive custom
+Rotation:                0.0
+Area rectangle:          n/a
+
+Device:                  ELAN2204:00 04F3:309A Mouse
+Kernel:                  /dev/input/event7
+Id:                      i2c:04f3:309a
+Group:                   6
+Seat:                    seat0, default
+Capabilities:            pointer 
+Tap-to-click:            n/a
+Tap-and-drag:            n/a
+Tap button map:          n/a
+Tap drag lock:           n/a
+Left-handed:             disabled
+Nat.scrolling:           disabled
+Middle emulation:        n/a
+Calibration:             n/a
+Scroll methods:          *button
+Scroll button:           BTN_RIGHT
+Scroll button lock:      disabled
+Click methods:           none
+Clickfinger button map:  n/a
+Disable-w-typing:        n/a
+Disable-w-trackpointing: n/a
+Accel profiles:          flat *adaptive custom
+Rotation:                n/a
+Area rectangle:          n/a
+
+Device:                  ELAN2204:00 04F3:309A Touchpad
+Kernel:                  /dev/input/event8
+Id:                      i2c:04f3:309a
+Group:                   6
+Seat:                    seat0, default
+Size:                    104x61mm
+Capabilities:            pointer gesture
+Tap-to-click:            disabled
+Tap-and-drag:            enabled
+Tap button map:          left/right/middle
+Tap drag lock:           disabled
+Left-handed:             disabled
+Nat.scrolling:           disabled
+Middle emulation:        disabled
+Calibration:             n/a
+Scroll methods:          *two-finger edge 
+Scroll button:           n/a
+Scroll button lock:      n/a
+Click methods:           *button-areas clickfinger 
+Clickfinger button map:  left/right/middle
+Disable-w-typing:        enabled
+Disable-w-trackpointing: enabled
+Accel profiles:          flat *adaptive custom
+Rotation:                n/a
+Area rectangle:          n/a
+
+Device:                  Huawei WMI hotkeys
+Kernel:                  /dev/input/event9
+Id:                      host:0000:0000
+Group:                   7
+Seat:                    seat0, default
+Capabilities:            keyboard 
+Tap-to-click:            n/a
+Tap-and-drag:            n/a
+Tap button map:          n/a
+Tap drag lock:           n/a
+Left-handed:             n/a
+Nat.scrolling:           n/a
+Middle emulation:        n/a
+Calibration:             n/a
+Scroll methods:          none
+Scroll button:           n/a
+Scroll button lock:      n/a
+Click methods:           none
+Clickfinger button map:  n/a
+Disable-w-typing:        n/a
+Disable-w-trackpointing: n/a
+Accel profiles:          n/a
+Rotation:                0.0
+Area rectangle:          n/a
+
+Device:                  AT Translated Set 2 keyboard
+Kernel:                  /dev/input/event3
+Id:                      serial:0001:0001
+Group:                   8
+Seat:                    seat0, default
+Capabilities:            keyboard 
+Tap-to-click:            n/a
+Tap-and-drag:            n/a
+Tap button map:          n/a
+Tap drag lock:           n/a
+Left-handed:             n/a
+Nat.scrolling:           n/a
+Middle emulation:        n/a
+Calibration:             n/a
+Scroll methods:          none
+Scroll button:           n/a
+Scroll button lock:      n/a
+Click methods:           none
+Clickfinger button map:  n/a
+Disable-w-typing:        n/a
+Disable-w-trackpointing: n/a
+Accel profiles:          n/a
+Rotation:                0.0
+Area rectangle:          n/a
+
+Device:                  ETPS/2 Elantech Touchpad
+Kernel:                  /dev/input/event13
+Id:                      serial:0002:000e
+Group:                   9
+Seat:                    seat0, default
+Size:                    104x63mm
+Capabilities:            pointer gesture
+Tap-to-click:            disabled
+Tap-and-drag:            enabled
+Tap button map:          left/right/middle
+Tap drag lock:           disabled
+Left-handed:             disabled
+Nat.scrolling:           disabled
+Middle emulation:        disabled
+Calibration:             n/a
+Scroll methods:          *two-finger edge 
+Scroll button:           n/a
+Scroll button lock:      n/a
+Click methods:           *button-areas clickfinger 
+Clickfinger button map:  left/right/middle
+Disable-w-typing:        enabled
+Disable-w-trackpointing: enabled
+Accel profiles:          flat *adaptive custom
+Rotation:                n/a
+Area rectangle:          n/a
+
