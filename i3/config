@@ -208,7 +208,6 @@ bar {
 exec_always --no-startup-id "killall clash; ~/go/bin/clash -f ~/clash/config.yml > ~/tmp/clash.log &"
 exec --no-startup-id "fcitx5 &"
 exec_always --no-startup-id "~/.screenlayout/aoc.sh &"
-exec_always --no-startup-id setxkbmap -layout us -option "ctrl:swapcaps"
 
 ## Screenshots, refer to  https://dev.to/dianjuar/i3wm-screenshot-shortcuts-3n7b
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
