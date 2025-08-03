@@ -270,3 +270,4 @@ function find_live_photos --description="find the live photos in my Apple backup
 end
 
 abbr pps "ps -ef | grep -E '(ondict)|(cloudflare)|(clash)|(miniserve)' | grep -v grep"
+abbr rm rm -i
