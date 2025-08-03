@@ -14,12 +14,12 @@ set $mod Mod4
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 # font pango:monospace 8
-# font noto-cjk:NotoSansCJK-Medium 10
 
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+# font pango:DejaVu Sans Mono 8
+font pango:Noto Sans CJK SC Medium, Regular 10
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -208,7 +208,6 @@ bar {
 exec_always --no-startup-id "killall clash; ~/go/bin/clash -f ~/clash/config.yml > ~/tmp/clash.log &"
 exec --no-startup-id "fcitx5 &"
 exec_always --no-startup-id "~/.screenlayout/aoc.sh &"
-exec_always --no-startup-id setxkbmap -layout us -option "ctrl:swapcaps"
 
 ## Screenshots, refer to  https://dev.to/dianjuar/i3wm-screenshot-shortcuts-3n7b
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
