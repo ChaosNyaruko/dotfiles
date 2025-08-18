@@ -43,7 +43,7 @@ vim.opt.rtp:prepend(lazypath)
 local at_home = function()
     -- disable codeium at working because of security policy
     local user = os.getenv("HOME")
-    if user:find("bill") or user:find("bat") then
+    if user:find("bill") or user:find("bat") or user:find("ark") then
         return true
     else
         return false
