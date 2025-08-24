@@ -1,0 +1,15 @@
+[Unit]
+Description=Clash
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ark
+WorkingDirectory=/home/ark/tmp
+ExecStart=/home/ark/go/bin/clash -f /home/ark/clash/config.yml
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

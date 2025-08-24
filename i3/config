@@ -205,7 +205,7 @@ bar {
         font pango:DejaVu Sans Mono Bold 10
 }
 
-exec_always --no-startup-id "killall clash; ~/go/bin/clash -f ~/clash/config.yml > ~/tmp/clash.log &"
+# exec_always --no-startup-id "killall clash; ~/go/bin/clash -f ~/clash/config.yml > ~/tmp/clash.log &"
 exec --no-startup-id "fcitx5 &"
 exec_always --no-startup-id "~/.screenlayout/aoc.sh &"
 
