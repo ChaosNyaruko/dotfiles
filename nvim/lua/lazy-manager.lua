@@ -110,6 +110,10 @@ local plugins = {
                 { buffer = false, desc = "quickly open compilation buffer" })
             vim.keymap.set("n", '<F5>', "<cmd>Compile<cr>",
                 { buffer = false, desc = "quickly launch Compile" })
+            vim.keymap.set("n", '<leader>cn', "<cmd>NextError<cr>",
+                { buffer = false, desc = "quickly jump to next error" })
+            vim.keymap.set("n", '<leader>cp', "<cmd>PrevError<cr>",
+                { buffer = false, desc = "quickly jump to previous error" })
         end
     },
     {
