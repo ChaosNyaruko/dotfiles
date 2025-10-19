@@ -29,8 +29,16 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # # by "xev" you can check keycode/keysym
-# bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
-# bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+
+# https://www.reddit.com/r/swaywm/comments/t0r6c6/mediacontrolsway/
+# XF86 symbols
+set $pctl playerctl 
+bindsym XF86AudioPrev exec --no-startup-id $pctl previous
+bindsym XF86AudioNext exec --no-startup-id $pctl next
+bindsym XF86AudioPlay exec --no-startup-id $pctl play-pause
+bindsym XF86AudioPause exec --no-startup-id $pctl play-pause
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -183,7 +191,7 @@ bar {
         font pango:DejaVu Sans Mono Bold 10
 }
 
-exec_always --no-startup-id "killall clash; ~/go/bin/clash -f ~/clash/config.yml > ~/tmp/clash.log &"
+# exec_always --no-startup-id "killall clash; ~/go/bin/clash -f ~/clash/config.yml > ~/tmp/clash.log &"
 exec_always --no-startup-id "killall fcitx5;  fcitx5 -d > ~/tmp/fcitx5.log"
 
 output DP-2 {
