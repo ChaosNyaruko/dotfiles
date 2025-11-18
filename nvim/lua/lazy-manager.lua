@@ -28,7 +28,7 @@ if vim.env.TMUX ~= nil then
 end
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath, nil) then
     vim.fn.system({
         "git",
         "clone",
@@ -43,6 +43,9 @@ vim.opt.rtp:prepend(lazypath)
 local at_home = function()
     -- disable codeium at working because of security policy
     local user = os.getenv("HOME")
+    if not user then
+        return false
+    end
     if user:find("bill") or user:find("bat") or user:find("ark") then
         return true
     else
@@ -53,7 +56,7 @@ end
 
 local function toggle_venn()
     local venn_enabled = vim.inspect(vim.b.venn_enabled)
-    if venn_enabled == "nil" then
+    if venn_enabled == 'nil' then
         vim.b.venn_enabled = true
         vim.cmd [[setlocal ve=all]]
         -- draw a line on HJKL keystokes
@@ -105,6 +108,8 @@ local plugins = {
                 },
                 default_command = "rg --vimgrep ",
                 debug = false,
+                input_word_completion = true,
+                hidden_buffer = false,
             }
             vim.keymap.set("n", '<leader>cc', "<cmd>buffer! *compilation*<cr>",
                 { buffer = false, desc = "quickly open compilation buffer" })
@@ -162,16 +167,6 @@ local plugins = {
                 },
             },
             image =
-            ---@class snacks.image.Config
-            ---@field enabled? boolean enable image viewer
-            ---@field wo? vim.wo|{} options for windows showing the image
-            ---@field bo? vim.bo|{} options for the image buffer
-            ---@field formats? string[]
-            --- Resolves a reference to an image with src in a file (currently markdown only).
-            --- Return the absolute path or url to the image.
-            --- When `nil`, the path is resolved relative to the file.
-            ---@field resolve? fun(file: string, src: string): string?
-            ---@field convert? snacks.image.convert.Config
             {
                 formats = {
                     "png",
@@ -294,64 +289,6 @@ local plugins = {
         end,
     },
     {
-        "nomnivore/ollama.nvim",
-        enabled = false,
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-
-        -- All the user commands added by the plugin
-        cmd = { "Ollama", "OllamaModel", "OllamaServe", "OllamaServeStop" },
-
-        keys = {
-            -- Sample keybind for prompt menu. Note that the <c-u> is important for selections to work properly.
-            {
-                "<leader>oo",
-                ":<c-u>lua require('ollama').prompt()<cr>",
-                desc = "ollama prompt",
-                mode = { "n", "v" },
-            },
-
-            -- Sample keybind for direct prompting. Note that the <c-u> is important for selections to work properly.
-            {
-                "<leader>oG",
-                ":<c-u>lua require('ollama').prompt('Generate_Code')<cr>",
-                desc = "ollama Generate Code",
-                mode = { "n", "v" },
-            },
-        },
-
-        ---@type Ollama.Config
-        opts = {
-            model = "codellama",
-            url = "http://127.0.0.1:11434",
-            serve = {
-                on_start = false,
-                command = "ollama",
-                args = { "serve" },
-                stop_command = "pkill",
-                stop_args = { "-SIGTERM", "ollama" },
-            },
-            -- View the actual default prompts in ./lua/ollama/prompts.lua
-            prompts = {
-                Sample_Prompt = {
-                    prompt = "$input $sel",
-                    input_label = "> ",
-                    model = "codellama",
-                    action = "display",
-                    system = "you are a Go expert, and gonna help me with code completion"
-                },
-                Generate_Code = {
-                    prompt = "$buf",
-                    input_label = "> ",
-                    model = "codellama",
-                    action = "insert",
-                    system = "you are a Go expert, and gonna help me with code completion"
-                }
-            }
-        }
-    },
-    {
         "norcalli/nvim-colorizer.lua",
         lazy = false,
         config = function()
@@ -364,10 +301,6 @@ local plugins = {
             )
         end
     },
-    -- {
-    --     "github/copilot.vim",
-    --     ft = { "go" },
-    -- },
     {
         'neovim/nvim-lspconfig',
         ft     = { "thrift", "html", "go", "lua", "python", "c", "cpp", "rust" },
@@ -393,8 +326,7 @@ local plugins = {
         config = function()
             require("settings.lualine")
         end
-    }, -- TODO: when this plugin is used, a strange bug happen, see lualine_bug.lua, and codium_status may be the source
-    { 'itchyny/lightline.vim', enabled = false },
+    },
     {
         enabled = true,
         'hrsh7th/nvim-cmp',
@@ -413,7 +345,6 @@ local plugins = {
             { 'saadparwaiz1/cmp_luasnip' },
         }
     },
-    { 'SirVer/ultisnips',      lazy = false,   enabled = false },
     {
         "L3MON4D3/LuaSnip",
         config = function()
@@ -436,12 +367,6 @@ local plugins = {
     { 'nvim-lua/plenary.nvim',                   event = "VeryLazy" },
     {
         'nvim-telescope/telescope.nvim',
-        -- keys = {
-        --     { "<leader>F",  mode = { "n", "v" } },
-        --     { "<leader>tf", mode = { "n" } },
-        --     { "<leader>ws", mode = { "n" } },
-        --     { "<leader>sf", mode = { "n" } },
-        -- },
         VeryLazy = true,
         config = function()
             require("settings.telescope")
@@ -456,118 +381,21 @@ local plugins = {
         lazy = true,
         enabled = false
     },
-    { 'fatih/vim-go',              lazy = true,                   ft = { "go", "gomod" }, enabled = false },
     { 'tpope/vim-commentary',      event = "VeryLazy" },
-    { 'ChaosNyaruko/vim-markdown', ft = "markdown",               event = "VeryLazy",     dev = false },
+    { 'ChaosNyaruko/vim-markdown', ft = "markdown",               event = "VeryLazy", dev = false },
     { 'godlygeek/tabular',         event = "VeryLazy" },
-    -- { 'christoomey/vim-tmux-navigator', enable = false,                event = "VeryLazy" },
     { 'junegunn/fzf',              build = ":call fzf#install()", event = "VeryLazy" },
     { 'junegunn/fzf.vim',          event = "VeryLazy" },
     { 'tpope/vim-fugitive',        event = "VeryLazy" },
     { 'tpope/vim-surround',        event = "VeryLazy" },
     { 'mbbill/undotree',           event = "VeryLazy" },
-    -- { 'gcmt/wildfire.vim',              event = "VeryLazy" },
-    -- {
-    --     'NLKNguyen/papercolor-theme',
-    --     enable = false,
-    --     init = function()
-    --         vim.cmd.colorscheme "PaperColor"
-    --         -- vim.o.background = 'light'
-    --     end,
-    -- },
-    {
-        enabled = false,
-        "rose-pine/neovim",
-        name = "rose-pine",
-        config = function()
-            require("rose-pine").setup({
-                variant = "auto",      -- auto, main, moon, or dawn
-                dark_variant = "main", -- main, moon, or dawn
-                dim_inactive_windows = false,
-                extend_background_behind_borders = true,
-
-                enable = {
-                    terminal = true,
-                    legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
-                    migrations = true,        -- Handle deprecated options automatically
-                },
-
-                styles = {
-                    bold = true,
-                    italic = true,
-                    transparency = false,
-                },
-
-                groups = {
-                    border = "muted",
-                    link = "iris",
-                    panel = "surface",
-
-                    error = "love",
-                    hint = "iris",
-                    info = "foam",
-                    note = "pine",
-                    todo = "rose",
-                    warn = "gold",
-
-                    git_add = "foam",
-                    git_change = "rose",
-                    git_delete = "love",
-                    git_dirty = "rose",
-                    git_ignore = "muted",
-                    git_merge = "iris",
-                    git_rename = "pine",
-                    git_stage = "iris",
-                    git_text = "rose",
-                    git_untracked = "subtle",
-
-                    h1 = "iris",
-                    h2 = "foam",
-                    h3 = "rose",
-                    h4 = "gold",
-                    h5 = "pine",
-                    h6 = "foam",
-                },
-
-                palette = {
-                    -- Override the builtin palette per variant
-                    -- moon = {
-                    --     base = '#18191a',
-                    --     overlay = '#363738',
-                    -- },
-                },
-
-                -- NOTE: Highlight groups are extended (merged) by default. Disable this
-                -- per group via `inherit = false`
-                highlight_groups = {
-                    -- Comment = { fg = "foam" },
-                    -- StatusLine = { fg = "love", bg = "love", blend = 15 },
-                    -- VertSplit = { fg = "muted", bg = "muted" },
-                    -- Visual = { fg = "base", bg = "text", inherit = false },
-                },
-
-                before_highlight = function(group, highlight, palette)
-                    -- Disable all undercurls
-                    -- if highlight.undercurl then
-                    --     highlight.undercurl = false
-                    -- end
-                    --
-                    -- Change palette colour
-                    -- if highlight.fg == palette.pine then
-                    --     highlight.fg = palette.foam
-                    -- end
-                end
-            }
-            )
-        end
-    },
     {
         enabled = true,
         "catppuccin/nvim",
         config = function()
             require("catppuccin").setup({
                 -- flavour = "latte", -- latte, frappe, macchiato, mocha
-                background = {     -- :h background
+                background = { -- :h background
                     light = "latte",
                     dark = "mocha",
                 },
@@ -616,117 +444,11 @@ local plugins = {
             vim.cmd.colorscheme "catppuccin"
         end
     },
-    -- {
-    --     "ronisbr/nano-theme.nvim",
-    --     init = function()
-    --         vim.o.background = "light" -- or "dark".
-    --         vim.cmd.colorscheme "nano-theme"
-    --     end
-    -- },
-    { 'preservim/nerdtree',           enabled = false },
-    { 'iamcco/markdown-preview.nvim', ft = "markdown", build = function() vim.fn["mkdp#util#install"]() end, event = "VeryLazy" },
-    -- { 'vim-autoformat/vim-autoformat',
-    --     event = "VeryLazy",
-    -- },
     {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        enabled = false,
-        init = function()
-            vim.o.timeout = true
-            vim.o.timeoutlen = 300
-        end,
-        opts = {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
-            plugins = {
-                marks = true,     -- shows a list of your marks on ' and `
-                registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-                -- the presets plugin, adds help for a bunch of default keybindings in Neovim
-                -- No actual key bindings are created
-                spelling = {
-                    enabled = true,   -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-                    suggestions = 20, -- how many suggestions should be shown in the list?
-                },
-                presets = {
-                    operators = true,    -- adds help for operators like d, y, ...
-                    motions = true,      -- adds help for motions
-                    text_objects = true, -- help for text objects triggered after entering an operator
-                    windows = true,      -- default bindings on <c-w>
-                    nav = true,          -- misc bindings to work with windows
-                    z = true,            -- bindings for folds, spelling and others prefixed with z
-                    g = true,            -- bindings for prefixed with g
-                },
-            },
-            -- add operators that will trigger motion and text object completion
-            -- to enable all native operators, set the preset / operators plugin above
-            operators = { gc = "Comments" },
-            key_labels = {
-                -- override the label used to display some keys. It doesn't effect WK in any other way.
-                -- For example:
-                -- ["<space>"] = "SPC",
-                -- ["<cr>"] = "RET",
-                -- ["<tab>"] = "TAB",
-            },
-            motions = {
-                count = true,
-            },
-            icons = {
-                breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-                separator = "➜", -- symbol used between a key and it's label
-                group = "+", -- symbol prepended to a group
-            },
-            popup_mappings = {
-                scroll_down = "<c-d>", -- binding to scroll down inside the popup
-                scroll_up = "<c-u>",   -- binding to scroll up inside the popup
-            },
-            window = {
-                border = "none",          -- none, single, double, shadow
-                position = "bottom",      -- bottom, top
-                margin = { 1, 0, 1, 0 },  -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
-                padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
-                winblend = 0,             -- value between 0-100 0 for fully opaque and 100 for fully transparent
-                zindex = 1000,            -- positive value to position WhichKey above other floating windows.
-            },
-            layout = {
-                height = { min = 4, max = 25 },                                               -- min and max height of the columns
-                width = { min = 20, max = 50 },                                               -- min and max width of the columns
-                spacing = 3,                                                                  -- spacing between columns
-                align = "left",                                                               -- align columns left, center or right
-            },
-            ignore_missing = false,                                                           -- enable this to hide mappings for which you didn't specify a label
-            hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "^:", "^ ", "^call ", "^lua " }, -- hide mapping boilerplate
-            show_help = true,                                                                 -- show a help message in the command line for using WhichKey
-            show_keys = true,                                                                 -- show the currently pressed key and its label as a message in the command line
-            triggers = "auto",                                                                -- automatically setup triggers
-            -- triggers = {"<leader>"} -- or specifiy a list manually
-            -- list of triggers, where WhichKey should not wait for timeoutlen and show immediately
-            triggers_nowait = {
-                -- marks
-                "`",
-                "'",
-                "g`",
-                "g'",
-                -- registers
-                '"',
-                "<c-r>",
-                -- spelling
-                "z=",
-            },
-            triggers_blacklist = {
-                -- list of mode / prefixes that should never be hooked by WhichKey
-                -- this is mostly relevant for keymaps that start with a native binding
-                i = { "j", "k" },
-                v = { "j", "k" },
-            },
-            -- disable the WhichKey popup for certain buf types and file types.
-            -- Disabled by default for Telescope
-            disable = {
-                buftypes = {},
-                filetypes = {},
-            },
-        }
+        'iamcco/markdown-preview.nvim',
+        ft = "markdown",
+        build = function() vim.fn["mkdp#util#install"]() end,
+        event = "VeryLazy"
     },
     {
         'Exafunction/codeium.vim',
@@ -746,14 +468,6 @@ local plugins = {
         end
     },
     {
-        'goolord/alpha-nvim',
-        enabled = false,
-        config = function()
-            require 'alpha'.setup(require 'alpha.themes.startify'.config)
-        end,
-    },
-    { "itchyny/dictionary.vim", enable = false },
-    {
         "ChaosNyaruko/ondict",
         event = "VeryLazy",
         build = function(plugin)
@@ -761,35 +475,12 @@ local plugins = {
         end,
         dev = false,
         config = function()
-            require("ondict").setup("192.168.0.105:1345")
+            require("ondict").setup("localhost:1345")
         end
-    },
-    {
-        "loctvl842/breadcrumb.nvim",
-        config = function()
-            require("breadcrumb").init()
-        end,
-        enabled = false,
-    },
-    {
-        'Bekaboo/dropbar.nvim',
-        -- optional, but required for fuzzy finder support
-        dependencies = {
-            'nvim-telescope/telescope-fzf-native.nvim'
-        },
-        enabled = false,
     },
     {
         "tpope/vim-rsi",
         enabled = false,
-    },
-    {
-        "nvim-lua/lsp_extensions.nvim",
-        -- ft     = {"rust"},
-        config = function()
-            -- Enable type inlay hints
-            vim.cmd [[autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }]]
-        end
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
@@ -808,16 +499,8 @@ local opts = {
 }
 
 require("lazy").setup(plugins, opts)
--- require("settings.mason")
--- require("settings.fzf")
--- require("settings.lspconfig")
--- require("settings.nvim-cmp")
--- require("settings.lualine")
--- require("settings.treesitter")
--- require("settings.telescope")
---
---
---
+
+--------
 -- workaround for vim in vim's terminal
 -- local exit_term_key = "<c-c>"
 
@@ -838,6 +521,10 @@ require("lazy").setup(plugins, opts)
 --   end,
 -- })
 --
+if true then
+    return
+end
+
 local on_attach = function(client, bufnr)
     vim.notify(string.format("bufnr: %d", bufnr))
     local bufopts = { noremap = true, silent = true, buffer = bufnr, desc = "buffer mappings in markdown" }
@@ -862,24 +549,20 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '\\f', vim.lsp.buf.format, bufopts)
 end
 
-if true then
-    return
-end
-
 local mdlsp = os.getenv("HOME") .. "/go/bin/educationalsp"
 local client, err = nil, nil
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "markdown" },
     callback = function(ev)
         if not client then
-            client, err = vim.lsp.start_client {
+            client, err = vim.lsp.start {
                 name = "markdownlint",
                 cmd = { mdlsp },
                 on_attach = on_attach,
             }
             vim.notify(string.format("client id: %d", client))
         end
-        if not client == nil then
+        if not client then
             vim.notify(string.format("hey, you didn't do the client thing good, %s", err))
             return
         end

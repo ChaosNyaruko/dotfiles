@@ -195,6 +195,11 @@ nvim_lsp.gopls.setup {
     cmd = { "gopls", "-remote=auto" },
     on_attach = on_attach,
     flags = lsp_flags,
+    settings = {
+        gopls = {
+            buildFlags = { "-tags=cmd" }
+        }
+    },
     -- capabilities = capabilities,
 }
 
@@ -250,7 +255,7 @@ nvim_lsp.html.setup {
 
 -- for thrift, to install the server, see github.com/joyme123/thrift-ls
 nvim_lsp.thriftls.setup {
-    cmd = {"thrift-ls"},
+    cmd = { "thrift-ls" },
     on_attach = on_attach,
     flags = lsp_flags,
     -- capabilities = capabilities,
