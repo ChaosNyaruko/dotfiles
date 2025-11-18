@@ -381,14 +381,20 @@ local plugins = {
         lazy = true,
         enabled = false
     },
-    { 'tpope/vim-commentary',      event = "VeryLazy" },
-    { 'ChaosNyaruko/vim-markdown', ft = "markdown",               event = "VeryLazy", dev = false },
-    { 'godlygeek/tabular',         event = "VeryLazy" },
-    { 'junegunn/fzf',              build = ":call fzf#install()", event = "VeryLazy" },
-    { 'junegunn/fzf.vim',          event = "VeryLazy" },
-    { 'tpope/vim-fugitive',        event = "VeryLazy" },
-    { 'tpope/vim-surround',        event = "VeryLazy" },
-    { 'mbbill/undotree',           event = "VeryLazy" },
+    { 'tpope/vim-commentary', event = "VeryLazy" },
+    {
+        'ChaosNyaruko/vim-markdown',
+        branch = "353",
+        ft = "markdown",
+        event = "VeryLazy",
+        dev = false
+    },
+    { 'godlygeek/tabular',    event = "VeryLazy" },
+    { 'junegunn/fzf',         build = ":call fzf#install()", event = "VeryLazy" },
+    { 'junegunn/fzf.vim',     event = "VeryLazy" },
+    { 'tpope/vim-fugitive',   event = "VeryLazy" },
+    { 'tpope/vim-surround',   event = "VeryLazy" },
+    { 'mbbill/undotree',      event = "VeryLazy" },
     {
         enabled = true,
         "catppuccin/nvim",
