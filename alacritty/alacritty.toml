@@ -35,14 +35,18 @@ size = 14.0
 
 [font.bold]
 family = "NotoMono Nerd Font"
+# family = "Iosevka"
 style = "Bold"
+
 
 [font.italic]
 family = "NotoMono Nerd Font"
+# family = "Iosevka"
 style = "Italic"
 
 [font.normal]
 family = "NotoMono Nerd Font"
+# family = "Iosevka"
 style = "Regular"
 
 [[keyboard.bindings]]
