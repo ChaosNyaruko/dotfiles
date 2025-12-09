@@ -222,3 +222,11 @@ bindsym Shift+Print exec --no-startup-id flameshot gui
 
 workspace 1 output eDP-1
 workspace 2 output DP-2
+
+# https://unix.stackexchange.com/questions/450700/opening-a-programme-in-a-floating-window-in-i3
+# easing floating
+# i3: xprop to get windows class/instance
+# for_window [class="Galculator" instance="galculator"] floating enable
+# sway: swaymsg -t get_tree?
+# bindsym $mod+Shift+Return exec --no-startup-id urxvt --class floating
+# for_window [class="floating"] floating enabled
