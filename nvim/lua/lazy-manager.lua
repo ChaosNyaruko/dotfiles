@@ -313,7 +313,7 @@ local plugins = {
     {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
-        event = "VimEnter",
+        event = "UIEnter",
         enabled = true,
         config = function()
             require("settings.lualine")
@@ -347,6 +347,7 @@ local plugins = {
     {
         'nvim-treesitter/nvim-treesitter',
         lazy = true,
+        ft = { "go", "rust", "c", "cpp" },
         cmd = { "TSInstallInfo", "TSUpdate" },
         build = ':TSUpdate',
         config = function()
