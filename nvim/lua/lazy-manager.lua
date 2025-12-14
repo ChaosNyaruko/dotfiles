@@ -242,11 +242,11 @@ local plugins = {
 
     },
     {
-        -- TODO: maybe someday try ollama.nvim or Ollama-Copilot
         'milanglacier/minuet-ai.nvim',
         enabled = function()
             return not at_home()
         end,
+        ft = { "go" },
         config = function()
             require('minuet').setup {
                 virtualtext = {
@@ -311,17 +311,9 @@ local plugins = {
         end
     },
     {
-        'williamboman/mason.nvim',
-        lazy = true,
-        cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
-        config = function()
-            require("settings.mason")
-        end
-    },
-    {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
-        event = "VimEnter",
+        event = "UIEnter",
         enabled = true,
         config = function()
             require("settings.lualine")
@@ -330,17 +322,15 @@ local plugins = {
     {
         enabled = true,
         'hrsh7th/nvim-cmp',
-        event = { "InsertEnter", "CmdlineEnter" },
+        event = { "InsertEnter" },
+        ft = { "go", "rust", "python" },
         config = function()
             require("settings.nvim-cmp")
         end,
         dependencies = {
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'hrsh7th/cmp-buffer' },
-            { 'hrsh7th/cmp-path' },
-            { 'hrsh7th/cmp-cmdline' },
             { 'hrsh7th/cmp-nvim-lsp-signature-help' },
-            -- { 'quangnguyen30192/cmp-nvim-ultisnips' },
             { 'L3MON4D3/LuaSnip' },
             { 'saadparwaiz1/cmp_luasnip' },
         }
@@ -350,20 +340,22 @@ local plugins = {
         config = function()
             require("luasnip.loaders.from_vscode").lazy_load()
         end,
+        ft = { "go", "sh", "rust" },
         dependencies = { "rafamadriz/friendly-snippets" },
     },
     { 'onsails/lspkind.nvim',                    event = "VeryLazy",         lazy = true },
     {
         'nvim-treesitter/nvim-treesitter',
         lazy = true,
+        ft = { "go", "rust", "c", "cpp" },
         cmd = { "TSInstallInfo", "TSUpdate" },
         build = ':TSUpdate',
         config = function()
             require("settings.treesitter")
         end
     },
-    { 'nvim-treesitter/playground',              cmd = "TSPlaygroundToggle", enabled = true, event = "VeryLazy" },
-    { 'nvim-treesitter/nvim-treesitter-context', event = "VeryLazy" },
+    { 'nvim-treesitter/playground',              cmd = "TSPlaygroundToggle", enabled = true,       event = "VeryLazy" },
+    { 'nvim-treesitter/nvim-treesitter-context', event = "VeryLazy",         ft = { "go", "rust" } },
     { 'nvim-lua/plenary.nvim',                   event = "VeryLazy" },
     {
         'nvim-telescope/telescope.nvim',
@@ -371,6 +363,14 @@ local plugins = {
         config = function()
             require("settings.telescope")
         end,
+        keys = {
+            {
+                '<leader>F',
+                '<cmd>lua require("telescope.builtin").grep_string()<cr>',
+                mode = { "n", "v" },
+                { noremap = true, silent = true },
+            },
+        },
         dependencies = {
             { 'nvim-telescope/telescope-file-browser.nvim' },
             { 'nvim-telescope/telescope-fzf-native.nvim',  build = 'make' },

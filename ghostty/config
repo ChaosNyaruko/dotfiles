@@ -1,6 +1,6 @@
 # foreground = #282c34
 # background = #ffffff
-theme = dark:Catppuccin Frappe,light:Catppuccin Latte
+theme = dark:Catppuccin-frappe,light:catppuccin-Latte
 
 
 # This is the configuration file for Ghostty.
