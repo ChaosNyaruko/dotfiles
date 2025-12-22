@@ -33,8 +33,6 @@ local preset_insert_mapping = cmp.mapping.preset.insert({
     -- ["<A-y>"] = require('minuet').make_cmp_map()
 })
 
--- print(vim.inspect(cmp.mapping.preset.insert()))
--- print(vim.inspect(cmp.mapping.preset.cmdline()))
 preset_insert_mapping["<CR>"] = cmp.mapping({
     i = function(fallback)
         if cmp.visible() and cmp.get_active_entry() then
@@ -57,32 +55,24 @@ preset_insert_mapping['<C-p>'] = cmp.mapping({
     i = cp,
 })
 
-local luasnip = require("luasnip")
--- print(vim.inspect(preset_insert_mapping['<C-n>']))
-preset_insert_mapping['<C-l>'] = cmp.mapping(
-    function(fallback)
-        if cmp.visible() then
-            if luasnip.expandable() then
-                luasnip.expand()
-            end
-        else
-            if luasnip.locally_jumpable(1) then
-                luasnip.jump(1)
-            else
-                fallback()
-            end
-        end
-    end,
-    { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-)
-
-preset_insert_mapping['<C-h>'] = cmp.mapping(
-    function(fallback)
-        fallback()
-    end,
-    { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-)
-
+-- local luasnip = require("luasnip")
+-- preset_insert_mapping['<C-l>'] = cmp.mapping(
+--     function(fallback)
+--         if cmp.visible() then
+--             if luasnip.expandable() then
+--                 luasnip.expand()
+--             end
+--         else
+--             if luasnip.locally_jumpable(1) then
+--                 luasnip.jump(1)
+--             else
+--                 fallback()
+--             end
+--         end
+--     end,
+--     { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+-- )
+--
 require('my_snippets').register_cmp_source()
 cmp.setup({
     preselect = cmp.PreselectMode.None,
@@ -95,10 +85,10 @@ cmp.setup({
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
             -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-            require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
             -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
             -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-            -- vim.snippet.expand(args.body)
+            vim.snippet.expand(args.body)
         end,
     },
     window = {
@@ -111,7 +101,7 @@ cmp.setup({
         { name = 'snp' },
         { name = 'nvim_lsp_signature_help' }, -- lsp_signature.nvim maybe better?
         -- { name = 'vsnip' }, -- For vsnip users.
-        { name = 'luasnip' },                 -- For luasnip users.
+        -- { name = 'luasnip' },                 -- For luasnip users.
         -- { name = 'ultisnips' }, -- For ultisnips users.
         -- { name = 'snippy' }, -- For snippy users.
     }, {
@@ -119,7 +109,10 @@ cmp.setup({
         -- { name = 'minuet' },
     }),
     experimental = {
-        ghost_text = false
+        ghost_text = false,
+    },
+    view = {
+        entries = "native",
     },
     performance = {
         fetching_timeout = 5000,
@@ -155,9 +148,9 @@ preset_cmdline['<C-p>'] = cmp.mapping({
 cmp.setup.cmdline(':', {
     mapping = preset_cmdline,
     sources = cmp.config.sources({
-        { name = 'path', keyword_length = 8 }
+        { name = 'path', keyword_length = 2 }
     }, {
-        { name = 'cmdline', keyword_length = 8 }
+        { name = 'cmdline', keyword_length = 2 }
     })
 })
 
@@ -168,7 +161,6 @@ cmp.setup.cmdline(':', {
 --     capabilities = capabilities
 -- }
 
-local kind_icons = {}
 local lspkind = require('lspkind')
 cmp.setup {
     formatting = {
@@ -181,29 +173,10 @@ cmp.setup {
                 luasnip = "[LuaSnip]",
                 nvim_lua = "[Lua]",
                 latex_symbols = "[Latex]",
+                snp = "[my_snippets]",
             })
         }),
-        -- format = function(entry, vim_item)
-        --     -- Kind icons
-        --     vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-        --     -- Source
-        --     vim_item.menu = ({
-        --             buffer = "[Buffer]",
-        --             nvim_lsp = "[LSP]",
-        --             luasnip = "[LuaSnip]",
-        --             nvim_lua = "[Lua]",
-        --             latex_symbols = "[LaTeX]",
-        --         })[entry.source.name]
-        --     return vim_item
-        -- end
     },
 }
 
 vim.opt.completeopt = 'menu,menuone,noselect'
--- local cmp = require('cmp')
--- local lspkind = require('lspkind')
--- cmp.setup {
---   formatting = {
---     format = lspkind.cmp_format(),
---   },
--- }
