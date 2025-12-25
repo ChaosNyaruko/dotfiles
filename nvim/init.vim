@@ -150,7 +150,10 @@ function! s:onlyemoji(emoji_with_comments)
     return (split(join(a:emoji_with_comments), ' '))[0]
 endfunction
 
-inoremap <expr> <c-x><c-k> fzf#vim#complete({
+" <c-x><c-k>(insert mode) to trigger dictionary words completion
+set dictionary+=/usr/share/dict/words 
+
+inoremap <expr> <c-x><c-e> fzf#vim#complete({
             \ 'source': 'cat ~/.local/share/larbs/chars/emoji ~/.local/share/larbs/chars/font-awesome',
             \ 'reducer': function('<sid>onlyemoji'),
             \ 'right':    40
