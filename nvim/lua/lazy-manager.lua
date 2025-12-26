@@ -335,17 +335,17 @@ local plugins = {
                 virtualtext = {
                     auto_trigger_ft = { 'go', 'lua', 'vim', 'python' },
                     keymap = {
-                        -- accept whole completion
-                        accept = '<C-]>',
                         -- accept one line
-                        accept_line = '<C-y>',
+                        accept_line = '<C-]>',
+                        -- accept whole completion
+                        accept = '<A-]>',
                         -- accept n lines (prompts for number)
                         accept_n_lines = '<A-z>',
                         -- Cycle to prev completion item, or manually invoke completion
-                        prev = '<C-;>',
+                        prev = '<A-;>',
                         -- Cycle to next completion item, or manually invoke completion
-                        next = '<C-,>',
-                        dismiss = '<C-e>',
+                        next = '<A-,>',
+                        dismiss = '<A-e>',
                     },
                 },
                 provider = 'openai_fim_compatible',
@@ -551,7 +551,7 @@ local plugins = {
 
 local opts = {
     dev = {
-        path = "~/github",
+        path = "~/github.com",
         pattern = {},
         fallback = false,
     }
