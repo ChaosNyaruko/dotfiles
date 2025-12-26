@@ -153,6 +153,8 @@ endfunction
 " <c-x><c-k>(insert mode) to trigger dictionary words completion
 set dictionary+=/usr/share/dict/words 
 
+nnoremap <leader>E :cgetexpr v:errmsg <bar> copen<cr>
+
 inoremap <expr> <c-x><c-e> fzf#vim#complete({
             \ 'source': 'cat ~/.local/share/larbs/chars/emoji ~/.local/share/larbs/chars/font-awesome',
             \ 'reducer': function('<sid>onlyemoji'),

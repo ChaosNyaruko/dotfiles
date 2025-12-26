@@ -1,3 +1,80 @@
+vim.lsp.enable('gopls')
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('rust_analyzer')
+local function document_highlight()
+    vim.lsp.buf.clear_references()
+    vim.lsp.buf.document_highlight()
+end
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('my.lsp', {}),
+    callback = function(args)
+        -- local opts = { buffer = true, noremap = true, silent = true, desc = "mapping for vim.lsp" }
+        local bufopts = {
+            noremap = true,
+            silent = true,
+            buffer = args.buf,
+            desc =
+            "buffer mappings in lspconfig on attach"
+        }
+        vim.diagnostic.config({ virtual_text = true })
+        vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
+        vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end, bufopts)
+        vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end, bufopts)
+        vim.keymap.set('n', '<space>q',
+            function() vim.diagnostic.setloclist({ severity = vim.diagnostic.severity.ERROR }) end, bufopts)
+
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+        -- if client.name ~= 'gopls' then
+        vim.keymap.set('n', 'goc', vim.lsp.buf.incoming_calls, bufopts)
+        -- end
+        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+        vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+        vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+        vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+        vim.keymap.set('n', '<space>wl', function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        end, bufopts)
+        vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+        vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+        vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+        vim.keymap.set('n', '\\f', vim.lsp.buf.format, bufopts)
+
+        local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+        if client.server_capabilities.documentHighlightProvider then
+            vim.api.nvim_set_hl(0, "LspReferenceText", { underline = true })
+            vim.keymap.set('n', '<space>8', document_highlight, bufopts)
+        end
+
+
+        if client:supports_method('textDocument/implementation') then
+            -- Create a keymap for vim.lsp.buf.implementation ...
+            vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, bufopts)
+        end
+        -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
+        if client:supports_method('textDocument/completion') then
+            -- Optional: trigger autocompletion on EVERY keypress. May be slow!
+            -- local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
+            -- client.server_capabilities.completionProvider.triggerCharacters = chars
+            vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+        end
+
+        -- autoformat for go and rust
+        local format_group = vim.api.nvim_create_augroup("LspFormatGroup", { clear = true })
+        vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+            group = format_group,
+            buffer = args.buf,
+            desc = "LspFormatGroup",
+            callback = function()
+                vim.notify(string.format("format by lsp: %s", client.name), vim.log.levels.WARN)
+                vim.lsp.buf.format()
+            end,
+        })
+    end,
+})
+
 -- https://github.com/neovim/neovim/discussions/29350
 vim.g.clipboard = {
     name = 'OSC 52',
@@ -302,6 +379,7 @@ local plugins = {
         end
     },
     {
+        enabled = false,
         'neovim/nvim-lspconfig',
         ft     = { "thrift", "html", "go", "lua", "python", "c", "cpp", "rust" },
         -- event = "VeryLazy",
@@ -320,7 +398,7 @@ local plugins = {
         end
     },
     {
-        enabled = true,
+        enabled = false,
         'hrsh7th/nvim-cmp',
         event = { "InsertEnter" },
         ft = { "go", "rust", "python" },
@@ -506,6 +584,7 @@ local opts = {
 }
 
 require("lazy").setup(plugins, opts)
+
 
 --------
 -- workaround for vim in vim's terminal
