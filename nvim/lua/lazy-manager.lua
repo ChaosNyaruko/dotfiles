@@ -1,6 +1,9 @@
+vim.opt.completeopt = 'menu,menuone,noselect'
+
 vim.lsp.enable('gopls')
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('rust_analyzer')
+vim.lsp.enable('thriftls')
 local function document_highlight()
     vim.lsp.buf.clear_references()
     vim.lsp.buf.document_highlight()
@@ -26,9 +29,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-        -- if client.name ~= 'gopls' then
         vim.keymap.set('n', 'goc', vim.lsp.buf.incoming_calls, bufopts)
-        -- end
         vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
         vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, bufopts)
         vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
@@ -43,6 +44,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '\\f', vim.lsp.buf.format, bufopts)
 
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+        print("attached: ", client.name)
         if client.server_capabilities.documentHighlightProvider then
             vim.api.nvim_set_hl(0, "LspReferenceText", { underline = true })
             vim.keymap.set('n', '<space>8', document_highlight, bufopts)
