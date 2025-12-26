@@ -172,6 +172,7 @@ local plugins = {
         -- branch = "latest",
         -- or the most up-to-date updates:
         -- branch = "nightly",
+        cmd = { "Compile" },
         dependencies = {
             "nvim-lua/plenary.nvim",
             -- if you want to enable coloring of ANSI escape codes in
@@ -219,8 +220,9 @@ local plugins = {
         lazy = false,
         ---@type snacks.Config
         keys = {
-            { "<leader>ss", function() Snacks.picker.lsp_symbols() end },
+            { "<leader>ws", function() Snacks.picker.lsp_workspace_symbols() end },
             { "<leader>sk", function() Snacks.image.hover() end },
+            { "<leader>F",  function() Snacks.picker.grep_word() end,            desc = "Visual selection or word", mode = { "n", "x" } },
         },
         opts = {
             -- your configuration comes here
@@ -369,7 +371,7 @@ local plugins = {
     },
     {
         "norcalli/nvim-colorizer.lua",
-        lazy = false,
+        cmd = { "ColorizerToggle" },
         config = function()
             vim.o.termguicolors = true
             require 'colorizer'.setup({
@@ -394,7 +396,7 @@ local plugins = {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
         event = "UIEnter",
-        enabled = true,
+        enabled = false,
         config = function()
             require("settings.lualine")
         end
@@ -415,15 +417,6 @@ local plugins = {
             -- { 'saadparwaiz1/cmp_luasnip' },
         }
     },
-    {
-        "L3MON4D3/LuaSnip",
-        enabled = false,
-        config = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
-        end,
-        ft = { "go", "sh", "rust" },
-        dependencies = { "rafamadriz/friendly-snippets" },
-    },
     { 'onsails/lspkind.nvim',                    event = "VeryLazy",         lazy = true },
     {
         'nvim-treesitter/nvim-treesitter',
@@ -435,34 +428,10 @@ local plugins = {
             require("settings.treesitter")
         end
     },
-    { 'nvim-treesitter/playground',              cmd = "TSPlaygroundToggle", enabled = true,       event = "VeryLazy" },
+    { 'nvim-treesitter/playground',              cmd = "TSPlaygroundToggle", enabled = false,      event = "VeryLazy" },
     { 'nvim-treesitter/nvim-treesitter-context', event = "VeryLazy",         ft = { "go", "rust" } },
     { 'nvim-lua/plenary.nvim',                   event = "VeryLazy" },
-    {
-        'nvim-telescope/telescope.nvim',
-        VeryLazy = true,
-        config = function()
-            require("settings.telescope")
-        end,
-        keys = {
-            {
-                '<leader>F',
-                '<cmd>lua require("telescope.builtin").grep_string()<cr>',
-                mode = { "n", "v" },
-                { noremap = true, silent = true },
-            },
-        },
-        dependencies = {
-            { 'nvim-telescope/telescope-file-browser.nvim' },
-            { 'nvim-telescope/telescope-fzf-native.nvim',  build = 'make' },
-        }
-    },
-    {
-        "gfanto/fzf-lsp.nvim",
-        lazy = true,
-        enabled = false
-    },
-    { 'tpope/vim-commentary', event = "VeryLazy" },
+    { 'tpope/vim-commentary',                    event = "VeryLazy" },
     {
         'ChaosNyaruko/vim-markdown',
         branch = "353",
@@ -470,12 +439,12 @@ local plugins = {
         event = "VeryLazy",
         dev = false
     },
-    { 'godlygeek/tabular',    event = "VeryLazy" },
-    { 'junegunn/fzf',         build = ":call fzf#install()", event = "VeryLazy" },
-    { 'junegunn/fzf.vim',     event = "VeryLazy" },
-    { 'tpope/vim-fugitive',   event = "VeryLazy" },
-    { 'tpope/vim-surround',   event = "VeryLazy" },
-    { 'mbbill/undotree',      event = "VeryLazy" },
+    { 'godlygeek/tabular',  event = "VeryLazy" },
+    { 'junegunn/fzf',       build = ":call fzf#install()", event = "VeryLazy" },
+    { 'junegunn/fzf.vim',   event = "VeryLazy" },
+    { 'tpope/vim-fugitive', event = "VeryLazy",            lazy = false },
+    { 'tpope/vim-surround', event = "VeryLazy" },
+    { 'mbbill/undotree',    event = "VeryLazy" },
     {
         enabled = true,
         "catppuccin/nvim",
@@ -570,6 +539,7 @@ local plugins = {
         enabled = false,
     },
     {
+        enabled = false,
         "nvim-treesitter/nvim-treesitter-textobjects",
         config = function()
             require("settings.treesitter")
@@ -587,6 +557,28 @@ local opts = {
 
 require("lazy").setup(plugins, opts)
 
+-- My simple statusline
+-- Broken down into easily includeable segments
+-- We need "vim-fugitive" to get Git hotness
+vim.cmd([[
+" display the number of matches from a search, see https://vi.stackexchange.com/questions/15944/how-to-display-in-the-statusline-the-number-of-matches-from-a-search
+set shortmess-=S
+" mode and filename
+set statusline=%{toupper(mode())}\ %<%f
+set statusline+=%=%=%{fugitive#statusline()} " Git Hotness
+" Options:
+" %w Preview window flag
+" %h Help buffer flag
+" %m Modified flag
+" %r Readonly flag
+set statusline+=%w%h%m%r
+" Right aligned file nav info
+set statusline+=%=%-14.(%l,%c%V%)\ %p%%
+set statusline+=\ [%{&ff}/%y/%{&fileencoding?&fileencoding:&encoding}]
+" set statusline+=\ [%{getcwd()}]          " Current dir
+" set statusline+=\ %b\ 0x%B             " ga/:ascii
+]]
+)
 
 --------
 -- workaround for vim in vim's terminal

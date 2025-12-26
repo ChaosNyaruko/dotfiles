@@ -428,3 +428,4 @@ nnoremap \t <cmd>call append(line("."), strftime("%F", localtime()))<cr>
 
 " learn from https://vim.fandom.com/wiki/Search_and_replace_in_a_visual_selection
 vnoremap <M-/> <Esc>/\%V
+
