@@ -157,6 +157,8 @@ local function toggle_venn()
 end
 
 local plugins = {
+    -- TODO: https://github.com/junegunn/vim-easy-align
+
     {
         "jbyuki/venn.nvim",
         config = function()
