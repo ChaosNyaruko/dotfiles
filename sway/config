@@ -181,7 +181,7 @@ bindsym $mod+x exec "swaymsg -t get_outputs |jq '[.[] | select(.active == true)]
 # 51 is the "\" key, i don't know the esacpe rule
 bindcode $mod+Shift+51 move scratchpad 
 bindcode $mod+51 scratchpad show
-bindsym $mod+m exec 'swaymsg workspace 10, exec "firefox --new-window http://192.168.0.105:1345"'
+bindsym $mod+m exec 'swaymsg workspace 10, exec "firefox --new-window http://mac-mini.local:1345"'
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
