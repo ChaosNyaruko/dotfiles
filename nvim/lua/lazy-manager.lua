@@ -551,7 +551,7 @@ local plugins = {
 
 local opts = {
     dev = {
-        path = "~/github.com",
+        path = "~/github",
         pattern = {},
         fallback = false,
     }
