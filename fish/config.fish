@@ -62,21 +62,36 @@ else
 end
 
 function Proxy
+    set -l port 7890
     if test (count $argv) = 0
         set -S http_proxy
         set -S https_proxy
         set -S no_proxy
+        set -S HTTP_PROXY
+        set -S HTTPS_PROXY
+        set -S NO_PROXY
         return
     end
+
+    if test (count $argv) > 1
+        set port $argv[2]
+    end
+    
     if test $argv[1] = "on" 
-        set -gx https_proxy http://localhost:7890
-        set -gx http_proxy http://localhost:7890
-        set -gx no_proxy socks5://localhost:7890
+        set -gx https_proxy http://localhost:$port
+        set -gx http_proxy http://localhost:$port
+        set -gx no_proxy socks5://localhost:$port
+        set -gx HTTPS_PROXY http://localhost:$port
+        set -gx HTTP_PROXY http://localhost:$port
+        set -gx NO_PROXY socks5://localhost:$port
         echo Proxy On $https_proxy
     else 
         set -e https_proxy
         set -e http_proxy
         set -e no_proxy 
+        set -e HTTPS_PROXY
+        set -e HTTP_PROXY
+        set -e NO_PROXY 
         echo Proxy Off
     end
 end
