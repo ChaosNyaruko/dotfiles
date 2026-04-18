@@ -78,29 +78,31 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 -- https://github.com/neovim/neovim/discussions/29350
--- vim.g.clipboard = {
---     name = 'OSC 52',
---     copy = {
---         ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
---         ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
---     },
---     paste = {
---         ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
---         ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
---     },
--- }
+vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+        ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+        ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+    },
+    paste = {
+        ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+        ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+    },
+}
 if vim.env.TMUX ~= nil then
+    local copy = { 'tmux', 'load-buffer', '-w', '-' }
+    local paste = { 'bash', '-c', 'tmux refresh-client -l && sleep 0.05 && tmux save-buffer -' }
     vim.g.clipboard = {
         name = 'tmux',
         copy = {
-            ['+'] = { 'tmux', 'load-buffer', '-' },
-            ['*'] = { 'tmux', 'load-buffer', '-' },
+            ['+'] = copy,
+            ['*'] = copy,
         },
         paste = {
-            ['+'] = { 'tmux', 'save-buffer', '-' },
-            ['*'] = { 'tmux', 'save-buffer', '-' },
+            ['+'] = paste,
+            ['*'] = paste,
         },
-        cache_enabled = 1,
+        cache_enabled = 0,
     }
 end
 
@@ -529,7 +531,7 @@ local plugins = {
         build = function(plugin)
             require("ondict").install(plugin.dir)
         end,
-        dev = true,
+        dev = false,
         config = function()
             require("ondict").setup("auto")
         end

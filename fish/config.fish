@@ -73,7 +73,7 @@ function Proxy
         return
     end
 
-    if test (count $argv) > 1
+    if test (count $argv) -ge 2
         set port $argv[2]
     end
     
