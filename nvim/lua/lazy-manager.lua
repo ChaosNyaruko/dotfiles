@@ -4,6 +4,8 @@ vim.lsp.enable('gopls')
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('thriftls')
+vim.lsp.enable('pyright')
+vim.lsp.enable('jdtls')
 local function document_highlight()
     vim.lsp.buf.clear_references()
     vim.lsp.buf.document_highlight()
@@ -156,9 +158,8 @@ local function toggle_venn()
     end
 end
 
+-- TODO: https://github.com/junegunn/vim-easy-align
 local plugins = {
-    -- TODO: https://github.com/junegunn/vim-easy-align
-
     {
         "jbyuki/venn.nvim",
         config = function()
@@ -423,15 +424,15 @@ local plugins = {
     {
         'nvim-treesitter/nvim-treesitter',
         lazy = true,
-        ft = { "go", "rust", "c", "cpp" },
+        ft = { "go", "rust", "c", "cpp", "java" },
         cmd = { "TSInstallInfo", "TSUpdate" },
         build = ':TSUpdate',
         config = function()
             require("settings.treesitter")
         end
     },
-    { 'nvim-treesitter/playground',              cmd = "TSPlaygroundToggle", enabled = false,      event = "VeryLazy" },
-    { 'nvim-treesitter/nvim-treesitter-context', event = "VeryLazy",         ft = { "go", "rust" } },
+    { 'nvim-treesitter/playground',              cmd = "TSPlaygroundToggle", enabled = false,              event = "VeryLazy" },
+    { 'nvim-treesitter/nvim-treesitter-context', event = "VeryLazy",         ft = { "go", "rust", "java" } },
     { 'nvim-lua/plenary.nvim',                   event = "VeryLazy" },
     { 'tpope/vim-commentary',                    event = "VeryLazy" },
     {
