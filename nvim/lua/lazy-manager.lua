@@ -42,7 +42,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
         vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
         vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+        vim.keymap.set('n', 'gr', function()
+            vim.lsp.buf.references(nil, { on_list = function(opts)
+                local seen = {}
+                opts.items = vim.tbl_filter(function(item)
+                    local key = item.filename .. ':' .. item.lnum .. ':' .. item.col
+                    if seen[key] then return false end
+                    seen[key] = true
+                    return true
+                end, opts.items)
+                vim.fn.setqflist({}, 'r', opts)
+                vim.cmd('copen')
+            end })
+        end, bufopts)
         vim.keymap.set('n', '\\f', vim.lsp.buf.format, bufopts)
 
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
