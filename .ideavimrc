@@ -36,8 +36,8 @@ let mapleader=" "
 " """ Editing source code
 " set ideajoin
 " set idearefactormode=keep
-" vnoremap < <gv
-" vnoremap > >gv
+vnoremap < <gv
+vnoremap > >gv
 " nnoremap [[ :action MethodUp<CR>
 " nnoremap ]] :action MethodDown<CR>
 " nnoremap zc :action CollapseRegion<CR>
@@ -67,7 +67,7 @@ nmap gr <Action>(FindUsages)
 " nnoremap <c-o> :action GotoSymbol<CR>
 " nnoremap gc :action GotoClass<CR>
 nnoremap gi :action GotoImplementation<CR>
-" nnoremap gd :action GotoDeclaration<CR>
+nnoremap gd :action GotoDeclaration<CR>
 " nnoremap gp :action GotToSuperMethod<CR>
 " nnoremap gt :action GotoTest<CR>
 " nnoremap gb :action Back<CR>
