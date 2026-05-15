@@ -1,0 +1,67 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "azure-gpt5": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "compat-gpt-5",
+      "options": {
+        "baseURL": "<url>/openai/deployments/gpt-5.5",
+        "apiKey": "<your-api-key>",
+        "queryParams": {
+          "api-version": "2025-03-01-preview"
+        }
+      },
+      "models": {
+        "gpt-5.5": {
+          "name": "gpt-5.5",
+          "reasoning": true
+        }
+      }
+    },
+    "azure": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "YOU",
+      "options": {
+        "useDeploymentBasedUrls": true,
+        "baseURL": "<url>/openai/deployments/gpt-4o-mini",
+        "apiKey": "<your-api-key>",
+        "queryParams": {
+          "api-version": "2024-12-01-preview"
+        },
+        "apiVersion": "2024-12-01-preview"
+      },
+      "models": {
+        "gpt-4o-mini": {
+          "name": "gpt-4o-mini"
+        }
+      }
+    },
+    "vllm-qwen": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "VLLM Qwen",
+      "options": {
+        "baseURL": "<url>/v1",
+        "apiKey": "xxx"
+      },
+      "models": {
+        "glm-5.1": {
+          "name": "glm-5.1"
+        }
+      }
+    }
+  },
+  "plugin": [
+    "./plugins/fix-gpt5-params.ts"
+  ],
+  "mcp": {
+    "chrome-devtools": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ],
+      "enabled": true
+    }
+  }
+}
