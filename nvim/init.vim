@@ -21,7 +21,7 @@ set wildmenu
 set wildmode=list:longest,full " basically [:] means [&&]  [,] means [then]
 " set wildoptions=pum,tagfile "nvim's default settings
 set showtabline=1
-set laststatus=3
+set laststatus=2
 set novisualbell
 set noswapfile
 set nobackup
@@ -56,58 +56,13 @@ autocmd FileType qf :set norelativenumber
 
 set undodir=~/.local/state/nvim/undo
 set undofile
-"
+
 " Share clipboard if possible
-if has('clipboard') 
-    if has('unnamedplus')  " When possible use + register for copy-paste
-        set clipboard=unnamed,unnamedplus
-    else         " On mac and Windows, use * register for copy-paste
-        set clipboard=unnamed
-    endif
-endif
+set clipboard+=unnamedplus
 
 if exists("g:vscode") 
     finish
 endif
-
-" A function for default basic emacs/bash-like moving in insert mode
-" might be useful when using Chinese input method
-function! ToggleEmacsMapping(prompt)
-    " vim has defined ctrl-u alt-b for similar functionality
-    if g:emacs_mapping==1
-        if (a:prompt)
-            echo "emacs_mapping is on, turning it off"
-        endif
-        iunmap <C-f>
-        iunmap <C-b>
-        iunmap <C-n>
-        iunmap <C-p>
-        iunmap <C-a>
-        iunmap <C-e>
-        iunmap <C-k>
-        iunmap <A-f>
-        let g:emacs_mapping=0
-    else
-        " TODO: using magarg to save/restore original mapping
-        " https://vi.stackexchange.com/questions/7734/how-to-save-and-restore-a-mapping
-        if (a:prompt)
-            echo "emacs_mapping is off, turning it on"
-        endif
-        inoremap <C-f> <Right>
-        inoremap <C-b> <Left>
-        inoremap <C-n> <cmd>execute "normal! g\<lt>Down>"<cr>
-        inoremap <C-p> <cmd>execute "normal! g\<lt>Up>"<cr>
-        inoremap <C-a> <Home>
-        inoremap <C-e> <End>
-        inoremap <C-k> <C-o>D
-        inoremap <A-f> <esc>lwi
-        inoremap <A-b> <esc>bi
-        let g:emacs_mapping=1
-    endif
-endfunction
-let g:emacs_mapping=0
-call ToggleEmacsMapping(v:false)
-command! -nargs=0 ToggleEmacs call ToggleEmacsMapping(v:true) "}}}
 
 " Auto jump back to the last position when opened {{{
 function! ResCur() 
@@ -150,7 +105,12 @@ function! s:onlyemoji(emoji_with_comments)
     return (split(join(a:emoji_with_comments), ' '))[0]
 endfunction
 
-inoremap <expr> <c-x><c-k> fzf#vim#complete({
+" <c-x><c-k>(insert mode) to trigger dictionary words completion
+set dictionary+=/usr/share/dict/words 
+
+nnoremap <leader>E :cgetexpr v:errmsg <bar> copen<cr>
+
+inoremap <expr> <c-x><c-e> fzf#vim#complete({
             \ 'source': 'cat ~/.local/share/larbs/chars/emoji ~/.local/share/larbs/chars/font-awesome',
             \ 'reducer': function('<sid>onlyemoji'),
             \ 'right':    40
@@ -244,7 +204,7 @@ let g:mkdp_preview_options = {
 
 " use a custom markdown style must be absolute path
 " like '/Users/username/markdown.css' or expand('~/markdown.css')
-" let g:mkdp_markdown_css = expand('~/dotfiles/github-markdown.css')
+let g:mkdp_markdown_css = expand('~/dotfiles/github-markdown.css')
 
 " use a custom highlight style must absolute path
 " like '/Users/username/highlight.css' or expand('~/highlight.css')
@@ -423,3 +383,4 @@ nnoremap \t <cmd>call append(line("."), strftime("%F", localtime()))<cr>
 
 " learn from https://vim.fandom.com/wiki/Search_and_replace_in_a_visual_selection
 vnoremap <M-/> <Esc>/\%V
+

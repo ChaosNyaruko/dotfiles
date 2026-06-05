@@ -1,3 +1,96 @@
+vim.opt.completeopt = 'menu,menuone,noselect'
+
+vim.lsp.enable('gopls')
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('rust_analyzer')
+vim.lsp.enable('thriftls')
+vim.lsp.enable('pyright')
+vim.lsp.enable('jdtls')
+local function document_highlight()
+    vim.lsp.buf.clear_references()
+    vim.lsp.buf.document_highlight()
+end
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('my.lsp', {}),
+    callback = function(args)
+        -- local opts = { buffer = true, noremap = true, silent = true, desc = "mapping for vim.lsp" }
+        local bufopts = {
+            noremap = true,
+            silent = true,
+            buffer = args.buf,
+            desc =
+            "buffer mappings in lspconfig on attach"
+        }
+        vim.diagnostic.config({ virtual_text = true })
+        vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
+        vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end, bufopts)
+        vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end, bufopts)
+        vim.keymap.set('n', '<space>q',
+            function() vim.diagnostic.setloclist({ severity = vim.diagnostic.severity.ERROR }) end, bufopts)
+
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+        vim.keymap.set('n', 'goc', vim.lsp.buf.incoming_calls, bufopts)
+        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+        vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+        vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+        vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+        vim.keymap.set('n', '<space>wl', function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        end, bufopts)
+        vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+        vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+        vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+        vim.keymap.set('n', 'gr', function()
+            vim.lsp.buf.references(nil, { on_list = function(opts)
+                local seen = {}
+                opts.items = vim.tbl_filter(function(item)
+                    local key = item.filename .. ':' .. item.lnum .. ':' .. item.col
+                    if seen[key] then return false end
+                    seen[key] = true
+                    return true
+                end, opts.items)
+                vim.fn.setqflist({}, 'r', opts)
+                vim.cmd('copen')
+            end })
+        end, bufopts)
+        vim.keymap.set('n', '\\f', vim.lsp.buf.format, bufopts)
+
+        local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+        print("attached: ", client.name)
+        if client.server_capabilities.documentHighlightProvider then
+            vim.api.nvim_set_hl(0, "LspReferenceText", { underline = true })
+            vim.keymap.set('n', '<space>8', document_highlight, bufopts)
+        end
+
+
+        if client:supports_method('textDocument/implementation') then
+            -- Create a keymap for vim.lsp.buf.implementation ...
+            vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, bufopts)
+        end
+        -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
+        if client:supports_method('textDocument/completion') then
+            -- Optional: trigger autocompletion on EVERY keypress. May be slow!
+            -- local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
+            -- client.server_capabilities.completionProvider.triggerCharacters = chars
+            vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+        end
+
+        -- autoformat for go and rust
+        local format_group = vim.api.nvim_create_augroup("LspFormatGroup", { clear = true })
+        vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+            group = format_group,
+            buffer = args.buf,
+            desc = "LspFormatGroup",
+            callback = function()
+                vim.notify(string.format("format by lsp: %s", client.name), vim.log.levels.WARN)
+                vim.lsp.buf.format()
+            end,
+        })
+    end,
+})
+
 -- https://github.com/neovim/neovim/discussions/29350
 vim.g.clipboard = {
     name = 'OSC 52',
@@ -77,6 +170,7 @@ local function toggle_venn()
     end
 end
 
+-- TODO: https://github.com/junegunn/vim-easy-align
 local plugins = {
     {
         "jbyuki/venn.nvim",
@@ -93,6 +187,7 @@ local plugins = {
         -- branch = "latest",
         -- or the most up-to-date updates:
         -- branch = "nightly",
+        cmd = { "Compile" },
         dependencies = {
             "nvim-lua/plenary.nvim",
             -- if you want to enable coloring of ANSI escape codes in
@@ -140,8 +235,9 @@ local plugins = {
         lazy = false,
         ---@type snacks.Config
         keys = {
-            { "<leader>ss", function() Snacks.picker.lsp_symbols() end },
+            { "<leader>ws", function() Snacks.picker.lsp_workspace_symbols() end },
             { "<leader>sk", function() Snacks.image.hover() end },
+            { "<leader>F",  function() Snacks.picker.grep_word() end,            desc = "Visual selection or word", mode = { "n", "x" } },
         },
         opts = {
             -- your configuration comes here
@@ -252,17 +348,17 @@ local plugins = {
                 virtualtext = {
                     auto_trigger_ft = { 'go', 'lua', 'vim', 'python' },
                     keymap = {
-                        -- accept whole completion
-                        accept = '<C-]>',
                         -- accept one line
-                        accept_line = '<C-y>',
+                        accept_line = '<C-]>',
+                        -- accept whole completion
+                        accept = '<A-]>',
                         -- accept n lines (prompts for number)
                         accept_n_lines = '<A-z>',
                         -- Cycle to prev completion item, or manually invoke completion
-                        prev = '<C-;>',
+                        prev = '<A-;>',
                         -- Cycle to next completion item, or manually invoke completion
-                        next = '<C-,>',
-                        dismiss = '<C-e>',
+                        next = '<A-,>',
+                        dismiss = '<A-e>',
                     },
                 },
                 provider = 'openai_fim_compatible',
@@ -290,7 +386,7 @@ local plugins = {
     },
     {
         "norcalli/nvim-colorizer.lua",
-        lazy = false,
+        cmd = { "ColorizerToggle" },
         config = function()
             vim.o.termguicolors = true
             require 'colorizer'.setup({
@@ -302,6 +398,7 @@ local plugins = {
         end
     },
     {
+        enabled = false,
         'neovim/nvim-lspconfig',
         ft     = { "thrift", "html", "go", "lua", "python", "c", "cpp", "rust" },
         -- event = "VeryLazy",
@@ -314,13 +411,13 @@ local plugins = {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
         event = "UIEnter",
-        enabled = true,
+        enabled = false,
         config = function()
             require("settings.lualine")
         end
     },
     {
-        enabled = true,
+        enabled = false,
         'hrsh7th/nvim-cmp',
         event = { "InsertEnter" },
         ft = { "go", "rust", "python" },
@@ -331,57 +428,25 @@ local plugins = {
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'hrsh7th/cmp-buffer' },
             { 'hrsh7th/cmp-nvim-lsp-signature-help' },
-            { 'L3MON4D3/LuaSnip' },
-            { 'saadparwaiz1/cmp_luasnip' },
+            -- { 'L3MON4D3/LuaSnip' },
+            -- { 'saadparwaiz1/cmp_luasnip' },
         }
-    },
-    {
-        "L3MON4D3/LuaSnip",
-        config = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
-        end,
-        ft = { "go", "sh", "rust" },
-        dependencies = { "rafamadriz/friendly-snippets" },
     },
     { 'onsails/lspkind.nvim',                    event = "VeryLazy",         lazy = true },
     {
         'nvim-treesitter/nvim-treesitter',
         lazy = true,
-        ft = { "go", "rust", "c", "cpp" },
+        ft = { "go", "rust", "c", "cpp", "java" },
         cmd = { "TSInstallInfo", "TSUpdate" },
         build = ':TSUpdate',
         config = function()
             require("settings.treesitter")
         end
     },
-    { 'nvim-treesitter/playground',              cmd = "TSPlaygroundToggle", enabled = true,       event = "VeryLazy" },
-    { 'nvim-treesitter/nvim-treesitter-context', event = "VeryLazy",         ft = { "go", "rust" } },
+    { 'nvim-treesitter/playground',              cmd = "TSPlaygroundToggle", enabled = false,              event = "VeryLazy" },
+    { 'nvim-treesitter/nvim-treesitter-context', event = "VeryLazy",         ft = { "go", "rust", "java" } },
     { 'nvim-lua/plenary.nvim',                   event = "VeryLazy" },
-    {
-        'nvim-telescope/telescope.nvim',
-        VeryLazy = true,
-        config = function()
-            require("settings.telescope")
-        end,
-        keys = {
-            {
-                '<leader>F',
-                '<cmd>lua require("telescope.builtin").grep_string()<cr>',
-                mode = { "n", "v" },
-                { noremap = true, silent = true },
-            },
-        },
-        dependencies = {
-            { 'nvim-telescope/telescope-file-browser.nvim' },
-            { 'nvim-telescope/telescope-fzf-native.nvim',  build = 'make' },
-        }
-    },
-    {
-        "gfanto/fzf-lsp.nvim",
-        lazy = true,
-        enabled = false
-    },
-    { 'tpope/vim-commentary', event = "VeryLazy" },
+    { 'tpope/vim-commentary',                    event = "VeryLazy" },
     {
         'ChaosNyaruko/vim-markdown',
         branch = "353",
@@ -389,12 +454,12 @@ local plugins = {
         event = "VeryLazy",
         dev = false
     },
-    { 'godlygeek/tabular',    event = "VeryLazy" },
-    { 'junegunn/fzf',         build = ":call fzf#install()", event = "VeryLazy" },
-    { 'junegunn/fzf.vim',     event = "VeryLazy" },
-    { 'tpope/vim-fugitive',   event = "VeryLazy" },
-    { 'tpope/vim-surround',   event = "VeryLazy" },
-    { 'mbbill/undotree',      event = "VeryLazy" },
+    { 'godlygeek/tabular',  event = "VeryLazy" },
+    { 'junegunn/fzf',       build = ":call fzf#install()", event = "VeryLazy" },
+    { 'junegunn/fzf.vim',   event = "VeryLazy" },
+    { 'tpope/vim-fugitive', event = "VeryLazy",            lazy = false },
+    { 'tpope/vim-surround', event = "VeryLazy" },
+    { 'mbbill/undotree',    event = "VeryLazy" },
     {
         enabled = true,
         "catppuccin/nvim",
@@ -458,7 +523,7 @@ local plugins = {
     },
     {
         'Exafunction/codeium.vim',
-        enabled = at_home,
+        enabled = false,
         event = "VeryLazy",
         init = function()
             vim.g.codeium_enabled = false
@@ -481,7 +546,7 @@ local plugins = {
         end,
         dev = false,
         config = function()
-            require("ondict").setup("localhost:1345")
+            require("ondict").setup("auto")
         end
     },
     {
@@ -489,6 +554,7 @@ local plugins = {
         enabled = false,
     },
     {
+        enabled = false,
         "nvim-treesitter/nvim-treesitter-textobjects",
         config = function()
             require("settings.treesitter")
@@ -505,6 +571,29 @@ local opts = {
 }
 
 require("lazy").setup(plugins, opts)
+
+-- My simple statusline
+-- Broken down into easily includeable segments
+-- We need "vim-fugitive" to get Git hotness
+vim.cmd([[
+" display the number of matches from a search, see https://vi.stackexchange.com/questions/15944/how-to-display-in-the-statusline-the-number-of-matches-from-a-search
+set shortmess-=S
+" mode and filename
+set statusline=%{toupper(mode())}\ %<%f
+set statusline+=%=%=%{fugitive#statusline()} " Git Hotness
+" Options:
+" %w Preview window flag
+" %h Help buffer flag
+" %m Modified flag
+" %r Readonly flag
+set statusline+=%w%h%m%r
+" Right aligned file nav info
+set statusline+=%=%-14.(%l,%c%V%)\ %p%%
+set statusline+=\ [%{&ff}/%y/%{&fileencoding?&fileencoding:&encoding}]
+" set statusline+=\ [%{getcwd()}]          " Current dir
+" set statusline+=\ %b\ 0x%B             " ga/:ascii
+]]
+)
 
 --------
 -- workaround for vim in vim's terminal

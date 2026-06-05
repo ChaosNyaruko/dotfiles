@@ -1226,3 +1226,16 @@
   min-height: 52px;
 }
 
+nav.table-of-contents {
+    flex-shrink: 1;
+    position: fixed;
+    left: 1rem;
+    /* right: 1rem; */
+    top: 1rem;
+    width: 300px;
+    max-height: calc(100vh - 2rem);
+    align-self: flex-start; /* prevents stretching to full height */
+    overflow-y: auto;
+}
+
+
