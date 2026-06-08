@@ -572,6 +572,10 @@ local opts = {
 
 require("lazy").setup(plugins, opts)
 
+vim.keymap.set('n', '<leader>tw', function()
+    vim.wo.wrap = not vim.wo.wrap
+end, { noremap = true, desc = 'Toggle wrap' })
+
 -- My simple statusline
 -- Broken down into easily includeable segments
 -- We need "vim-fugitive" to get Git hotness
