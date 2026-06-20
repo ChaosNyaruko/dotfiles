@@ -1,150 +1,120 @@
-local status, ts = pcall(require, 'nvim-treesitter.config')
-if (not status) then return end
+-- ── Parser installation ──────────────────────────────────────────────
+-- nvim-treesitter (main branch) only manages parsers and queries now.
+-- Highlighting / folding / indentation are Neovim built-ins.
+require('nvim-treesitter').install({
+    'lua', 'json', 'vim', 'query', 'go', 'python', 'java',
+}):wait(300000)
 
+-- ── Highlighting (built-in vim.treesitter) ────────────────────────────
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'go', 'rust', 'c', 'cpp', 'java', 'lua', 'json', 'python', 'query' },
+    callback = function(ev)
+        -- vimdoc has a strange error, skip it
+        if vim.bo[ev.buf].filetype == 'vimdoc' then return end
+        local ok = pcall(vim.treesitter.start)
+        if not ok then return end
+    end,
+})
 
--- nvim-treesitter-textobjects
-require 'treesitter-context'.setup {
-    enable = true,            -- Enable this plugin (Can be enabled/disabled later via commands)
-    max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
-    min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-    line_numbers = true,
-    multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
-    trim_scope = 'outer',     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-    mode = 'cursor',          -- Line used to calculate context. Choices: 'cursor', 'topline'
-    -- Separator between context and content. Should be a single character string, like '-'.
-    -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-    separator = nil,
-    zindex = 20,     -- The Z-index of the context window
-    on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+-- ── Indentation (nvim-treesitter experimental) ────────────────────────
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'go', 'rust', 'c', 'cpp', 'java', 'lua', 'python' },
+    callback = function()
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
+})
+
+-- ── nvim-treesitter-context ───────────────────────────────────────────
+local ctx_ok, ctx = pcall(require, 'treesitter-context')
+if ctx_ok then
+    ctx.setup {
+        enable            = true,
+        multiwindow       = false,
+        max_lines         = 0,
+        min_window_height = 0,
+        line_numbers      = true,
+        multiline_threshold = 20,
+        trim_scope        = 'outer',
+        mode              = 'cursor',
+        separator         = nil,
+        zindex            = 20,
+        on_attach         = nil,
+    }
+
+    vim.cmd [[hi TreesitterContextBottom gui=underline guisp=Grey]]
+
+    vim.keymap.set("n", "[c", function()
+        require("treesitter-context").go_to_context(vim.v.count1)
+    end, { silent = true, desc = "Jump to treesitter context" })
+end
+
+-- ── nvim-treesitter-textobjects ───────────────────────────────────────
+local to_ok, _ = pcall(require, 'nvim-treesitter-textobjects')
+if not to_ok then return end
+
+local select = require('nvim-treesitter-textobjects.select')
+local move   = require('nvim-treesitter-textobjects.move')
+
+-- select
+require('nvim-treesitter-textobjects').setup {
+    select = {
+        lookahead = true,
+        selection_modes = {
+            ['@parameter.outer'] = 'v',
+            ['@function.outer']  = 'V',
+            ['@class.outer']     = '<c-v>',
+        },
+        include_surrounding_whitespace = true,
+    },
+    move = {
+        set_jumps = true,
+    },
 }
 
-vim.cmd [[hi TreesitterContextBottom gui=underline guisp=Grey]]
-vim.keymap.set("n", "[c", function()
-    require("treesitter-context").go_to_context()
-end, { silent = true })
+-- text-object selection keymaps
+for _, mode in ipairs({ 'x', 'o' }) do
+    vim.keymap.set(mode, 'af', function()
+        select.select_textobject('@function.outer', 'textobjects')
+    end, { desc = 'Select outer function' })
+    vim.keymap.set(mode, 'if', function()
+        select.select_textobject('@function.inner', 'textobjects')
+    end, { desc = 'Select inner function' })
+    vim.keymap.set(mode, 'ac', function()
+        select.select_textobject('@class.outer', 'textobjects')
+    end, { desc = 'Select outer class' })
+    vim.keymap.set(mode, 'ic', function()
+        select.select_textobject('@class.inner', 'textobjects')
+    end, { desc = 'Select inner class' })
+    vim.keymap.set(mode, 'as', function()
+        select.select_textobject('@local.scope', 'locals')
+    end, { desc = 'Select scope' })
+end
 
-ts.setup {
-    modules = { "all" }, -- See :TSModuleInfo
-    auto_install = false,
-    sync_install = false,
-    ignore_install = { "all" },
-    highlight = {
-        enable = true,
-        disable = { "vimdoc" }, -- TODO: vimdoc:strange error, markdown: make the gx work
-        additional_vim_regex_highlighting = false, -- From https://github.com/catppuccin/nvim FAQ
-    },
-    indent = {
-        enable = true,
-        disable = {},
-    },
-    ensure_installed = {
-        'lua',
-        'json',
-        'vim',
-        "query",
-        "go",
-        "python",
-        "java",
-    },
-    autotag = {
-        enable = true,
-    },
-    playground = {
-        enable = true,
-        disable = {},
-        updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
-        persist_queries = false, -- Whether the query persists across vim sessions
-        keybindings = {
-            toggle_query_editor = 'o',
-            toggle_hl_groups = 'i',
-            toggle_injected_languages = 't',
-            toggle_anonymous_nodes = 'a',
-            toggle_language_display = 'I',
-            focus_language = 'f',
-            unfocus_language = 'F',
-            update = 'R',
-            goto_node = '<cr>',
-            show_help = '?',
-        },
-    },
-    textobjects = {
-        move = {
-            enable = true,
-            set_jumps = true, -- whether to set jumps in the jumplist
-            goto_next_start = {
-                ["]]"] = "@function.outer",
-                -- ["]]"] = { query = "@class.outer", desc = "Next class start" },
-                --
-                -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queires.
-                ["]o"] = "@loop.*",
-                -- ["]o"] = { query = { "@loop.inner", "@loop.outer" } }
-                --
-                -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
-                -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
-                ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
-                ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
-            },
-            goto_next_end = {
-                ["]["] = "@function.outer",
-                -- ["]["] = "@class.outer",
-            },
-            goto_previous_start = {
-                ["[["] = "@function.outer",
-                -- ["[["] = "@class.outer",
-            },
-            goto_previous_end = {
-                ["[]"] = "@function.outer",
-                -- ["[]"] = "@class.outer",
-            },
-            -- Below will go to either the start or the end, whichever is closer.
-            -- Use if you want more granular movements
-            -- Make it even more gradual by adding multiple queries and regex.
-            goto_next = {
-                -- ["]d"] = "@conditional.outer",
-            },
-            goto_previous = {
-                -- ["[d"] = "@conditional.outer",
-            }
-        },
-        select = {
-            enable = true,
+-- move keymaps
+vim.keymap.set({ 'n', 'x', 'o' }, ']]', function()
+    move.goto_next_start('@function.outer', 'textobjects')
+end, { desc = 'Next function start' })
 
-            -- Automatically jump forward to textobj, similar to targets.vim
-            lookahead = true,
+vim.keymap.set({ 'n', 'x', 'o' }, '][', function()
+    move.goto_next_end('@function.outer', 'textobjects')
+end, { desc = 'Next function end' })
 
-            keymaps = {
-                -- You can use the capture groups defined in textobjects.scm
-                ["af"] = "@function.outer",
-                ["if"] = "@function.inner",
-                ["ac"] = "@class.outer",
-                -- You can optionally set descriptions to the mappings (used in the desc parameter of
-                -- nvim_buf_set_keymap) which plugins like which-key display
-                ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-                -- You can also use captures from other query groups like `locals.scm`
-                ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-            },
-            -- You can choose the select mode (default is charwise 'v')
-            --
-            -- Can also be a function which gets passed a table with the keys
-            -- * query_string: eg '@function.inner'
-            -- * method: eg 'v' or 'o'
-            -- and should return the mode ('v', 'V', or '<c-v>') or a table
-            -- mapping query_strings to modes.
-            selection_modes = {
-                ['@parameter.outer'] = 'v', -- charwise
-                ['@function.outer'] = 'V',  -- linewise
-                ['@class.outer'] = '<c-v>', -- blockwise
-            },
-            -- If you set this to `true` (default is `false`) then any textobject is
-            -- extended to include preceding or succeeding whitespace. Succeeding
-            -- whitespace has priority in order to act similarly to eg the built-in
-            -- `ap`.
-            --
-            -- Can also be a function which gets passed a table with the keys
-            -- * query_string: eg '@function.inner'
-            -- * selection_mode: eg 'v'
-            -- and should return true of false
-            include_surrounding_whitespace = true,
-        },
-    },
-}
+vim.keymap.set({ 'n', 'x', 'o' }, '[[', function()
+    move.goto_previous_start('@function.outer', 'textobjects')
+end, { desc = 'Previous function start' })
+
+vim.keymap.set({ 'n', 'x', 'o' }, '[]', function()
+    move.goto_previous_end('@function.outer', 'textobjects')
+end, { desc = 'Previous function end' })
+
+vim.keymap.set({ 'n', 'x', 'o' }, ']o', function()
+    move.goto_next_start({ '@loop.inner', '@loop.outer' }, 'textobjects')
+end, { desc = 'Next loop start' })
+
+vim.keymap.set({ 'n', 'x', 'o' }, ']s', function()
+    move.goto_next_start('@local.scope', 'locals')
+end, { desc = 'Next scope' })
+
+vim.keymap.set({ 'n', 'x', 'o' }, ']z', function()
+    move.goto_next_start('@fold', 'folds')
+end, { desc = 'Next fold' })

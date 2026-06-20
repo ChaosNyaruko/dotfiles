@@ -435,9 +435,9 @@ local plugins = {
     { 'onsails/lspkind.nvim',                    event = "VeryLazy",         lazy = true },
     {
         'nvim-treesitter/nvim-treesitter',
-        lazy = true,
-        ft = { "go", "rust", "c", "cpp", "java" },
-        cmd = { "TSInstallInfo", "TSUpdate" },
+        branch = "main",
+        -- new main branch does not support lazy-loading
+        lazy = false,
         build = ':TSUpdate',
         config = function()
             require("settings.treesitter")
@@ -554,11 +554,10 @@ local plugins = {
         enabled = false,
     },
     {
-        enabled = false,
         "nvim-treesitter/nvim-treesitter-textobjects",
-        config = function()
-            require("settings.treesitter")
-        end
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        branch = "main",
+        lazy = true,
     }
 }
 
