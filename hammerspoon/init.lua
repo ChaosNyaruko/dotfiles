@@ -242,3 +242,23 @@ hs.hotkey.bind({ "cmd", "shift" }, "x", function()
     local nextScreen = screens[(idx % #screens) + 1]
     win:moveToScreen(nextScreen, true, true)
 end)
+
+
+hs.hotkey.bind({"cmd", "shift"}, "x", function()
+  local win = hs.window.focusedWindow()
+  local screens = hs.screen.allScreens()
+  local currentScreen = win:screen()
+  
+  -- Find index of current screen
+  local idx = 1
+  for i, s in ipairs(screens) do
+    if s == currentScreen then
+      idx = i
+      break
+    end
+  end
+  
+  -- Move to next screen (wraps around)
+  local nextScreen = screens[(idx % #screens) + 1]
+  win:moveToScreen(nextScreen, true, true)
+end)
