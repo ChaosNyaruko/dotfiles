@@ -7,9 +7,28 @@ vim.lsp.enable('thriftls')
 vim.lsp.enable('pyright')
 vim.lsp.enable('jdtls')
 vim.lsp.enable('clangd')
+local format_clients = {
+    gopls = true,
+    rust_analyzer = true,
+}
+local format_group = vim.api.nvim_create_augroup("LspFormatGroup", { clear = false })
 local function document_highlight()
     vim.lsp.buf.clear_references()
     vim.lsp.buf.document_highlight()
+end
+local function format_lsp_range()
+    local start_pos = vim.fn.getpos("v")
+    local end_pos = vim.fn.getpos(".")
+    local start_line = math.min(start_pos[2], end_pos[2])
+    local end_line = math.max(start_pos[2], end_pos[2])
+
+    vim.notify(string.format("format range: %d-%d", start_line, end_line), vim.log.levels.INFO)
+    vim.lsp.buf.format({
+        range = {
+            ["start"] = { start_line - 1, 0 },
+            ["end"] = { end_line - 1, #vim.fn.getline(end_line) },
+        },
+    })
 end
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('my.lsp', {}),
@@ -44,19 +63,22 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
         vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
         vim.keymap.set('n', 'gr', function()
-            vim.lsp.buf.references(nil, { on_list = function(opts)
-                local seen = {}
-                opts.items = vim.tbl_filter(function(item)
-                    local key = item.filename .. ':' .. item.lnum .. ':' .. item.col
-                    if seen[key] then return false end
-                    seen[key] = true
-                    return true
-                end, opts.items)
-                vim.fn.setqflist({}, 'r', opts)
-                vim.cmd('copen')
-            end })
+            vim.lsp.buf.references(nil, {
+                on_list = function(opts)
+                    local seen = {}
+                    opts.items = vim.tbl_filter(function(item)
+                        local key = item.filename .. ':' .. item.lnum .. ':' .. item.col
+                        if seen[key] then return false end
+                        seen[key] = true
+                        return true
+                    end, opts.items)
+                    vim.fn.setqflist({}, 'r', opts)
+                    vim.cmd('copen')
+                end
+            })
         end, bufopts)
         vim.keymap.set('n', '\\f', vim.lsp.buf.format, bufopts)
+        vim.keymap.set('v', '\\f', format_lsp_range, bufopts)
 
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
         print("attached: ", client.name)
@@ -78,15 +100,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
             vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
         end
 
-        -- autoformat for go and rust
-        local format_group = vim.api.nvim_create_augroup("LspFormatGroup", { clear = true })
+        if not format_clients[client.name] then
+            return
+        end
+
         vim.api.nvim_create_autocmd({ "BufWritePre" }, {
             group = format_group,
             buffer = args.buf,
             desc = "LspFormatGroup",
             callback = function()
                 vim.notify(string.format("format by lsp: %s", client.name), vim.log.levels.WARN)
-                vim.lsp.buf.format()
+                vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
             end,
         })
     end,
@@ -646,7 +670,10 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '\\f', vim.lsp.buf.format, bufopts)
+    vim.keymap.set({ 'n', 'v' }, '\\f', function()
+        vim.notify("formatting by lsp...")
+        vim.lsp.buf.format()
+    end, bufopts)
 end
 
 local mdlsp = os.getenv("HOME") .. "/go/bin/educationalsp"
