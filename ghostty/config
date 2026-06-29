@@ -2,7 +2,8 @@
 # background = #ffffff
 theme = Catppuccin Latte
 shell-integration-features = ssh-env,ssh-terminfo
-
+font-family = IosevkaTerm Nerd Font
+font-feature = -calt
 
 # This is the configuration file for Ghostty.
 #

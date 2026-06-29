@@ -87,19 +87,19 @@ TERM = "xterm-256color"
 size = 14.0
 
 [font.bold]
-family = "NotoMono Nerd Font"
-# family = "Iosevka"
+# family = "NotoMono Nerd Font"
+family = "IosevkaTerm Nerd Font"
 style = "Bold"
 
 
 [font.italic]
-family = "NotoMono Nerd Font"
-# family = "Iosevka"
+# family = "NotoMono Nerd Font"
+family = "IosevkaTerm Nerd Font"
 style = "Italic"
 
 [font.normal]
-family = "NotoMono Nerd Font"
-# family = "Iosevka"
+# family = "NotoMono Nerd Font"
+family = "IosevkaTerm Nerd Font"
 style = "Regular"
 
 [[keyboard.bindings]]
