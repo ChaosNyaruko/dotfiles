@@ -54,6 +54,12 @@ persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B",
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 on-mode-changed = []
 
+on-window-detected = [
+    { if = 'test %{app-bundle-id} = com.mitchellh.ghostty', run = ['layout floating'] },
+    { if = 'test %{app-name} = Telegram', run = ['layout floating'] },
+    { if = 'test %{app-bundle-id} = com.tencent.qq', run = ['layout floating'] },
+]
+
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
@@ -215,8 +221,3 @@ on-mode-changed = []
     alt-shift-k = ['join-with up', 'mode main']
     alt-shift-l = ['join-with right', 'mode main']
 
-[[on-window-detected]]
-if.app-id="com.mitchellh.ghostty"
-run= [
-  "layout tiling",
-]
