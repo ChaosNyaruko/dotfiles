@@ -58,6 +58,7 @@ on-window-detected = [
     { if = 'test %{app-bundle-id} = com.mitchellh.ghostty', run = ['layout floating'] },
     { if = 'test %{app-name} = Telegram', run = ['layout floating'] },
     { if = 'test %{app-bundle-id} = com.tencent.qq', run = ['layout floating'] },
+    { if = 'test %{app-bundle-id} = com.apple.ActivityMonitor', run = ['layout floating'] },
 ]
 
 # Possible values: (qwerty|dvorak|colemak)
