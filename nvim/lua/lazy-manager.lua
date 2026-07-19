@@ -1,4 +1,5 @@
 vim.opt.completeopt = 'menu,menuone,noselect'
+vim.keymap.set('n', '<space>P', require("U").insert_url)
 
 vim.lsp.enable('gopls')
 vim.lsp.enable('lua_ls')
