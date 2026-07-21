@@ -75,6 +75,11 @@ magenta = '#EA76CB' # pink
 cyan = '#179299' # teal
 white = '#ACB0BE' # surface2
 
+[colors]
+indexed_colors = [
+    # { index = 200, color = "#ff55ff" },
+    # { index = 201, color = "#00ffcc" }
+]
 
 [cursor]
 thickness = 0.18
