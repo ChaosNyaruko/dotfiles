@@ -1227,6 +1227,32 @@
 }
 
 
+/* --- Content column -----------------------------------------------------
+   Use the whole window instead of the plugin's centred 900px reading column.
+   page.css sets `#page-ctn { max-width: 900px; margin: 0 auto }` at the same
+   (1,0,0) specificity, but this file is served as markdown.css, which loads
+   after page.css, so these win on order.
+
+   The text needs its own gutter once the column is window-wide: the plugin's
+   markdown.css carried `padding: 45px` on .markdown-body and this file
+   replaced it with 0, which is why text sat flush against the panel edge.
+   #page-header gets the same horizontal padding so the filename lines up
+   with the body text rather than sitting 9px off. */
+
+#page-ctn {
+  max-width: none;
+  margin: 0 1rem;
+}
+
+.markdown-body {
+  padding: 1rem 1.5rem;
+}
+
+#page-header {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 /* --- Table of contents ---------------------------------------------------
    Rendered as <nav class="table-of-contents"> by markdown-it-table-of-contents,
    and only when the markdown source contains a [[toc]] placeholder on its own
@@ -1280,7 +1306,7 @@ nav.table-of-contents li {
    distance from the sidebar at any width. */
 #page-ctn:has(nav.table-of-contents) {
   margin-left: 340px;
-  margin-right: auto;
+  margin-right: 1rem;
 }
 
 /* Too narrow for a fixed sidebar: put the toc back in the normal flow. */
@@ -1293,6 +1319,6 @@ nav.table-of-contents li {
   }
 
   #page-ctn:has(nav.table-of-contents) {
-    margin-left: auto;
+    margin-left: 1rem;
   }
 }
