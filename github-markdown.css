@@ -1266,11 +1266,21 @@ nav.table-of-contents li {
   margin-top: 0;
 }
 
-/* Reserve the gutter. The wrapper holds both the filename header and
+/* Reserve the gutter. #page-ctn wraps both the filename header and
    .markdown-body, so offsetting it keeps either from sliding under the
-   sidebar. Scoped with :has() so documents with no [[toc]] stay full width. */
-main > div:has(nav.table-of-contents) {
-  padding-left: 348px;
+   sidebar. Scoped with :has() so documents with no [[toc]] stay full width.
+
+   Must override `#page-ctn { margin: 0 auto; max-width: 900px }` from the
+   plugin's page.css, hence matching the id here -- a `main > div:has(...)`
+   selector loses to that ID on specificity and silently does nothing.
+
+   Must also be a margin rather than padding: padding would be added to a
+   centred box, so the gap would grow with the window (180px on a 1512px
+   screen). margin-left with margin-right:auto pins the content a fixed
+   distance from the sidebar at any width. */
+#page-ctn:has(nav.table-of-contents) {
+  margin-left: 340px;
+  margin-right: auto;
 }
 
 /* Too narrow for a fixed sidebar: put the toc back in the normal flow. */
@@ -1279,10 +1289,10 @@ main > div:has(nav.table-of-contents) {
     position: static;
     width: auto;
     max-height: none;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
-  main > div:has(nav.table-of-contents) {
-    padding-left: 0;
+  #page-ctn:has(nav.table-of-contents) {
+    margin-left: auto;
   }
 }
