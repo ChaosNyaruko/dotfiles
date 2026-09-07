@@ -1226,16 +1226,63 @@
   min-height: 52px;
 }
 
+
+/* --- Table of contents ---------------------------------------------------
+   Rendered as <nav class="table-of-contents"> by markdown-it-table-of-contents,
+   and only when the markdown source contains a [[toc]] placeholder on its own
+   line ([toc] / ${toc} / $<toc{...}> also work).
+
+   g:mkdp_markdown_css REPLACES the plugin's own app/_static/markdown.css
+   (see app/routes.js), so the list reset it used to provide has to live here.
+   Note the plugin emits <ul>, not <ol>. */
+
 nav.table-of-contents {
-    flex-shrink: 1;
-    position: fixed;
-    left: 1rem;
-    /* right: 1rem; */
-    top: 1rem;
-    width: 300px;
-    max-height: calc(100vh - 2rem);
-    align-self: flex-start; /* prevents stretching to full height */
-    overflow-y: auto;
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  width: 300px;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 0.75rem 1rem;
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: var(--bgColor-default);
+  border: 1px solid var(--borderColor-default);
+  border-radius: 6px;
 }
 
+nav.table-of-contents ul {
+  list-style: none;
+  padding-left: 1rem;
+  margin: 0;
+}
 
+nav.table-of-contents > ul {
+  padding-left: 0;
+}
+
+nav.table-of-contents li {
+  margin-top: 0;
+}
+
+/* Reserve the gutter. The wrapper holds both the filename header and
+   .markdown-body, so offsetting it keeps either from sliding under the
+   sidebar. Scoped with :has() so documents with no [[toc]] stay full width. */
+main > div:has(nav.table-of-contents) {
+  padding-left: 348px;
+}
+
+/* Too narrow for a fixed sidebar: put the toc back in the normal flow. */
+@media (max-width: 800px) {
+  nav.table-of-contents {
+    position: static;
+    width: auto;
+    max-height: none;
+    margin-bottom: 1rem;
+  }
+
+  main > div:has(nav.table-of-contents) {
+    padding-left: 0;
+  }
+}
