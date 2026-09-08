@@ -61,6 +61,7 @@ else
 # 	abbr -a lll 'ls -la'
 end
 
+source ~/local.fish
 function Proxy
     set -l port 7890
     if test (count $argv) = 0
@@ -78,12 +79,12 @@ function Proxy
     end
     
     if test $argv[1] = "on" 
-        set -gx https_proxy http://localhost:$port
-        set -gx http_proxy http://localhost:$port
-        set -gx no_proxy socks5://localhost:$port
-        set -gx HTTPS_PROXY http://localhost:$port
-        set -gx HTTP_PROXY http://localhost:$port
-        set -gx NO_PROXY socks5://localhost:$port
+        set -gx https_proxy http://$PUSER:$PPASSWORD@localhost:$port
+        set -gx http_proxy http://$PUSER:$PPASSWORD@localhost:$port
+        set -gx no_proxy socks5://$PUSER:$PPASSWORD@localhost:$port
+        set -gx HTTPS_PROXY http://$PUSER:$PPASSWORD@localhost:$port
+        set -gx HTTP_PROXY http://$PUSER:$PPASSWORD@localhost:$port
+        set -gx NO_PROXY socks5://$PUSER:$PPASSWORD@localhost:$port
         echo Proxy On $https_proxy
     else 
         set -e https_proxy
@@ -267,7 +268,6 @@ function colors
 end
 
 abbr -a ra ~/Library/Python/3.12/bin/ranger
-source ~/local.fish
 
 function find_live_photos --description="find the live photos in my Apple backups"
     set -l path $argv[1]

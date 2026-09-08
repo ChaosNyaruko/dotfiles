@@ -54,6 +54,15 @@ persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B",
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 on-mode-changed = []
 
+on-window-detected = [
+    { if = 'test %{app-bundle-id} = com.mitchellh.ghostty', run = ['layout floating'] },
+    { if = 'test %{app-name} = Telegram', run = ['layout floating'] },
+    { if = 'test %{app-bundle-id} = com.tencent.qq', run = ['layout floating'] },
+    { if = 'test %{app-bundle-id} = com.apple.ActivityMonitor', run = ['layout floating'] },
+    { if = 'test %{app-bundle-id} = com.colliderli.iina', run = ['layout floating'] },
+    { if = 'test %{app-bundle-id} = com.apple.Safari', run = ['layout floating'] },
+]
+
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
@@ -99,14 +108,9 @@ on-mode-changed = []
     # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-    # You can uncomment the following lines to open up terminal with alt + enter shortcut
+    # Open up Alacritty with alt + enter shortcut
     # (like in i3)
-    alt-enter = '''exec-and-forget osascript -e '
-    tell application "Terminal.app"
-        do script
-        activate
-    end tell'
-    '''
+    alt-enter = 'exec-and-forget open -na Alacritty'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
     alt-slash = 'layout tiles horizontal vertical'
@@ -141,8 +145,8 @@ on-mode-changed = []
     alt-8 = 'workspace 8'
     alt-9 = 'workspace 9'
     alt-a = 'workspace A' # In your config, you can drop workspace bindings that you don't need
-    alt-b = 'workspace B'
-    alt-c = 'workspace C'
+    # alt-b = 'workspace B'
+    # alt-c = 'workspace C'
     alt-d = 'workspace D'
     alt-e = 'workspace E'
     # alt-f = 'workspace F'
@@ -158,7 +162,7 @@ on-mode-changed = []
     alt-t = 'workspace T'
     alt-u = 'workspace U'
     alt-v = 'workspace V'
-    alt-w = 'workspace W'
+    # alt-w = 'workspace W'
     alt-x = 'workspace X'
     alt-y = 'workspace Y'
     alt-z = 'workspace Z'
@@ -220,8 +224,3 @@ on-mode-changed = []
     alt-shift-k = ['join-with up', 'mode main']
     alt-shift-l = ['join-with right', 'mode main']
 
-[[on-window-detected]]
-if.app-id="com.mitchellh.ghostty"
-run= [
-  "layout tiling",
-]

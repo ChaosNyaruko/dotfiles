@@ -1226,16 +1226,99 @@
   min-height: 52px;
 }
 
-nav.table-of-contents {
-    flex-shrink: 1;
-    position: fixed;
-    left: 1rem;
-    /* right: 1rem; */
-    top: 1rem;
-    width: 300px;
-    max-height: calc(100vh - 2rem);
-    align-self: flex-start; /* prevents stretching to full height */
-    overflow-y: auto;
+
+/* --- Content column -----------------------------------------------------
+   Use the whole window instead of the plugin's centred 900px reading column.
+   page.css sets `#page-ctn { max-width: 900px; margin: 0 auto }` at the same
+   (1,0,0) specificity, but this file is served as markdown.css, which loads
+   after page.css, so these win on order.
+
+   The text needs its own gutter once the column is window-wide: the plugin's
+   markdown.css carried `padding: 45px` on .markdown-body and this file
+   replaced it with 0, which is why text sat flush against the panel edge.
+   #page-header gets the same horizontal padding so the filename lines up
+   with the body text rather than sitting 9px off. */
+
+#page-ctn {
+  max-width: none;
+  margin: 0 1rem;
 }
 
+.markdown-body {
+  padding: 1rem 1.5rem;
+}
 
+#page-header {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* --- Table of contents ---------------------------------------------------
+   Rendered as <nav class="table-of-contents"> by markdown-it-table-of-contents,
+   and only when the markdown source contains a [[toc]] placeholder on its own
+   line ([toc] / ${toc} / $<toc{...}> also work).
+
+   g:mkdp_markdown_css REPLACES the plugin's own app/_static/markdown.css
+   (see app/routes.js), so the list reset it used to provide has to live here.
+   Note the plugin emits <ul>, not <ol>. */
+
+nav.table-of-contents {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  width: 300px;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 0.75rem 1rem;
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: var(--bgColor-default);
+  border: 1px solid var(--borderColor-default);
+  border-radius: 6px;
+}
+
+nav.table-of-contents ul {
+  list-style: none;
+  padding-left: 1rem;
+  margin: 0;
+}
+
+nav.table-of-contents > ul {
+  padding-left: 0;
+}
+
+nav.table-of-contents li {
+  margin-top: 0;
+}
+
+/* Reserve the gutter. #page-ctn wraps both the filename header and
+   .markdown-body, so offsetting it keeps either from sliding under the
+   sidebar. Scoped with :has() so documents with no [[toc]] stay full width.
+
+   Must override `#page-ctn { margin: 0 auto; max-width: 900px }` from the
+   plugin's page.css, hence matching the id here -- a `main > div:has(...)`
+   selector loses to that ID on specificity and silently does nothing.
+
+   Must also be a margin rather than padding: padding would be added to a
+   centred box, so the gap would grow with the window (180px on a 1512px
+   screen). margin-left with margin-right:auto pins the content a fixed
+   distance from the sidebar at any width. */
+#page-ctn:has(nav.table-of-contents) {
+  margin-left: 340px;
+  margin-right: 1rem;
+}
+
+/* Too narrow for a fixed sidebar: put the toc back in the normal flow. */
+@media (max-width: 800px) {
+  nav.table-of-contents {
+    position: static;
+    width: auto;
+    max-height: none;
+    margin-bottom: 1.5rem;
+  }
+
+  #page-ctn:has(nav.table-of-contents) {
+    margin-left: 1rem;
+  }
+}

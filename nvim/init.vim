@@ -31,7 +31,7 @@ set history=2000
 set splitright
 let mapleader=" "
 set nolist
-set nowrap
+set wrap
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 set textwidth=0
 set scrolloff=3
