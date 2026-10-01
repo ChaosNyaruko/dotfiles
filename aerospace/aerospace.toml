@@ -62,6 +62,8 @@ on-window-detected = [
     { if = 'test %{app-bundle-id} = com.colliderli.iina', run = ['layout floating'] },
     { if = 'test %{app-bundle-id} = com.apple.Safari', run = ['layout floating'] },
     { if = 'test %{app-bundle-id} = NULL-APP-BUNDLE-ID', run = ['layout floating'] },
+    { if = 'test %{app-bundle-id} = org.chromium.Chromium', run = ['layout floating'] },
+    { if = 'test %{app-bundle-id} = com.apple.Preview', run = ['layout floating'] },
 ]
 
 # Possible values: (qwerty|dvorak|colemak)
