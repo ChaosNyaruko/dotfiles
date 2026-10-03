@@ -81,18 +81,22 @@ function Proxy
     if test $argv[1] = "on" 
         set -gx https_proxy http://$PUSER:$PPASSWORD@localhost:$port
         set -gx http_proxy http://$PUSER:$PPASSWORD@localhost:$port
-        set -gx no_proxy socks5://$PUSER:$PPASSWORD@localhost:$port
+        set -gx all_proxy socks5://$PUSER:$PPASSWORD@localhost:$port
         set -gx HTTPS_PROXY http://$PUSER:$PPASSWORD@localhost:$port
         set -gx HTTP_PROXY http://$PUSER:$PPASSWORD@localhost:$port
-        set -gx NO_PROXY socks5://$PUSER:$PPASSWORD@localhost:$port
+        set -gx ALL_PROXY socks5://$PUSER:$PPASSWORD@localhost:$port
+        set -gx NO_PROXY "192.168.1.8,localhost,127.0.0.1"
+        set -gx no_proxy "192.168.1.8,localhost,127.0.0.1"
         echo Proxy On $https_proxy
     else 
         set -e https_proxy
         set -e http_proxy
-        set -e no_proxy 
+        set -e all_proxy 
         set -e HTTPS_PROXY
         set -e HTTP_PROXY
-        set -e NO_PROXY 
+        set -e ALL_PROXY 
+        set -e NO_PROXY
+        set -e no_proxy 
         echo Proxy Off
     end
 end
