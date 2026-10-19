@@ -385,3 +385,11 @@ nnoremap \t <cmd>call append(line("."), strftime("%F", localtime()))<cr>
 " learn from https://vim.fandom.com/wiki/Search_and_replace_in_a_visual_selection
 vnoremap <M-/> <Esc>/\%V
 
+" search the opened buffers (<bar> copen must stay before <cr>, <Cmd> ends at <cr>)
+nnoremap <leader>bf <cmd>bufdo vimgrepadd <cword> % <bar> copen<cr>
+" same, but type the pattern yourself: cursor lands between the //
+nnoremap <leader>bF :bufdo vimgrepadd // % <bar> copen<C-Left><C-Left><C-Left><C-Left><Right>
+" clear the quickfix list
+nnoremap <leader>bc <cmd>call setqflist([])<cr><cmd>cclose<cr>
+
+
