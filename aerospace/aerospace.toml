@@ -66,6 +66,9 @@ on-window-detected = [
     { if = 'test %{app-bundle-id} = com.apple.Preview', run = ['layout floating'] },
     { if = 'test %{app-bundle-id} = com.valvesoftware.steam', run = ['layout floating'] },
     { if = 'test %{app-bundle-id} = com.apple.finder', run = ['layout floating'] },
+    { if = 'test %{app-bundle-id} = com.google.Chrome', run = ['layout floating'] },
+    { if = 'test %{app-bundle-id} = dev.kdrag0n.MacVirt', run = ['layout floating'] }, # orbstack
+    
 ]
 
 # Possible values: (qwerty|dvorak|colemak)
