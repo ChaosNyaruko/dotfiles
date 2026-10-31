@@ -392,4 +392,4 @@ nnoremap <leader>bF :bufdo vimgrepadd // % <bar> copen<C-Left><C-Left><C-Left><C
 " clear the quickfix list
 nnoremap <leader>bc <cmd>call setqflist([])<cr><cmd>cclose<cr>
 
-
+autocmd FileType netrw nnoremap <buffer> <leader>ml <cmd>echo netrw#Expose("netrwmarkfilelist")<cr>
