@@ -102,6 +102,14 @@ command! -bang -nargs=* PRg
 command! -nargs=* -complete=dir -bang PFZF call fzf#run(fzf#wrap('FZF', fzf#vim#with_preview({'dir': getenv('PWD')}), <bang>0))
 nnoremap <C-p> :PFZF<CR>
 
+" *All variants: also search gitignored files (only .git itself is excluded)
+command! -bang -nargs=* PRgAll
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --hidden --no-ignore --glob '!.git' ".shellescape(<q-args>), 1, fzf#vim#with_preview({'dir': getenv('PWD')}), <bang>0)
+
+command! -bang PFZFAll call fzf#run(fzf#wrap('FZFAll', fzf#vim#with_preview({'source': 'fd --hidden --no-ignore --type f --exclude .git', 'dir': getenv('PWD')}), <bang>0))
+nnoremap sF :PFZFAll<CR>
+nnoremap <leader>R :PRgAll<CR>
+
 function! s:onlyemoji(emoji_with_comments)
     return (split(join(a:emoji_with_comments), ' '))[0]
 endfunction
