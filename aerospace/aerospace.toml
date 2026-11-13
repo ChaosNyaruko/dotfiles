@@ -68,7 +68,7 @@ on-window-detected = [
     { if = 'test %{app-bundle-id} = com.apple.finder', run = ['layout floating'] },
     { if = 'test %{app-bundle-id} = com.google.Chrome', run = ['layout tiling'] },
     { if = 'test %{app-bundle-id} = dev.kdrag0n.MacVirt', run = ['layout floating'] }, # orbstack
-    
+    { if = 'test %{app-bundle-id} = com.tencent.wwmapp', run = ['layout floating'] },
 ]
 
 # Possible values: (qwerty|dvorak|colemak)
