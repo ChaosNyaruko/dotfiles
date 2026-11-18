@@ -211,6 +211,41 @@ end
 -- TODO: https://github.com/junegunn/vim-easy-align
 local plugins = {
     {
+        "X3eRo0/dired.nvim",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+        },
+        config = function()
+            -- if we are using dired, we make it Emacs-like, and use $PWD if we really want to search from the "root"
+            vim.opt.autochdir = true
+            require("dired").setup {
+                path_separator = "/",
+                show_banner = false,
+                show_icons = false,
+                show_hidden = true,
+                show_dot_dirs = true,
+                show_colors = true,
+                -- Define keybindings for various 'dired' actions
+                keybinds = {
+                    dired_enter = "<CR>",
+                    dired_back = "-",
+                    dired_up = "_",
+                    dired_rename = "R",
+                    -- ... (add more keybindings as needed)
+                    dired_quit = "q",
+                },
+
+                -- Define colors for different file types and attributes
+                colors = {
+                    DiredDimText = { link = {}, bg = "NONE", fg = "505050", gui = "NONE" },
+                    DiredDirectoryName = { link = {}, bg = "NONE", fg = "9370DB", gui = "NONE" },
+                    -- ... (define more colors as needed)
+                    DiredMoveFile = { link = {}, bg = "NONE", fg = "ff3399", gui = "bold" },
+                },
+            }
+        end
+    },
+    {
         "jbyuki/venn.nvim",
         config = function()
             -- toggle keymappings for venn using <leader>v
@@ -275,7 +310,7 @@ local plugins = {
         keys = {
             { "<leader>ws", function() Snacks.picker.lsp_workspace_symbols() end },
             { "<leader>sk", function() Snacks.image.hover() end },
-            { "<leader>F",  function() Snacks.picker.grep_word() end,            desc = "Visual selection or word", mode = { "n", "x" } },
+            { "<leader>F",  function() Snacks.picker.grep_word({ dirs = { vim.env.PWD } }) end, desc = "Visual selection or word", mode = { "n", "x" } },
         },
         opts = {
             -- your configuration comes here
