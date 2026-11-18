@@ -117,18 +117,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
--- https://github.com/neovim/neovim/discussions/29350
-vim.g.clipboard = {
-    name = 'OSC 52',
-    copy = {
-        ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-        ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
-    },
-    paste = {
-        ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
-        ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
-    },
-}
+-- Clipboard: tmux provider inside tmux (tmux forwards to the outer terminal via
+-- OSC 52 when `set-clipboard on`); plain OSC 52 over SSH without tmux; otherwise
+-- leave nvim's default provider (pbcopy/pbpaste on macOS).
+local is_ssh = vim.env.SSH_CLIENT or vim.env.SSH_TTY or vim.env.SSH_CONNECTION
+
 if vim.env.TMUX ~= nil then
     local copy = { 'tmux', 'load-buffer', '-w', '-' }
     local paste = { 'bash', '-c', 'tmux refresh-client -l && sleep 0.05 && tmux save-buffer -' }
@@ -143,6 +136,25 @@ if vim.env.TMUX ~= nil then
             ['*'] = paste,
         },
         cache_enabled = 0,
+    }
+elseif is_ssh then
+    -- https://github.com/neovim/neovim/discussions/29350
+    -- Copy via OSC 52; paste from the unnamed register, since many terminals
+    -- block or prompt on OSC 52 reads (use the terminal's own paste instead).
+    local osc52 = require('vim.ui.clipboard.osc52')
+    local function paste()
+        return { vim.fn.split(vim.fn.getreg(''), '\n'), vim.fn.getregtype('') }
+    end
+    vim.g.clipboard = {
+        name = 'OSC 52',
+        copy = {
+            ['+'] = osc52.copy('+'),
+            ['*'] = osc52.copy('*'),
+        },
+        paste = {
+            ['+'] = paste,
+            ['*'] = paste,
+        },
     }
 end
 
