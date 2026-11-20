@@ -656,17 +656,17 @@ vim.cmd([[
 set shortmess-=S
 " mode and filename
 set statusline=%{toupper(mode())}\ %<%f
-set statusline+=%=%=%{fugitive#statusline()} " Git Hotness
+" set statusline+=%=%=%{fugitive#statusline()} " Git Hotness
 " Options:
 " %w Preview window flag
 " %h Help buffer flag
 " %m Modified flag
 " %r Readonly flag
 set statusline+=%w%h%m%r
+set statusline+=\ [%{getcwd()}]          " Current dir
 " Right aligned file nav info
 set statusline+=%=%-14.(%l,%c%V%)\ %p%%
 set statusline+=\ [%{&ff}/%y/%{&fileencoding?&fileencoding:&encoding}]
-" set statusline+=\ [%{getcwd()}]          " Current dir
 " set statusline+=\ %b\ 0x%B             " ga/:ascii
 ]]
 )
